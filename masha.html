@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masha et Michka - Universal Toon</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Quicksand:wght@400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --masha-red: #FF6B6B;
+            --masha-pink: #FFB8C6;
+            --masha-yellow: #FFD166;
+            --masha-green: #06D6A0;
+            --masha-blue: #118AB2;
+            --masha-cream: #FFF5EE;
+            --magic-shadow: 0 0 15px rgba(255, 107, 107, 0.3);
+            --header-font: 'Poppins', sans-serif;
+            --body-font: 'Quicksand', sans-serif;
+            --magic-font: 'Dancing Script', cursive;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--body-font);
+            background: linear-gradient(135deg, #FF6B6B 0%, #FFB8C6 50%, #06D6A0 100%);
+            color: #333;
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            opacity: 0;
+            animation: fadeInBody 0.8s ease-out forwards;
+        }
+        
+        @keyframes fadeInBody {
+            to { opacity: 1; }
+        }
+        
+        .confetti {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 20px;
+            animation: fallConfetti 15s infinite linear;
+        }
+        
+        @keyframes fallConfetti {
+            0% { transform: translateY(-100px) translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(100vh) translateX(100px) rotate(360deg); opacity: 0; }
+        }
+        
+        .sun-rays {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            pointer-events: none;
+            opacity: 0.1;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.7) 0%, transparent 70%);
+        }
+        
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 107, 107, 0.2);
+            animation: slideDown 0.5s ease-out;
+        }
+        
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            height: 90px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+            text-decoration: none;
+        }
+        
+        .logo-container:hover .masha-icon {
+            animation: mashaBounce 1s ease;
+        }
+        
+        @keyframes mashaBounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.1); }
+        }
+        
+        .masha-icon {
+            font-size: 42px;
+            color: var(--masha-red);
+            position: relative;
+            animation: floatMasha 8s infinite ease-in-out;
+            filter: drop-shadow(0 0 10px rgba(255, 107, 107, 0.7));
+        }
+        
+        @keyframes floatMasha {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-5px) rotate(-2deg); }
+            75% { transform: translateY(5px) rotate(2deg); }
+        }
+        
+        .site-title {
+            font-family: var(--magic-font);
+            font-size: 38px;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--masha-red), var(--masha-pink), var(--masha-yellow));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
+            letter-spacing: 1px;
+        }
+        
+        .magic-sparkle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 15px white;
+            animation: sparkle 2s infinite;
+            opacity: 0;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        .nav-container {
+            background: linear-gradient(90deg, var(--masha-red), var(--masha-pink));
+            padding: 0 5%;
+            position: relative;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--masha-cream), transparent);
+        }
+        
+        .nav-menu {
+            display: flex;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .nav-item {
+            position: relative;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 18px 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: block;
+            position: relative;
+            font-family: var(--header-font);
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background: rgba(255, 255, 255, 0.2);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 4px;
+            background: var(--masha-cream);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            transform: translateX(-50%);
+        }
+        
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 80%;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            min-width: 250px;
+            display: none;
+            z-index: 1001;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 107, 107, 0.2);
+            border-top: none;
+        }
+        
+        .dropdown-menu.active {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+        
+        .dropdown-item {
+            padding: 15px 25px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #333;
+            text-decoration: none;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+        
+        .dropdown-item:hover {
+            background: rgba(255, 107, 107, 0.2);
+            padding-left: 35px;
+            color: var(--masha-red);
+        }
+        
+        .dropdown-item:hover::before {
+            content: '🐻';
+            position: absolute;
+            left: 15px;
+            color: var(--masha-red);
+        }
+        
+        .category-hero {
+            text-align: center;
+            padding: 120px 5% 80px;
+            background: radial-gradient(circle at 30% 20%, rgba(255, 107, 107, 0.6) 0%, rgba(255, 184, 198, 0.4) 40%, transparent 70%),
+                        radial-gradient(circle at 70% 80%, rgba(6, 214, 160, 0.5) 0%, rgba(17, 138, 178, 0.3) 30%, transparent 60%),
+                        url('https://images.unsplash.com/photo-1518495978942-83cdb633d6d6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(255, 107, 107, 0.2);
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .category-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
+        .category-hero h1 {
+            font-family: var(--magic-font);
+            font-size: 72px;
+            margin-bottom: 25px;
+            color: white;
+            text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.5),
+                         0 0 30px rgba(255, 107, 107, 0.5),
+                         0 0 60px rgba(255, 184, 198, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+        
+        .category-hero h1::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--masha-cream), transparent);
+        }
+        
+        .category-hero p {
+            font-size: 24px;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+            font-weight: 300;
+            line-height: 1.8;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+        
+        .videos-section {
+            padding: 60px 5%;
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 42px;
+            color: white;
+            font-family: var(--header-font);
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3),
+                         0 0 20px rgba(255, 107, 107, 0.3);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title::before, .section-title::after {
+            content: '🐻';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--masha-cream);
+            font-size: 24px;
+            opacity: 0.8;
+        }
+        
+        .section-title::before {
+            left: -50px;
+        }
+        
+        .section-title::after {
+            right: -50px;
+        }
+        
+        .videos-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 35px;
+        }
+        
+        .video-item {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(5px);
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+        
+        .video-item:nth-child(1) { animation-delay: 0.3s; }
+        .video-item:nth-child(2) { animation-delay: 0.4s; }
+        .video-item:nth-child(3) { animation-delay: 0.5s; }
+        .video-item:nth-child(4) { animation-delay: 0.6s; }
+        .video-item:nth-child(5) { animation-delay: 0.7s; }
+        .video-item:nth-child(6) { animation-delay: 0.8s; }
+        .video-item:nth-child(7) { animation-delay: 0.9s; }
+        .video-item:nth-child(8) { animation-delay: 1.0s; }
+        
+        .video-item:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2),
+                        0 0 30px rgba(255, 107, 107, 0.2);
+            border-color: rgba(255, 107, 107, 0.3);
+        }
+        
+        .video-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--masha-red), var(--masha-green), var(--masha-blue));
+            z-index: 2;
+        }
+        
+        .video-thumbnail {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .video-thumbnail img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .video-item:hover .video-thumbnail img {
+            transform: scale(1.05);
+        }
+        
+        .video-thumbnail::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: opacity 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 60px;
+            z-index: 1;
+        }
+        
+        .video-item:hover .video-thumbnail::after {
+            opacity: 1;
+            content: '▶';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+        }
+        
+        .video-info {
+            padding: 25px;
+        }
+        
+        .video-info h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #333;
+            font-family: var(--header-font);
+            min-height: 60px;
+        }
+        
+        .video-info p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #888;
+            font-size: 14px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .video-modal.active {
+            display: flex;
+        }
+        
+        .video-modal-content {
+            width: 90%;
+            max-width: 1100px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
+                        0 0 0 1px rgba(255, 107, 107, 0.1);
+            animation: modalSlideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+        
+        @keyframes modalSlideIn {
+            from { opacity: 0; transform: translateY(60px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        
+        .video-modal-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--masha-red), var(--masha-green), var(--masha-blue));
+            z-index: 2;
+        }
+        
+        .video-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background: rgba(0, 0, 0, 0.1);
+        }
+        
+        .video-modal-header h3 {
+            font-size: 24px;
+            color: #333;
+            font-family: var(--header-font);
+        }
+        
+        .close-video-modal {
+            font-size: 32px;
+            color: rgba(0, 0, 0, 0.7);
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .close-video-modal:hover {
+            color: #333;
+            background: rgba(0, 0, 0, 0.1);
+            transform: rotate(90deg);
+        }
+        
+        .video-modal-body {
+            padding: 0;
+        }
+        
+        .video-modal-iframe-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .video-modal-iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .video-modal-info {
+            padding: 25px 30px;
+            background: rgba(0, 0, 0, 0.05);
+        }
+        
+        .video-modal-info p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 18px;
+        }
+        
+        .btn {
+            padding: 16px 35px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: var(--header-font);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 1px;
+            animation: fadeInUp 0.8s ease-out 0.8s both;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, var(--masha-red), var(--masha-pink));
+            color: white;
+            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.4);
+            border: 2px solid transparent;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(45deg, var(--masha-pink), var(--masha-red));
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.6);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 50px;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(30deg);
+            transition: all 0.5s;
+        }
+        
+        .btn-primary:hover::after {
+            left: 120%;
+        }
+        
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            padding: 70px 5% 40px;
+            margin-top: 100px;
+            border-top: 1px solid rgba(255, 107, 107, 0.2);
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--masha-red), var(--masha-green), var(--masha-blue));
+        }
+        
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-section {
+            position: relative;
+        }
+        
+        .footer-section h3 {
+            font-size: 24px;
+            margin-bottom: 25px;
+            color: var(--masha-red);
+            font-family: var(--header-font);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--masha-red), transparent);
+        }
+        
+        .footer-section p, .footer-section a {
+            color: #666;
+            line-height: 1.8;
+            transition: all 0.3s;
+        }
+        
+        .footer-section a {
+            text-decoration: none;
+            display: block;
+            padding: 8px 0;
+            position: relative;
+            padding-left: 0;
+            transition: all 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: var(--masha-red);
+            padding-left: 15px;
+        }
+        
+        .footer-section a:hover::before {
+            content: '›';
+            position: absolute;
+            left: 0;
+            color: var(--masha-red);
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            color: #888;
+            font-size: 15px;
+        }
+        
+        .footer-bottom p {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .footer-bottom p::before, .footer-bottom p::after {
+            content: '🐻';
+            color: var(--masha-red);
+            font-size: 18px;
+        }
+        
+        .masha-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .masha-element {
+            position: absolute;
+            font-size: 30px;
+            animation: floatElement 25s infinite linear;
+            opacity: 0.1;
+        }
+        
+        @keyframes floatElement {
+            0% { transform: translateY(100vh) translateX(0) rotate(0deg); }
+            100% { transform: translateY(-100px) translateX(100px) rotate(360deg); }
+        }
+        
+        @keyframes balloonFloat {
+            0% { transform: translateX(-100px) translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateX(calc(100vw + 100px)) translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+        
+        .balloons {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .balloon {
+            position: absolute;
+            font-size: 40px;
+            animation: balloonFloat 25s infinite linear;
+            opacity: 0.1;
+        }
+        
+        .masha-decoration {
+            position: absolute;
+            bottom: 0;
+            right: 5%;
+            width: 300px;
+            height: 300px;
+            background: url('https://images.unsplash.com/photo-1518495978942-83cdb633d6d6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80') no-repeat center;
+            background-size: contain;
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        @media (max-width: 1200px) {
+            .videos-container { grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); }
+            .category-hero h1 { font-size: 62px; }
+        }
+        
+        @media (max-width: 992px) {
+            .videos-container { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+            .category-hero h1 { font-size: 52px; }
+            .category-hero p { font-size: 22px; }
+            .section-title { font-size: 36px; }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container { flex-direction: column; height: auto; padding: 20px 5%; }
+            .nav-menu { flex-wrap: wrap; justify-content: center; }
+            .nav-link { padding: 15px 20px; font-size: 15px; }
+            .category-hero { padding: 100px 5% 60px; }
+            .category-hero h1 { font-size: 44px; }
+            .category-hero p { font-size: 20px; }
+            .videos-container { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
+            .footer-content { grid-template-columns: 1fr; gap: 40px; }
+        }
+        
+        @media (max-width: 576px) {
+            .videos-container { grid-template-columns: 1fr; }
+            .category-hero h1 { font-size: 38px; }
+            .section-title { font-size: 32px; }
+            .section-title::before, .section-title::after { display: none; }
+            .video-modal-content { width: 95%; border-radius: 15px; }
+            .video-modal-header { padding: 15px 20px; }
+            .video-modal-header h3 { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="confetti" id="confetti"></div>
+    <div class="sun-rays"></div>
+    <div class="balloons" id="balloons"></div>
+    <div class="masha-elements" id="mashaElements"></div>
+    <div class="masha-decoration"></div>
+    
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo-container">
+                <div class="masha-icon">👧🐻</div>
+                <h1 class="site-title">Universal Toon</h1>
+                <div class="magic-sparkle" style="top: 10px; right: -5px; animation-delay: 0.2s;"></div>
+                <div class="magic-sparkle" style="bottom: 5px; left: 40px; animation-delay: 0.7s;"></div>
+                <div class="magic-sparkle" style="top: 30px; left: 10px; animation-delay: 1.3s;"></div>
+            </a>
+        </div>
+        
+        <div class="nav-container">
+            <nav class="nav-menu">
+                <div class="nav-item">
+                    <a href="index.html" class="nav-link">Accueil</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link active" id="categoriesDropdownToggle">Catégories <i class="fas fa-chevron-down" style="margin-left: 5px; font-size: 12px;"></i></a>
+                    <div class="dropdown-menu" id="categoriesDropdown">
+                        <a href="conte-fee.html" class="dropdown-item" data-category="conte">Conte de fée</a>
+                        <a href="aventure.html" class="dropdown-item" data-category="aventure">Aventure&Action</a>
+                        <a href="tomjerry.html" class="dropdown-item" data-category="tomjerry">Tom et Jerry</a>
+                        <a href="oggy.html" class="dropdown-item" data-category="oggy">Oggy et les Cafards</a>
+                        <a href="zik.html" class="dropdown-item" data-category="zik">Zik et Sharko</a>
+                        <a href="corneil.html" class="dropdown-item" data-category="corneil">Corneil et Bernie</a>
+                        <a href="marcelino.html" class="dropdown-item" data-category="marcelino">Marcelino</a>
+                        <a href="ouioui.html" class="dropdown-item" data-category="ouioui">Oui Oui</a>
+                        <a href="charlotte.html" class="dropdown-item" data-category="charlotte">Charlotte aux fraises</a>
+                        <a href="bob.html" class="dropdown-item" data-category="bob">Bob l'éponge</a>
+                        <a href="enfants.html" class="dropdown-item" data-category="enfants">Education</a>
+                        <a href="univers.html" class="dropdown-item" data-category="univers">Univers</a>
+                        <a href="masha.html" class="dropdown-item active" data-category="masha">Masha et Michka</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="category-hero">
+        <h1>Masha et Michka</h1>
+        <p>Rejoignez Masha, la petite fille espiègle, et Michka, l'ours gentil et patient, dans leurs aventures pleines de rires et de surprises ! Découvrez des histoires amusantes, des leçons de vie et des moments tendres entre cette petite fille pleine d'énergie et son grand ami à fourrure. Une série pour toute la famille !</p>
+        <button class="btn btn-primary" style="max-width: 280px;" id="watchTrailerBtn">Regarder la bande-annonce</button>
+    </section>
+    
+    <section class="videos-section">
+        <h2 class="section-title">Aventures de Masha et Michka</h2>
+        <div class="videos-container" id="videosContainer"></div>
+    </section>
+    
+    <div class="video-modal" id="videoModal">
+        <div class="video-modal-content">
+            <div class="video-modal-header">
+                <h3 id="videoModalTitle">Titre de la vidéo</h3>
+                <span class="close-video-modal" id="closeVideoModal">&times;</span>
+            </div>
+            <div class="video-modal-body">
+                <div class="video-modal-iframe-container">
+                    <div id="videoPlayerContainer"></div>
+                </div>
+                <div class="video-modal-info">
+                    <p id="videoModalDescription">Description de la vidéo</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>À propos de Universal Toon</h3>
+                <p>Universal Toon est une plateforme qui regroupe les meilleurs films et dessins animés pour toute la famille. Profitez de contenu adapté à tous les âges et tous les goûts.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Catégories</h3>
+                <ul>
+                    <li><a href="conte-fee.html">Contes de fée</a></li>
+                    <li><a href="aventure.html">Aventure&Action</a></li>
+                    <li><a href="tomjerry.html">Tom et Jerry</a></li>
+                    <li><a href="oggy.html">Oggy et les Cafards</a></li>
+                    <li><a href="zik.html">Zik et Sharko</a></li>
+                    <li><a href="corneil.html">Corneil et Bernie</a></li>
+                    <li><a href="marcelino.html">Marcelino</a></li>
+                    <li><a href="ouioui.html">Oui Oui</a></li>
+                    <li><a href="charlotte.html">Charlotte aux fraises</a></li>
+                    <li><a href="bob.html">Bob l'éponge</a></li>
+                    <li><a href="enfants.html">Education</a></li>
+                    <li><a href="univers.html">Univers</a></li>
+                    <li><a href="masha.html">Masha et Michka</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: contact@universaltoon.com</p>
+                <p>Téléphone: +221762442530 & +221755222968</p>
+                <p>Adresse: Senegal Mbour</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Universal Toon. Tous droits réservés. Conçu avec ❤️ pour les familles</p>
+        </div>
+    </footer>
+
+    <script>
+        const mashaVideos = [
+            { id: "k8qY8mWXyGk", title: "Masha et Michka - La Première Rencontre", description: "Découvrez comment Masha et Michka se sont rencontrés pour la première fois.", duration: "45:22", year: "2005", platform: "youtube" },
+            { id: "L-7V5Wv5JN4", title: "Masha et Michka - La Grande Aventure", description: "Masha et Michka partent à l'aventure dans la forêt.", duration: "48:15", year: "2007", platform: "youtube" },
+            { id: "pV9Q6sF1O8E", title: "Masha et Michka - La Fête d'Anniversaire", description: "Masha organise une fête d'anniversaire surprise pour Michka.", duration: "42:33", year: "2009", platform: "youtube" },
+            { id: "qR2sV2S3T4F", title: "Masha et Michka - Le Concours de Danse", description: "Masha et Michka participent à un concours de danse.", duration: "50:47", year: "2011", platform: "youtube" },
+            { id: "rS3tU4V5W6X", title: "Masha et Michka - Les Meilleurs Amis", description: "Une journée typique de Masha et Michka, pleine de rires et de jeux.", duration: "46:19", year: "2013", platform: "youtube" },
+            { id: "sT4vU5W6X7Y", title: "Masha et Michka - La Chasse au Trésor", description: "Masha et Michka partent à la recherche d'un trésor caché.", duration: "44:28", year: "2015", platform: "youtube" },
+            { id: "tU5vW6X7Y8Z", title: "Masha et Michka - L'Hiver Magique", description: "Masha et Michka découvrent les joies de l'hiver.", duration: "47:51", year: "2017", platform: "youtube" },
+            { id: "uV6wX7Y8Z9A", title: "Masha et Michka - Les Meilleurs Moments", description: "Compilation des moments les plus drôles de Masha et Michka.", duration: "51:27", year: "2019", platform: "youtube" },
+            { id: "x1n5n5b", title: "Masha et Michka - La Nouvelle Amie", description: "Masha se fait une nouvelle amie et Michka devient un peu jaloux.", duration: "39:14", year: "2020", platform: "dailymotion" },
+            { id: "x2o4gfv", title: "Masha et Michka - Le Spectacle de Magie", description: "Masha organise un spectacle de magie avec Michka comme assistant.", duration: "43:08", year: "2021", platform: "dailymotion" },
+            { id: "x3n5o7f", title: "Masha et Michka - Le Pique-nique", description: "Masha et Michka préparent un pique-nique dans la forêt.", duration: "45:33", year: "2021", platform: "dailymotion" },
+            { id: "x4o6b4l", title: "Masha et Michka - La Cabane dans les Arbres", description: "Masha et Michka construisent une cabane dans les arbres.", duration: "42:45", year: "2022", platform: "dailymotion" },
+            { id: "y1n5gvb", title: "Masha et Michka - La Journée à la Plage", description: "Masha et Michka passent une journée amusante à la plage.", duration: "44:19", year: "2022", platform: "dailymotion" },
+            { id: "y2o4gfv", title: "Masha et Michka - Le Concours de Cuisine", description: "Masha et Michka participent à un concours de cuisine.", duration: "41:52", year: "2023", platform: "dailymotion" },
+            { id: "y3n5n5b", title: "Masha et Michka - La Fête de la Forêt", description: "Tous les animaux de la forêt organisent une grande fête.", duration: "47:41", year: "2023", platform: "dailymotion" }
+        ];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            createConfetti();
+            createBalloons();
+            createMashaElements();
+            loadVideos();
+            setupInteractions();
+            setupVideoModal();
+            preloadImages();
+        });
+
+        function createConfetti() {
+            const container = document.getElementById('confetti');
+            for (let i = 0; i < 150; i++) {
+                const piece = document.createElement('div');
+                piece.classList.add('confetti-piece');
+                const colors = ['#FF6B6B', '#FFB8C6', '#FFD166', '#06D6A0', '#118AB2'];
+                piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                piece.style.width = `${Math.random() * 10 + 5}px`;
+                piece.style.height = `${Math.random() * 15 + 10}px`;
+                piece.style.left = `${Math.random() * 100}%`;
+                piece.style.top = `${Math.random() * 100}%`;
+                piece.style.animationDelay = `${Math.random() * 15}s`;
+                piece.style.animationDuration = `${10 + Math.random() * 20}s`;
+                container.appendChild(piece);
+            }
+        }
+
+        function createBalloons() {
+            const container = document.getElementById('balloons');
+            const items = ['👧', '🐻', '🌟', '🌸', '🍭', '🎈', '🎨', '🎪'];
+            for (let i = 0; i < 20; i++) {
+                const balloon = document.createElement('div');
+                balloon.classList.add('balloon');
+                balloon.textContent = items[Math.floor(Math.random() * items.length)];
+                balloon.style.fontSize = `${Math.random() * 50 + 30}px`;
+                balloon.style.left = `${Math.random() * 100}%`;
+                balloon.style.top = `${Math.random() * 100}%`;
+                balloon.style.animationDelay = `${Math.random() * 25}s`;
+                balloon.style.animationDuration = `${15 + Math.random() * 25}s`;
+                container.appendChild(balloon);
+            }
+        }
+
+        function createMashaElements() {
+            const container = document.getElementById('mashaElements');
+            const items = ['👧', '🐻', '🌟', '🌸', '🍭', '🎈', '🎨', '🎪', '🐰', '🐦', '🦋', '🌳', '🌼'];
+            for (let i = 0; i < 30; i++) {
+                const element = document.createElement('div');
+                element.classList.add('masha-element');
+                element.textContent = items[Math.floor(Math.random() * items.length)];
+                element.style.fontSize = `${Math.random() * 40 + 20}px`;
+                element.style.left = `${Math.random() * 100}%`;
+                element.style.top = `${Math.random() * 100}%`;
+                element.style.animationDelay = `${Math.random() * 25}s`;
+                element.style.animationDuration = `${20 + Math.random() * 30}s`;
+                container.appendChild(element);
+            }
+        }
+
+        function preloadImages() {
+            const img = new Image();
+            img.src = 'https://images.unsplash.com/photo-1518495978942-83cdb633d6d6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80';
+        }
+
+        function getThumbnailUrl(video) {
+            return video.platform === 'dailymotion' 
+                ? `https://www.dailymotion.com/thumbnail/video/${video.id}`
+                : `https://img.youtube.com/vi/${video.id}/hqdefault.jpg`;
+        }
+
+        function loadVideos() {
+            const container = document.getElementById('videosContainer');
+            if (!container) return;
+            container.innerHTML = '';
+            
+            mashaVideos.forEach((video, index) => {
+                const videoItem = document.createElement('div');
+                videoItem.className = 'video-item';
+                videoItem.setAttribute('data-video-id', video.id);
+                videoItem.setAttribute('data-video-title', video.title);
+                videoItem.setAttribute('data-video-description', video.description);
+                videoItem.setAttribute('data-platform', video.platform || 'youtube');
+                videoItem.style.animationDelay = `${index * 0.1}s`;
+                
+                videoItem.innerHTML = `
+                    <div class="video-thumbnail">
+                        <img src="${getThumbnailUrl(video)}" alt="${video.title}" loading="lazy">
+                    </div>
+                    <div class="video-info">
+                        <h3>${video.title}</h3>
+                        <p>${video.description}</p>
+                        <div class="video-meta">
+                            <span><i class="far fa-clock"></i> ${video.duration}</span>
+                            <span><i class="far fa-calendar"></i> ${video.year}</span>
+                            <span><i class="fas fa-video"></i> ${video.platform === 'dailymotion' ? 'Dailymotion' : 'YouTube'}</span>
+                        </div>
+                    </div>
+                `;
+                
+                videoItem.addEventListener('click', () => {
+                    openVideoModal(video.id, video.title, video.description, video.platform || 'youtube');
+                });
+                container.appendChild(videoItem);
+            });
+        }
+
+        function setupInteractions() {
+            const watchTrailerBtn = document.getElementById('watchTrailerBtn');
+            if (watchTrailerBtn && mashaVideos[0]) {
+                watchTrailerBtn.addEventListener('click', () => {
+                    openVideoModal(mashaVideos[0].id, mashaVideos[0].title, mashaVideos[0].description, mashaVideos[0].platform || 'youtube');
+                });
+            }
+            
+            const toggle = document.getElementById('categoriesDropdownToggle');
+            const dropdown = document.getElementById('categoriesDropdown');
+            if (toggle) {
+                toggle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    dropdown.classList.toggle('active');
+                });
+                document.addEventListener('click', (e) => {
+                    if (!toggle.contains(e.target) && !dropdown.contains(e.target)) {
+                        dropdown.classList.remove('active');
+                    }
+                });
+            }
+        }
+
+        function setupVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const closeBtn = document.getElementById('closeVideoModal');
+            if (closeBtn) closeBtn.addEventListener('click', closeVideoModalFunc);
+            if (modal) modal.addEventListener('click', (e) => { if (e.target === modal) closeVideoModalFunc(); });
+            document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('active')) closeVideoModalFunc(); });
+        }
+
+        function openVideoModal(videoId, title, description, platform = 'youtube') {
+            const modal = document.getElementById('videoModal');
+            const container = document.getElementById('videoPlayerContainer');
+            const titleEl = document.getElementById('videoModalTitle');
+            const descEl = document.getElementById('videoModalDescription');
+            if (!modal || !container) return;
+            
+            titleEl.textContent = title;
+            descEl.textContent = description;
+            container.innerHTML = '';
+            
+            const embedUrl = platform === 'dailymotion'
+                ? `https://www.dailymotion.com/embed/video/${videoId}?autoplay=1&controls=1&ui-info=0`
+                : `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&controls=1&showinfo=0`;
+            
+            const iframe = document.createElement('iframe');
+            iframe.src = embedUrl;
+            iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+            iframe.setAttribute('allowfullscreen', 'true');
+            iframe.style.cssText = 'width:100%;height:100%;position:absolute;top:0;left:0;border:none';
+            container.appendChild(iframe);
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeVideoModalFunc() {
+            const modal = document.getElementById('videoModal');
+            const container = document.getElementById('videoPlayerContainer');
+            if (!modal || !container) return;
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+            container.innerHTML = '';
+        }
+    </script>
+</body>
+</html>

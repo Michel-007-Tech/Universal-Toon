@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Loup - Universal Toon</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Quicksand:wght@400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Variables CSS pour Mini Loup - thème forêt/magique */
+        :root {
+            --forest-green: #2E7D32;
+            --wolf-brown: #8D6E63;
+            --magic-gold: #FFC107;
+            --sky-blue: #42A5F5;
+            --sunset-orange: #FF9800;
+            --cream-white: #FFF8E1;
+            --night-purple: #5E35B1;
+            --magic-shadow: 0 0 15px rgba(255, 193, 7, 0.3);
+            --header-font: 'Poppins', sans-serif;
+            --body-font: 'Quicksand', sans-serif;
+            --magic-font: 'Dancing Script', cursive;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--body-font);
+            background: linear-gradient(135deg, #2E7D32 0%, #42A5F5 50%, #FF9800 100%);
+            color: var(--cream-white);
+            line-height: 1.7;
+            overflow-x: hidden;
+            min-height: 100vh;
+            opacity: 0;
+            animation: fadeInBody 0.8s ease-out forwards;
+        }
+        
+        @keyframes fadeInBody {
+            to { opacity: 1; }
+        }
+        
+        /* Étoiles scintillantes */
+        .twinkling-stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+        }
+        
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite alternate;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        /* En-tête */
+        header {
+            background: rgba(46, 125, 50, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 193, 7, 0.3);
+            animation: slideDown 0.5s ease-out;
+        }
+        
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            height: 90px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+        
+        .logo-container:hover .wolf-icon {
+            animation: wolfHowl 1s ease;
+        }
+        
+        @keyframes wolfHowl {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1) rotate(-5deg); }
+        }
+        
+        .wolf-icon {
+            font-size: 42px;
+            color: var(--magic-gold);
+            animation: floatWolf 6s infinite ease-in-out;
+            filter: drop-shadow(0 0 10px rgba(255, 193, 7, 0.7));
+        }
+        
+        @keyframes floatWolf {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        
+        .site-title {
+            font-family: var(--magic-font);
+            font-size: 38px;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--magic-gold), var(--cream-white), var(--sky-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Navigation */
+        .nav-container {
+            background: linear-gradient(90deg, var(--forest-green), var(--wolf-brown));
+            padding: 0 5%;
+            position: relative;
+        }
+        
+        .nav-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--magic-gold), transparent);
+        }
+        
+        .nav-menu {
+            display: flex;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 18px 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: block;
+            font-family: var(--header-font);
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background: rgba(255, 255, 255, 0.15);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 4px;
+            background: var(--magic-gold);
+            transition: all 0.4s;
+            transform: translateX(-50%);
+        }
+        
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 80%;
+        }
+        
+        /* Menu déroulant */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(46, 125, 50, 0.95);
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            min-width: 250px;
+            display: none;
+            z-index: 1001;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 193, 7, 0.2);
+        }
+        
+        .dropdown-menu.active {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+        
+        .dropdown-item {
+            padding: 15px 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+            color: var(--cream-white);
+            text-decoration: none;
+            display: block;
+        }
+        
+        .dropdown-item:hover {
+            background: rgba(255, 193, 7, 0.2);
+            padding-left: 35px;
+        }
+        
+        /* Bannière héros */
+        .category-hero {
+            text-align: center;
+            padding: 120px 5% 80px;
+            background: radial-gradient(circle at 30% 20%, rgba(46, 125, 50, 0.6) 0%, rgba(66, 165, 245, 0.4) 40%, transparent 70%),
+                        url('https://images.unsplash.com/photo-1517213849290-bbbfffdc6da3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            margin-bottom: 60px;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .category-hero h1 {
+            font-family: var(--magic-font);
+            font-size: 72px;
+            margin-bottom: 25px;
+            color: white;
+            text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+        
+        .category-hero p {
+            font-size: 24px;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+        
+        /* Section vidéos */
+        .videos-section {
+            padding: 60px 5%;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 42px;
+            color: white;
+            font-family: var(--header-font);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title::before, .section-title::after {
+            content: '🐺';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            opacity: 0.8;
+        }
+        
+        .section-title::before {
+            left: -50px;
+        }
+        
+        .section-title::after {
+            right: -50px;
+        }
+        
+        .videos-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 35px;
+        }
+        
+        .video-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+        
+        .video-item:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 193, 7, 0.5);
+        }
+        
+        .video-thumbnail {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .video-thumbnail img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .video-item:hover .video-thumbnail img {
+            transform: scale(1.05);
+        }
+        
+        .video-info {
+            padding: 25px;
+        }
+        
+        .video-info h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: white;
+            font-family: var(--header-font);
+        }
+        
+        .video-info p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 16px;
+        }
+        
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Modal vidéo */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .video-modal.active {
+            display: flex;
+            animation: fadeInModal 0.3s ease-out;
+        }
+        
+        @keyframes fadeInModal {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .video-modal-content {
+            width: 90%;
+            max-width: 1100px;
+            background: rgba(46, 125, 50, 0.95);
+            border-radius: 20px;
+            overflow: hidden;
+            animation: modalSlideIn 0.5s;
+        }
+        
+        @keyframes modalSlideIn {
+            from { opacity: 0; transform: translateY(60px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        
+        .video-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        .video-modal-header h3 {
+            font-size: 24px;
+            color: white;
+        }
+        
+        .close-video-modal {
+            font-size: 32px;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .close-video-modal:hover {
+            color: white;
+            transform: rotate(90deg);
+        }
+        
+        .video-modal-iframe-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+        
+        .video-modal-iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .video-modal-info {
+            padding: 25px 30px;
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        .video-modal-info p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 18px;
+        }
+        
+        /* Bouton */
+        .btn {
+            padding: 16px 35px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: var(--header-font);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, var(--forest-green), var(--magic-gold));
+            color: white;
+            box-shadow: 0 5px 20px rgba(46, 125, 50, 0.4);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(46, 125, 50, 0.6);
+        }
+        
+        /* Footer */
+        footer {
+            background: rgba(46, 125, 50, 0.95);
+            color: white;
+            padding: 70px 5% 40px;
+            margin-top: 100px;
+            border-top: 1px solid rgba(255, 193, 7, 0.3);
+        }
+        
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-section h3 {
+            font-size: 24px;
+            margin-bottom: 25px;
+            color: var(--magic-gold);
+            font-family: var(--header-font);
+        }
+        
+        .footer-section p, .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            text-decoration: none;
+            display: block;
+            padding: 8px 0;
+            transition: all 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+            padding-left: 15px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                height: auto;
+                padding: 20px 5%;
+            }
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .nav-link {
+                padding: 15px 20px;
+                font-size: 15px;
+            }
+            .category-hero h1 {
+                font-size: 44px;
+            }
+            .category-hero p {
+                font-size: 20px;
+            }
+            .videos-container {
+                grid-template-columns: 1fr;
+            }
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="twinkling-stars" id="twinklingStars"></div>
+    
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo-container">
+                <div class="wolf-icon">🐺</div>
+                <h1 class="site-title">Universal Toon</h1>
+            </a>
+        </div>
+        
+        <div class="nav-container">
+            <nav class="nav-menu">
+                <div class="nav-item">
+                    <a href="index.html" class="nav-link">Accueil</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link active" id="categoriesDropdownToggle">Catégories <i class="fas fa-chevron-down" style="margin-left: 5px;"></i></a>
+                    <div class="dropdown-menu" id="categoriesDropdown">
+                        <a href="conte-fee.html" class="dropdown-item">Conte de fée</a>
+                        <a href="aventure.html" class="dropdown-item">Aventure&Action</a>
+                        <a href="tomjerry.html" class="dropdown-item">Tom et Jerry</a>
+                        <a href="oggy.html" class="dropdown-item">Oggy et les Cafards</a>
+                        <a href="loup.html" class="dropdown-item active">Mini Loup</a>
+                        <a href="univers.html" class="dropdown-item">Univers</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="category-hero">
+        <h1>Mini Loup</h1>
+        <p>Rejoignez Mini Loup et ses amis dans leurs aventures passionnantes à travers la forêt ! Découvrez des histoires amusantes et éducatives où Mini Loup apprend à surmonter ses peurs, à être un bon ami et à explorer le monde qui l'entoure.</p>
+        <button class="btn btn-primary" id="watchTrailerBtn">Regarder la bande-annonce</button>
+    </section>
+    
+    <section class="videos-section">
+        <h2 class="section-title">Les Meilleurs Épisodes de Mini Loup</h2>
+        <div class="videos-container" id="videosContainer"></div>
+    </section>
+    
+    <div class="video-modal" id="videoModal">
+        <div class="video-modal-content">
+            <div class="video-modal-header">
+                <h3 id="videoModalTitle">Titre</h3>
+                <span class="close-video-modal" id="closeVideoModal">&times;</span>
+            </div>
+            <div class="video-modal-body">
+                <div class="video-modal-iframe-container">
+                    <div id="videoPlayerContainer"></div>
+                </div>
+                <div class="video-modal-info">
+                    <p id="videoModalDescription">Description</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>À propos de Universal Toon</h3>
+                <p>Universal Toon regroupe les meilleurs dessins animés pour toute la famille.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Catégories</h3>
+                <ul>
+                    <li><a href="conte-fee.html">Contes de fée</a></li>
+                    <li><a href="aventure.html">Aventure&Action</a></li>
+                    <li><a href="tomjerry.html">Tom et Jerry</a></li>
+                    <li><a href="oggy.html">Oggy et les Cafards</a></li>
+                    <li><a href="loup.html">Mini Loup</a></li>
+                    <li><a href="univers.html">Univers</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: contact@universaltoon.com</p>
+                <p>Téléphone: +221762442530 & +221755222968</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Universal Toon. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        const miniLoupVideos = [
+            { id: "dQw4w9WgXcQ", title: "Mini Loup - La Rentrée des Classes", description: "Mini Loup découvre l'école pour la première fois", duration: "10:15", year: "2019", platform: "youtube" },
+            { id: "9bZkp7q19f0", title: "Mini Loup - La Grande Aventure en Forêt", description: "Mini Loup explore la forêt mystérieuse", duration: "11:30", year: "2019", platform: "youtube" },
+            { id: "CduA0TULnow", title: "Mini Loup - Le Trésor Caché", description: "Mini Loup suit une carte au trésor", duration: "12:45", year: "2020", platform: "youtube" },
+            { id: "FlsCjmMhFmw", title: "Mini Loup - Le Club des Explorateurs", description: "Mini Loup fonde un club d'explorateurs", duration: "13:20", year: "2020", platform: "youtube" },
+            { id: "L_jWHffIx5E", title: "Mini Loup - La Fête d'Anniversaire", description: "Mini Loup organise une fête surprise", duration: "11:10", year: "2019", platform: "youtube" },
+            { id: "ZXsQAXx_ao0", title: "Mini Loup - Le Mystère de la Nuit", description: "Mini Loup surmonte sa peur du noir", duration: "12:35", year: "2020", platform: "youtube" }
+        ];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            createTwinklingStars();
+            loadVideos();
+            setupInteractions();
+            setupVideoModal();
+        });
+
+        function createTwinklingStars() {
+            const container = document.getElementById('twinklingStars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                const size = Math.random() * 3 + 1;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.animationDelay = `${Math.random() * 3}s`;
+                star.style.animationDuration = `${1 + Math.random() * 4}s`;
+                container.appendChild(star);
+            }
+        }
+
+        function getThumbnailUrl(video) {
+            return `https://img.youtube.com/vi/${video.id}/hqdefault.jpg`;
+        }
+
+        function loadVideos() {
+            const container = document.getElementById('videosContainer');
+            if (!container) return;
+            container.innerHTML = '';
+            
+            miniLoupVideos.forEach((video, index) => {
+                const videoItem = document.createElement('div');
+                videoItem.className = 'video-item';
+                videoItem.style.animationDelay = `${index * 0.1}s`;
+                videoItem.innerHTML = `
+                    <div class="video-thumbnail">
+                        <img src="${getThumbnailUrl(video)}" alt="${video.title}" loading="lazy">
+                    </div>
+                    <div class="video-info">
+                        <h3>${video.title}</h3>
+                        <p>${video.description}</p>
+                        <div class="video-meta">
+                            <span><i class="far fa-clock"></i> ${video.duration}</span>
+                            <span><i class="far fa-calendar"></i> ${video.year}</span>
+                        </div>
+                    </div>
+                `;
+                videoItem.addEventListener('click', () => openVideoModal(video.id, video.title, video.description, video.platform));
+                container.appendChild(videoItem);
+            });
+        }
+
+        function setupInteractions() {
+            const watchTrailerBtn = document.getElementById('watchTrailerBtn');
+            if (watchTrailerBtn) {
+                watchTrailerBtn.addEventListener('click', () => openVideoModal(miniLoupVideos[0].id, miniLoupVideos[0].title, miniLoupVideos[0].description));
+            }
+            
+            const toggle = document.getElementById('categoriesDropdownToggle');
+            const dropdown = document.getElementById('categoriesDropdown');
+            if (toggle) {
+                toggle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    dropdown.classList.toggle('active');
+                });
+                document.addEventListener('click', (e) => {
+                    if (!toggle.contains(e.target) && !dropdown.contains(e.target)) {
+                        dropdown.classList.remove('active');
+                    }
+                });
+            }
+        }
+
+        function setupVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const closeBtn = document.getElementById('closeVideoModal');
+            if (closeBtn) closeBtn.addEventListener('click', closeVideoModal);
+            if (modal) modal.addEventListener('click', (e) => { if (e.target === modal) closeVideoModal(); });
+            document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('active')) closeVideoModal(); });
+        }
+
+        function openVideoModal(videoId, title, description) {
+            const modal = document.getElementById('videoModal');
+            const container = document.getElementById('videoPlayerContainer');
+            const titleEl = document.getElementById('videoModalTitle');
+            const descEl = document.getElementById('videoModalDescription');
+            if (!modal || !container) return;
+            
+            titleEl.textContent = title;
+            descEl.textContent = description;
+            container.innerHTML = '';
+            
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+            iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+            iframe.setAttribute('allowfullscreen', 'true');
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            iframe.style.position = 'absolute';
+            iframe.style.border = 'none';
+            container.appendChild(iframe);
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const container = document.getElementById('videoPlayerContainer');
+            if (!modal) return;
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+            if (container) container.innerHTML = '';
+        }
+    </script>
+</body>
+</html>

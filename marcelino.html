@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marcelino - Universal Toon</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Quicksand:wght@400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Variables CSS adaptées pour Marcelino - thème religieux et chaleureux */
+        :root {
+            --monastery-brown: #8B4513;
+            --wine-red: #8B0000;
+            --bread-gold: #DAA520;
+            --candle-yellow: #FFD700;
+            --stone-gray: #808080;
+            --sky-blue: #87CEEB;
+            --light-cream: #FFF8DC;
+            --accent-green: #228B22;
+            --magic-shadow: 0 0 15px rgba(218, 165, 32, 0.3);
+            --header-font: 'Poppins', sans-serif;
+            --body-font: 'Quicksand', sans-serif;
+            --magic-font: 'Dancing Script', cursive;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Reset et styles de base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--body-font);
+            background: linear-gradient(135deg, #654321 0%, #8B4513 50%, #A0522D 100%);
+            color: var(--light-cream);
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            opacity: 0;
+            animation: fadeInBody 0.8s ease-out forwards;
+        }
+        
+        @keyframes fadeInBody {
+            to { opacity: 1; }
+        }
+        
+        /* Effet de poussière de farine en arrière-plan */
+        .flour-dust {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .flour-particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: floatFlour 20s infinite linear;
+        }
+        
+        @keyframes floatFlour {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Effet de rayons de lumière */
+        .light-rays {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            pointer-events: none;
+            opacity: 0.1;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.5) 0%, transparent 70%);
+        }
+        
+        /* En-tête et navigation */
+        header {
+            background: rgba(101, 67, 33, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(218, 165, 32, 0.2);
+            animation: slideDown 0.5s ease-out;
+        }
+        
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            height: 90px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+            text-decoration: none;
+        }
+        
+        .logo-container:hover .bread-icon {
+            animation: breadSpin 1s ease;
+        }
+        
+        @keyframes breadSpin {
+            0%, 20%, 50%, 80%, 100% { transform: rotate(0); }
+            40% { transform: rotate(180deg); }
+            60% { transform: rotate(160deg); }
+        }
+        
+        .bread-icon {
+            font-size: 42px;
+            color: var(--bread-gold);
+            position: relative;
+            animation: breadFloat 8s infinite ease-in-out;
+            filter: drop-shadow(0 0 10px rgba(218, 165, 32, 0.7));
+        }
+        
+        @keyframes breadFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-5px) rotate(-5deg); }
+            75% { transform: translateY(5px) rotate(5deg); }
+        }
+        
+        .site-title {
+            font-family: var(--magic-font);
+            font-size: 38px;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--bread-gold), var(--wine-red), var(--sky-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+            letter-spacing: 1px;
+        }
+        
+        .magic-sparkle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 15px white;
+            animation: sparkle 2s infinite;
+            opacity: 0;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        /* Navigation */
+        .nav-container {
+            background: linear-gradient(90deg, var(--monastery-brown), var(--wine-red));
+            padding: 0 5%;
+            position: relative;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--bread-gold), transparent);
+        }
+        
+        .nav-menu {
+            display: flex;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .nav-item {
+            position: relative;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 18px 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: block;
+            position: relative;
+            font-family: var(--header-font);
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background: rgba(255, 255, 255, 0.15);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 4px;
+            background: var(--bread-gold);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            transform: translateX(-50%);
+        }
+        
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 80%;
+        }
+        
+        /* Menu déroulant des catégories */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(101, 67, 33, 0.95);
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            min-width: 250px;
+            display: none;
+            z-index: 1001;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(218, 165, 32, 0.2);
+            border-top: none;
+        }
+        
+        .dropdown-menu.active {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+        
+        .dropdown-item {
+            padding: 15px 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+            color: var(--light-cream);
+            text-decoration: none;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+        
+        .dropdown-item:hover {
+            background: rgba(218, 165, 32, 0.2);
+            padding-left: 35px;
+            color: white;
+        }
+        
+        .dropdown-item:hover::before {
+            content: '🙏';
+            position: absolute;
+            left: 15px;
+            color: var(--bread-gold);
+        }
+        
+        /* Section de bannière principale pour Marcelino */
+        .category-hero {
+            text-align: center;
+            padding: 120px 5% 80px;
+            background: radial-gradient(circle at 30% 20%, rgba(218, 165, 32, 0.6) 0%, rgba(139, 0, 0, 0.4) 40%, transparent 70%),
+                        radial-gradient(circle at 70% 80%, rgba(135, 206, 235, 0.5) 0%, rgba(101, 67, 33, 0.3) 30%, transparent 60%),
+                        url('https://images.unsplash.com/photo-1544717305-99670f9c28f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(218, 165, 32, 0.2);
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .category-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
+        .category-hero h1 {
+            font-family: var(--magic-font);
+            font-size: 72px;
+            margin-bottom: 25px;
+            color: white;
+            text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.7),
+                         0 0 30px rgba(218, 165, 32, 0.5),
+                         0 0 60px rgba(139, 0, 0, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+        
+        .category-hero h1::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--bread-gold), transparent);
+        }
+        
+        .category-hero p {
+            font-size: 24px;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+            font-weight: 300;
+            line-height: 1.8;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+        
+        /* Section vidéos */
+        .videos-section {
+            padding: 60px 5%;
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 42px;
+            color: white;
+            font-family: var(--header-font);
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5),
+                         0 0 20px rgba(101, 67, 33, 0.3);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title::before, .section-title::after {
+            content: '🍞';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--bread-gold);
+            font-size: 24px;
+            opacity: 0.8;
+        }
+        
+        .section-title::before {
+            left: -50px;
+        }
+        
+        .section-title::after {
+            right: -50px;
+        }
+        
+        .videos-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 35px;
+        }
+        
+        .video-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+        
+        .video-item:nth-child(1) { animation-delay: 0.3s; }
+        .video-item:nth-child(2) { animation-delay: 0.4s; }
+        .video-item:nth-child(3) { animation-delay: 0.5s; }
+        .video-item:nth-child(4) { animation-delay: 0.6s; }
+        .video-item:nth-child(5) { animation-delay: 0.7s; }
+        .video-item:nth-child(6) { animation-delay: 0.8s; }
+        .video-item:nth-child(7) { animation-delay: 0.9s; }
+        .video-item:nth-child(8) { animation-delay: 1.0s; }
+        
+        .video-item:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4),
+                        0 0 30px rgba(101, 67, 33, 0.2);
+            border-color: rgba(101, 67, 33, 0.3);
+        }
+        
+        .video-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--monastery-brown), var(--wine-red), var(--bread-gold));
+            z-index: 2;
+        }
+        
+        .video-thumbnail {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .video-thumbnail img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .video-item:hover .video-thumbnail img {
+            transform: scale(1.05);
+        }
+        
+        /* Effet de lecture automatique au survol */
+        .video-thumbnail::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: opacity 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 60px;
+            z-index: 1;
+        }
+        
+        .video-item:hover .video-thumbnail::after {
+            opacity: 1;
+            content: '▶';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+        }
+        
+        .video-info {
+            padding: 25px;
+        }
+        
+        .video-info h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: white;
+            font-family: var(--header-font);
+            min-height: 60px;
+        }
+        
+        .video-info p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Modal vidéo */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .video-modal.active {
+            display: flex;
+        }
+        
+        .video-modal-content {
+            width: 90%;
+            max-width: 1100px;
+            background: rgba(101, 67, 33, 0.95);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7),
+                        0 0 0 1px rgba(218, 165, 32, 0.1);
+            animation: modalSlideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+        
+        @keyframes modalSlideIn {
+            from { opacity: 0; transform: translateY(60px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        
+        .video-modal-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--monastery-brown), var(--wine-red), var(--bread-gold));
+            z-index: 2;
+        }
+        
+        .video-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        .video-modal-header h3 {
+            font-size: 24px;
+            color: white;
+            font-family: var(--header-font);
+        }
+        
+        .close-video-modal {
+            font-size: 32px;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .close-video-modal:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(90deg);
+        }
+        
+        .video-modal-body {
+            padding: 0;
+        }
+        
+        .video-modal-iframe-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .video-modal-iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .video-modal-info {
+            padding: 25px 30px;
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        .video-modal-info p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            font-size: 18px;
+        }
+        
+        /* Boutons */
+        .btn {
+            padding: 16px 35px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: var(--header-font);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 1px;
+            animation: fadeInUp 0.8s ease-out 0.8s both;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, var(--monastery-brown), var(--wine-red));
+            color: white;
+            box-shadow: 0 5px 20px rgba(139, 69, 19, 0.4);
+            border: 2px solid transparent;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(45deg, var(--wine-red), var(--monastery-brown));
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(139, 69, 19, 0.6);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 50px;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(30deg);
+            transition: all 0.5s;
+        }
+        
+        .btn-primary:hover::after {
+            left: 120%;
+        }
+        
+        /* Pied de page */
+        footer {
+            background: rgba(101, 67, 33, 0.95);
+            color: white;
+            padding: 70px 5% 40px;
+            margin-top: 100px;
+            border-top: 1px solid rgba(218, 165, 32, 0.2);
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--monastery-brown), var(--wine-red), var(--bread-gold));
+        }
+        
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-section {
+            position: relative;
+        }
+        
+        .footer-section h3 {
+            font-size: 24px;
+            margin-bottom: 25px;
+            color: var(--bread-gold);
+            font-family: var(--header-font);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--bread-gold), transparent);
+        }
+        
+        .footer-section p, .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            transition: all 0.3s;
+        }
+        
+        .footer-section a {
+            text-decoration: none;
+            display: block;
+            padding: 8px 0;
+            position: relative;
+            padding-left: 0;
+            transition: all 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+            padding-left: 15px;
+        }
+        
+        .footer-section a:hover::before {
+            content: '›';
+            position: absolute;
+            left: 0;
+            color: var(--bread-gold);
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 15px;
+        }
+        
+        .footer-bottom p {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .footer-bottom p::before, .footer-bottom p::after {
+            content: '🍞';
+            color: var(--bread-gold);
+            font-size: 18px;
+        }
+        
+        /* Éléments décoratifs religieux */
+        .religious-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .religious-element {
+            position: absolute;
+            font-size: 30px;
+            animation: floatElement 25s infinite linear;
+            opacity: 0.1;
+        }
+        
+        @keyframes floatElement {
+            0% { transform: translateY(100vh) translateX(0) rotate(0deg); }
+            100% { transform: translateY(-100px) translateX(100px) rotate(360deg); }
+        }
+        
+        /* Animation spéciale pour les gouttes de vin */
+        @keyframes wineDrop {
+            0% { transform: translateX(-100px) translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateX(calc(100vw + 100px)) translateY(50px) rotate(360deg); opacity: 0; }
+        }
+        
+        .wine-drops {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .wine-drop {
+            position: absolute;
+            font-size: 40px;
+            animation: wineDrop 18s infinite linear;
+            opacity: 0.1;
+            color: var(--wine-red);
+        }
+        
+        .marcelino-decoration {
+            position: absolute;
+            bottom: 0;
+            right: 5%;
+            width: 300px;
+            height: 300px;
+            background: url('https://images.unsplash.com/photo-1544717305-99670f9c28f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80') no-repeat center;
+            background-size: contain;
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .videos-container {
+                grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            }
+            
+            .category-hero h1 {
+                font-size: 62px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .videos-container {
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            }
+            
+            .category-hero h1 {
+                font-size: 52px;
+            }
+            
+            .category-hero p {
+                font-size: 22px;
+            }
+            
+            .section-title {
+                font-size: 36px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                height: auto;
+                padding: 20px 5%;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-link {
+                padding: 15px 20px;
+                font-size: 15px;
+            }
+            
+            .category-hero {
+                padding: 100px 5% 60px;
+            }
+            
+            .category-hero h1 {
+                font-size: 44px;
+            }
+            
+            .category-hero p {
+                font-size: 20px;
+            }
+            
+            .videos-container {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 25px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .videos-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .category-hero h1 {
+                font-size: 38px;
+            }
+            
+            .section-title {
+                font-size: 32px;
+            }
+            
+            .section-title::before, .section-title::after {
+                display: none;
+            }
+            
+            .video-modal-content {
+                width: 95%;
+                border-radius: 15px;
+            }
+            
+            .video-modal-header {
+                padding: 15px 20px;
+            }
+            
+            .video-modal-header h3 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Effet de poussière de farine -->
+    <div class="flour-dust" id="flourDust"></div>
+    
+    <!-- Effet de rayons de lumière -->
+    <div class="light-rays"></div>
+    
+    <!-- Gouttes de vin flottantes -->
+    <div class="wine-drops" id="wineDrops"></div>
+    
+    <!-- Éléments décoratifs religieux -->
+    <div class="religious-elements" id="religiousElements"></div>
+    
+    <!-- Décoration Marcelino -->
+    <div class="marcelino-decoration"></div>
+    
+    <!-- En-tête avec logo -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo-container">
+                <div class="bread-icon">🍷👼</div>
+                <h1 class="site-title">Universal Toon</h1>
+                <!-- Étincelles magiques -->
+                <div class="magic-sparkle" style="top: 10px; right: -5px; animation-delay: 0.2s;"></div>
+                <div class="magic-sparkle" style="bottom: 5px; left: 40px; animation-delay: 0.7s;"></div>
+                <div class="magic-sparkle" style="top: 30px; left: 10px; animation-delay: 1.3s;"></div>
+            </a>
+        </div>
+        
+        <!-- Barre de navigation avec menu déroulant des catégories -->
+        <div class="nav-container">
+            <nav class="nav-menu">
+                <div class="nav-item">
+                    <a href="index.html" class="nav-link">Accueil</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link active" id="categoriesDropdownToggle">Catégories <i class="fas fa-chevron-down" style="margin-left: 5px; font-size: 12px;"></i></a>
+                    <div class="dropdown-menu" id="categoriesDropdown">
+                        <a href="conte-fee.html" class="dropdown-item" data-category="conte">Conte de fée</a>
+                        <a href="aventure.html" class="dropdown-item" data-category="aventure">Aventure&Action</a>
+                        <a href="tomjerry.html" class="dropdown-item" data-category="tomjerry">Tom et Jerry</a>
+                        <a href="oggy.html" class="dropdown-item" data-category="oggy">Oggy et les Cafards</a>
+                        <a href="zik.html" class="dropdown-item" data-category="zik">Zik et Sharko</a>
+                        <a href="corneil.html" class="dropdown-item" data-category="corneil">Corneil et Bernie</a>
+                        <a href="marcelino.html" class="dropdown-item active" data-category="marcelino">Marcelino</a>
+                        <a href="enfants.html" class="dropdown-item" data-category="enfants">Education</a>
+                        <a href="univers.html" class="dropdown-item" data-category="univers">Univers</a> 
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Section de bannière pour Marcelino -->
+    <section class="category-hero">
+        <h1>Marcelino</h1>
+        <p>Découvrez l'histoire touchante de Marcelino, l'orphelin recueilli par des moines franciscains. Cette œuvre cinématographique espagnole classique raconte l'histoire d'un petit garçon qui découvre un crucifix dans le grenier du monastère et développe une relation spéciale avec Jésus.</p>
+        <button class="btn btn-primary" style="max-width: 280px;" id="watchTrailerBtn">Regarder la bande-annonce</button>
+    </section>
+    
+    <!-- Section des vidéos -->
+    <section class="videos-section">
+        <h2 class="section-title">Films et Documentaires sur Marcelino</h2>
+        <div class="videos-container" id="videosContainer">
+            <!-- Les vidéos seront chargées par JavaScript -->
+        </div>
+    </section>
+    
+    <!-- Modal vidéo -->
+    <div class="video-modal" id="videoModal">
+        <div class="video-modal-content">
+            <div class="video-modal-header">
+                <h3 id="videoModalTitle">Titre de la vidéo</h3>
+                <span class="close-video-modal" id="closeVideoModal">&times;</span>
+            </div>
+            <div class="video-modal-body">
+                <div class="video-modal-iframe-container">
+                    <div id="videoPlayerContainer"></div>
+                </div>
+                <div class="video-modal-info">
+                    <p id="videoModalDescription">Description de la vidéo</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Pied de page -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>À propos de Universal Toon</h3>
+                <p>Universal Toon est une plateforme qui regroupe les meilleurs films et dessins animés pour toute la famille. Profitez de contenu adapté à tous les âges et tous les goûts.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Catégories</h3>
+                <ul>
+                    <li><a href="conte-fee.html">Contes de fée</a></li>
+                    <li><a href="aventure.html">Aventure&Action</a></li>
+                    <li><a href="tomjerry.html">Tom et Jerry</a></li>
+                    <li><a href="oggy.html">Oggy et les Cafards</a></li>
+                    <li><a href="zik.html">Zik et Sharko</a></li>
+                    <li><a href="corneil.html">Corneil et Bernie</a></li>
+                    <li><a href="marcelino.html">Marcelino</a></li>
+                    <li><a href="enfants.html">Education</a></li>
+                    <li><a href="univers.html">Univers</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: contact@universaltoon.com</p>
+                <p>Téléphone: +221762442530 & +221755222968</p>
+                <p>Adresse: Senegal Mbour</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Universal Toon. Tous droits réservés. Conçu avec ❤️ pour les familles</p>
+        </div>
+    </footer>
+
+    <script>
+        // Données des vidéos pour la catégorie "Marcelino"
+        const marcelinoVideos = [
+            {
+                id: "g0FnmtYmkp3",
+                title: "Marcelino, pan y vino - Film Complet (1955)",
+                description: "Le film classique espagnol qui raconte l'histoire touchante de Marcelino, un orphelin recueilli par des moines franciscains.",
+                duration: "1:30:25",
+                year: "1955",
+                platform: "youtube"
+            },
+            {
+                id: "h1P2Z2N3VvX",
+                title: "Marcelino, pan y vino - Bande-annonce Originale",
+                description: "La bande-annonce originale du film culte Marcelino, pan y vino, sorti en 1955.",
+                duration: "2:45",
+                year: "1955",
+                platform: "youtube"
+            },
+            {
+                id: "j2Q3a4W5XxB",
+                title: "Marcelino - Les Meilleurs Moments Émotionnels",
+                description: "Une compilation des moments les plus émouvants du film Marcelino, pan y vino.",
+                duration: "25:33",
+                year: "1955",
+                platform: "youtube"
+            },
+            {
+                id: "k3R4b5Y6ZzD",
+                title: "Marcelino - Documentaire sur la Création du Film",
+                description: "Un documentaire fascinant sur la création et la production du film Marcelino, pan y vino.",
+                duration: "45:47",
+                year: "2005",
+                platform: "youtube"
+            },
+            {
+                id: "l4S5c6D7EeI",
+                title: "Marcelino - Analyse et Critique Cinématographique",
+                description: "Une analyse approfondie du film Marcelino, pan y vino et de son impact sur le cinéma espagnol.",
+                duration: "38:22",
+                year: "2010",
+                platform: "youtube"
+            },
+            {
+                id: "m5T6d8F9GgK",
+                title: "Marcelino - L'Héritage Culturel",
+                description: "Découvrez l'héritage culturel du film Marcelino, pan y vino et son influence sur les générations suivantes.",
+                duration: "42:39",
+                year: "2015",
+                platform: "youtube"
+            },
+            {
+                id: "n6U7e0G1HhL",
+                title: "Marcelino - Les Acteurs et l'Équipe",
+                description: "Rencontrez les acteurs et l'équipe qui ont créé le film Marcelino, pan y vino.",
+                duration: "35:51",
+                year: "2008",
+                platform: "youtube"
+            },
+            {
+                id: "o7V1f2J3KkM",
+                title: "Marcelino - La Musique du Film",
+                description: "Découvrez la bande originale du film Marcelino, pan y vino et son compositeur.",
+                duration: "30:27",
+                year: "2007",
+                platform: "youtube"
+            },
+            {
+                id: "p8W3x4Y5ZzP",
+                title: "Marcelino - Adaptations et Remakes",
+                description: "Explorez les différentes adaptations et remakes du film Marcelino, pan y vino à travers le monde.",
+                duration: "40:14",
+                year: "2012",
+                platform: "youtube"
+            },
+            {
+                id: "q9R4s5T6UuY",
+                title: "Marcelino - Le Message Spirituel",
+                description: "Une analyse du message spirituel et religieux du film Marcelino, pan y vino.",
+                duration: "33:08",
+                year: "2018",
+                platform: "youtube"
+            },
+            {
+                id: "x1o4gfv",
+                title: "Marcelino - Film Complet (Version Restaurée)",
+                description: "La version restaurée du film classique Marcelino, pan y vino avec une qualité d'image améliorée.",
+                duration: "1:32:33",
+                year: "2015",
+                platform: "dailymotion"
+            },
+            {
+                id: "x2n5n5b",
+                title: "Marcelino - Scènes Coupées et Bonus",
+                description: "Découvrez des scènes coupées et des bonus exclusifs du film Marcelino, pan y vino.",
+                duration: "28:45",
+                year: "2005",
+                platform: "dailymotion"
+            },
+            {
+                id: "x3n5o7f",
+                title: "Marcelino - L'Histoire Réelle",
+                description: "Explorez l'histoire réelle qui a inspiré le film Marcelino, pan y vino.",
+                duration: "35:19",
+                year: "2010",
+                platform: "dailymotion"
+            },
+            {
+                id: "x4o6b4l",
+                title: "Marcelino - Influence sur le Cinéma Espagnol",
+                description: "Comment Marcelino, pan y vino a influencé le cinéma espagnol et international.",
+                duration: "42:52",
+                year: "2017",
+                platform: "dailymotion"
+            },
+            {
+                id: "x5n5gvb",
+                title: "Marcelino - Témoignages des Téléspectateurs",
+                description: "Des témoignages touchants de téléspectateurs du monde entier sur l'impact du film.",
+                duration: "38:41",
+                year: "2019",
+                platform: "dailymotion"
+            },
+            {
+                id: "x6n5pux",
+                title: "Marcelino - La Symbolique du Pain et du Vin",
+                description: "Une analyse approfondie de la symbolique du pain et du vin dans le film.",
+                duration: "41:27",
+                year: "2016",
+                platform: "dailymotion"
+            },
+            {
+                id: "x7n8nbz",
+                title: "Marcelino - Le Monastère et les Décors",
+                description: "Découvrez les décors authentiques du film et le monastère où il a été tourné.",
+                duration: "33:33",
+                year: "2011",
+                platform: "dailymotion"
+            },
+            {
+                id: "x8n8nqr",
+                title: "Marcelino - Hommage au Réalisateur",
+                description: "Un hommage au réalisateur Ladislao Vajda et à sa vision artistique.",
+                duration: "36:58",
+                year: "2014",
+                platform: "dailymotion"
+            },
+            {
+                id: "x9qurft",
+                title: "Marcelino - Version pour Enfants",
+                description: "Une version adaptée du film Marcelino, pan y vino pour les plus jeunes téléspectateurs.",
+                duration: "45:22",
+                year: "2018",
+                platform: "dailymotion"
+            },
+            {
+                id: "x0nmrtf",
+                title: "Marcelino - Le Petit Orphelin",
+                description: "Focus sur le personnage de Marcelino et son parcours émotionnel dans le film.",
+                duration: "39:11",
+                year: "2013",
+                platform: "dailymotion"
+            }
+        ];
+
+        // Initialisation lorsque la page est chargée
+        document.addEventListener('DOMContentLoaded', function() {
+            // Créer les effets visuels
+            createFlourDust();
+            createWineDrops();
+            createReligiousElements();
+            
+            // Charger les vidéos
+            loadVideos();
+            
+            // Configurer les interactions
+            setupInteractions();
+            
+            // Configurer la modal vidéo
+            setupVideoModal();
+            
+            // Précharger les images pour une meilleure fluidité
+            preloadImages();
+        });
+
+        // Créer la poussière de farine en arrière-plan
+        function createFlourDust() {
+            const container = document.getElementById('flourDust');
+            const particleCount = 100;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('flour-particle');
+                
+                const size = Math.random() * 8 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                particle.style.animationDelay = `${Math.random() * 20}s`;
+                particle.style.animationDuration = `${15 + Math.random() * 25}s`;
+                
+                container.appendChild(particle);
+            }
+        }
+
+        // Créer les gouttes de vin flottantes
+        function createWineDrops() {
+            const container = document.getElementById('wineDrops');
+            const dropCount = 30;
+            
+            for (let i = 0; i < dropCount; i++) {
+                const drop = document.createElement('div');
+                drop.classList.add('wine-drop');
+                drop.textContent = '🍷';
+                
+                const size = Math.random() * 40 + 20;
+                drop.style.fontSize = `${size}px`;
+                drop.style.left = `${Math.random() * 100}%`;
+                drop.style.top = `${Math.random() * 100}%`;
+                
+                drop.style.animationDelay = `${Math.random() * 18}s`;
+                drop.style.animationDuration = `${12 + Math.random() * 20}s`;
+                
+                container.appendChild(drop);
+            }
+        }
+
+        // Créer les éléments décoratifs religieux
+        function createReligiousElements() {
+            const container = document.getElementById('religiousElements');
+            const elementCount = 25;
+            const elements = ['🙏', '✝️', '⛪', '📿', '🕯️', '📖', '🕊️'];
+            
+            for (let i = 0; i < elementCount; i++) {
+                const element = document.createElement('div');
+                element.classList.add('religious-element');
+                
+                const elementType = elements[Math.floor(Math.random() * elements.length)];
+                element.textContent = elementType;
+                
+                const size = Math.random() * 35 + 15;
+                element.style.fontSize = `${size}px`;
+                element.style.left = `${Math.random() * 100}%`;
+                element.style.top = `${Math.random() * 100}%`;
+                
+                element.style.animationDelay = `${Math.random() * 25}s`;
+                element.style.animationDuration = `${20 + Math.random() * 30}s`;
+                
+                container.appendChild(element);
+            }
+        }
+
+        // Précharger les images pour une meilleure fluidité
+        function preloadImages() {
+            const imageUrls = [
+                'https://images.unsplash.com/photo-1544717305-99670f9c28f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80'
+            ];
+            
+            imageUrls.forEach(url => {
+                const img = new Image();
+                img.src = url;
+            });
+        }
+
+        // Obtenir l'URL de la miniature en fonction de la plateforme
+        function getThumbnailUrl(video) {
+            if (video.platform === 'dailymotion') {
+                return `https://www.dailymotion.com/thumbnail/video/${video.id}`;
+            } else {
+                return `https://img.youtube.com/vi/${video.id}/hqdefault.jpg`;
+            }
+        }
+
+        // Charger les vidéos
+        function loadVideos() {
+            const container = document.getElementById('videosContainer');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            marcelinoVideos.forEach((video, index) => {
+                const videoItem = document.createElement('div');
+                videoItem.className = 'video-item';
+                videoItem.setAttribute('data-video-id', video.id);
+                videoItem.setAttribute('data-video-title', video.title);
+                videoItem.setAttribute('data-video-description', video.description);
+                videoItem.setAttribute('data-platform', video.platform || 'youtube');
+                videoItem.style.animationDelay = `${index * 0.1}s`;
+                
+                const thumbnailUrl = getThumbnailUrl(video);
+                
+                videoItem.innerHTML = `
+                    <div class="video-thumbnail">
+                        <img src="${thumbnailUrl}" alt="${video.title}" loading="lazy">
+                    </div>
+                    <div class="video-info">
+                        <h3>${video.title}</h3>
+                        <p>${video.description}</p>
+                        <div class="video-meta">
+                            <span><i class="far fa-clock"></i> ${video.duration}</span>
+                            <span><i class="far fa-calendar"></i> ${video.year}</span>
+                            <span><i class="fas fa-video"></i> ${video.platform === 'dailymotion' ? 'Dailymotion' : 'YouTube'}</span>
+                        </div>
+                    </div>
+                `;
+                
+                videoItem.addEventListener('click', function() {
+                    openVideoModal(video.id, video.title, video.description, video.platform || 'youtube');
+                });
+                
+                container.appendChild(videoItem);
+            });
+        }
+
+        // Configurer les interactions
+        function setupInteractions() {
+            // Gérer le bouton "Regarder la bande-annonce"
+            const watchTrailerBtn = document.getElementById('watchTrailerBtn');
+            if (watchTrailerBtn) {
+                watchTrailerBtn.addEventListener('click', function() {
+                    openVideoModal(marcelinoVideos[0].id, marcelinoVideos[0].title, marcelinoVideos[0].description, marcelinoVideos[0].platform || 'youtube');
+                });
+            }
+            
+            // Gérer le menu déroulant des catégories
+            const categoriesDropdownToggle = document.getElementById('categoriesDropdownToggle');
+            const categoriesDropdown = document.getElementById('categoriesDropdown');
+            
+            if (categoriesDropdownToggle) {
+                categoriesDropdownToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    categoriesDropdown.classList.toggle('active');
+                });
+                
+                document.addEventListener('click', function(e) {
+                    if (!categoriesDropdownToggle.contains(e.target) && !categoriesDropdown.contains(e.target)) {
+                        categoriesDropdown.classList.remove('active');
+                    }
+                });
+            }
+        }
+
+        // Configurer la modal vidéo
+        function setupVideoModal() {
+            const videoModal = document.getElementById('videoModal');
+            const closeVideoModal = document.getElementById('closeVideoModal');
+            
+            if (closeVideoModal) {
+                closeVideoModal.addEventListener('click', function() {
+                    closeVideoModalFunc();
+                });
+            }
+            
+            if (videoModal) {
+                videoModal.addEventListener('click', function(e) {
+                    if (e.target === videoModal) {
+                        closeVideoModalFunc();
+                    }
+                });
+            }
+            
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && videoModal.classList.contains('active')) {
+                    closeVideoModalFunc();
+                }
+            });
+        }
+
+        // Ouvrir la modal vidéo
+        function openVideoModal(videoId, title, description, platform = 'youtube') {
+            const videoModal = document.getElementById('videoModal');
+            const videoPlayerContainer = document.getElementById('videoPlayerContainer');
+            const videoModalTitle = document.getElementById('videoModalTitle');
+            const videoModalDescription = document.getElementById('videoModalDescription');
+            
+            if (!videoModal || !videoPlayerContainer) return;
+            
+            videoModalTitle.textContent = title;
+            videoModalDescription.textContent = description;
+            
+            videoPlayerContainer.innerHTML = '';
+            
+            let embedUrl;
+            if (platform === 'dailymotion') {
+                embedUrl = `https://www.dailymotion.com/embed/video/${videoId}?autoplay=1&controls=1&ui-info=0`;
+            } else {
+                embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&controls=1&showinfo=0`;
+            }
+            
+            const iframe = document.createElement('iframe');
+            iframe.src = embedUrl;
+            iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+            iframe.setAttribute('allowfullscreen', 'true');
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            iframe.style.position = 'absolute';
+            iframe.style.top = '0';
+            iframe.style.left = '0';
+            iframe.style.border = 'none';
+            
+            videoPlayerContainer.appendChild(iframe);
+            
+            videoModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Fermer la modal vidéo
+        function closeVideoModalFunc() {
+            const videoModal = document.getElementById('videoModal');
+            const videoPlayerContainer = document.getElementById('videoPlayerContainer');
+            
+            if (!videoModal || !videoPlayerContainer) return;
+            
+            videoModal.classList.remove('active');
+            document.body.style.overflow = '';
+            videoPlayerContainer.innerHTML = '';
+        }
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/12.13.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.13.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.13.0/firebase-analytics-compat.js"></script>
+    <script src="./firebase-auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,2377 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les Dalton - Universal Toon</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Quicksand:wght@400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Variables CSS adaptées pour Les Dalton - thème western et comique */
+        :root {
+            --western-brown: #8B4513;
+            --western-red: #A52A2A;
+            --western-yellow: #DAA520;
+            --western-blue: #1E90FF;
+            --western-green: #228B22;
+            --western-cream: #FFF5EE;
+            --magic-shadow: 0 0 15px rgba(218, 165, 32, 0.3);
+            --header-font: 'Poppins', sans-serif;
+            --body-font: 'Quicksand', sans-serif;
+            --magic-font: 'Dancing Script', cursive;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Reset et styles de base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--body-font);
+            background: linear-gradient(135deg, #8B4513 0%, #DAA520 50%, #1E90FF 100%);
+            color: #333;
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            opacity: 0;
+            animation: fadeInBody 0.8s ease-out forwards;
+        }
+        
+        @keyframes fadeInBody {
+            to { opacity: 1; }
+        }
+        
+        /* Effet de confettis en arrière-plan */
+        .confetti {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 20px;
+            animation: fallConfetti 15s infinite linear;
+        }
+        
+        @keyframes fallConfetti {
+            0% {
+                transform: translateY(-100px) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Effet de rayons de soleil */
+        .sun-rays {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            pointer-events: none;
+            opacity: 0.1;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.7) 0%, transparent 70%);
+        }
+        
+        /* En-tête et navigation */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(218, 165, 32, 0.2);
+            animation: slideDown 0.5s ease-out;
+        }
+        
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            height: 90px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+            text-decoration: none;
+        }
+        
+        .logo-container:hover .dalton-icon {
+            animation: daltonBounce 1s ease;
+        }
+        
+        @keyframes daltonBounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.1); }
+        }
+        
+        .dalton-icon {
+            font-size: 42px;
+            color: var(--western-red);
+            position: relative;
+            animation: floatDalton 8s infinite ease-in-out;
+            filter: drop-shadow(0 0 10px rgba(139, 69, 19, 0.7));
+        }
+        
+        @keyframes floatDalton {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-5px) rotate(-2deg); }
+            75% { transform: translateY(5px) rotate(2deg); }
+        }
+        
+        .site-title {
+            font-family: var(--magic-font);
+            font-size: 38px;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--western-brown), var(--western-red), var(--western-yellow));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
+            letter-spacing: 1px;
+        }
+        
+        .magic-sparkle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 15px white;
+            animation: sparkle 2s infinite;
+            opacity: 0;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        /* Navigation */
+        .nav-container {
+            background: linear-gradient(90deg, var(--western-brown), var(--western-yellow));
+            padding: 0 5%;
+            position: relative;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--western-cream), transparent);
+        }
+        
+        .nav-menu {
+            display: flex;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .nav-item {
+            position: relative;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 18px 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: block;
+            position: relative;
+            font-family: var(--header-font);
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background: rgba(255, 255, 255, 0.2);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 4px;
+            background: var(--western-cream);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            transform: translateX(-50%);
+        }
+        
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 80%;
+        }
+        
+        /* Menu déroulant des catégories */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            min-width: 250px;
+            display: none;
+            z-index: 1001;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(218, 165, 32, 0.2);
+            border-top: none;
+        }
+        
+        .dropdown-menu.active {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+        
+        .dropdown-item {
+            padding: 15px 25px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #333;
+            text-decoration: none;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+        
+        .dropdown-item:hover {
+            background: rgba(139, 69, 19, 0.2);
+            padding-left: 35px;
+            color: var(--western-red);
+        }
+        
+        .dropdown-item:hover::before {
+            content: '🤠';
+            position: absolute;
+            left: 15px;
+            color: var(--western-red);
+        }
+        
+        /* Menu utilisateur */
+        .user-menu-container {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            padding: 10px 20px;
+            border-radius: 50px;
+            transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .user-info:hover {
+            background: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .user-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--western-brown), var(--western-yellow));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            box-shadow: 0 0 15px rgba(139, 69, 19, 0.5);
+            border: 2px solid var(--western-brown);
+        }
+        
+        /* Style Glass iOS pour le menu utilisateur */
+        .user-dropdown-menu {
+            position: absolute;
+            top: 85px;
+            right: 5%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-radius: 20px;
+            box-shadow: var(--glass-shadow);
+            min-width: 280px;
+            display: none;
+            z-index: 1002;
+            border: 1px solid var(--glass-border);
+            overflow: hidden;
+            padding: 15px;
+        }
+        
+        .user-dropdown-menu.active {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+        
+        .user-dropdown-menu ul {
+            list-style: none;
+        }
+        
+        .user-dropdown-menu li {
+            padding: 18px 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #333;
+        }
+        
+        .user-dropdown-menu li:last-child {
+            margin-bottom: 0;
+        }
+        
+        .user-dropdown-menu li:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: translateX(5px);
+        }
+        
+        .user-dropdown-menu i {
+            margin-right: 15px;
+            color: var(--western-red);
+            width: 20px;
+            text-align: center;
+            font-size: 18px;
+        }
+        
+        .user-dropdown-menu span {
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        /* Section de bannière principale pour Les Dalton */
+        .category-hero {
+            text-align: center;
+            padding: 120px 5% 80px;
+            background: radial-gradient(circle at 30% 20%, rgba(139, 69, 19, 0.6) 0%, rgba(218, 165, 32, 0.4) 40%, transparent 70%),
+                        radial-gradient(circle at 70% 80%, rgba(34, 139, 34, 0.5) 0%, rgba(165, 42, 42, 0.3) 30%, transparent 60%),
+                        url('https://images.unsplash.com/photo-1476610182048-b716b8518aae?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(218, 165, 32, 0.2);
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .category-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
+        .category-hero h1 {
+            font-family: var(--magic-font);
+            font-size: 72px;
+            margin-bottom: 25px;
+            color: white;
+            text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.5),
+                         0 0 30px rgba(139, 69, 19, 0.5),
+                         0 0 60px rgba(218, 165, 32, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+        
+        .category-hero h1::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--western-cream), transparent);
+        }
+        
+        .category-hero p {
+            font-size: 24px;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+            font-weight: 300;
+            line-height: 1.8;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+        
+        /* Section vidéos */
+        .videos-section {
+            padding: 60px 5%;
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 42px;
+            color: white;
+            font-family: var(--header-font);
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3),
+                         0 0 20px rgba(165, 42, 42, 0.3);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title::before, .section-title::after {
+            content: '🤠';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--western-cream);
+            font-size: 24px;
+            opacity: 0.8;
+        }
+        
+        .section-title::before {
+            left: -50px;
+        }
+        
+        .section-title::after {
+            right: -50px;
+        }
+        
+        .videos-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 35px;
+        }
+        
+        .video-item {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(5px);
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+        
+        .video-item:nth-child(1) { animation-delay: 0.3s; }
+        .video-item:nth-child(2) { animation-delay: 0.4s; }
+        .video-item:nth-child(3) { animation-delay: 0.5s; }
+        .video-item:nth-child(4) { animation-delay: 0.6s; }
+        .video-item:nth-child(5) { animation-delay: 0.7s; }
+        .video-item:nth-child(6) { animation-delay: 0.8s; }
+        .video-item:nth-child(7) { animation-delay: 0.9s; }
+        .video-item:nth-child(8) { animation-delay: 1.0s; }
+        
+        .video-item:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2),
+                        0 0 30px rgba(165, 42, 42, 0.2);
+            border-color: rgba(165, 42, 42, 0.3);
+        }
+        
+        .video-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--western-brown), var(--western-green), var(--western-red));
+            z-index: 2;
+        }
+        
+        .video-thumbnail {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .video-thumbnail img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .video-item:hover .video-thumbnail img {
+            transform: scale(1.05);
+        }
+        
+        /* Effet de lecture automatique au survol */
+        .video-thumbnail::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: opacity 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 60px;
+            z-index: 1;
+        }
+        
+        .video-item:hover .video-thumbnail::after {
+            opacity: 1;
+            content: '▶';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+        }
+        
+        .video-info {
+            padding: 25px;
+        }
+        
+        .video-info h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #333;
+            font-family: var(--header-font);
+            min-height: 60px;
+        }
+        
+        .video-info p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #888;
+            font-size: 14px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Modal vidéo */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .video-modal.active {
+            display: flex;
+        }
+        
+        .video-modal-content {
+            width: 90%;
+            max-width: 1100px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
+                        0 0 0 1px rgba(218, 165, 32, 0.1);
+            animation: modalSlideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+        
+        @keyframes modalSlideIn {
+            from { opacity: 0; transform: translateY(60px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        
+        .video-modal-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--western-brown), var(--western-green), var(--western-red));
+            z-index: 2;
+        }
+        
+        .video-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background: rgba(0, 0, 0, 0.1);
+        }
+        
+        .video-modal-header h3 {
+            font-size: 24px;
+            color: #333;
+            font-family: var(--header-font);
+        }
+        
+        .close-video-modal {
+            font-size: 32px;
+            color: rgba(0, 0, 0, 0.7);
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .close-video-modal:hover {
+            color: #333;
+            background: rgba(0, 0, 0, 0.1);
+            transform: rotate(90deg);
+        }
+        
+        .video-modal-body {
+            padding: 0;
+        }
+        
+        .video-modal-iframe-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .video-modal-iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .video-modal-info {
+            padding: 25px 30px;
+            background: rgba(0, 0, 0, 0.05);
+        }
+        
+        .video-modal-info p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 18px;
+        }
+        
+        /* Boutons */
+        .btn {
+            padding: 16px 35px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: var(--header-font);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 1px;
+            animation: fadeInUp 0.8s ease-out 0.8s both;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, var(--western-brown), var(--western-red));
+            color: white;
+            box-shadow: 0 5px 20px rgba(139, 69, 19, 0.4);
+            border: 2px solid transparent;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(45deg, var(--western-red), var(--western-brown));
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(139, 69, 19, 0.6);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 50px;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(30deg);
+            transition: all 0.5s;
+        }
+        
+        .btn-primary:hover::after {
+            left: 120%;
+        }
+        
+        /* Boutons de connexion et d'inscription */
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn-login, .btn-signup {
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: var(--header-font);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-login {
+            background: transparent;
+            border: 2px solid var(--western-brown);
+            color: var(--western-brown);
+        }
+        
+        .btn-login:hover {
+            background: rgba(139, 69, 19, 0.1);
+            box-shadow: 0 0 20px rgba(139, 69, 19, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        .btn-signup {
+            background: linear-gradient(45deg, var(--western-green), var(--western-red));
+            border: 2px solid transparent;
+            color: white;
+            box-shadow: 0 5px 15px rgba(34, 139, 34, 0.3);
+        }
+        
+        .btn-signup:hover {
+            background: linear-gradient(45deg, var(--western-red), var(--western-green));
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(34, 139, 34, 0.4);
+        }
+        
+        /* Modal de connexion */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal.active {
+            display: flex;
+            animation: modalFadeIn 0.4s ease-out;
+        }
+        
+        .modal-content {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            width: 90%;
+            max-width: 550px;
+            padding: 50px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3),
+                        0 0 0 1px rgba(218, 165, 32, 0.1);
+            animation: modalSlideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .modal-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--western-brown), var(--western-green), var(--western-red));
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        
+        .modal-header h2 {
+            font-size: 32px;
+            color: #333;
+            font-family: var(--header-font);
+            background: linear-gradient(45deg, var(--western-brown), var(--western-red));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .close-modal {
+            font-size: 32px;
+            color: rgba(0, 0, 0, 0.7);
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .close-modal:hover {
+            color: #333;
+            background: rgba(0, 0, 0, 0.1);
+            transform: rotate(90deg);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #333;
+            font-family: var(--header-font);
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+            color: #333;
+            font-family: var(--body-font);
+        }
+        
+        .form-group input:focus {
+            border-color: var(--western-brown);
+            background: white;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.2);
+        }
+        
+        /* Style pour les messages d'erreur */
+        .error-message {
+            color: #ff6b6b;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        /* Style pour le formulaire de basculement */
+        .form-switch {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+        }
+        
+        .form-switch a {
+            color: var(--western-brown);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        .form-switch a:hover {
+            color: var(--western-red);
+            text-decoration: underline;
+        }
+        
+        /* Boutons de connexion sociale */
+        .social-login {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 14px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: var(--header-font);
+            border: 2px solid transparent;
+            font-size: 16px;
+        }
+        
+        .btn-google {
+            background: white;
+            color: #444;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-google:hover {
+            background: #f8f8f8;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-apple {
+            background: #000;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-apple:hover {
+            background: #222;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+        }
+        
+        .social-btn i {
+            font-size: 20px;
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
+            color: #999;
+        }
+        
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        .divider span {
+            padding: 0 15px;
+            font-size: 14px;
+        }
+        
+        /* Pied de page */
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            padding: 70px 5% 40px;
+            margin-top: 100px;
+            border-top: 1px solid rgba(218, 165, 32, 0.2);
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--western-brown), var(--western-green), var(--western-red));
+        }
+        
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-section {
+            position: relative;
+        }
+        
+        .footer-section h3 {
+            font-size: 24px;
+            margin-bottom: 25px;
+            color: var(--western-red);
+            font-family: var(--header-font);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--western-red), transparent);
+        }
+        
+        .footer-section p, .footer-section a {
+            color: #666;
+            line-height: 1.8;
+            transition: all 0.3s;
+        }
+        
+        .footer-section a {
+            text-decoration: none;
+            display: block;
+            padding: 8px 0;
+            position: relative;
+            padding-left: 0;
+            transition: all 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: var(--western-red);
+            padding-left: 15px;
+        }
+        
+        .footer-section a:hover::before {
+            content: '›';
+            position: absolute;
+            left: 0;
+            color: var(--western-red);
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            color: #888;
+            font-size: 15px;
+        }
+        
+        .footer-bottom p {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .footer-bottom p::before, .footer-bottom p::after {
+            content: '🤠';
+            color: var(--western-red);
+            font-size: 18px;
+        }
+        
+        /* Éléments décoratifs western */
+        .western-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .western-element {
+            position: absolute;
+            font-size: 30px;
+            animation: floatElement 25s infinite linear;
+            opacity: 0.1;
+        }
+        
+        @keyframes floatElement {
+            0% { transform: translateY(100vh) translateX(0) rotate(0deg); }
+            100% { transform: translateY(-100px) translateX(100px) rotate(360deg); }
+        }
+        
+        /* Animation spéciale pour les ballons */
+        @keyframes balloonFloat {
+            0% { transform: translateX(-100px) translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateX(calc(100vw + 100px)) translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+        
+        .balloons {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .balloon {
+            position: absolute;
+            font-size: 40px;
+            animation: balloonFloat 25s infinite linear;
+            opacity: 0.1;
+        }
+        
+        .dalton-decoration {
+            position: absolute;
+            bottom: 0;
+            right: 5%;
+            width: 300px;
+            height: 300px;
+            background: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80') no-repeat center;
+            background-size: contain;
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .videos-container {
+                grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            }
+            
+            .category-hero h1 {
+                font-size: 62px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .videos-container {
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            }
+            
+            .category-hero h1 {
+                font-size: 52px;
+            }
+            
+            .category-hero p {
+                font-size: 22px;
+            }
+            
+            .section-title {
+                font-size: 36px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                height: auto;
+                padding: 20px 5%;
+            }
+            
+            .user-menu-container {
+                margin-top: 20px;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-link {
+                padding: 15px 20px;
+                font-size: 15px;
+            }
+            
+            .category-hero {
+                padding: 100px 5% 60px;
+            }
+            
+            .category-hero h1 {
+                font-size: 44px;
+            }
+            
+            .category-hero p {
+                font-size: 20px;
+            }
+            
+            .videos-container {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 25px;
+            }
+            
+            .modal-content {
+                padding: 40px 30px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .videos-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .category-hero h1 {
+                font-size: 38px;
+            }
+            
+            .section-title {
+                font-size: 32px;
+            }
+            
+            .section-title::before, .section-title::after {
+                display: none;
+            }
+            
+            .auth-buttons {
+                flex-direction: column;
+                width: 100%;
+                max-width: 250px;
+            }
+            
+            .btn-login, .btn-signup {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .video-modal-content {
+                width: 95%;
+                border-radius: 15px;
+            }
+            
+            .video-modal-header {
+                padding: 15px 20px;
+            }
+            
+            .video-modal-header h3 {
+                font-size: 20px;
+            }
+            
+            .social-login {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Effet de confettis -->
+    <div class="confetti" id="confetti"></div>
+    
+    <!-- Effet de rayons de soleil -->
+    <div class="sun-rays"></div>
+    
+    <!-- Ballons flottants -->
+    <div class="balloons" id="balloons"></div>
+    
+    <!-- Éléments décoratifs western -->
+    <div class="western-elements" id="westernElements"></div>
+    
+    <!-- Décoration Les Dalton -->
+    <div class="dalton-decoration"></div>
+    
+    <!-- En-tête avec logo et menu utilisateur -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo-container">
+                <div class="dalton-icon">🤠</div>
+                <h1 class="site-title">Universal Toon</h1>
+                <!-- Étincelles magiques -->
+                <div class="magic-sparkle" style="top: 10px; right: -5px; animation-delay: 0.2s;"></div>
+                <div class="magic-sparkle" style="bottom: 5px; left: 40px; animation-delay: 0.7s;"></div>
+                <div class="magic-sparkle" style="top: 30px; left: 10px; animation-delay: 1.3s;"></div>
+            </a>
+            
+            <div class="user-menu-container">
+                <!-- Boutons de connexion/inscription (visible quand non connecté) -->
+                <div class="auth-buttons" id="authButtons">
+                    <button class="btn-login" id="openLoginModal">Se connecter</button>
+                    <button class="btn-signup" id="openSignupModal">S'inscrire</button>
+                </div>
+                
+                <!-- Info utilisateur (visible quand connecté) -->
+                <div class="user-info" id="userInfo" style="display: none;">
+                    <div class="user-avatar" id="userAvatar">U</div>
+                    <span id="userName">Utilisateur</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                
+                <!-- Menu déroulant utilisateur style Glass iOS -->
+              
+        
+        <!-- Barre de navigation avec menu déroulant des catégories -->
+        <div class="nav-container">
+            <nav class="nav-menu">
+                <div class="nav-item">
+                    <a href="index.html" class="nav-link">Accueil</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link active" id="categoriesDropdownToggle">Catégories <i class="fas fa-chevron-down" style="margin-left: 5px; font-size: 12px;"></i></a>
+                    <div class="dropdown-menu" id="categoriesDropdown">
+                        <a href="conte-fee.html" class="dropdown-item" data-category="conte">Conte de fée</a>
+                        <a href="aventure.html" class="dropdown-item" data-category="aventure">Aventure&Action</a>
+                        <a href="tomjerry.html" class="dropdown-item" data-category="tomjerry">Tom et Jerry</a>
+                        <a href="oggy.html" class="dropdown-item" data-category="oggy">Oggy et les Cafards</a>
+                        <a href="zik.html" class="dropdown-item" data-category="zik">Zik et Sharko</a>
+                        <a href="corneil.html" class="dropdown-item" data-category="corneil">Corneil et Bernie</a>
+                        <a href="marcelino.html" class="dropdown-item" data-category="marcelino">Marcelino</a>
+                        <a href="ouioui.html" class="dropdown-item" data-category="ouioui">Oui Oui</a>
+                        <a href="charlotte.html" class="dropdown-item" data-category="charlotte">Charlotte aux fraises</a>
+                        <a href="bob.html" class="dropdown-item" data-category="bob">Bob l'éponge</a>
+                        <a href="enfants.html" class="dropdown-item" data-category="enfants">Education</a>
+                        <a href="univers.html" class="dropdown-item" data-category="univers">Univers</a>
+                        <a href="dalton.html" class="dropdown-item active" data-category="dalton">Les Dalton</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Section de bannière pour Les Dalton -->
+    <section class="category-hero">
+        <h1>Les Dalton</h1>
+        <p>Rejoignez les frères Dalton dans leurs aventures hilarantes et leurs évasions rocambolesques ! Joe, William, Jack et Averell, les quatre frères les plus maladroits du Far West, vous entraînent dans des situations comiques et des poursuites effrénées. Des gags, des courses-poursuites et des moments de franche rigolade vous attendent !</p>
+        <button class="btn btn-primary" style="max-width: 280px;" id="watchTrailerBtn">Regarder la bande-annonce</button>
+    </section>
+    
+    <!-- Section des vidéos -->
+    <section class="videos-section">
+        <h2 class="section-title">Aventures des Dalton</h2>
+        <div class="videos-container" id="videosContainer">
+            <!-- Les vidéos seront chargées par JavaScript -->
+        </div>
+    </section>
+    
+    <!-- Modal vidéo -->
+    <div class="video-modal" id="videoModal">
+        <div class="video-modal-content">
+            <div class="video-modal-header">
+                <h3 id="videoModalTitle">Titre de la vidéo</h3>
+                <span class="close-video-modal" id="closeVideoModal">&times;</span>
+            </div>
+            <div class="video-modal-body">
+                <div class="video-modal-iframe-container">
+                    <div id="videoPlayerContainer"></div>
+                </div>
+                <div class="video-modal-info">
+                    <p id="videoModalDescription">Description de la vidéo</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal de connexion -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Connexion</h2>
+                <span class="close-modal" id="closeLoginModal">&times;</span>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required>
+                    <div class="error-message" id="loginEmailError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Mot de passe</label>
+                    <input type="password" id="loginPassword" required>
+                    <div class="error-message" id="loginPasswordError"></div>
+                </div>
+                <button type="submit" class="btn btn-primary">Se connecter</button>
+                
+                <div class="divider">
+                    <span>Ou continuer avec</span>
+                </div>
+                
+                <div class="social-login">
+                    <button type="button" class="social-btn btn-google" id="googleLoginBtn">
+                        <i class="fab fa-google"></i>
+                        Continuer avec Google
+                    </button>
+                    <button type="button" class="social-btn btn-apple" id="appleLoginBtn">
+                        <i class="fab fa-apple"></i>
+                        Continuer avec Apple
+                    </button>
+                </div>
+                
+                <div class="form-switch">
+                    Pas encore de compte ? <a href="#" id="switchToSignup">S'inscrire</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Modal d'inscription -->
+    <div class="modal" id="signupModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Inscription</h2>
+                <span class="close-modal" id="closeSignupModal">&times;</span>
+            </div>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="signupName">Nom complet</label>
+                    <input type="text" id="signupName" required>
+                    <div class="error-message" id="signupNameError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" required>
+                    <div class="error-message" id="signupEmailError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Mot de passe</label>
+                    <input type="password" id="signupPassword" required>
+                    <div class="error-message" id="signupPasswordError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="signupConfirmPassword">Confirmer le mot de passe</label>
+                    <input type="password" id="signupConfirmPassword" required>
+                    <div class="error-message" id="signupConfirmPasswordError"></div>
+                </div>
+                <button type="submit" class="btn btn-primary">S'inscrire</button>
+                
+                <div class="divider">
+                    <span>Ou s'inscrire avec</span>
+                </div>
+                
+                <div class="social-login">
+                    <button type="button" class="social-btn btn-google" id="googleSignupBtn">
+                        <i class="fab fa-google"></i>
+                        S'inscrire avec Google
+                    </button>
+                    <button type="button" class="social-btn btn-apple" id="appleSignupBtn">
+                        <i class="fab fa-apple"></i>
+                        S'inscrire avec Apple
+                    </button>
+                </div>
+                
+                <div class="form-switch">
+                    Déjà un compte ? <a href="#" id="switchToLogin">Se connecter</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Pied de page -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>À propos de Universal Toon</h3>
+                <p>Universal Toon est une plateforme qui regroupe les meilleurs films et dessins animés pour toute la famille. Profitez de contenu adapté à tous les âges et tous les goûts.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Catégories</h3>
+                <ul>
+                    <li><a href="conte-fee.html">Contes de fée</a></li>
+                    <li><a href="aventure.html">Aventure&Action</a></li>
+                    <li><a href="tomjerry.html">Tom et Jerry</a></li>
+                    <li><a href="oggy.html">Oggy et les Cafards</a></li>
+                    <li><a href="zik.html">Zik et Sharko</a></li>
+                    <li><a href="corneil.html">Corneil et Bernie</a></li>
+                    <li><a href="marcelino.html">Marcelino</a></li>
+                    <li><a href="ouioui.html">Oui Oui</a></li>
+                    <li><a href="charlotte.html">Charlotte aux fraises</a></li>
+                    <li><a href="bob.html">Bob l'éponge</a></li>
+                    <li><a href="enfants.html">Education</a></li>
+                    <li><a href="univers.html">Univers</a></li>
+                    <li><a href="dalton.html">Les Dalton</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: contact@sdmdisney.com</p>
+                <p>Téléphone: +221762442530 & +221755222968</p>
+                <p>Adresse: Senegal Mbour</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Universal Toon. Tous droits réservés. Conçu avec ❤️ pour les familles</p>
+        </div>
+    </footer>
+
+    <script>
+        // Données des vidéos pour la catégorie "Les Dalton"
+        const daltonVideos = [
+            {
+                id: "",
+                title: "Les Dalton ",
+                description: "",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "",
+                title: "Les Dalton ",
+                description: "",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "",
+                title: "Les Dalton ",
+                description: "",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "",
+                title: "Les Dalton ",
+                description: "",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "",
+                title: "Les Dalton ",
+                description: "",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "",
+                title: "Les Dalton ",
+                description: "",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "",
+                title: "Les Dalton ",
+                description: "",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "",
+                title: "Les Dalton ",
+                description: "",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "",
+                title: "Les Dalton ",
+                description: "",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "",
+                title: "Les Dalton ",
+                description: "",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "",
+                title: "Les Dalton ",
+                description: "",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "",
+                title: "Les Dalton ",
+                description: "",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "",
+                title: "Les Dalton ",
+                description: "",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "",
+                title: "Les Dalton ",
+                description: "",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "",
+                title: "Les Dalton ",
+                description: "",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "",
+                title: "Les Dalton ",
+                description: "",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "",
+                title: "Les Dalton ",
+                description: "",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "",
+                title: "Les Dalton ",
+                description: "",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "",
+                title: "Les Dalton ",
+                description: "",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "",
+                title: "Les Dalton ",
+                description: "",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "",
+                title: "Les Dalton ",
+                description: "",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+           
+        
+          
+        ];
+
+        // Variables globales
+        let currentUser = null;
+
+        // Initialisation lorsque la page est chargée
+        document.addEventListener('DOMContentLoaded', function() {
+            // Créer les effets visuels
+            createConfetti();
+            createBalloons();
+            createWesternElements();
+            
+            // Charger les vidéos
+            loadVideos();
+            
+            // Configurer les interactions
+            setupInteractions();
+            
+            // Configurer l'authentification
+            setupAuthentication();
+            
+            // Configurer la modal vidéo
+            setupVideoModal();
+            
+            // Vérifier si un utilisateur est déjà connecté (depuis localStorage)
+            checkLoggedInUser();
+            
+            // Précharger les images pour une meilleure fluidité
+            preloadImages();
+        });
+
+        // Vérifier si un utilisateur est connecté dans localStorage
+        function checkLoggedInUser() {
+            const savedUser = localStorage.getItem('sdmDisneyUser');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                updateUserInterface();
+                showNotification(`Bon retour ${currentUser.displayName} !`, 'success');
+            }
+        }
+
+        // Créer les confettis en arrière-plan
+        function createConfetti() {
+            const container = document.getElementById('confetti');
+            const pieceCount = 150;
+            
+            for (let i = 0; i < pieceCount; i++) {
+                const piece = document.createElement('div');
+                piece.classList.add('confetti-piece');
+                
+                // Couleurs western pour les confettis
+                const colors = ['#8B4513', '#A52A2A', '#DAA520', '#228B22', '#1E90FF'];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                piece.style.backgroundColor = color;
+                
+                const width = Math.random() * 10 + 5;
+                const height = Math.random() * 15 + 10;
+                piece.style.width = `${width}px`;
+                piece.style.height = `${height}px`;
+                piece.style.left = `${Math.random() * 100}%`;
+                piece.style.top = `${Math.random() * 100}%`;
+                
+                piece.style.animationDelay = `${Math.random() * 15}s`;
+                piece.style.animationDuration = `${10 + Math.random() * 20}s`;
+                
+                container.appendChild(piece);
+            }
+        }
+
+        // Créer les ballons flottants
+        function createBalloons() {
+            const container = document.getElementById('balloons');
+            const balloonCount = 20;
+            const balloonColors = ['🤠', '🐎', '🌟', '🔫', '👢', '🌵'];
+            
+            for (let i = 0; i < balloonCount; i++) {
+                const balloon = document.createElement('div');
+                balloon.classList.add('balloon');
+                balloon.textContent = balloonColors[Math.floor(Math.random() * balloonColors.length)];
+                
+                const size = Math.random() * 50 + 30;
+                balloon.style.fontSize = `${size}px`;
+                balloon.style.left = `${Math.random() * 100}%`;
+                balloon.style.top = `${Math.random() * 100}%`;
+                
+                balloon.style.animationDelay = `${Math.random() * 25}s`;
+                balloon.style.animationDuration = `${15 + Math.random() * 25}s`;
+                
+                container.appendChild(balloon);
+            }
+        }
+
+        // Créer les éléments décoratifs western
+        function createWesternElements() {
+            const container = document.getElementById('westernElements');
+            const elementCount = 30;
+            const elements = ['🤠', '🐎', '🌟', '🔫', '👢', '🌵', '🐄', '🐍', '🦅', '🌄', '🏜️', '🌅', '🪨'];
+            
+            for (let i = 0; i < elementCount; i++) {
+                const element = document.createElement('div');
+                element.classList.add('western-element');
+                
+                const elementType = elements[Math.floor(Math.random() * elements.length)];
+                element.textContent = elementType;
+                
+                const size = Math.random() * 40 + 20;
+                element.style.fontSize = `${size}px`;
+                element.style.left = `${Math.random() * 100}%`;
+                element.style.top = `${Math.random() * 100}%`;
+                
+                element.style.animationDelay = `${Math.random() * 25}s`;
+                element.style.animationDuration = `${20 + Math.random() * 30}s`;
+                
+                container.appendChild(element);
+            }
+        }
+
+        // Précharger les images pour une meilleure fluidité
+        function preloadImages() {
+            const imageUrls = [
+                'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80'
+            ];
+            
+            imageUrls.forEach(url => {
+                const img = new Image();
+                img.src = url;
+            });
+        }
+
+        // Obtenir l'URL de la miniature en fonction de la plateforme
+        function getThumbnailUrl(video) {
+            if (video.platform === 'dailymotion') {
+                return `https://www.dailymotion.com/thumbnail/video/${video.id}`;
+            } else {
+                // YouTube par défaut
+                return `https://img.youtube.com/vi/${video.id}/hqdefault.jpg`;
+            }
+        }
+
+        // Obtenir l'URL d'embed en fonction de la plateforme
+        function getEmbedUrl(video) {
+            if (video.platform === 'dailymotion') {
+                return `https://www.dailymotion.com/embed/video/${video.id}?autoplay=1&controls=1&ui-info=0`;
+            } else {
+                // YouTube par défaut
+                return `https://www.youtube.com/embed/${video.id}?autoplay=1&rel=0&modestbranding=1&controls=1&showinfo=0`;
+            }
+        }
+
+        // Charger les vidéos
+        function loadVideos() {
+            const container = document.getElementById('videosContainer');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            daltonVideos.forEach((video, index) => {
+                const videoItem = document.createElement('div');
+                videoItem.className = 'video-item';
+                videoItem.setAttribute('data-video-id', video.id);
+                videoItem.setAttribute('data-video-title', video.title);
+                videoItem.setAttribute('data-video-description', video.description);
+                videoItem.setAttribute('data-platform', video.platform || 'youtube');
+                videoItem.style.animationDelay = `${index * 0.1}s`;
+                
+                const thumbnailUrl = getThumbnailUrl(video);
+                
+                videoItem.innerHTML = `
+                    <div class="video-thumbnail">
+                        <img src="${thumbnailUrl}" alt="${video.title}" loading="lazy">
+                    </div>
+                    <div class="video-info">
+                        <h3>${video.title}</h3>
+                        <p>${video.description}</p>
+                        <div class="video-meta">
+                            <span><i class="far fa-clock"></i> ${video.duration}</span>
+                            <span><i class="far fa-calendar"></i> ${video.year}</span>
+                            <span><i class="fas fa-video"></i> ${video.platform === 'dailymotion' ? 'Dailymotion' : 'YouTube'}</span>
+                        </div>
+                    </div>
+                `;
+                
+                videoItem.addEventListener('click', function() {
+                    openVideoModal(video.id, video.title, video.description, video.platform || 'youtube');
+                });
+                
+                container.appendChild(videoItem);
+            });
+        }
+
+        // Configurer les interactions
+        function setupInteractions() {
+            // Gérer le bouton "Regarder la bande-annonce"
+            const watchTrailerBtn = document.getElementById('watchTrailerBtn');
+            if (watchTrailerBtn) {
+                watchTrailerBtn.addEventListener('click', function() {
+                    openVideoModal(daltonVideos[0].id, daltonVideos[0].title, daltonVideos[0].description, daltonVideos[0].platform || 'youtube');
+                });
+            }
+            
+            // Gérer le menu déroulant des catégories
+            const categoriesDropdownToggle = document.getElementById('categoriesDropdownToggle');
+            const categoriesDropdown = document.getElementById('categoriesDropdown');
+            
+            if (categoriesDropdownToggle) {
+                categoriesDropdownToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    categoriesDropdown.classList.toggle('active');
+                });
+                
+                document.addEventListener('click', function(e) {
+                    if (!categoriesDropdownToggle.contains(e.target) && !categoriesDropdown.contains(e.target)) {
+                        categoriesDropdown.classList.remove('active');
+                    }
+                });
+            }
+        }
+
+        // Configurer la modal vidéo
+        function setupVideoModal() {
+            const videoModal = document.getElementById('videoModal');
+            const closeVideoModal = document.getElementById('closeVideoModal');
+            
+            if (closeVideoModal) {
+                closeVideoModal.addEventListener('click', function() {
+                    closeVideoModalFunc();
+                });
+            }
+            
+            if (videoModal) {
+                videoModal.addEventListener('click', function(e) {
+                    if (e.target === videoModal) {
+                        closeVideoModalFunc();
+                    }
+                });
+            }
+            
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && videoModal.classList.contains('active')) {
+                    closeVideoModalFunc();
+                }
+            });
+        }
+
+        // Ouvrir la modal vidéo
+        function openVideoModal(videoId, title, description, platform = 'youtube') {
+            const videoModal = document.getElementById('videoModal');
+            const videoPlayerContainer = document.getElementById('videoPlayerContainer');
+            const videoModalTitle = document.getElementById('videoModalTitle');
+            const videoModalDescription = document.getElementById('videoModalDescription');
+            
+            if (!videoModal || !videoPlayerContainer) return;
+            
+            videoModalTitle.textContent = title;
+            videoModalDescription.textContent = description;
+            
+            // Vider le conteneur précédent
+            videoPlayerContainer.innerHTML = '';
+            
+            // Créer l'iframe en fonction de la plateforme
+            let embedUrl;
+            if (platform === 'dailymotion') {
+                embedUrl = `https://www.dailymotion.com/embed/video/${videoId}?autoplay=1&controls=1&ui-info=0`;
+            } else {
+                embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&controls=1&showinfo=0`;
+            }
+            
+            const iframe = document.createElement('iframe');
+            iframe.src = embedUrl;
+            iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+            iframe.setAttribute('allowfullscreen', 'true');
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            iframe.style.position = 'absolute';
+            iframe.style.top = '0';
+            iframe.style.left = '0';
+            iframe.style.border = 'none';
+            
+            videoPlayerContainer.appendChild(iframe);
+            
+            videoModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Fermer la modal vidéo
+        function closeVideoModalFunc() {
+            const videoModal = document.getElementById('videoModal');
+            const videoPlayerContainer = document.getElementById('videoPlayerContainer');
+            
+            if (!videoModal || !videoPlayerContainer) return;
+            
+            videoModal.classList.remove('active');
+            document.body.style.overflow = '';
+            
+            // Arrêter la vidéo en vidant le conteneur
+            videoPlayerContainer.innerHTML = '';
+        }
+
+        // Configurer l'authentification
+        function setupAuthentication() {
+            // Éléments modaux
+            const loginModal = document.getElementById('loginModal');
+            const signupModal = document.getElementById('signupModal');
+            const openLoginModalBtn = document.getElementById('openLoginModal');
+            const openSignupModalBtn = document.getElementById('openSignupModal');
+            const closeLoginModalBtn = document.getElementById('closeLoginModal');
+            const closeSignupModalBtn = document.getElementById('closeSignupModal');
+            const switchToSignupLink = document.getElementById('switchToSignup');
+            const switchToLoginLink = document.getElementById('switchToLogin');
+            
+            // Ouvrir modaux
+            if (openLoginModalBtn) {
+                openLoginModalBtn.addEventListener('click', () => {
+                    loginModal.classList.add('active');
+                    signupModal.classList.remove('active');
+                });
+            }
+            
+            if (openSignupModalBtn) {
+                openSignupModalBtn.addEventListener('click', () => {
+                    signupModal.classList.add('active');
+                    loginModal.classList.remove('active');
+                });
+            }
+            
+            // Fermer modaux
+            if (closeLoginModalBtn) {
+                closeLoginModalBtn.addEventListener('click', () => {
+                    loginModal.classList.remove('active');
+                });
+            }
+            
+            if (closeSignupModalBtn) {
+                closeSignupModalBtn.addEventListener('click', () => {
+                    signupModal.classList.remove('active');
+                });
+            }
+            
+            // Basculer entre modaux
+            if (switchToSignupLink) {
+                switchToSignupLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    loginModal.classList.remove('active');
+                    signupModal.classList.add('active');
+                });
+            }
+            
+            if (switchToLoginLink) {
+                switchToLoginLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    signupModal.classList.remove('active');
+                    loginModal.classList.add('active');
+                });
+            }
+            
+            // Fonction pour valider l'email
+            function isValidEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+            
+            // Gestion de l'inscription
+            const signupForm = document.getElementById('signupForm');
+            if (signupForm) {
+                signupForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    
+                    const name = document.getElementById('signupName').value;
+                    const email = document.getElementById('signupEmail').value;
+                    const password = document.getElementById('signupPassword').value;
+                    const confirmPassword = document.getElementById('signupConfirmPassword').value;
+                    
+                    // Validation côté client
+                    if (!isValidEmail(email)) {
+                        showNotification('Veuillez entrer une adresse email valide', 'error');
+                        return;
+                    }
+                    
+                    if (password !== confirmPassword) {
+                        showNotification('Les mots de passe ne correspondent pas', 'error');
+                        return;
+                    }
+                    
+                    if (password.length < 6) {
+                        showNotification('Le mot de passe doit contenir au moins 6 caractères', 'error');
+                        return;
+                    }
+                    
+                    // Créer l'utilisateur (simulation)
+                    const userId = 'user_' + Date.now();
+                    const user = {
+                        uid: userId,
+                        email: email,
+                        displayName: name,
+                        createdAt: new Date().toISOString()
+                    };
+                    
+                    // Sauvegarder l'utilisateur dans localStorage
+                    localStorage.setItem('sdmDisneyUser', JSON.stringify(user));
+                    
+                    // Mettre à jour l'interface
+                    currentUser = user;
+                    updateUserInterface();
+                    
+                    // Fermer le modal et réinitialiser le formulaire
+                    signupModal.classList.remove('active');
+                    signupForm.reset();
+                    
+                    showNotification('Compte créé avec succès !', 'success');
+                });
+            }
+            
+            // Gestion de la connexion
+            const loginForm = document.getElementById('loginForm');
+            if (loginForm) {
+                loginForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    
+                    const email = document.getElementById('loginEmail').value;
+                    const password = document.getElementById('loginPassword').value;
+                    
+                    // Vérifier les identifiants (simulation)
+                    const savedUser = localStorage.getItem('sdmDisneyUser');
+                    
+                    if (savedUser) {
+                        const user = JSON.parse(savedUser);
+                        
+                        // Simulation de vérification
+                        if (user.email === email) {
+                            // Connexion réussie
+                            currentUser = user;
+                            updateUserInterface();
+                            
+                            loginModal.classList.remove('active');
+                            loginForm.reset();
+                            
+                            showNotification('Connexion réussie !', 'success');
+                        } else {
+                            showNotification('Email ou mot de passe incorrect', 'error');
+                        }
+                    } else {
+                        // Premier utilisateur - création automatique
+                        const userId = 'user_' + Date.now();
+                        const user = {
+                            uid: userId,
+                            email: email,
+                            displayName: email.split('@')[0],
+                            createdAt: new Date().toISOString()
+                        };
+                        
+                        localStorage.setItem('sdmDisneyUser', JSON.stringify(user));
+                        currentUser = user;
+                        updateUserInterface();
+                        
+                        loginModal.classList.remove('active');
+                        loginForm.reset();
+                        
+                        showNotification('Compte créé et connexion réussie !', 'success');
+                    }
+                });
+            }
+            
+            // Gestion de la déconnexion
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', () => {
+                    // Supprimer l'utilisateur du localStorage
+                    localStorage.removeItem('sdmDisneyUser');
+                    currentUser = null;
+                    updateUserInterface();
+                    
+                    showNotification('Déconnexion réussie', 'info');
+                    const userDropdown = document.getElementById('userDropdown');
+                    if (userDropdown) {
+                        userDropdown.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Gestion du menu déroulant utilisateur
+            const userInfo = document.getElementById('userInfo');
+            const userDropdown = document.getElementById('userDropdown');
+            
+            if (userInfo) {
+                userInfo.addEventListener('click', () => {
+                    userDropdown.classList.toggle('active');
+                });
+                
+                // Fermer le menu déroulant en cliquant à l'extérieur
+                window.addEventListener('click', (e) => {
+                    if (!userInfo.contains(e.target) && !userDropdown.contains(e.target)) {
+                        userDropdown.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Navigation vers les pages
+            window.navigateTo = function(page) {
+                if (currentUser) {
+                    window.location.href = page;
+                } else {
+                    showNotification('Veuillez vous connecter pour accéder à cette page.', 'info');
+                    document.getElementById('loginModal').classList.add('active');
+                }
+            };
+            
+            // Fermer modaux en cliquant à l'extérieur
+            window.addEventListener('click', (e) => {
+                if (e.target === loginModal) {
+                    loginModal.classList.remove('active');
+                }
+                if (e.target === signupModal) {
+                    signupModal.classList.remove('active');
+                }
+            });
+        }
+
+        // Mettre à jour l'interface utilisateur en fonction de l'état de connexion
+        function updateUserInterface() {
+            const authButtons = document.getElementById('authButtons');
+            const userInfo = document.getElementById('userInfo');
+            const userAvatar = document.getElementById('userAvatar');
+            const userName = document.getElementById('userName');
+            
+            if (currentUser && userInfo) {
+                // Afficher les informations utilisateur
+                authButtons.style.display = 'none';
+                userInfo.style.display = 'flex';
+                
+                // Mettre à jour le nom et l'avatar
+                userName.textContent = currentUser.displayName;
+                
+                if (currentUser.photoURL) {
+                    userAvatar.innerHTML = `<img src="${currentUser.photoURL}" alt="${currentUser.displayName}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">`;
+                } else {
+                    userAvatar.textContent = currentUser.displayName.charAt(0).toUpperCase();
+                    
+                    // Ajouter une couleur d'avatar basée sur le nom
+                    const colors = ['#8B4513', '#A52A2A', '#DAA520', '#228B22'];
+                    const colorIndex = currentUser.displayName.length % colors.length;
+                    userAvatar.style.background = `linear-gradient(135deg, ${colors[colorIndex]}, ${colors[(colorIndex + 1) % colors.length]})`;
+                }
+            } else if (authButtons) {
+                // Afficher les boutons d'authentification
+                authButtons.style.display = 'flex';
+                if (userInfo) userInfo.style.display = 'none';
+            }
+        }
+
+        // Afficher une notification
+        function showNotification(message, type) {
+            // Créer l'élément de notification
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            
+            // Styles de la notification
+            notification.style.position = 'fixed';
+            notification.style.top = '30px';
+            notification.style.right = '30px';
+            notification.style.padding = '15px 25px';
+            notification.style.borderRadius = '10px';
+            notification.style.color = 'white';
+            notification.style.fontWeight = '600';
+            notification.style.zIndex = '9999';
+            notification.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.3)';
+            notification.style.animation = 'slideInRight 0.3s ease-out';
+            
+            // Couleur selon le type
+            if (type === 'success') {
+                notification.style.background = 'linear-gradient(45deg, #8B4513, #A52A2A)';
+                notification.style.border = '1px solid rgba(255, 255, 255, 0.2)';
+            } else if (type === 'error') {
+                notification.style.background = 'linear-gradient(45deg, #e74c3c, #c0392b)';
+                notification.style.border = '1px solid rgba(255, 255, 255, 0.2)';
+            } else {
+                notification.style.background = 'linear-gradient(45deg, #8B4513, #228B22)';
+                notification.style.border = '1px solid rgba(255, 255, 255, 0.2)';
+            }
+            
+            // Ajouter au document
+            document.body.appendChild(notification);
+            
+            // Supprimer après 5 secondes
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease-out';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 5000);
+            
+            // Ajouter les keyframes pour l'animation
+            if (!document.querySelector('#notification-styles')) {
+                const style = document.createElement('style');
+                style.id = 'notification-styles';
+                style.textContent = `
+                    @keyframes slideInRight {
+                        from { transform: translateX(100%); opacity: 0; }
+                        to { transform: translateX(0); opacity: 1; }
+                    }
+                    @keyframes slideOutRight {
+                        from { transform: translateX(0); opacity: 1; }
+                        to { transform: translateX(100%); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/12.13.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.13.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.13.0/firebase-analytics-compat.js"></script>
+    <script src="./firebase-auth.js"></script>
+</body>
+</html>

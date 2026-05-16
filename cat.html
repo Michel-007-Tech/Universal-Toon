@@ -1,0 +1,2146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat - Universal Toon</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Quicksand:wght@400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Variables CSS pour une ambiance féline magique */
+        :root {
+            --cat-orange: #FF9800;
+            --cat-brown: #8D6E63;
+            --cat-cream: #FFECB3;
+            --cat-teal: #0097A7;
+            --cat-purple: #7B1FA2;
+            --cat-red: #D32F2F;
+            --cat-light: #f5f5f5;
+            --cat-dark: #121212;
+            --magic-shadow: 0 0 15px rgba(255, 152, 0, 0.3);
+            --header-font: 'Poppins', sans-serif;
+            --body-font: 'Quicksand', sans-serif;
+            --magic-font: 'Dancing Script', cursive;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Reset et styles de base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--body-font);
+            background: linear-gradient(135deg, #FF9800 0%, #FF5722 50%, #FFECB3 100%);
+            color: var(--cat-light);
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            opacity: 0;
+            animation: fadeInBody 0.8s ease-out forwards;
+        }
+        
+        @keyframes fadeInBody {
+            to { opacity: 1; }
+        }
+        
+        /* Effet de poils de chat en arrière-plan */
+        .cat-fur {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .fur-particle {
+            position: absolute;
+            width: 6px;
+            height: 2px;
+            background: rgba(255, 236, 179, 0.7);
+            animation: floatFur 20s infinite linear;
+            border-radius: 50%;
+        }
+        
+        @keyframes floatFur {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Effet d'étoiles scintillantes */
+        .twinkling-stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            pointer-events: none;
+        }
+        
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite alternate;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        /* En-tête et navigation */
+        header {
+            background: rgba(255, 152, 0, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 236, 179, 0.2);
+            animation: slideDown 0.5s ease-out;
+        }
+        
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            height: 90px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+            text-decoration: none;
+        }
+        
+        .logo-container:hover .cat-icon {
+            animation: catJump 1s ease;
+        }
+        
+        @keyframes catJump {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            25% { transform: translateY(-15px) rotate(-10deg); }
+            75% { transform: translateY(5px) rotate(10deg); }
+        }
+        
+        .cat-icon {
+            font-size: 42px;
+            color: #FFECB3;
+            position: relative;
+            animation: catFloat 6s infinite ease-in-out;
+            filter: drop-shadow(0 0 10px rgba(255, 236, 179, 0.7));
+        }
+        
+        @keyframes catFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-10px) rotate(-5deg); }
+            75% { transform: translateY(5px) rotate(5deg); }
+        }
+        
+        .site-title {
+            font-family: var(--magic-font);
+            font-size: 38px;
+            font-weight: 700;
+            background: linear-gradient(45deg, #FFECB3, #FF9800, #FF5722);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+            letter-spacing: 1px;
+        }
+        
+        .magic-sparkle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 15px white;
+            animation: sparkle 2s infinite;
+            opacity: 0;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        /* Navigation avec menu déroulant des catégories */
+        .nav-container {
+            background: linear-gradient(90deg, #FF9800, #FF5722);
+            padding: 0 5%;
+            position: relative;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #FFECB3, transparent);
+        }
+        
+        .nav-menu {
+            display: flex;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .nav-item {
+            position: relative;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 18px 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: block;
+            position:relative;
+            font-family: var(--header-font);
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background: rgba(255, 255, 255, 0.15);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 4px;
+            background: #FFECB3;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            transform: translateX(-50%);
+        }
+        
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 80%;
+        }
+        
+        /* Menu déroulant des catégories */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(255, 152, 0, 0.95);
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            min-width: 250px;
+            display: none;
+            z-index: 1001;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 236, 179, 0.2);
+            border-top: none;
+        }
+        
+        .dropdown-menu.active {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+        
+        .dropdown-item {
+            padding: 15px 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+            color: var(--cat-light);
+            text-decoration: none;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+        
+        .dropdown-item:hover {
+            background: rgba(255, 193, 7, 0.2);
+            padding-left: 35px;
+            color: white;
+        }
+        
+        .dropdown-item:hover::before {
+            content: '🐾';
+            position: absolute;
+            left: 15px;
+            color: #FFECB3;
+        }
+        
+        /* Section de bannière principale pour Chat */
+        .category-hero {
+            text-align: center;
+            padding: 120px 5% 80px;
+            background: radial-gradient(circle at 30% 20%, rgba(255, 236, 179, 0.6) 0%, rgba(255, 152, 0, 0.4) 40%, transparent 70%),
+                        radial-gradient(circle at 70% 80%, rgba(255, 87, 34, 0.5) 0%, rgba(255, 152, 0, 0.3) 30%, transparent 60%),
+                        url('https://images.unsplash.com/photo-1514888286974-6d03bdeacba8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(255, 236, 179, 0.2);
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .category-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
+        .category-hero h1 {
+            font-family: var(--magic-font);
+            font-size: 72px;
+            margin-bottom: 25px;
+            color: white;
+            text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.7),
+                         0 0 30px rgba(255, 236, 179, 0.5),
+                         0 0 60px rgba(255, 152, 0, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+        
+        .category-hero h1::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #FFECB3, transparent);
+        }
+        
+        .category-hero p {
+            font-size: 24px;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+            font-weight: 300;
+            line-height: 1.8;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+        
+        /* Section vidéos pour Chat */
+        .videos-section {
+            padding: 60px 5%;
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 42px;
+            color: white;
+            font-family: var(--header-font);
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5),
+                         0 0 20px rgba(255, 152, 0, 0.3);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title::before, .section-title::after {
+            content: '🐾';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #FFECB3;
+            font-size: 24px;
+            opacity: 0.8;
+        }
+        
+        .section-title::before {
+            left: -50px;
+        }
+        
+        .section-title::after {
+            right: -50px;
+        }
+        
+        .videos-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 35px;
+        }
+        
+        .video-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+        
+        .video-item:nth-child(1) { animation-delay: 0.3s; }
+        .video-item:nth-child(2) { animation-delay: 0.4s; }
+        .video-item:nth-child(3) { animation-delay: 0.5s; }
+        .video-item:nth-child(4) { animation-delay: 0.6s; }
+        .video-item:nth-child(5) { animation-delay: 0.7s; }
+        .video-item:nth-child(6) { animation-delay: 0.8s; }
+        .video-item:nth-child(7) { animation-delay: 0.9s; }
+        .video-item:nth-child(8) { animation-delay: 1.0s; }
+        
+        .video-item:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4),
+                        0 0 30px rgba(255, 152, 0, 0.2);
+            border-color: rgba(255, 152, 0, 0.3);
+        }
+        
+        .video-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #FF5722, #FF9800, #FFECB3);
+            z-index: 2;
+        }
+        
+        .video-thumbnail {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .video-thumbnail img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .video-item:hover .video-thumbnail img {
+            transform: scale(1.05);
+        }
+        
+        /* Effet de lecture automatique au survol */
+        .video-thumbnail::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: opacity 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 60px;
+            z-index: 1;
+        }
+        
+        .video-item:hover .video-thumbnail::after {
+            opacity: 1;
+            content: '▶';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+        }
+        
+        .video-info {
+            padding: 25px;
+        }
+        
+        .video-info h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: white;
+            font-family: var(--header-font);
+            min-height: 60px;
+        }
+        
+        .video-info p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Modal vidéo */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .video-modal.active {
+            display: flex;
+        }
+        
+        .video-modal-content {
+            width: 90%;
+            max-width: 1100px;
+            background: rgba(255, 152, 0, 0.95);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7),
+                        0 0 0 1px rgba(255, 236, 179, 0.1);
+            animation: modalSlideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+        
+        @keyframes modalSlideIn {
+            from { opacity: 0; transform: translateY(60px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        
+        .video-modal-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #FF5722, #FF9800, #FFECB3);
+            z-index: 2;
+        }
+        
+        .video-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        .video-modal-header h3 {
+            font-size: 24px;
+            color: white;
+            font-family: var(--header-font);
+        }
+        
+        .close-video-modal {
+            font-size: 32px;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .close-video-modal:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(90deg);
+        }
+        
+        .video-modal-body {
+            padding: 0;
+        }
+        
+        .video-modal-iframe-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .video-modal-iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .video-modal-info {
+            padding: 25px 30px;
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        .video-modal-info p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            font-size: 18px;
+        }
+        
+        /* Boutons */
+        .btn {
+            padding: 16px 35px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: var(--header-font);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 1px;
+            animation: fadeInUp 0.8s ease-out 0.8s both;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #FF5722, #FF9800);
+            color: white;
+            box-shadow: 0 5px 20px rgba(255, 87, 34, 0.4);
+            border: 2px solid transparent;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(45deg, #FF9800, #FF5722);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 87, 34, 0.6);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 50px;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(30deg);
+            transition: all 0.5s;
+        }
+        
+        .btn-primary:hover::after {
+            left: 120%;
+        }
+        
+        /* Pied de page */
+        footer {
+            background: rgba(255, 152, 0, 0.95);
+            color: white;
+            padding: 70px 5% 40px;
+            margin-top: 100px;
+            border-top: 1px solid rgba(255, 236, 179, 0.2);
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #FF5722, #FF9800, #FFECB3);
+        }
+        
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-section {
+            position: relative;
+        }
+        
+        .footer-section h3 {
+            font-size: 24px;
+            margin-bottom: 25px;
+            color: #FFECB3;
+            font-family: var(--header-font);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #FFECB3, transparent);
+        }
+        
+        .footer-section p, .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            transition: all 0.3s;
+        }
+        
+        .footer-section a {
+            text-decoration: none;
+            display: block;
+            padding: 8px 0;
+            position: relative;
+            padding-left: 0;
+            transition: all 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+            padding-left: 15px;
+        }
+        
+        .footer-section a:hover::before {
+            content: '›';
+            position: absolute;
+            left: 0;
+            color: #FFECB3;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 15px;
+        }
+        
+        .footer-bottom p {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .footer-bottom p::before, .footer-bottom p::after {
+            content: '🐾';
+            color: #FFECB3;
+            font-size: 18px;
+        }
+        
+        /* Points colorés décoratifs */
+        .decorative-dots {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: floatDot 20s infinite linear;
+        }
+        
+        @keyframes floatDot {
+            0% { transform: translateY(100vh) translateX(0) rotate(0deg); }
+            100% { transform: translateY(-100px) translateX(100px) rotate(360deg); }
+        }
+        
+        /* Animation spéciale pour Chat */
+        @keyframes catSpin {
+            0% { transform: rotate(0) scale(1); }
+            25% { transform: rotate(90deg) scale(1.1); }
+            50% { transform: rotate(180deg) scale(1); }
+            75% { transform: rotate(270deg) scale(1.05); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+        
+        .cat-dust {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .cat-particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255, 236, 179, 0.8);
+            box-shadow: 0 0 15px 3px rgba(255, 236, 179, 0.7);
+            animation: floatFur 12s infinite linear;
+        }
+        
+        .cat-decoration {
+            position: absolute;
+            bottom: 0;
+            right: 5%;
+            width: 300px;
+            height: 300px;
+            background: url('https://images.unsplash.com/photo-1514888286974-6d03bdeacba8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80') no-repeat center;
+            background-size: contain;
+            opacity: 0.1;
+            z-index: -1;
+            animation: catSpin 8s infinite ease-in-out;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .videos-container {
+                grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            }
+            
+            .category-hero h1 {
+                font-size: 62px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .videos-container {
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            }
+            
+            .category-hero h1 {
+                font-size: 52px;
+            }
+            
+            .category-hero p {
+                font-size: 22px;
+            }
+            
+            .section-title {
+                font-size: 36px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                height: auto;
+                padding: 20px 5%;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-link {
+                padding: 15px 20px;
+                font-size: 15px;
+            }
+            
+            .category-hero {
+                padding: 100px 5% 60px;
+            }
+            
+            .category-hero h1 {
+                font-size: 44px;
+            }
+            
+            .category-hero p {
+                font-size: 20px;
+            }
+            
+            .videos-container {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 25px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .videos-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .category-hero h1 {
+                font-size: 38px;
+            }
+            
+            .section-title {
+                font-size: 32px;
+            }
+            
+            .section-title::before, .section-title::after {
+                display: none;
+            }
+            
+            .video-modal-content {
+                width: 95%;
+                border-radius: 15px;
+            }
+            
+            .video-modal-header {
+                padding: 15px 20px;
+            }
+            
+            .video-modal-header h3 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Effet de poils de chat -->
+    <div class="cat-fur" id="catFur"></div>
+    
+    <!-- Poussière Chat spéciale -->
+    <div class="cat-dust" id="catDust"></div>
+    
+    <!-- Étoiles scintillantes -->
+    <div class="twinkling-stars" id="twinklingStars"></div>
+    
+    <!-- Points colorés décoratifs -->
+    <div class="decorative-dots" id="decorativeDots"></div>
+    
+    <!-- Décoration Chat -->
+    <div class="cat-decoration"></div>
+    
+    <!-- En-tête avec logo et menu utilisateur -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo-container">
+                <div class="cat-icon">🐱</div>
+                <h1 class="site-title">Universal Toon</h1>
+                <!-- Étincelles magiques -->
+                <div class="magic-sparkle" style="top: 10px; right: -5px; animation-delay: 0.2s;"></div>
+                <div class="magic-sparkle" style="bottom: 5px; left: 40px; animation-delay: 0.7s;"></div>
+                <div class="magic-sparkle" style="top: 30px; left: 10px; animation-delay: 1.3s;"></div>
+            </a>
+        </div>
+        
+        <!-- Barre de navigation avec menu déroulant des catégories -->
+        <div class="nav-container">
+            <nav class="nav-menu">
+                <div class="nav-item">
+                    <a href="index.html" class="nav-link">Accueil</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link active" id="categoriesDropdownToggle">Catégories <i class="fas fa-chevron-down" style="margin-left: 5px; font-size: 12px;"></i></a>
+                    <div class="dropdown-menu" id="categoriesDropdown">
+                        <a href="conte-fee.html" class="dropdown-item" data-category="conte">Conte de fée</a>
+                        <a href="aventure.html" class="dropdown-item" data-category="aventure">Aventure&Action</a>
+                        <a href="tomjerry.html" class="dropdown-item" data-category="tomjerry">Tom et Jerry</a>
+                        <a href="oggy.html" class="dropdown-item" data-category="oggy">Oggy et les Cafards</a>
+                        <a href="tchoupi.html" class="dropdown-item" data-category="tchoupi">Tchoupi</a>
+                        <a href="sisters.html" class="dropdown-item" data-category="sisters">Sisters</a>
+                        <a href="enfants.html" class="dropdown-item" data-category="enfants">Education</a>
+                        <a href="univers.html" class="dropdown-item" data-category="univers">Univers</a>
+                        <a href="cat.html" class="dropdown-item active" data-category="cat">Chat</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Section de bannière pour Chat -->
+    <section class="category-hero">
+        <h1>La famille chat</h1>
+        <p>Découvrez les aventures des trois petits chatons</p>
+    </section>
+    
+    <!-- Section des vidéos -->
+    <section class="videos-section">
+        <h2 class="section-title">Les Meilleurs Épisodes de la famille Chat</h2>
+        <div class="videos-container" id="videosContainer">
+            <!-- Les vidéos seront chargées par JavaScript -->
+        </div>
+    </section>
+    
+    <!-- Modal vidéo -->
+    <div class="video-modal" id="videoModal">
+        <div class="video-modal-content">
+            <div class="video-modal-header">
+                <h3 id="videoModalTitle">Titre de la vidéo</h3>
+                <span class="close-video-modal" id="closeVideoModal">&times;</span>
+            </div>
+            <div class="video-modal-body">
+                <div class="video-modal-iframe-container">
+                    <div id="videoPlayerContainer"></div>
+                </div>
+                <div class="video-modal-info">
+                    <p id="videoModalDescription">Description de la vidéo</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Pied de page -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>À propos de Universal Toon</h3>
+                <p>Universal Toon est une plateforme qui regroupe les meilleurs dessins animés pour toute la famille. Profitez de contenu adapté à tous les âges et tous les goûts.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Catégories</h3>
+                <ul>
+                    <li><a href="conte-fee.html">Contes de fée</a></li>
+                    <li><a href="aventure.html">Aventure&Action</a></li>
+                    <li><a href="tomjerry.html">Tom et Jerry</a></li>
+                    <li><a href="oggy.html">Oggy et les Cafards</a></li>
+                    <li><a href="tchoupi.html">Tchoupi</a></li>
+                    <li><a href="sisters.html">Sisters</a></li>
+                    <li><a href="enfants.html">Education</a></li>
+                    <li><a href="univers.html">Univers</a></li>
+                    <li><a href="cat.html">Famille chat</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: contact@universaltoon.com</p>
+                <p>Téléphone: +221762442530 & +221755222968</p>
+                <p>Adresse: Senegal Mbour</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Universal Toon. Tous droits réservés. Conçu avec ❤️ pour les familles</p>
+        </div>
+    </footer>
+
+    <script>
+        // Données des vidéos pour la catégorie "Chat"
+        const catVideos = [
+            {
+                id: "K1C_triVXRY",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "jaSgL8ZWZhg",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "FsfrR2aHppA",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "fk39oasQ7qo",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "pa2dFxs6yeo",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "bWUMlDLLKS4",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "NJs8ihlM3T0",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "RKmkN4dh9-A",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "o3eguKYfnwY",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "LDeyTw_2d9g",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "-oL0BX9hOOU",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "EHkJH2qjV_c",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "uEfI0lj39sE",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "O5LZlvu6_rM",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "VHalpUl-y1E",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "kih5s86Wdy4",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "zo40HRha9EI",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "weNAUikv4_o",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "95sss5-tjPY",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "SLTDUJj-Dkg",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "89Ti0DeKhwo",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "seMYwKX4RY0",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "RCdA8My-pmA",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "dZ4uzovJkTs",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "0Bm8lQSkZwU",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "LXKllCQ9XXg",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "D7XkEpaqQ5Q",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "HDmdYUivbKE",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "bGBkJxsZAp4",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "5uThGuVkGJY",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "d7QQJ9ljOl8",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "ZhSH8yCyR2o",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "HjISyeuqkKs",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "RSE_HLgWgSo",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "0npDlolJB18",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "e570dlBnqMA",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "956szY3SjhM",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "lw3M4Af6MLU",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "rGD16Wfv8Nk",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "o3eguKYfnwY",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "uEfI0lj39sE",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "AvfBZfuZ6nc",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "AvfBZfuZ6nc",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "ZhSH8yCyR2o",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "seEeAPDYt5w",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "vC2It_XJjws",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "SLTDUJj-Dkg",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "seMYwKX4RY0",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "5NlMk7FxaX0",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "d7QQJ9ljOl8",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "lsQOuqQmLxc",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "s4LUFyjcNQY",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "vqpeUBlqFXM",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "b5zlfkLtxlw",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "UZ5tqKat9qE",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "thZZgpqnbwk",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "tCtP7UyOO-Y",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "NizDO-6S9LU",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "P_PDP0mYavA",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "hp66hmrP6SM",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "BGqRE5b79TI",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "-IOqQ7GG7lI",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "u8lxYq8YVhc",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "F7qM-dftp84",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "A2OUPlLVOnY",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "-iZaWNVNhrY",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "Fa4yFIvh6Oc",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "gogOVDKqT0U",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "JB16kL1zvc8",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "vMOHRjRtjh8",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "IcWpTO0pvxI",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "oQbZwLSsDwI",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "phwBKYkFxQs",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "iIX9s5bhks0",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "rfSjxHLIlCA",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "wFGQftcCUw4",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "tCtP7UyOO-Y",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "NizDO-6S9LU",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "7CERuskvX60",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "YA9DMQHOZrs",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "YA9DMQHOZrs",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "8jyAg3fvWBo",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "e2ktYKwWE9Y",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "4SdgnZ2XOh4",
+                title: "La famille chat",
+                description: "La famille chat",
+                duration: "",
+                year: "©2025",
+                platform: "youtube"
+            },
+        ];
+
+        // Initialisation lorsque la page est chargée
+        document.addEventListener('DOMContentLoaded', function() {
+            // Créer les effets visuels
+            createCatFur();
+            createCatDust();
+            createTwinklingStars();
+            createDecorativeDots();
+            
+            // Charger les vidéos
+            loadVideos();
+            
+            // Configurer les interactions
+            setupInteractions();
+            
+            // Configurer la modal vidéo
+            setupVideoModal();
+            
+            // Précharger les images pour une meilleure fluidité
+            preloadImages();
+        });
+
+        // Créer l'effet de poils de chat en arrière-plan
+        function createCatFur() {
+            const container = document.getElementById('catFur');
+            const particleCount = 120;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('fur-particle');
+                
+                const width = Math.random() * 8 + 4;
+                const height = Math.random() * 3 + 1;
+                particle.style.width = `${width}px`;
+                particle.style.height = `${height}px`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                const hue = 40 + Math.random() * 20;
+                particle.style.backgroundColor = `hsl(${hue}, 80%, 70%)`;
+                
+                particle.style.animationDelay = `${Math.random() * 20}s`;
+                particle.style.animationDuration = `${10 + Math.random() * 25}s`;
+                
+                container.appendChild(particle);
+            }
+        }
+
+        // Créer la poussière Chat spéciale
+        function createCatDust() {
+            const container = document.getElementById('catDust');
+            const particleCount = 60;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('cat-particle');
+                
+                const size = Math.random() * 6 + 3;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                const hue = 40 + Math.random() * 30;
+                particle.style.backgroundColor = `hsl(${hue}, 80%, 70%)`;
+                particle.style.boxShadow = `0 0 15px 3px hsl(${hue}, 80%, 70%)`;
+                
+                particle.style.animationDelay = `${Math.random() * 12}s`;
+                particle.style.animationDuration = `${8 + Math.random() * 16}s`;
+                
+                container.appendChild(particle);
+            }
+        }
+
+        // Créer les étoiles scintillantes
+        function createTwinklingStars() {
+            const container = document.getElementById('twinklingStars');
+            const starCount = 100;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                const size = Math.random() * 3 + 1;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                
+                star.style.animationDelay = `${Math.random() * 3}s`;
+                star.style.animationDuration = `${1 + Math.random() * 4}s`;
+                
+                container.appendChild(star);
+            }
+        }
+
+        // Créer les points colorés décoratifs
+        function createDecorativeDots() {
+            const container = document.getElementById('decorativeDots');
+            const dotCount = 80;
+            const colors = ['#FF9800', '#FF5722', '#FFECB3', '#8D6E63', '#FFC107', '#0097A7'];
+            
+            for (let i = 0; i < dotCount; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                dot.style.backgroundColor = color;
+                dot.style.boxShadow = `0 0 10px ${color}`;
+                
+                const size = Math.random() * 10 + 3;
+                dot.style.width = `${size}px`;
+                dot.style.height = `${size}px`;
+                dot.style.left = `${Math.random() * 100}%`;
+                dot.style.top = `${Math.random() * 100}%`;
+                
+                dot.style.animationDelay = `${Math.random() * 20}s`;
+                dot.style.animationDuration = `${15 + Math.random() * 25}s`;
+                
+                container.appendChild(dot);
+            }
+        }
+
+        // Précharger les images pour une meilleure fluidité
+        function preloadImages() {
+            const imageUrls = [
+                'https://images.unsplash.com/photo-1514888286974-6d03bdeacba8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80'
+            ];
+            
+            imageUrls.forEach(url => {
+                const img = new Image();
+                img.src = url;
+            });
+        }
+
+        // Obtenir l'URL de la miniature en fonction de la plateforme
+        function getThumbnailUrl(video) {
+            if (video.platform === 'dailymotion') {
+                return `https://www.dailymotion.com/thumbnail/video/${video.id}`;
+            } else {
+                // YouTube par défaut
+                return `https://img.youtube.com/vi/${video.id}/hqdefault.jpg`;
+            }
+        }
+
+        // Obtenir l'URL d'embed en fonction de la plateforme
+        function getEmbedUrl(video) {
+            if (video.platform === 'dailymotion') {
+                return `https://www.dailymotion.com/embed/video/${video.id}?autoplay=1&controls=1&ui-info=0`;
+            } else {
+                // YouTube par défaut
+                return `https://www.youtube.com/embed/${video.id}?autoplay=1&rel=0&modestbranding=1&controls=1&showinfo=0`;
+            }
+        }
+
+        // Charger les vidéos
+        function loadVideos() {
+            const container = document.getElementById('videosContainer');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            catVideos.forEach((video, index) => {
+                const videoItem = document.createElement('div');
+                videoItem.className = 'video-item';
+                videoItem.setAttribute('data-video-id', video.id);
+                videoItem.setAttribute('data-video-title', video.title);
+                videoItem.setAttribute('data-video-description', video.description);
+                videoItem.setAttribute('data-platform', video.platform || 'youtube');
+                videoItem.style.animationDelay = `${index * 0.1}s`;
+                
+                const thumbnailUrl = getThumbnailUrl(video);
+                
+                videoItem.innerHTML = `
+                    <div class="video-thumbnail">
+                        <img src="${thumbnailUrl}" alt="${video.title}" loading="lazy">
+                    </div>
+                    <div class="video-info">
+                        <h3>${video.title}</h3>
+                        <p>${video.description}</p>
+                        <div class="video-meta">
+                            <span><i class="far fa-clock"></i> ${video.duration}</span>
+                            <span><i class="far fa-calendar"></i> ${video.year}</span>
+                            <span><i class="fas fa-video"></i> ${video.platform === 'dailymotion' ? 'Dailymotion' : 'YouTube'}</span>
+                        </div>
+                    </div>
+                `;
+                
+                videoItem.addEventListener('click', function() {
+                    openVideoModal(video.id, video.title, video.description, video.platform || 'youtube');
+                });
+                
+                container.appendChild(videoItem);
+            });
+        }
+
+        // Configurer les interactions
+        function setupInteractions() {
+            // Gérer le menu déroulant des catégories
+            const categoriesDropdownToggle = document.getElementById('categoriesDropdownToggle');
+            const categoriesDropdown = document.getElementById('categoriesDropdown');
+            
+            if (categoriesDropdownToggle) {
+                categoriesDropdownToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    categoriesDropdown.classList.toggle('active');
+                });
+                
+                document.addEventListener('click', function(e) {
+                    if (!categoriesDropdownToggle.contains(e.target) && !categoriesDropdown.contains(e.target)) {
+                        categoriesDropdown.classList.remove('active');
+                    }
+                });
+            }
+        }
+
+        // Configurer la modal vidéo
+        function setupVideoModal() {
+            const videoModal = document.getElementById('videoModal');
+            const closeVideoModal = document.getElementById('closeVideoModal');
+            
+            if (closeVideoModal) {
+                closeVideoModal.addEventListener('click', function() {
+                    closeVideoModalFunc();
+                });
+            }
+            
+            if (videoModal) {
+                videoModal.addEventListener('click', function(e) {
+                    if (e.target === videoModal) {
+                        closeVideoModalFunc();
+                    }
+                });
+            }
+            
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && videoModal.classList.contains('active')) {
+                    closeVideoModalFunc();
+                }
+            });
+        }
+
+        // Ouvrir la modal vidéo
+        function openVideoModal(videoId, title, description, platform = 'youtube') {
+            const videoModal = document.getElementById('videoModal');
+            const videoPlayerContainer = document.getElementById('videoPlayerContainer');
+            const videoModalTitle = document.getElementById('videoModalTitle');
+            const videoModalDescription = document.getElementById('videoModalDescription');
+            
+            if (!videoModal || !videoPlayerContainer) return;
+            
+            videoModalTitle.textContent = title;
+            videoModalDescription.textContent = description;
+            
+            // Vider le conteneur précédent
+            videoPlayerContainer.innerHTML = '';
+            
+            // Créer l'iframe en fonction de la plateforme
+            let embedUrl;
+            if (platform === 'dailymotion') {
+                embedUrl = `https://www.dailymotion.com/embed/video/${videoId}?autoplay=1&controls=1&ui-info=0`;
+            } else {
+                embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&controls=1&showinfo=0`;
+            }
+            
+            const iframe = document.createElement('iframe');
+            iframe.src = embedUrl;
+            iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+            iframe.setAttribute('allowfullscreen', 'true');
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            iframe.style.position = 'absolute';
+            iframe.style.top = '0';
+            iframe.style.left = '0';
+            iframe.style.border = 'none';
+            
+            videoPlayerContainer.appendChild(iframe);
+            
+            videoModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Fermer la modal vidéo
+        function closeVideoModalFunc() {
+            const videoModal = document.getElementById('videoModal');
+            const videoPlayerContainer = document.getElementById('videoPlayerContainer');
+            
+            if (!videoModal || !videoPlayerContainer) return;
+            
+            videoModal.classList.remove('active');
+            document.body.style.overflow = '';
+            
+            // Arrêter la vidéo en vidant le conteneur
+            videoPlayerContainer.innerHTML = '';
+        }
+
+        // Afficher une notification
+        function showNotification(message, type) {
+            // Créer l'élément de notification
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            
+            // Styles de la notification
+            notification.style.position = 'fixed';
+            notification.style.top = '30px';
+            notification.style.right = '30px';
+            notification.style.padding = '15px 25px';
+            notification.style.borderRadius = '10px';
+            notification.style.color = 'white';
+            notification.style.fontWeight = '600';
+            notification.style.zIndex = '9999';
+            notification.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.3)';
+            notification.style.animation = 'slideInRight 0.3s ease-out';
+            
+            // Couleur selon le type
+            if (type === 'success') {
+                notification.style.background = 'linear-gradient(45deg, #4caf50, #2e7d32)';
+                notification.style.border = '1px solid rgba(255, 255, 255, 0.2)';
+            } else if (type === 'error') {
+                notification.style.background = 'linear-gradient(45deg, #f44336, #c62828)';
+                notification.style.border = '1px solid rgba(255, 255, 255, 0.2)';
+            } else {
+                notification.style.background = 'linear-gradient(45deg, #2196f3, #1565c0)';
+                notification.style.border = '1px solid rgba(255, 255, 255, 0.2)';
+            }
+            
+            // Ajouter au document
+            document.body.appendChild(notification);
+            
+            // Supprimer après 5 secondes
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease-out';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 5000);
+            
+            // Ajouter les keyframes pour l'animation
+            if (!document.querySelector('#notification-styles')) {
+                const style = document.createElement('style');
+                style.id = 'notification-styles';
+                style.textContent = `
+                    @keyframes slideInRight {
+                        from { transform: translateX(100%); opacity: 0; }
+                        to { transform: translateX(0); opacity: 1; }
+                    }
+                    @keyframes slideOutRight {
+                        from { transform: translateX(0); opacity: 1; }
+                        to { transform: translateX(100%); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+    </script>
+</body>
+</html>

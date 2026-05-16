@@ -1,0 +1,802 @@
+<!-- ============================================ -->
+<!-- Universal Toon - SYSTÈME D'AUTHENTIFICATION FIREBASE -->
+<!-- ============================================ -->
+
+<style>
+    /* MODAL D'AUTHENTIFICATION - S'INTÈGRE À VOTRE SITE */
+    .sdm-auth-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(8px);
+        z-index: 10000;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .sdm-auth-modal {
+        background: linear-gradient(135deg, #fff5e6 0%, #ffe6cc 100%);
+        border-radius: 30px;
+        width: 90%;
+        max-width: 450px;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+        animation: sdmFadeIn 0.3s ease-out;
+    }
+
+    @keyframes sdmFadeIn {
+        from {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    .sdm-modal-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 20px;
+        text-align: center;
+        position: relative;
+        border-radius: 30px 30px 0 0;
+    }
+
+    .sdm-modal-header h2 {
+        color: white;
+        margin: 0;
+        font-size: 24px;
+    }
+
+    .sdm-modal-header p {
+        color: rgba(255,255,255,0.9);
+        margin: 5px 0 0;
+        font-size: 13px;
+    }
+
+    .sdm-close-btn {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 28px;
+        color: white;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .sdm-close-btn:hover {
+        color: #ffd700;
+        transform: rotate(90deg);
+    }
+
+    .sdm-tabs {
+        display: flex;
+        background: #f0e6d2;
+        border-bottom: 2px solid #ffd89c;
+    }
+
+    .sdm-tab {
+        flex: 1;
+        padding: 15px;
+        text-align: center;
+        cursor: pointer;
+        font-weight: bold;
+        border: none;
+        background: transparent;
+        font-size: 16px;
+        transition: 0.3s;
+    }
+
+    .sdm-tab.active {
+        background: white;
+        color: #667eea;
+        border-bottom: 3px solid #667eea;
+    }
+
+    .sdm-form-panel {
+        padding: 25px;
+    }
+
+    .sdm-form {
+        display: none;
+    }
+
+    .sdm-form.active {
+        display: block;
+    }
+
+    .sdm-input-group {
+        margin-bottom: 18px;
+    }
+
+    .sdm-input-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #4a2c2a;
+    }
+
+    .sdm-input-group input {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #ffd89c;
+        border-radius: 50px;
+        font-size: 14px;
+        transition: 0.3s;
+    }
+
+    .sdm-input-group input:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102,126,234,0.2);
+    }
+
+    .sdm-btn-auth {
+        width: 100%;
+        padding: 14px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 50px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+        margin-top: 10px;
+    }
+
+    .sdm-btn-auth:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102,126,234,0.4);
+    }
+
+    .sdm-btn-secondary {
+        background: transparent;
+        border: none;
+        color: #667eea;
+        cursor: pointer;
+        font-size: 14px;
+        margin-top: 10px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .sdm-btn-secondary:hover {
+        color: #764ba2;
+        text-decoration: underline;
+    }
+
+    .sdm-divider {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin: 20px 0;
+        color: #999;
+    }
+
+    .sdm-divider::before,
+    .sdm-divider::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .sdm-divider span {
+        padding: 0 10px;
+        font-size: 12px;
+    }
+
+    .sdm-social-buttons {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        margin-top: 15px;
+    }
+
+    .sdm-social-btn {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 12px;
+        border: none;
+        border-radius: 50px;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+        background: white;
+        color: #333;
+        border: 1px solid #ddd;
+    }
+
+    .sdm-social-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .sdm-social-btn.google-btn:hover {
+        background: #DB4437;
+        color: white;
+        border-color: #DB4437;
+    }
+
+    .sdm-social-btn.apple-btn:hover {
+        background: #000;
+        color: white;
+        border-color: #000;
+    }
+
+    .sdm-social-btn.github-btn:hover {
+        background: #333;
+        color: white;
+        border-color: #333;
+    }
+
+    .sdm-forgot-password {
+        text-align: right;
+        margin-top: 5px;
+        margin-bottom: 15px;
+    }
+
+    .sdm-forgot-password button {
+        background: none;
+        border: none;
+        color: #667eea;
+        font-size: 12px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .sdm-forgot-password button:hover {
+        color: #764ba2;
+        text-decoration: underline;
+    }
+
+    .sdm-back-to-login {
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    .sdm-back-to-login button {
+        background: none;
+        border: none;
+        color: #667eea;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .sdm-back-to-login button:hover {
+        color: #764ba2;
+        text-decoration: underline;
+    }
+
+    .sdm-message {
+        margin-top: 15px;
+        padding: 10px;
+        border-radius: 10px;
+        font-size: 13px;
+        text-align: center;
+        display: none;
+    }
+
+    .sdm-message.error {
+        background: #ffe0e0;
+        color: #d32f2f;
+        display: block;
+    }
+
+    .sdm-message.success {
+        background: #e0ffe0;
+        color: #2e7d32;
+        display: block;
+    }
+
+    .sdm-message.info {
+        background: #e3f2fd;
+        color: #1565c0;
+        display: block;
+    }
+
+    /* Widget utilisateur dans la navbar */
+    .sdm-user-widget {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 8px 15px;
+        border-radius: 50px;
+        color: white;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .sdm-user-widget:hover {
+        transform: scale(1.05);
+    }
+
+    .sdm-user-avatar {
+        width: 32px;
+        height: 32px;
+        background: rgba(255,255,255,0.2);
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+    }
+
+    /* Loading spinner */
+    .sdm-loading {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        border: 2px solid #fff;
+        border-radius: 50%;
+        border-top-color: transparent;
+        animation: sdm-spin 0.6s linear infinite;
+        margin-right: 8px;
+    }
+
+    @keyframes sdm-spin {
+        to { transform: rotate(360deg); }
+    }
+</style>
+
+<!-- MODAL AUTHENTIFICATION -->
+<div id="sdmAuthModal" class="sdm-auth-overlay">
+    <div class="sdm-auth-modal">
+        <div class="sdm-modal-header">
+            <span class="sdm-close-btn" id="sdmCloseModal">&times;</span>
+            <h2>🎨 Universal Toon</h2>
+            <p>Espace créatif - Rejoins la communauté</p>
+        </div>
+        
+        <div class="sdm-tabs">
+            <button class="sdm-tab active" data-sdm-tab="login">🔐 Connexion</button>
+            <button class="sdm-tab" data-sdm-tab="signup">✨ Inscription</button>
+            <button class="sdm-tab" data-sdm-tab="reset">🔄 Mot de passe</button>
+        </div>
+        
+        <div class="sdm-form-panel">
+            <!-- Formulaire connexion -->
+            <form id="sdmLoginForm" class="sdm-form active">
+                <div class="sdm-input-group">
+                    <label>📧 Email</label>
+                    <input type="email" id="sdmLoginEmail" required placeholder="exemple@disney.com">
+                </div>
+                <div class="sdm-input-group">
+                    <label>🔒 Mot de passe</label>
+                    <input type="password" id="sdmLoginPassword" required placeholder="••••••••">
+                </div>
+                <div class="sdm-forgot-password">
+                    <button type="button" id="sdmForgotPasswordBtn">Mot de passe oublié ?</button>
+                </div>
+                <button type="submit" class="sdm-btn-auth">Se connecter</button>
+                
+                <div class="sdm-divider">
+                    <span>Ou continuer avec</span>
+                </div>
+                
+                <div class="sdm-social-buttons">
+                    <button type="button" class="sdm-social-btn google-btn" id="sdmGoogleLoginBtn">
+                        <i class="fab fa-google"></i> Google
+                    </button>
+                    <button type="button" class="sdm-social-btn apple-btn" id="sdmAppleLoginBtn">
+                        <i class="fab fa-apple"></i> Apple
+                    </button>
+                    <button type="button" class="sdm-social-btn github-btn" id="sdmGithubLoginBtn">
+                        <i class="fab fa-github"></i> GitHub
+                    </button>
+                </div>
+                
+                <div id="sdmLoginMsg" class="sdm-message"></div>
+            </form>
+            
+            <!-- Formulaire inscription -->
+            <form id="sdmSignupForm" class="sdm-form">
+                <div class="sdm-input-group">
+                    <label>📧 Email</label>
+                    <input type="email" id="sdmSignupEmail" required placeholder="exemple@disney.com">
+                </div>
+                <div class="sdm-input-group">
+                    <label>🔒 Mot de passe (min 6 caractères)</label>
+                    <input type="password" id="sdmSignupPassword" required placeholder="••••••••">
+                </div>
+                <div class="sdm-input-group">
+                    <label>🎭 Pseudo</label>
+                    <input type="text" id="sdmSignupUsername" placeholder="Ton pseudo Disney">
+                </div>
+                <button type="submit" class="sdm-btn-auth">Créer mon compte</button>
+                
+                <div class="sdm-divider">
+                    <span>Ou s'inscrire avec</span>
+                </div>
+                
+                <div class="sdm-social-buttons">
+                    <button type="button" class="sdm-social-btn google-btn" id="sdmGoogleSignupBtn">
+                        <i class="fab fa-google"></i> Google
+                    </button>
+                    <button type="button" class="sdm-social-btn apple-btn" id="sdmAppleSignupBtn">
+                        <i class="fab fa-apple"></i> Apple
+                    </button>
+                    <button type="button" class="sdm-social-btn github-btn" id="sdmGithubSignupBtn">
+                        <i class="fab fa-github"></i> GitHub
+                    </button>
+                </div>
+                
+                <div id="sdmSignupMsg" class="sdm-message"></div>
+            </form>
+            
+            <!-- Formulaire réinitialisation mot de passe -->
+            <form id="sdmResetForm" class="sdm-form">
+                <div class="sdm-input-group">
+                    <label>📧 Email</label>
+                    <input type="email" id="sdmResetEmail" required placeholder="exemple@disney.com">
+                </div>
+                <button type="submit" class="sdm-btn-auth">Envoyer l'email de réinitialisation</button>
+                
+                <div class="sdm-back-to-login">
+                    <button type="button" id="sdmBackToLoginBtn">← Retour à la connexion</button>
+                </div>
+                
+                <div id="sdmResetMsg" class="sdm-message"></div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="module">
+    // CONFIGURATION FIREBASE
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { 
+        getAuth, 
+        createUserWithEmailAndPassword, 
+        signInWithEmailAndPassword, 
+        signOut, 
+        onAuthStateChanged, 
+        updateProfile,
+        sendPasswordResetEmail,
+        GoogleAuthProvider,
+        OAuthProvider,
+        signInWithPopup,
+        signInWithRedirect,
+        getRedirectResult,
+        linkWithPopup,
+        fetchSignInMethodsForEmail
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyB33esedjnifzMq_4_C4SpprCdFvZ1SaVM",
+        authDomain: "disney-2c184.firebaseapp.com",
+        projectId: "disney-2c184",
+        storageBucket: "disney-2c184.firebasestorage.app",
+        messagingSenderId: "893790980161",
+        appId: "1:893790980161:web:6d7980fc1d3fc20cea9ec0",
+        measurementId: "G-H96M4NV1VJ"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    
+    // Providers pour les connexions sociales
+    const googleProvider = new GoogleAuthProvider();
+    googleProvider.addScope('profile');
+    googleProvider.addScope('email');
+    
+    const appleProvider = new OAuthProvider('apple.com');
+    appleProvider.addScope('email');
+    appleProvider.addScope('name');
+    
+    const githubProvider = new OAuthProvider('github.com');
+    githubProvider.addScope('user:email');
+
+    // Éléments DOM
+    const modal = document.getElementById('sdmAuthModal');
+    const closeModal = document.getElementById('sdmCloseModal');
+    const tabs = document.querySelectorAll('.sdm-tab');
+    const loginForm = document.getElementById('sdmLoginForm');
+    const signupForm = document.getElementById('sdmSignupForm');
+    const resetForm = document.getElementById('sdmResetForm');
+    const loginMsg = document.getElementById('sdmLoginMsg');
+    const signupMsg = document.getElementById('sdmSignupMsg');
+    const resetMsg = document.getElementById('sdmResetMsg');
+
+    // Ajout du bouton dans la navbar
+    function addAuthButton() {
+        const nav = document.querySelector('nav') || document.querySelector('.navbar') || document.querySelector('header');
+        
+        if (nav) {
+            // Vérifier si le bouton existe déjà
+            if (document.getElementById('sdmAuthBtn')) return;
+            
+            const authBtn = document.createElement('div');
+            authBtn.id = 'sdmAuthBtn';
+            authBtn.className = 'sdm-user-widget';
+            authBtn.innerHTML = '<span class="sdm-user-avatar">👤</span> <span>Connexion</span>';
+            authBtn.style.cursor = 'pointer';
+            authBtn.onclick = () => { modal.style.display = 'flex'; };
+            nav.appendChild(authBtn);
+        }
+    }
+
+    function showMessage(element, message, isError = true, isInfo = false) {
+        element.textContent = message;
+        if (isInfo) {
+            element.className = 'sdm-message info';
+        } else {
+            element.className = `sdm-message ${isError ? 'error' : 'success'}`;
+        }
+        element.style.display = 'block';
+        setTimeout(() => {
+            element.style.display = 'none';
+        }, 5000);
+    }
+    
+    function setLoading(button, isLoading) {
+        if (isLoading) {
+            button.disabled = true;
+            button.innerHTML = '<span class="sdm-loading"></span> Chargement...';
+        } else {
+            button.disabled = false;
+            button.innerHTML = button.originalText || button.textContent;
+        }
+    }
+
+    function updateUserWidget(user) {
+        const authBtn = document.getElementById('sdmAuthBtn');
+        if (authBtn && user) {
+            const displayName = user.displayName || user.email.split('@')[0];
+            const firstLetter = displayName.charAt(0).toUpperCase();
+            authBtn.innerHTML = `<span class="sdm-user-avatar">${firstLetter}</span> <span>${displayName}</span>`;
+            authBtn.onclick = () => {
+                if (confirm('Voulez-vous vous déconnecter ?')) {
+                    signOut(auth);
+                }
+            };
+        } else if (authBtn) {
+            authBtn.innerHTML = '<span class="sdm-user-avatar">👤</span> <span>Connexion</span>';
+            authBtn.onclick = () => { modal.style.display = 'flex'; };
+        }
+    }
+    
+    // Fonction de connexion sociale générique
+    async function socialLogin(provider, isSignup = false) {
+        try {
+            const result = await signInWithPopup(auth, provider);
+            const user = result.user;
+            
+            // Vérifier si l'utilisateur existe dans Firestore
+            const userDoc = await getDoc(doc(db, "utilisateurs", user.uid));
+            
+            if (!userDoc.exists()) {
+                // Créer un nouveau document utilisateur
+                await setDoc(doc(db, "utilisateurs", user.uid), {
+                    username: user.displayName || user.email.split('@')[0],
+                    email: user.email,
+                    points: 0,
+                    drawings: 0,
+                    createdAt: serverTimestamp(),
+                    lastLogin: serverTimestamp(),
+                    provider: provider.providerId
+                });
+            } else {
+                // Mettre à jour la date de dernière connexion
+                await setDoc(doc(db, "utilisateurs", user.uid), {
+                    lastLogin: serverTimestamp()
+                }, { merge: true });
+            }
+            
+            showMessage(isSignup ? signupMsg : loginMsg, `✅ ${isSignup ? 'Inscription' : 'Connexion'} réussie avec ${provider.providerId === 'google.com' ? 'Google' : provider.providerId === 'apple.com' ? 'Apple' : 'GitHub'} !`, false);
+            setTimeout(() => {
+                modal.style.display = 'none';
+                window.location.reload();
+            }, 1500);
+        } catch (error) {
+            console.error(error);
+            let errorMessage = 'Une erreur est survenue';
+            if (error.code === 'auth/account-exists-with-different-credential') {
+                errorMessage = 'Un compte existe déjà avec cette adresse email. Veuillez vous connecter avec la méthode appropriée.';
+            } else if (error.code === 'auth/popup-closed-by-user') {
+                errorMessage = 'Fenêtre popup fermée. Veuillez réessayer.';
+            } else if (error.code === 'auth/unauthorized-domain') {
+                errorMessage = 'Domaine non autorisé. Veuillez ajouter ce domaine dans la console Firebase.';
+            } else {
+                errorMessage = error.message;
+            }
+            showMessage(isSignup ? signupMsg : loginMsg, `❌ ${errorMessage}`, true);
+        }
+    }
+
+    // Gestion des onglets
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const tabId = tab.dataset.sdmTab;
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            
+            const forms = document.querySelectorAll('.sdm-form');
+            forms.forEach(form => form.classList.remove('active'));
+            
+            if (tabId === 'login') {
+                loginForm.classList.add('active');
+            } else if (tabId === 'signup') {
+                signupForm.classList.add('active');
+            } else if (tabId === 'reset') {
+                resetForm.classList.add('active');
+            }
+            
+            loginMsg.style.display = 'none';
+            signupMsg.style.display = 'none';
+            resetMsg.style.display = 'none';
+        });
+    });
+
+    // Mot de passe oublié - bouton
+    document.getElementById('sdmForgotPasswordBtn')?.addEventListener('click', () => {
+        tabs.forEach(tab => tab.classList.remove('active'));
+        document.querySelector('[data-sdm-tab="reset"]').classList.add('active');
+        loginForm.classList.remove('active');
+        signupForm.classList.remove('active');
+        resetForm.classList.add('active');
+        loginMsg.style.display = 'none';
+        signupMsg.style.display = 'none';
+        resetMsg.style.display = 'none';
+    });
+    
+    // Retour à la connexion
+    document.getElementById('sdmBackToLoginBtn')?.addEventListener('click', () => {
+        tabs.forEach(tab => tab.classList.remove('active'));
+        document.querySelector('[data-sdm-tab="login"]').classList.add('active');
+        loginForm.classList.add('active');
+        signupForm.classList.remove('active');
+        resetForm.classList.remove('active');
+        loginMsg.style.display = 'none';
+        signupMsg.style.display = 'none';
+        resetMsg.style.display = 'none';
+    });
+
+    // Réinitialisation mot de passe
+    resetForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('sdmResetEmail').value.trim();
+        const submitBtn = resetForm.querySelector('button[type="submit"]');
+        
+        if (!email) {
+            showMessage(resetMsg, '❌ Veuillez entrer votre adresse email', true);
+            return;
+        }
+        
+        setLoading(submitBtn, true);
+        
+        try {
+            await sendPasswordResetEmail(auth, email);
+            showMessage(resetMsg, '✅ Un email de réinitialisation a été envoyé. Vérifiez votre boîte de réception.', false);
+            document.getElementById('sdmResetEmail').value = '';
+        } catch (error) {
+            let errorMessage = 'Une erreur est survenue';
+            if (error.code === 'auth/user-not-found') {
+                errorMessage = '❌ Aucun compte trouvé avec cette adresse email';
+            } else if (error.code === 'auth/invalid-email') {
+                errorMessage = '❌ Adresse email invalide';
+            } else {
+                errorMessage = `❌ ${error.message}`;
+            }
+            showMessage(resetMsg, errorMessage, true);
+        } finally {
+            setLoading(submitBtn, false);
+            submitBtn.originalText = 'Envoyer l\'email de réinitialisation';
+            submitBtn.innerHTML = 'Envoyer l\'email de réinitialisation';
+        }
+    });
+
+    // Inscription email/mot de passe
+    signupForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('sdmSignupEmail').value.trim();
+        const password = document.getElementById('sdmSignupPassword').value;
+        const username = document.getElementById('sdmSignupUsername').value.trim() || email.split('@')[0];
+        const submitBtn = signupForm.querySelector('button[type="submit"]');
+        
+        if (password.length < 6) {
+            showMessage(signupMsg, '❌ Mot de passe trop court (min 6 caractères)', true);
+            return;
+        }
+        
+        setLoading(submitBtn, true);
+        
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            await updateProfile(userCredential.user, { displayName: username });
+            await setDoc(doc(db, "utilisateurs", userCredential.user.uid), {
+                username: username,
+                email: email,
+                points: 0,
+                drawings: 0,
+                createdAt: serverTimestamp(),
+                lastLogin: serverTimestamp()
+            });
+            
+            showMessage(signupMsg, '✅ Compte créé avec succès !', false);
+            setTimeout(() => {
+                modal.style.display = 'none';
+                window.location.reload();
+            }, 1500);
+        } catch (error) {
+            if (error.code === 'auth/email-already-in-use') {
+                showMessage(signupMsg, '❌ Email déjà utilisé', true);
+            } else if (error.code === 'auth/weak-password') {
+                showMessage(signupMsg, '❌ Mot de passe trop faible', true);
+            } else {
+                showMessage(signupMsg, `❌ ${error.message}`, true);
+            }
+        } finally {
+            setLoading(submitBtn, false);
+            submitBtn.originalText = 'Créer mon compte';
+            submitBtn.innerHTML = 'Créer mon compte';
+        }
+    });
+
+    // Connexion email/mot de passe
+    loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('sdmLoginEmail').value.trim();
+        const password = document.getElementById('sdmLoginPassword').value;
+        const submitBtn = loginForm.querySelector('button[type="submit"]');
+        
+        setLoading(submitBtn, true);
+        
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+            showMessage(loginMsg, '✅ Connexion réussie !', false);
+            setTimeout(() => {
+                modal.style.display = 'none';
+                window.location.reload();
+            }, 1000);
+        } catch (error) {
+            if (error.code === 'auth/user-not-found') {
+                showMessage(loginMsg, '❌ Aucun compte trouvé avec cet email', true);
+            } else if (error.code === 'auth/wrong-password') {
+                showMessage(loginMsg, '❌ Mot de passe incorrect', true);
+            } else if (error.code === 'auth/too-many-requests') {
+                showMessage(loginMsg, '❌ Trop de tentatives. Réessayez plus tard.', true);
+            } else {
+                showMessage(loginMsg, '❌ Email ou mot de passe incorrect', true);
+            }
+        } finally {
+            setLoading(submitBtn, false);
+            submitBtn.originalText = 'Se connecter';
+            submitBtn.innerHTML = 'Se connecter';
+        }
+    });
+
+    // Connexions sociales
+    document.getElementById('sdmGoogleLoginBtn')?.addEventListener('click', () => socialLogin(googleProvider, false));
+    document.getElementById('sdmAppleLoginBtn')?.addEventListener('click', () => socialLogin(appleProvider, false));
+    document.getElementById('sdmGithubLoginBtn')?.addEventListener('click', () => socialLogin(githubProvider, false));
+    document.getElementById('sdmGoogleSignupBtn')?.addEventListener('click', () => socialLogin(googleProvider, true));
+    document.getElementById('sdmAppleSignupBtn')?.addEventListener('click', () => socialLogin(appleProvider, true));
+    document.getElementById('sdmGithubSignupBtn')?.addEventListener('click', () => socialLogin(githubProvider, true));
+
+    // Surveillance état connexion
+    onAuthStateChanged(auth, (user) => {
+        updateUserWidget(user);
+    });
+
+    // Fermeture modal
+    closeModal.onclick = () => { modal.style.display = 'none'; };
+    window.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
+    
+    // Initialisation
+    addAuthButton();
+</script>

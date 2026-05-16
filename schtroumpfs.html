@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les Schtroumpfs - Universal Toon</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Quicksand:wght@400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --smurf-blue: #3B7AFF;
+            --smurf-white: #FFFFFF;
+            --smurf-red: #FF4444;
+            --mushroom-red: #DC143C;
+            --forest-green: #228B22;
+            --header-font: 'Poppins', sans-serif;
+            --body-font: 'Quicksand', sans-serif;
+            --magic-font: 'Dancing Script', cursive;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: var(--body-font);
+            background: linear-gradient(135deg, #3B7AFF 0%, #228B22 50%, #DC143C 100%);
+            color: white;
+            min-height: 100vh;
+            opacity: 0;
+            animation: fadeInBody 0.8s ease-out forwards;
+        }
+        
+        @keyframes fadeInBody { to { opacity: 1; } }
+        
+        /* Champignons flottants */
+        .mushrooms {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+        }
+        
+        .mushroom {
+            position: absolute;
+            font-size: 30px;
+            animation: floatMushroom 20s infinite linear;
+            opacity: 0.2;
+        }
+        
+        @keyframes floatMushroom {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.2; }
+            90% { opacity: 0.2; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+        
+        header {
+            background: rgba(59, 122, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            animation: slideDown 0.5s;
+        }
+        
+        @keyframes slideDown { from { transform: translateY(-100%); } to { transform: translateY(0); } }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            height: 90px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+        
+        .smurf-icon {
+            font-size: 42px;
+            animation: bounceSmurf 6s infinite;
+        }
+        
+        @keyframes bounceSmurf { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        
+        .site-title {
+            font-family: var(--magic-font);
+            font-size: 38px;
+            background: linear-gradient(45deg, white, var(--smurf-red));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .nav-container {
+            background: linear-gradient(90deg, var(--smurf-blue), var(--forest-green));
+            padding: 0 5%;
+        }
+        
+        .nav-menu { display: flex; max-width: 1600px; margin: 0 auto; }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 18px 30px;
+            font-weight: 600;
+            display: block;
+            font-family: var(--header-font);
+        }
+        
+        .nav-link:hover, .nav-link.active { background: rgba(255, 255, 255, 0.2); }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 4px;
+            background: white;
+            transition: all 0.4s;
+            transform: translateX(-50%);
+        }
+        
+        .nav-link:hover::after, .nav-link.active::after { width: 80%; }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(59, 122, 255, 0.95);
+            border-radius: 0 0 15px 15px;
+            min-width: 250px;
+            display: none;
+            z-index: 1001;
+            backdrop-filter: blur(10px);
+        }
+        
+        .dropdown-menu.active { display: block; animation: slideDown 0.3s; }
+        
+        .dropdown-item {
+            padding: 15px 25px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            color: white;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .dropdown-item:hover {
+            background: rgba(255, 68, 68, 0.2);
+            padding-left: 35px;
+        }
+        
+        .category-hero {
+            text-align: center;
+            padding: 120px 5% 80px;
+            background: radial-gradient(circle at 30% 20%, rgba(59, 122, 255, 0.6) 0%, rgba(34, 139, 34, 0.4) 40%, transparent 70%),
+                        url('https://images.unsplash.com/photo-1580137189272-c9379f8864fd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            margin-bottom: 60px;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+        
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .category-hero h1 {
+            font-family: var(--magic-font);
+            font-size: 72px;
+            margin-bottom: 25px;
+            text-shadow: 3px 3px 15px rgba(0,0,0,0.5);
+        }
+        
+        .category-hero p {
+            font-size: 24px;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+        
+        .videos-section { padding: 60px 5%; max-width: 1600px; margin: 0 auto; }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 42px;
+            font-family: var(--header-font);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title::before, .section-title::after {
+            content: '🍄';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+        }
+        
+        .section-title::before { left: -50px; }
+        .section-title::after { right: -50px; }
+        
+        .videos-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 35px;
+        }
+        
+        .video-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+        
+        .video-item:hover {
+            transform: translateY(-15px);
+            border: 1px solid white;
+        }
+        
+        .video-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--smurf-blue), white, var(--smurf-red));
+        }
+        
+        .video-thumbnail {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+        
+        .video-thumbnail img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .video-info { padding: 25px; }
+        .video-info h3 { font-size: 24px; margin-bottom: 10px; }
+        .video-info p { color: rgba(255,255,255,0.8); font-size: 16px; }
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            color: rgba(255,255,255,0.6);
+            font-size: 14px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .video-modal.active { display: flex; }
+        
+        .video-modal-content {
+            width: 90%;
+            max-width: 1100px;
+            background: rgba(59, 122, 255, 0.95);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        
+        .video-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background: rgba(0,0,0,0.3);
+        }
+        
+        .close-video-modal {
+            font-size: 32px;
+            cursor: pointer;
+        }
+        
+        .video-modal-iframe-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+        
+        .video-modal-iframe-container iframe {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .video-modal-info { padding: 25px 30px; }
+        
+        .btn {
+            padding: 16px 35px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: var(--header-font);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, var(--smurf-blue), var(--smurf-red));
+            color: white;
+        }
+        
+        .btn-primary:hover { transform: translateY(-5px); }
+        
+        footer {
+            background: rgba(59, 122, 255, 0.95);
+            padding: 70px 5% 40px;
+            margin-top: 100px;
+        }
+        
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+        }
+        
+        .footer-section h3 {
+            font-size: 24px;
+            margin-bottom: 25px;
+            color: white;
+        }
+        
+        .footer-section p, .footer-section a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            display: block;
+            padding: 8px 0;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+            padding-left: 15px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .header-container { flex-direction: column; height: auto; padding: 20px; }
+            .nav-menu { flex-wrap: wrap; justify-content: center; }
+            .nav-link { padding: 15px 20px; }
+            .category-hero h1 { font-size: 44px; }
+            .videos-container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="mushrooms" id="mushrooms"></div>
+    
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo-container">
+                <div class="smurf-icon">🍄</div>
+                <h1 class="site-title">Universal Toon</h1>
+            </a>
+        </div>
+        
+        <div class="nav-container">
+            <nav class="nav-menu">
+                <div class="nav-item">
+                    <a href="index.html" class="nav-link">Accueil</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link active" id="categoriesDropdownToggle">Catégories <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-menu" id="categoriesDropdown">
+                        <a href="conte-fee.html" class="dropdown-item">Conte de fée</a>
+                        <a href="aventure.html" class="dropdown-item">Aventure&Action</a>
+                        <a href="schtroumpfs.html" class="dropdown-item active">Les Schtroumpfs</a>
+                        <a href="univers.html" class="dropdown-item">Univers</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="category-hero">
+        <h1>Les Schtroumpfs</h1>
+        <p>Vivez les aventures des petits êtres bleus dans leur village de champignons ! Schtroumpf à tous !</p>
+        <button class="btn btn-primary" id="watchTrailerBtn">Regarder la bande-annonce</button>
+    </section>
+    
+    <section class="videos-section">
+        <h2 class="section-title">Les Aventures Schtroumpfantes</h2>
+        <div class="videos-container" id="videosContainer"></div>
+    </section>
+    
+    <div class="video-modal" id="videoModal">
+        <div class="video-modal-content">
+            <div class="video-modal-header">
+                <h3 id="videoModalTitle">Titre</h3>
+                <span class="close-video-modal" id="closeVideoModal">&times;</span>
+            </div>
+            <div class="video-modal-body">
+                <div class="video-modal-iframe-container">
+                    <div id="videoPlayerContainer"></div>
+                </div>
+                <div class="video-modal-info">
+                    <p id="videoModalDescription">Description</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>À propos</h3>
+                <p>Universal Toon - Les meilleurs dessins animés pour toute la famille.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Catégories</h3>
+                <ul>
+                    <li><a href="conte-fee.html">Contes de fée</a></li>
+                    <li><a href="aventure.html">Aventure&Action</a></li>
+                    <li><a href="schtroumpfs.html">Les Schtroumpfs</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: contact@universaltoon.com</p>
+                <p>Tél: +221762442530 & +221755222968</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Universal Toon. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        const smurfVideos = [
+            { id: "dQw4w9WgXcQ", title: "Les Schtroumpfs - Le Village", description: "Découverte du village des Schtroumpfs.", duration: "22:15", year: "1981" },
+            { id: "WT012PvL5g", title: "Les Schtroumpfs - Gargamel", description: "Gargamel tente encore de capturer les Schtroumpfs.", duration: "21:30", year: "1982" },
+            { id: "CduA0TULnow", title: "Les Schtroumpfs - La Schtroumpfette", description: "La Schtroumpfette arrive au village.", duration: "23:45", year: "1982" },
+            { id: "FlsCjmMhFmw", title: "Les Schtroumpfs - Le Grand Schtroumpf", description: "Le Grand Schtroumpf sauve la situation.", duration: "22:20", year: "1983" }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            createMushrooms();
+            loadVideos();
+            setupInteractions();
+            setupVideoModal();
+        });
+
+        function createMushrooms() {
+            const container = document.getElementById('mushrooms');
+            for (let i = 0; i < 60; i++) {
+                const mush = document.createElement('div');
+                mush.classList.add('mushroom');
+                mush.textContent = ['🍄', '🍄‍🟫', '🌿'][Math.floor(Math.random() * 3)];
+                mush.style.fontSize = `${Math.random() * 40 + 20}px`;
+                mush.style.left = `${Math.random() * 100}%`;
+                mush.style.animationDelay = `${Math.random() * 20}s`;
+                mush.style.animationDuration = `${12 + Math.random() * 16}s`;
+                container.appendChild(mush);
+            }
+        }
+
+        function getThumbnailUrl(video) { return `https://img.youtube.com/vi/${video.id}/hqdefault.jpg`; }
+
+        function loadVideos() {
+            const container = document.getElementById('videosContainer');
+            container.innerHTML = '';
+            smurfVideos.forEach((video, index) => {
+                const item = document.createElement('div');
+                item.className = 'video-item';
+                item.style.animationDelay = `${index * 0.1}s`;
+                item.innerHTML = `
+                    <div class="video-thumbnail"><img src="${getThumbnailUrl(video)}" alt="${video.title}"></div>
+                    <div class="video-info">
+                        <h3>${video.title}</h3>
+                        <p>${video.description}</p>
+                        <div class="video-meta">
+                            <span><i class="far fa-clock"></i> ${video.duration}</span>
+                            <span><i class="far fa-calendar"></i> ${video.year}</span>
+                        </div>
+                    </div>
+                `;
+                item.addEventListener('click', () => openVideoModal(video.id, video.title, video.description));
+                container.appendChild(item);
+            });
+        }
+
+        function setupInteractions() {
+            const trailerBtn = document.getElementById('watchTrailerBtn');
+            if (trailerBtn) trailerBtn.addEventListener('click', () => openVideoModal(smurfVideos[0].id, smurfVideos[0].title, smurfVideos[0].description));
+            
+            const toggle = document.getElementById('categoriesDropdownToggle');
+            const dropdown = document.getElementById('categoriesDropdown');
+            if (toggle) {
+                toggle.addEventListener('click', (e) => { e.preventDefault(); dropdown.classList.toggle('active'); });
+                document.addEventListener('click', (e) => { if (!toggle.contains(e.target) && !dropdown.contains(e.target)) dropdown.classList.remove('active'); });
+            }
+        }
+
+        function setupVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const closeBtn = document.getElementById('closeVideoModal');
+            if (closeBtn) closeBtn.addEventListener('click', closeVideoModal);
+            if (modal) modal.addEventListener('click', (e) => { if (e.target === modal) closeVideoModal(); });
+            document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('active')) closeVideoModal(); });
+        }
+
+        function openVideoModal(videoId, title, description) {
+            const modal = document.getElementById('videoModal');
+            const container = document.getElementById('videoPlayerContainer');
+            document.getElementById('videoModalTitle').textContent = title;
+            document.getElementById('videoModalDescription').textContent = description;
+            container.innerHTML = '';
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+            iframe.allowFullscreen = true;
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            iframe.style.position = 'absolute';
+            container.appendChild(iframe);
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const container = document.getElementById('videoPlayerContainer');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+            if (container) container.innerHTML = '';
+        }
+    </script>
+</body>
+</html>

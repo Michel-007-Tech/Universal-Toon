@@ -1,0 +1,1692 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contes de Fée - Universal Toon</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Quicksand:wght@400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Variables CSS améliorées pour une ambiance magique Disney */
+        :root {
+            --disney-blue: #0d47a1;
+            --disney-magenta: #e91e63;
+            --disney-gold: #ffc107;
+            --disney-purple: #7b1fa2;
+            --disney-teal: #0097a7;
+            --disney-red: #d32f2f;
+            --disney-light: #f5f5f5;
+            --disney-dark: #121212;
+            --magic-shadow: 0 0 15px rgba(233, 30, 99, 0.3);
+            --header-font: 'Poppins', sans-serif;
+            --body-font: 'Quicksand', sans-serif;
+            --magic-font: 'Dancing Script', cursive;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Reset et styles de base améliorés */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--body-font);
+            background: linear-gradient(135deg, #1a0b2e 0%, #2d1b69 50%, #4a2b8c 100%);
+            color: var(--disney-light);
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            opacity: 0;
+            animation: fadeInBody 0.8s ease-out forwards;
+        }
+        
+        @keyframes fadeInBody {
+            to { opacity: 1; }
+        }
+        
+        /* Effet de poussière magique en arrière-plan */
+        .magic-dust {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .dust-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8);
+            animation: floatDust 15s infinite linear;
+        }
+        
+        @keyframes floatDust {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Effet d'étoiles scintillantes */
+        .twinkling-stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            pointer-events: none;
+        }
+        
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite alternate;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        /* En-tête et navigation améliorés */
+        header {
+            background: rgba(13, 13, 46, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 193, 7, 0.2);
+            animation: slideDown 0.5s ease-out;
+        }
+        
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            height: 90px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+            text-decoration: none;
+        }
+        
+        .logo-container:hover .magic-hat {
+            animation: hatSpin 1s ease;
+        }
+        
+        @keyframes hatSpin {
+            0% { transform: rotate(0); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .magic-hat {
+            font-size: 42px;
+            color: var(--disney-gold);
+            position: relative;
+            animation: hatFloat 6s infinite ease-in-out;
+            filter: drop-shadow(0 0 10px rgba(255, 193, 7, 0.7));
+        }
+        
+        @keyframes hatFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-10px) rotate(-5deg); }
+            75% { transform: translateY(5px) rotate(5deg); }
+        }
+        
+        .site-title {
+            font-family: var(--magic-font);
+            font-size: 38px;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--disney-gold), var(--disney-magenta), var(--disney-teal));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+            letter-spacing: 1px;
+        }
+        
+        .magic-sparkle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 15px white;
+            animation: sparkle 2s infinite;
+            opacity: 0;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        /* Navigation avec menu déroulant des catégories amélioré */
+        .nav-container {
+            background: linear-gradient(90deg, var(--disney-purple), var(--disney-blue));
+            padding: 0 5%;
+            position: relative;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--disney-gold), transparent);
+        }
+        
+        .nav-menu {
+            display: flex;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .nav-item {
+            position: relative;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 18px 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: block;
+            position: relative;
+            font-family: var(--header-font);
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background: rgba(255, 255, 255, 0.15);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 4px;
+            background: var(--disney-gold);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            transform: translateX(-50%);
+        }
+        
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 80%;
+        }
+        
+        /* Menu déroulant des catégories amélioré */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(13, 13, 46, 0.95);
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            min-width: 250px;
+            display: none;
+            z-index: 1001;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 193, 7, 0.2);
+            border-top: none;
+        }
+        
+        .dropdown-menu.active {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+        
+        .dropdown-item {
+            padding: 15px 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+            color: var(--disney-light);
+            text-decoration: none;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+        
+        .dropdown-item:hover {
+            background: rgba(233, 30, 99, 0.2);
+            padding-left: 35px;
+            color: white;
+        }
+        
+        .dropdown-item:hover::before {
+            content: '✦';
+            position: absolute;
+            left: 15px;
+            color: var(--disney-gold);
+        }
+        
+        /* Section de bannière principale améliorée pour Conte de Fée */
+        .category-hero {
+            text-align: center;
+            padding: 120px 5% 80px;
+            background: radial-gradient(circle at 30% 20%, rgba(155, 89, 182, 0.6) 0%, rgba(123, 31, 162, 0.4) 40%, transparent 70%),
+                        radial-gradient(circle at 70% 80%, rgba(233, 30, 99, 0.5) 0%, rgba(255, 193, 7, 0.3) 30%, transparent 60%),
+                        url('https://images.unsplash.com/photo-1635805737707-575885ab0820?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(255, 193, 7, 0.2);
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .category-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
+        .category-hero h1 {
+            font-family: var(--magic-font);
+            font-size: 72px;
+            margin-bottom: 25px;
+            color: white;
+            text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.7),
+                         0 0 30px rgba(233, 30, 99, 0.5),
+                         0 0 60px rgba(123, 31, 162, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+        
+        .category-hero h1::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--disney-gold), transparent);
+        }
+        
+        .category-hero p {
+            font-size: 24px;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+            font-weight: 300;
+            line-height: 1.8;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+        
+        /* Section vidéos améliorée pour Conte de Fée */
+        .videos-section {
+            padding: 60px 5%;
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 42px;
+            color: white;
+            font-family: var(--header-font);
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5),
+                         0 0 20px rgba(233, 30, 99, 0.3);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title::before, .section-title::after {
+            content: '✦';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--disney-gold);
+            font-size: 24px;
+            opacity: 0.8;
+        }
+        
+        .section-title::before {
+            left: -50px;
+        }
+        
+        .section-title::after {
+            right: -50px;
+        }
+        
+        .videos-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 35px;
+        }
+        
+        .video-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+        
+        .video-item:nth-child(1) { animation-delay: 0.3s; }
+        .video-item:nth-child(2) { animation-delay: 0.4s; }
+        .video-item:nth-child(3) { animation-delay: 0.5s; }
+        .video-item:nth-child(4) { animation-delay: 0.6s; }
+        .video-item:nth-child(5) { animation-delay: 0.7s; }
+        .video-item:nth-child(6) { animation-delay: 0.8s; }
+        .video-item:nth-child(7) { animation-delay: 0.9s; }
+        .video-item:nth-child(8) { animation-delay: 1.0s; }
+        
+        .video-item:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4),
+                        0 0 30px rgba(233, 30, 99, 0.2);
+            border-color: rgba(233, 30, 99, 0.3);
+        }
+        
+        .video-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--disney-purple), var(--disney-magenta), var(--disney-gold));
+            z-index: 2;
+        }
+        
+        .video-thumbnail {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .video-thumbnail img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .video-item:hover .video-thumbnail img {
+            transform: scale(1.05);
+        }
+        
+        /* Effet de lecture automatique au survol */
+        .video-thumbnail::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: opacity 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 60px;
+            z-index: 1;
+        }
+        
+        .video-item:hover .video-thumbnail::after {
+            opacity: 1;
+            content: '▶';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+        }
+        
+        .video-info {
+            padding: 25px;
+        }
+        
+        .video-info h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: white;
+            font-family: var(--header-font);
+            min-height: 60px;
+        }
+        
+        .video-info p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Modal vidéo amélioré */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .video-modal.active {
+            display: flex;
+        }
+        
+        .video-modal-content {
+            width: 90%;
+            max-width: 1100px;
+            background: rgba(13, 13, 46, 0.95);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7),
+                        0 0 0 1px rgba(255, 193, 7, 0.1);
+            animation: modalSlideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+        
+        @keyframes modalSlideIn {
+            from { opacity: 0; transform: translateY(60px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        
+        .video-modal-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--disney-purple), var(--disney-magenta), var(--disney-gold));
+            z-index: 2;
+        }
+        
+        .video-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        .video-modal-header h3 {
+            font-size: 24px;
+            color: white;
+            font-family: var(--header-font);
+        }
+        
+        .close-video-modal {
+            font-size: 32px;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .close-video-modal:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(90deg);
+        }
+        
+        .video-modal-body {
+            padding: 0;
+        }
+        
+        .video-modal-iframe-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .video-modal-iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .video-modal-info {
+            padding: 25px 30px;
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        .video-modal-info p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            font-size: 18px;
+        }
+        
+        /* Boutons améliorés */
+        .btn {
+            padding: 16px 35px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: var(--header-font);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 1px;
+            animation: fadeInUp 0.8s ease-out 0.8s both;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, var(--disney-purple), var(--disney-magenta));
+            color: white;
+            box-shadow: 0 5px 20px rgba(123, 31, 162, 0.4);
+            border: 2px solid transparent;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(45deg, var(--disney-magenta), var(--disney-purple));
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(123, 31, 162, 0.6);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 50px;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(30deg);
+            transition: all 0.5s;
+        }
+        
+        .btn-primary:hover::after {
+            left: 120%;
+        }
+        
+        /* Pied de page amélioré */
+        footer {
+            background: rgba(13, 13, 46, 0.95);
+            color: white;
+            padding: 70px 5% 40px;
+            margin-top: 100px;
+            border-top: 1px solid rgba(255, 193, 7, 0.2);
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--disney-purple), var(--disney-magenta), var(--disney-gold));
+        }
+        
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-section {
+            position: relative;
+        }
+        
+        .footer-section h3 {
+            font-size: 24px;
+            margin-bottom: 25px;
+            color: var(--disney-gold);
+            font-family: var(--header-font);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--disney-gold), transparent);
+        }
+        
+        .footer-section p, .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            transition: all 0.3s;
+        }
+        
+        .footer-section a {
+            text-decoration: none;
+            display: block;
+            padding: 8px 0;
+            position: relative;
+            padding-left: 0;
+            transition: all 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+            padding-left: 15px;
+        }
+        
+        .footer-section a:hover::before {
+            content: '›';
+            position: absolute;
+            left: 0;
+            color: var(--disney-gold);
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 15px;
+        }
+        
+        .footer-bottom p {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .footer-bottom p::before, .footer-bottom p::after {
+            content: '✦';
+            color: var(--disney-gold);
+            font-size: 18px;
+        }
+        
+        /* Points colorés décoratifs */
+        .decorative-dots {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: floatDot 20s infinite linear;
+        }
+        
+        @keyframes floatDot {
+            0% { transform: translateY(100vh) translateX(0) rotate(0deg); }
+            100% { transform: translateY(-100px) translateX(100px) rotate(360deg); }
+        }
+        
+        /* Animation spéciale pour les contes de fée */
+        @keyframes fairyDust {
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) translateX(50px) rotate(360deg); opacity: 0; }
+        }
+        
+        .fairy-dust {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .fairy-particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255, 215, 0, 0.8);
+            box-shadow: 0 0 15px 3px rgba(255, 215, 0, 0.7);
+            animation: fairyDust 12s infinite linear;
+        }
+        
+        .castle-decoration {
+            position: absolute;
+            bottom: 0;
+            right: 5%;
+            width: 300px;
+            height: 300px;
+            background: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80') no-repeat center;
+            background-size: contain;
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        /* Responsive amélioré */
+        @media (max-width: 1200px) {
+            .videos-container {
+                grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            }
+            
+            .category-hero h1 {
+                font-size: 62px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .videos-container {
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            }
+            
+            .category-hero h1 {
+                font-size: 52px;
+            }
+            
+            .category-hero p {
+                font-size: 22px;
+            }
+            
+            .section-title {
+                font-size: 36px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                height: auto;
+                padding: 20px 5%;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-link {
+                padding: 15px 20px;
+                font-size: 15px;
+            }
+            
+            .category-hero {
+                padding: 100px 5% 60px;
+            }
+            
+            .category-hero h1 {
+                font-size: 44px;
+            }
+            
+            .category-hero p {
+                font-size: 20px;
+            }
+            
+            .videos-container {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 25px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .videos-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .category-hero h1 {
+                font-size: 38px;
+            }
+            
+            .section-title {
+                font-size: 32px;
+            }
+            
+            .section-title::before, .section-title::after {
+                display: none;
+            }
+            
+            .video-modal-content {
+                width: 95%;
+                border-radius: 15px;
+            }
+            
+            .video-modal-header {
+                padding: 15px 20px;
+            }
+            
+            .video-modal-header h3 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Effet de poussière magique -->
+    <div class="magic-dust" id="magicDust"></div>
+    
+    <!-- Poussière de fée spéciale -->
+    <div class="fairy-dust" id="fairyDust"></div>
+    
+    <!-- Étoiles scintillantes -->
+    <div class="twinkling-stars" id="twinklingStars"></div>
+    
+    <!-- Points colorés décoratifs -->
+    <div class="decorative-dots" id="decorativeDots"></div>
+    
+    <!-- Château décoratif -->
+    <div class="castle-decoration"></div>
+    
+    <!-- En-tête avec logo -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo-container">
+                <div class="magic-hat">👑</div>
+                <h1 class="site-title">Universal Toon</h1>
+                <!-- Étincelles magiques -->
+                <div class="magic-sparkle" style="top: 10px; right: -5px; animation-delay: 0.2s;"></div>
+                <div class="magic-sparkle" style="bottom: 5px; left: 40px; animation-delay: 0.7s;"></div>
+                <div class="magic-sparkle" style="top: 30px; left: 10px; animation-delay: 1.3s;"></div>
+            </a>
+        </div>
+        
+        <!-- Barre de navigation avec menu déroulant des catégories -->
+        <div class="nav-container">
+            <nav class="nav-menu">
+                <div class="nav-item">
+                    <a href="index.html" class="nav-link">Accueil</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link active" id="categoriesDropdownToggle">Catégories <i class="fas fa-chevron-down" style="margin-left: 5px; font-size: 12px;"></i></a>
+                    <div class="dropdown-menu" id="categoriesDropdown">
+                        <a href="conte-fee.html" class="dropdown-item active" data-category="conte">Conte de fée</a>
+                        <a href="aventure.html" class="dropdown-item" data-category="aventure">Aventure&Action</a>
+                        <a href="enfants.html" class="dropdown-item" data-category="enfants">Education</a>
+                        <a href="univers.html" class="dropdown-item" data-category="univers">Univers</a> 
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Section de bannière pour Conte de Fée -->
+    <section class="category-hero">
+        <h1>Contes de Fée Enchantés</h1>
+        <p>Plongez dans l'univers magique des contes de fée avec des histoires enchantées, des princesses courageuses et des mondes merveilleux où les rêves deviennent réalité. Découvrez une sélection des plus beaux contes Disney.</p>
+        <button class="btn btn-primary" style="max-width: 280px;" id="watchTrailerBtn">Regarder la bande-annonce</button>
+    </section>
+    
+    <!-- Section des vidéos -->
+    <section class="videos-section">
+        <h2 class="section-title">Les Plus Beaux Contes de Fée</h2>
+        <div class="videos-container" id="videosContainer">
+            <!-- Les vidéos seront chargées par JavaScript -->
+        </div>
+    </section>
+    
+    <!-- Modal vidéo -->
+    <div class="video-modal" id="videoModal">
+        <div class="video-modal-content">
+            <div class="video-modal-header">
+                <h3 id="videoModalTitle">Titre de la vidéo</h3>
+                <span class="close-video-modal" id="closeVideoModal">&times;</span>
+            </div>
+            <div class="video-modal-body">
+                <div class="video-modal-iframe-container">
+                    <div id="videoPlayerContainer"></div>
+                </div>
+                <div class="video-modal-info">
+                    <p id="videoModalDescription">Description de la vidéo</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Pied de page -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>À propos de Universal Toon</h3>
+                <p>Universal Toon est une plateforme qui regroupe les meilleurs dessins animés pour toute la famille. Profitez de contenu adapté à tous les âges et tous les goûts.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Catégories</h3>
+                <ul>
+                    <li><a href="conte-fee.html">Contes de fée</a></li>
+                    <li><a href="aventure.html">Aventure&Action</a></li>
+                    <li><a href="univers.html">Univers</a></li> 
+                    <li><a href="enfants.html">Education</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: contact@universaltoon.com</p>
+                <p>Téléphone: +221762442530 & +221755222968</p>
+                <p>Adresse: Senegal Mbour</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Universal Toon. Tous droits réservés. Conçu avec ❤️ pour les familles</p>
+        </div>
+    </footer>
+
+    <script>
+        // Données des vidéos pour la catégorie "Conte de Fée"
+        const fairyTaleVideos = [
+            {
+                id: "BQotymmxmgo",
+                title: "La Legende du chevalier-Dessin Animé Complet",
+                description: "Un jeune garçon veut être chevalier comme son grand-père, mais son père ne veut pas. Alors, il quitte sa famille et son royaume pour vivre une grande aventure.",
+                duration: "2:15",
+                year: "2013",
+                platform: "youtube"
+            },
+            {
+                id: "YFnyrSK0LWU",
+                title: "Le Monde Magique d'OZ-Dessin Animé Complet",
+                description: "Le brave mais méchant Urfin veut gouverner le Monde Magique d'Oz. Avec son armée de soldats de bois, il envahit la Cité d'Emeraude",
+                duration: "1:25:11",
+                year: "©2021",
+                platform: "youtube"
+            },
+            {
+                id: "PhAcgKHZoSU",
+                title: "L'Epée Magique - Dessin Animé Complet",
+                description: "Dans un royaume ancien, un jeune guerrier intrépide doit affronter un spectre maléfique pour sauver le monde et protéger les créatures magiques.",
+                duration: "1:30:27",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "DEZYqbJIC-8",
+                title: "Le Livre Enchantée-Dessin Animé Complet",
+                description: "Le jour de son anniversaire, la Princesse Barbara découvre un livre magique qui la transporte dans un univers merveilleux rempli de créatures fantastiques.",
+                duration: "1:09:6",
+                year: "©2021",
+                platform: "youtube"
+            },
+            {
+                id: "arMlYe_nDpU",
+                title: "Académie de la Licorne-Dessin Animé Complet",
+                description: "Lorsque la paisible île de la Licorne est menacée parle retour de la maléfique Ravenzella et de sa puissante magie sinistr, les élèves de l'UNICORN ACADEMYet leurs licornes magiques doivent s'élever pour la protéger",
+                duration: "1:11:58",
+                year: "©2021",
+                platform: "youtube"
+            },
+            {
+                id: "TJTnRqqa83s",
+                title: "Les Nouvelles Aventure de Cendrillon-Dessin Animé Complet",
+                description: "Lorsque le prince Alex est piégé dans le corps d'une souris, Ella et ses amis partent dans un voyage extraordinaire pour le sauver.",
+                duration: "1:23:25",
+                year: "©2023",
+                platform: "youtube"
+            },
+            {
+                id: "-w2ZXLQ-Bno",
+                title: "L'Ecole des Magigiens-Dessin Animé Complet",
+                description: "Aura a des pouvoirs magiques. Elle et ses amis vivent de nombreuses aventures passionnantes à l'académie, mais Aura apprend que l'école cache de nombreux sombres secrets.",
+                duration: "1:16:42",
+                year: "©2023",
+                platform: "youtube"
+            },
+            {
+                id: "56yO9KtC6Jk",
+                title: "La Princesse Guerrière-Dessin Animé Complet",
+                description: "Pour sauver son père, la jeune Mulan se déguise en homme et intègre l'armée à sa place. Rebelle et intrépide, Mulan profite de cette occasion pour explorer le monde.",
+                duration: "1:34:29",
+                year: "©2023",
+                platform: "youtube"
+            },
+            {
+                id: "HsZjnfukx0k",
+                title: "La Prophétie Enchantée-Dessin Animé Complet",
+                description: "Une ancienne prophétie s'entrelace autour du joyau magique du bracelet de Mia. Il emmène Mia dans un voyage aventureux. Elle fait face à un ennemi puissant, mais prend également son destin en main.",
+                duration: "1:24:37",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "6GCHUMLzjVg",
+                title: "Le Royaume de Frog-Dessin Animé Complet",
+                description: "Lorsque son père, le Roi Frog annonce que le gagnant des Froglympics d'hiver obtiendra la main de sa fille en récompense, celle-ci décide de s'enfuir.",
+                duration: "1:26:56",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "FhVMkzWmKpI",
+                title: "La Royaume Fantastique",
+                description: "Dans le royaume des elfes, le mariage de la princesse tourne à la panique quand une armée d'elfes noires s'invitent à la cérémonie.",
+                duration: "1:29:18",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "3hXtd9N9dRc",
+                title: "Le Nouveau Monde-Dessin Animé Complet",
+                description: "Histoire de l'une des aventures les plus incroyables jamais vécues : le premier tour du monde.",
+                duration: "1:20:56",
+                year: "©2022",
+                platform: "youtube"
+            },
+            {
+                id: "gpo1pdsiAC4",
+                title: "Amis pour La Vie-Dessin Animé Complet",
+                description: "Un chien revenant du paradis et une fillette qui parle aux animaux unissent leurs forces pour déjouer un méchant, découvrir l'amitié et apprendre à faire le bien.",
+                duration: "1:24:35",
+                year: "©2026",
+                platform: "youtube"
+            },
+            {
+                id: "bcvYEpxmqEE",
+                title: "La Gardienne Des Lanternes-Dessin Animé Complet",
+                description: "Une vieille dame effrayée par ce que lui réserve l'avenir, utilise une de ses lanternes pour remonter le temps et contraindre les habitants de son village à revivre sans cesse la même année...",
+                duration: "1:29:32",
+                year: "©2022",
+                platform: "youtube"
+            },
+            {
+                id: "cFQIRprANsM",
+                title: "Le Cristal Magique-Dessin Animé Complet",
+                description: "Un petit hérisson courageux et son ami écureuil partent récupérer une pierre magique volée par le roi des ours pour sauver leur forêt asséchée.",
+                duration: "1:21:41",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "NQnqlKOhlH4",
+                title: "La Reine Du Royaume Enchanté-Dessin Animé Complet",
+                description: "À la recherche de son père disparu, une jeune fille découvre la maison cachée de Blanche-Neige et les nains. Mais cette quête les mènera-t-elle droit dans le piège de la méchante reine ?",
+                duration: "1:14:23",
+                year: "©2023",
+                platform: "youtube"
+            },
+            {
+                id: "vRWV17Rotr4",
+                title: "Maxi,10 ans Et Toutes Ses Dents -Dessin Animé Complet",
+                description: "Une fée curieuse découvre le monde des humains et, avec l'aide d'une jeune fille, tente de retourner chez elle avant que le temps ne s'écoule.",
+                duration: "1:19:33",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "qw6ed5x9E64",
+                title: "La Petite Magicienne-Dessin Animé Complet",
+                description: "Ella et Henry sont les meilleurs amis du monde. Mais un jour, l'arrivée d'un nouveau garçon dans le quartier va tout changer et l'amitié des deux amis va être bouleversée.",
+                duration: "1:11:01",
+                year: "©2024",
+                platform: "youtube"
+            },
+            {
+                id: "0XIZDFS4_nI",
+                title: "Il Était une Fois-Dessin Animé Complet",
+                description: "Des royaumes de ballons, des dragons policiers et des sorciers heureux sont exactement ce dont Terry se souvient des contes fous de sa grand-mère. Cependant, tout ceci est bien réel",
+                duration: "1:22:03",
+                year: "©2024",
+                platform: "youtube"
+            },
+            {
+                id: "iVZUcUTiH50",
+                title: "Le Voyage Féérique de Blanche Neige-Dessin Animé Complet",
+                description: "À la recherche de son père disparu, une jeune fille découvre la maison cachée de Blanche-Neige et les nains. Ses nouveaux amis vont l'aider à suivre les indices sur l'endroit où se trouve son père.",
+                duration: "1:14:23",
+                year: "©2023",
+                platform: "youtube"
+            },
+            {
+                id: "pe3kQ6nCRFc",
+                title: "Le Prince des Neiges-Dessin Animé Complet",
+                description: "Après avoir quitté le palais, une princesse rencontre un monstre puissant dans les bois, et ensemble ils vivent des aventures qui apprennent la confiance et le courage.",
+                duration: "1:32:32",
+                year: "©2025",
+                platform: "youtube"
+            },
+            {
+                id: "eNhc4VdabmE",
+                title: "Mei, La Poupée Prisonnière",
+                description: "Nathan et ses compagnons, petits jouets, vivent paisiblement dans une boutique. Un jour, la vie du groupe va être bouleversée quand la Poupée Mei est enlevée...",
+                duration: "1:30:22",
+                year: "©2023",
+                platform: "youtube"
+            },
+            {
+                id: "x9o4gfs",
+                title: "Barbie et le Palais de Diamant",
+                description: "Barbie et le Palais de Diamant",
+                duration: "1:12:45",
+                year: "©2025",
+                platform: "dailymotion"
+            },
+            {
+                id: "x9n5n5y",
+                title: "Barbie Princesse de l'Île Merveilleuse",
+                description: "une jeune fille élevée sur une île tropicale, qui découvre sa véritable identité royale",
+                duration: "1:25:08",
+                year: "©2025",
+                platform: "dailymotion"
+            },
+            {
+                id: "x9n5o7c",
+                title: "Barbie Mariposa et ses Amies les Fées Papillons",
+                description: "Une aventure féerique pleine de magie, de lumière, d'amitié et de courage",
+                duration: "1:14:49",
+                year: "©2025",
+                platform: "dailymotion"
+            },
+            {
+                id: "x9o6b4i",
+                title: "Barbie 🧚‍♀️ et la Porte Secrète",
+                description: "Barbie incarne la princesse Alexa, une jeune fille timide qui découvre un passage secret vers un royaume rempli de fées",
+                duration: "1:20:51",
+                year: "©2025",
+                platform: "dailymotion"
+            },
+            {
+                id: "x9n5gvy",
+                title: "Barbie et les trois",
+                description: "Plonge dans une aventure épique avec Barbie 💖 et ses amies devenues mousquetaires",
+                duration: "1:21:23",
+                year: "©2025",
+                platform: "dailymotion"
+            },
+            {
+                id: "x9n5puu",
+                title: "Barbie : Rêve de Danseuse Étoil",
+                description: "Suis Kristyn, une jeune ballerine passionnée 💖 qui découvre des chaussons magiques ✨ l'emmenant dans des ballets enchanteurs comme Giselle et Le Lac des cygnes 🦢🎼. Un film féerique alliant grâce, passion, amitié et dépassement de soi 👯‍♀️💫",
+                duration: "1:14:41",
+                year: "©2025",
+                platform: "dailymotion"
+            },
+            {
+                id: "x9n8nbw",
+                title: "Barbie et la Magie de Noël",
+                description: "Inspirée du conte classique Un Chant de Noël de Charles Dickens 📖, Barbie incarne Eden Starling, une diva égoïste qui va découvrir la générosité grâce à trois esprits de Noël ✨👻. Une belle leçon de partage et d'amour dans un univers enchanteur plein de musique, d'amitié et d'émotion 🎼",
+                duration: "1:16:18",
+                year: "©2025",
+                platform: "dailymotion"
+            },
+            {
+                id: "x9n8nqo",
+                title: "Barbie : Un Merveilleux Noël",
+                description: "Accompagne Barbie et ses trois sœurs 👯‍♀️ dans une aventure enneigée pleine de surprises alors qu'elles se retrouvent coincées dans une petite ville juste avant Noël ❄️🎅. Entre chansons, moments en famille et esprit des fêtes",
+                duration: "1:13:52",
+                year: "©2025",
+                platform: "dailymotion"
+            },
+            {
+                id: "x8qurfp",
+                title: "Le Magicien Grincheux",
+                description: "Des royaumes de ballons, des dragons policiers et des sorciers heureux sont exactement ce dont Terry se souvient des contes fous de sa grand-mère. Cependant, tout ceci est bien réel...",
+                duration: "1:22:04",
+                year: "©2025",
+                platform: "dailymotion"
+            },
+            {
+                id: "x9nmrtc",
+                title: "Ainbo, Princesse d'Amazonie",
+                description: "Accompagnée d'esprits animaux drôles et attachants, Ainbo va découvrir sa destinée, lutter contre les forces obscures et défendre l'équilibre de la nature",
+                duration: "1:24:29",
+                year: "©2025",
+                platform: "dailymotion"
+            },
+            {
+                id: "x88dam2",
+                title: "Le Prince Grenouille",
+                description: "Convaincu d'être un prince charmant enchanté en grenouille, Ribbit va chercher une princesse qui pourrait rompre le soi-disant sort..",
+                duration: "1:21:21",
+                year: "©2025",
+                platform: "dailymotion"
+            },
+            {
+                id: "x9o6auc",
+                title: "Les Noces Funèbres",
+                description: "Plonge dans l'univers gothique et poétique de Les Noces Funèbres signé Tim Burton 🎩🖤Victor, un jeune homme timide, se retrouve malgré lui marié à une mystérieuse mariée morte-vivante dans le monde des morts 💍💀",
+                duration: "1:13:59",
+                year: "©2025, 18 ans",
+                platform: "dailymotion"
+            },
+            {
+                id: "x9mqvjs",
+                title: "Le Royaume des Chats",
+                description: "Plongez dans l'univers enchanteur du Royaume des Chats, un conte magique et poétique signé par les studios Ghibli",
+                duration: "1:11:55",
+                year: "©2025",
+                platform: "dailymotion"
+            },
+            {
+                id: "x9pafqc",
+                title: "Peter Pan",
+                description: "Découvrez l'inoubliable classique Peter Pan",
+                duration: "1:11:45",
+                year: "©2025",
+                platform: "dailymotion"
+            },
+            {
+                id: "x373fy2",
+                title: "La Fée Clochette Et Le Secret Des Fées",
+                description: "La Fée Clochette Et Le Secret Des Fées",
+                duration: "1:06:31",
+                year: "©2025",
+                platform: "dailymotion"
+            }
+        ];
+
+        // Initialisation lorsque la page est chargée
+        document.addEventListener('DOMContentLoaded', function() {
+            // Créer les effets visuels
+            createMagicDust();
+            createFairyDust();
+            createTwinklingStars();
+            createDecorativeDots();
+            
+            // Charger les vidéos
+            loadVideos();
+            
+            // Configurer les interactions
+            setupInteractions();
+            
+            // Configurer la modal vidéo
+            setupVideoModal();
+            
+            // Précharger les images pour une meilleure fluidité
+            preloadImages();
+        });
+
+        // Créer la poussière magique en arrière-plan
+        function createMagicDust() {
+            const container = document.getElementById('magicDust');
+            const particleCount = 150;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('dust-particle');
+                
+                const size = Math.random() * 5 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                particle.style.animationDelay = `${Math.random() * 15}s`;
+                particle.style.animationDuration = `${10 + Math.random() * 20}s`;
+                
+                container.appendChild(particle);
+            }
+        }
+
+        // Créer la poussière de fée spéciale
+        function createFairyDust() {
+            const container = document.getElementById('fairyDust');
+            const particleCount = 80;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('fairy-particle');
+                
+                const size = Math.random() * 8 + 3;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                const hue = 50 + Math.random() * 10;
+                particle.style.backgroundColor = `hsl(${hue}, 100%, 60%)`;
+                particle.style.boxShadow = `0 0 15px 3px hsl(${hue}, 100%, 60%)`;
+                
+                particle.style.animationDelay = `${Math.random() * 12}s`;
+                particle.style.animationDuration = `${8 + Math.random() * 16}s`;
+                
+                container.appendChild(particle);
+            }
+        }
+
+        // Créer les étoiles scintillantes
+        function createTwinklingStars() {
+            const container = document.getElementById('twinklingStars');
+            const starCount = 100;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                const size = Math.random() * 3 + 1;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                
+                star.style.animationDelay = `${Math.random() * 3}s`;
+                star.style.animationDuration = `${1 + Math.random() * 4}s`;
+                
+                container.appendChild(star);
+            }
+        }
+
+        // Créer les points colorés décoratifs
+        function createDecorativeDots() {
+            const container = document.getElementById('decorativeDots');
+            const dotCount = 80;
+            const colors = ['#3498db', '#2ecc71', '#f39c12', '#e74c3c', '#9b59b6', '#1abc9c'];
+            
+            for (let i = 0; i < dotCount; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                dot.style.backgroundColor = color;
+                dot.style.boxShadow = `0 0 10px ${color}`;
+                
+                const size = Math.random() * 10 + 3;
+                dot.style.width = `${size}px`;
+                dot.style.height = `${size}px`;
+                dot.style.left = `${Math.random() * 100}%`;
+                dot.style.top = `${Math.random() * 100}%`;
+                
+                dot.style.animationDelay = `${Math.random() * 20}s`;
+                dot.style.animationDuration = `${15 + Math.random() * 25}s`;
+                
+                container.appendChild(dot);
+            }
+        }
+
+        // Précharger les images pour une meilleure fluidité
+        function preloadImages() {
+            const imageUrls = [
+                'https://images.unsplash.com/photo-1635805737707-575885ab0820?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80',
+                'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
+            ];
+            
+            imageUrls.forEach(url => {
+                const img = new Image();
+                img.src = url;
+            });
+        }
+
+        // Obtenir l'URL de la miniature en fonction de la plateforme
+        function getThumbnailUrl(video) {
+            if (video.platform === 'dailymotion') {
+                return `https://www.dailymotion.com/thumbnail/video/${video.id}`;
+            } else {
+                return `https://img.youtube.com/vi/${video.id}/hqdefault.jpg`;
+            }
+        }
+
+        // Charger les vidéos
+        function loadVideos() {
+            const container = document.getElementById('videosContainer');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            fairyTaleVideos.forEach((video, index) => {
+                const videoItem = document.createElement('div');
+                videoItem.className = 'video-item';
+                videoItem.setAttribute('data-video-id', video.id);
+                videoItem.setAttribute('data-video-title', video.title);
+                videoItem.setAttribute('data-video-description', video.description);
+                videoItem.setAttribute('data-platform', video.platform || 'youtube');
+                videoItem.style.animationDelay = `${index * 0.1}s`;
+                
+                const thumbnailUrl = getThumbnailUrl(video);
+                
+                videoItem.innerHTML = `
+                    <div class="video-thumbnail">
+                        <img src="${thumbnailUrl}" alt="${video.title}" loading="lazy">
+                    </div>
+                    <div class="video-info">
+                        <h3>${video.title}</h3>
+                        <p>${video.description}</p>
+                        <div class="video-meta">
+                            <span><i class="far fa-clock"></i> ${video.duration}</span>
+                            <span><i class="far fa-calendar"></i> ${video.year}</span>
+                            <span><i class="fas fa-video"></i> ${video.platform === 'dailymotion' ? 'Dailymotion' : 'YouTube'}</span>
+                        </div>
+                    </div>
+                `;
+                
+                videoItem.addEventListener('click', function() {
+                    openVideoModal(video.id, video.title, video.description, video.platform || 'youtube');
+                });
+                
+                container.appendChild(videoItem);
+            });
+        }
+
+        // Configurer les interactions
+        function setupInteractions() {
+            // Gérer le bouton "Regarder la bande-annonce"
+            const watchTrailerBtn = document.getElementById('watchTrailerBtn');
+            if (watchTrailerBtn) {
+                watchTrailerBtn.addEventListener('click', function() {
+                    openVideoModal(fairyTaleVideos[0].id, fairyTaleVideos[0].title, fairyTaleVideos[0].description, fairyTaleVideos[0].platform || 'youtube');
+                });
+            }
+            
+            // Gérer le menu déroulant des catégories
+            const categoriesDropdownToggle = document.getElementById('categoriesDropdownToggle');
+            const categoriesDropdown = document.getElementById('categoriesDropdown');
+            
+            if (categoriesDropdownToggle) {
+                categoriesDropdownToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    categoriesDropdown.classList.toggle('active');
+                });
+                
+                document.addEventListener('click', function(e) {
+                    if (!categoriesDropdownToggle.contains(e.target) && !categoriesDropdown.contains(e.target)) {
+                        categoriesDropdown.classList.remove('active');
+                    }
+                });
+            }
+        }
+
+        // Configurer la modal vidéo
+        function setupVideoModal() {
+            const videoModal = document.getElementById('videoModal');
+            const closeVideoModal = document.getElementById('closeVideoModal');
+            
+            if (closeVideoModal) {
+                closeVideoModal.addEventListener('click', function() {
+                    closeVideoModalFunc();
+                });
+            }
+            
+            if (videoModal) {
+                videoModal.addEventListener('click', function(e) {
+                    if (e.target === videoModal) {
+                        closeVideoModalFunc();
+                    }
+                });
+            }
+            
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && videoModal.classList.contains('active')) {
+                    closeVideoModalFunc();
+                }
+            });
+        }
+
+        // Ouvrir la modal vidéo
+        function openVideoModal(videoId, title, description, platform = 'youtube') {
+            const videoModal = document.getElementById('videoModal');
+            const videoPlayerContainer = document.getElementById('videoPlayerContainer');
+            const videoModalTitle = document.getElementById('videoModalTitle');
+            const videoModalDescription = document.getElementById('videoModalDescription');
+            
+            if (!videoModal || !videoPlayerContainer) return;
+            
+            videoModalTitle.textContent = title;
+            videoModalDescription.textContent = description;
+            
+            videoPlayerContainer.innerHTML = '';
+            
+            let embedUrl;
+            if (platform === 'dailymotion') {
+                embedUrl = `https://www.dailymotion.com/embed/video/${videoId}?autoplay=1&controls=1&ui-info=0`;
+            } else {
+                embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&controls=1&showinfo=0`;
+            }
+            
+            const iframe = document.createElement('iframe');
+            iframe.src = embedUrl;
+            iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+            iframe.setAttribute('allowfullscreen', 'true');
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            iframe.style.position = 'absolute';
+            iframe.style.top = '0';
+            iframe.style.left = '0';
+            iframe.style.border = 'none';
+            
+            videoPlayerContainer.appendChild(iframe);
+            
+            videoModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Fermer la modal vidéo
+        function closeVideoModalFunc() {
+            const videoModal = document.getElementById('videoModal');
+            const videoPlayerContainer = document.getElementById('videoPlayerContainer');
+            
+            if (!videoModal || !videoPlayerContainer) return;
+            
+            videoModal.classList.remove('active');
+            document.body.style.overflow = '';
+            videoPlayerContainer.innerHTML = '';
+        }
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/12.13.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.13.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.13.0/firebase-analytics-compat.js"></script>
+    <script src="./firebase-auth.js"></script>
+</body>
+</html>
