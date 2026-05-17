@@ -667,5 +667,581 @@
             }
         }
     </script>
+    <script src="responsive.js"></script>
+<!-- ou directement -->
+<script>
+    // le script complet ici
+    /**
+ * UNIVERSAL TOON - SCRIPT D'ADAPTATION RESPONSIVE
+ * Support complet : Mobile, Tablette, PC, Smart TV
+ * Version: 1.0
+ */
+
+(function() {
+    'use strict';
+
+    // ============================================
+    // 1. DÉTECTION DE L'APPAREIL
+    // ============================================
+    
+    const deviceInfo = {
+        isMobile: false,
+        isTablet: false,
+        isDesktop: false,
+        isTV: false,
+        isTouch: false,
+        screenWidth: window.innerWidth,
+        screenHeight: window.innerHeight,
+        pixelRatio: window.devicePixelRatio || 1,
+        userAgent: navigator.userAgent.toLowerCase(),
+        orientation: window.innerWidth > window.innerHeight ? 'landscape' : 'portrait'
+    };
+
+    // Détection du type d'appareil
+    function detectDevice() {
+        const ua = deviceInfo.userAgent;
+        
+        // Détection TV (Smart TV, Apple TV, Chromecast, etc.)
+        if (ua.includes('tv') || ua.includes('smart-tv') || ua.includes('googletv') || 
+            ua.includes('appletv') || ua.includes('hbbtv') || ua.includes('viera') ||
+            ua.includes('tizen') || ua.includes('webos') || ua.includes('kdl')) {
+            deviceInfo.isTV = true;
+            deviceInfo.isDesktop = false;
+            deviceInfo.isTablet = false;
+            deviceInfo.isMobile = false;
+        }
+        // Détection tablette
+        else if ((ua.includes('ipad') || (ua.includes('android') && !ua.includes('mobile')) || 
+                  (ua.includes('tablet') || (screen.width >= 768 && screen.width <= 1366 && deviceInfo.isTouch)))) {
+            deviceInfo.isTablet = true;
+            deviceInfo.isMobile = false;
+            deviceInfo.isDesktop = false;
+        }
+        // Détection mobile
+        else if (ua.includes('mobile') || ua.includes('iphone') || ua.includes('ipod') || 
+                 (screen.width < 768 && deviceInfo.isTouch)) {
+            deviceInfo.isMobile = true;
+            deviceInfo.isTablet = false;
+            deviceInfo.isDesktop = false;
+        }
+        // Sinon desktop
+        else {
+            deviceInfo.isDesktop = true;
+        }
+        
+        // Détection tactile
+        deviceInfo.isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        
+        // Mise à jour de la largeur
+        deviceInfo.screenWidth = window.innerWidth;
+        deviceInfo.screenHeight = window.innerHeight;
+        deviceInfo.orientation = window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
+        
+        console.log('[Device]', {
+            type: deviceInfo.isTV ? 'TV' : (deviceInfo.isTablet ? 'Tablette' : (deviceInfo.isMobile ? 'Mobile' : 'Desktop')),
+            width: deviceInfo.screenWidth,
+            orientation: deviceInfo.orientation,
+            touch: deviceInfo.isTouch
+        });
+        
+        return deviceInfo;
+    }
+
+    // ============================================
+    // 2. REDIMENSIONNEMENT DYNAMIQUE
+    // ============================================
+    
+    function applyResponsiveStyles() {
+        const width = deviceInfo.screenWidth;
+        const isLandscape = deviceInfo.orientation === 'landscape';
+        
+        // Styles dynamiques à appliquer
+        let rootStyles = '';
+        
+        // Ajustements par type d'appareil
+        if (deviceInfo.isMobile) {
+            // Mobile
+            if (isLandscape) {
+                // Mobile paysage
+                rootStyles = `
+                    --header-height: 70px;
+                    --nav-padding: 8px 12px;
+                    --hero-title-size: 32px;
+                    --hero-text-size: 16px;
+                    --card-min-width: 280px;
+                    --grid-gap: 20px;
+                    --section-padding: 30px 5%;
+                `;
+            } else {
+                // Mobile portrait
+                rootStyles = `
+                    --header-height: 60px;
+                    --nav-padding: 6px 10px;
+                    --hero-title-size: 28px;
+                    --hero-text-size: 14px;
+                    --card-min-width: 100%;
+                    --grid-gap: 15px;
+                    --section-padding: 20px 4%;
+                `;
+            }
+        } 
+        else if (deviceInfo.isTablet) {
+            // Tablette
+            if (isLandscape) {
+                rootStyles = `
+                    --header-height: 80px;
+                    --nav-padding: 10px 15px;
+                    --hero-title-size: 48px;
+                    --hero-text-size: 20px;
+                    --card-min-width: 320px;
+                    --grid-gap: 25px;
+                    --section-padding: 40px 5%;
+                `;
+            } else {
+                rootStyles = `
+                    --header-height: 75px;
+                    --nav-padding: 10px 12px;
+                    --hero-title-size: 42px;
+                    --hero-text-size: 18px;
+                    --card-min-width: 300px;
+                    --grid-gap: 20px;
+                    --section-padding: 35px 4%;
+                `;
+            }
+        }
+        else if (deviceInfo.isTV) {
+            // TV - grands écrans, polices plus grandes, espacements plus larges
+            rootStyles = `
+                --header-height: 100px;
+                --nav-padding: 15px 25px;
+                --hero-title-size: 96px;
+                --hero-text-size: 32px;
+                --card-min-width: 450px;
+                --grid-gap: 45px;
+                --section-padding: 80px 8%;
+                --tv-focus-scale: 1.1;
+                --tv-margin: 20px;
+            `;
+            // Ajouter une classe spécifique pour la TV
+            document.body.classList.add('tv-device');
+        }
+        else {
+            // Desktop
+            if (width > 1600) {
+                // Grand écran
+                rootStyles = `
+                    --header-height: 90px;
+                    --nav-padding: 12px 18px;
+                    --hero-title-size: 72px;
+                    --hero-text-size: 24px;
+                    --card-min-width: 380px;
+                    --grid-gap: 35px;
+                    --section-padding: 60px 5%;
+                `;
+            } else {
+                // Écran standard
+                rootStyles = `
+                    --header-height: 90px;
+                    --nav-padding: 12px 15px;
+                    --hero-title-size: 64px;
+                    --hero-text-size: 22px;
+                    --card-min-width: 350px;
+                    --grid-gap: 30px;
+                    --section-padding: 50px 5%;
+                `;
+            }
+        }
+        
+        // Application des variables CSS
+        const root = document.documentElement;
+        Object.assign(root.style, rootStyles.split(';').reduce((acc, rule) => {
+            const [prop, val] = rule.split(':');
+            if (prop && val) acc[prop.trim()] = val.trim();
+            return acc;
+        }, {}));
+        
+        // Ajustement spécifique pour la navigation
+        adjustNavigation();
+        
+        // Ajustement des catégories
+        adjustCategoriesGrid();
+        
+        // Ajustement des polices
+        adjustFontSizes();
+    }
+    
+    function adjustNavigation() {
+        const navMenu = document.querySelector('.nav-menu');
+        const headerContainer = document.querySelector('.header-container');
+        
+        if (!navMenu) return;
+        
+        if (deviceInfo.isMobile && deviceInfo.orientation === 'portrait') {
+            // Mode hamburger pour mobile portrait
+            if (!document.querySelector('.mobile-menu-toggle')) {
+                createMobileMenuToggle();
+            }
+            navMenu.style.flexDirection = 'column';
+            navMenu.style.width = '100%';
+            if (headerContainer) headerContainer.style.flexDirection = 'column';
+        } else {
+            // Mode normal
+            const toggle = document.querySelector('.mobile-menu-toggle');
+            if (toggle) toggle.remove();
+            navMenu.style.flexDirection = 'row';
+            navMenu.style.width = 'auto';
+            if (headerContainer) headerContainer.style.flexDirection = 'row';
+        }
+        
+        // Pour la TV, agrandir les liens de navigation
+        if (deviceInfo.isTV) {
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.style.padding = '20px 40px';
+                link.style.fontSize = '24px';
+            });
+        }
+    }
+    
+    function createMobileMenuToggle() {
+        const header = document.querySelector('.header-container');
+        if (!header) return;
+        
+        const toggle = document.createElement('button');
+        toggle.className = 'mobile-menu-toggle';
+        toggle.innerHTML = '<i class="fas fa-bars"></i>';
+        toggle.style.cssText = `
+            background: linear-gradient(45deg, #7b1fa2, #e91e63);
+            border: none;
+            border-radius: 10px;
+            padding: 12px 20px;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            margin-top: 10px;
+        `;
+        
+        const navMenu = document.querySelector('.nav-menu');
+        let isOpen = false;
+        
+        toggle.onclick = () => {
+            isOpen = !isOpen;
+            navMenu.style.display = isOpen ? 'flex' : 'none';
+            toggle.innerHTML = isOpen ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        };
+        
+        header.appendChild(toggle);
+    }
+    
+    function adjustCategoriesGrid() {
+        const grid = document.querySelector('.categories-grid');
+        if (!grid) return;
+        
+        if (deviceInfo.isMobile && deviceInfo.orientation === 'portrait') {
+            grid.style.gridTemplateColumns = '1fr';
+        } else if (deviceInfo.isMobile && deviceInfo.orientation === 'landscape') {
+            grid.style.gridTemplateColumns = 'repeat(2, 1fr)';
+        } else if (deviceInfo.isTablet) {
+            grid.style.gridTemplateColumns = deviceInfo.orientation === 'landscape' ? 'repeat(3, 1fr)' : 'repeat(2, 1fr)';
+        } else if (deviceInfo.isTV) {
+            grid.style.gridTemplateColumns = 'repeat(4, 1fr)';
+            grid.style.gap = '45px';
+        } else {
+            // Desktop - responsive via CSS
+            grid.style.gridTemplateColumns = '';
+        }
+    }
+    
+    function adjustFontSizes() {
+        const root = document.documentElement;
+        
+        if (deviceInfo.isTV) {
+            root.style.fontSize = '20px';
+        } else if (deviceInfo.isTablet) {
+            root.style.fontSize = '16px';
+        } else if (deviceInfo.isMobile) {
+            root.style.fontSize = deviceInfo.orientation === 'landscape' ? '14px' : '13px';
+        } else {
+            root.style.fontSize = '16px';
+        }
+    }
+    
+    // ============================================
+    // 3. OPTIMISATION POUR SMART TV
+    // ============================================
+    
+    function setupTVOptimizations() {
+        if (!deviceInfo.isTV) return;
+        
+        // Navigation au clavier TV (télécommande)
+        const focusableElements = 'a, button, .category-card, .video-item, .nav-link, .dropdown-item';
+        const elements = document.querySelectorAll(focusableElements);
+        
+        elements.forEach(el => {
+            el.setAttribute('tabindex', '0');
+            el.style.transition = 'all 0.2s ease';
+            
+            el.addEventListener('focus', () => {
+                el.style.transform = 'scale(1.05)';
+                el.style.outline = '3px solid #ffc107';
+                el.style.outlineOffset = '4px';
+                el.style.zIndex = '100';
+            });
+            
+            el.addEventListener('blur', () => {
+                el.style.transform = '';
+                el.style.outline = '';
+                el.style.zIndex = '';
+            });
+        });
+        
+        // Désactiver les animations trop lourdes pour la TV
+        document.body.classList.add('tv-optimized');
+        
+        // Ajouter un style pour la TV
+        const tvStyle = document.createElement('style');
+        tvStyle.textContent = `
+            .tv-device .video-item:hover {
+                transform: scale(1.02);
+            }
+            .tv-device .category-card:hover {
+                transform: scale(1.02);
+            }
+            .tv-device *:focus {
+                outline: 3px solid #ffc107 !important;
+                outline-offset: 5px !important;
+            }
+        `;
+        document.head.appendChild(tvStyle);
+    }
+    
+    // ============================================
+    // 4. OPTIMISATION DES IMAGES
+    // ============================================
+    
+    function optimizeImages() {
+        const images = document.querySelectorAll('img');
+        const isLowBandwidth = navigator.connection && navigator.connection.saveData;
+        
+        images.forEach(img => {
+            // Lazy loading
+            if (!img.hasAttribute('loading')) {
+                img.setAttribute('loading', 'lazy');
+            }
+            
+            // Réduction de qualité sur mobile si bande passante faible
+            if (isLowBandwidth && deviceInfo.isMobile) {
+                const originalSrc = img.src;
+                if (originalSrc && !originalSrc.includes('lowres')) {
+                    // Tentative d'utiliser une version de qualité inférieure
+                    img.src = originalSrc.replace(/(w=\d+)/, 'w=400');
+                }
+            }
+        });
+    }
+    
+    // ============================================
+    // 5. GESTION DE L'ORIENTATION
+    // ============================================
+    
+    function handleOrientationChange() {
+        deviceInfo.orientation = window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
+        deviceInfo.screenWidth = window.innerWidth;
+        deviceInfo.screenHeight = window.innerHeight;
+        
+        console.log('[Orientation]', deviceInfo.orientation, deviceInfo.screenWidth);
+        
+        // Re-appliquer les styles
+        applyResponsiveStyles();
+        
+        // Notification aux composants
+        const event = new CustomEvent('orientationChange', { detail: deviceInfo });
+        window.dispatchEvent(event);
+    }
+    
+    // ============================================
+    // 6. OPTIMISATION DU SCROLL (Mobile/Tablette)
+    // ============================================
+    
+    function optimizeScroll() {
+        if (deviceInfo.isMobile || deviceInfo.isTablet) {
+            // Smooth scroll natif optimisé
+            document.documentElement.style.scrollBehavior = 'smooth';
+            
+            // Détection du scroll pour charger plus de contenu (infinite scroll)
+            let scrollTimeout;
+            window.addEventListener('scroll', () => {
+                if (scrollTimeout) clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    const scrollPosition = window.scrollY + window.innerHeight;
+                    const documentHeight = document.documentElement.scrollHeight;
+                    
+                    if (scrollPosition >= documentHeight - 500) {
+                        // Précharger le contenu suivant
+                        const event = new CustomEvent('nearBottom');
+                        window.dispatchEvent(event);
+                    }
+                }, 150);
+            });
+        }
+    }
+    
+    // ============================================
+    // 7. GESTION DU RÉSEAU (Bande passante)
+    // ============================================
+    
+    function setupNetworkOptimization() {
+        if ('connection' in navigator) {
+            const connection = navigator.connection;
+            
+            const updateNetworkStatus = () => {
+                const isSlow = connection.saveData || 
+                              connection.effectiveType === 'slow-2g' || 
+                              connection.effectiveType === '2g';
+                
+                if (isSlow) {
+                    document.body.classList.add('low-bandwidth');
+                    // Désactiver les animations lourdes
+                    document.body.style.animation = 'none';
+                } else {
+                    document.body.classList.remove('low-bandwidth');
+                    document.body.style.animation = '';
+                }
+                
+                console.log('[Network]', connection.effectiveType, connection.saveData ? 'Save Data ON' : '');
+            };
+            
+            connection.addEventListener('change', updateNetworkStatus);
+            updateNetworkStatus();
+        }
+    }
+    
+    // ============================================
+    // 8. MÉMOIRE DE LA DERNIÈRE POSITION
+    // ============================================
+    
+    function saveScrollPosition() {
+        if (!deviceInfo.isMobile) return;
+        
+        const scrollKey = 'universal_toon_scroll_' + window.location.pathname;
+        
+        // Sauvegarder la position avant de quitter
+        window.addEventListener('beforeunload', () => {
+            sessionStorage.setItem(scrollKey, window.scrollY);
+        });
+        
+        // Restaurer la position
+        const savedPosition = sessionStorage.getItem(scrollKey);
+        if (savedPosition && parseInt(savedPosition) > 100) {
+            setTimeout(() => {
+                window.scrollTo(0, parseInt(savedPosition));
+            }, 100);
+        }
+    }
+    
+    // ============================================
+    // 9. DÉTECTION DES GESTES (Mobile)
+    // ============================================
+    
+    function setupGestures() {
+        if (!deviceInfo.isTouch) return;
+        
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchEndX = 0;
+        let touchEndY = 0;
+        
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+        });
+        
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            const deltaX = touchEndX - touchStartX;
+            const deltaY = touchEndY - touchStartY;
+            
+            if (Math.abs(deltaX) > 50 && Math.abs(deltaY) < 50) {
+                if (deltaX > 0) {
+                    // Swipe droite - navigation arrière
+                    const event = new CustomEvent('swipeRight');
+                    window.dispatchEvent(event);
+                } else {
+                    // Swipe gauche
+                    const event = new CustomEvent('swipeLeft');
+                    window.dispatchEvent(event);
+                }
+            }
+        }
+    }
+    
+    // ============================================
+    // 10. INITIALISATION
+    // ============================================
+    
+    function init() {
+        detectDevice();
+        applyResponsiveStyles();
+        setupTVOptimizations();
+        optimizeImages();
+        optimizeScroll();
+        setupNetworkOptimization();
+        saveScrollPosition();
+        setupGestures();
+        
+        // Écouteurs d'événements
+        window.addEventListener('resize', () => {
+            clearTimeout(window.resizedTimer);
+            window.resizedTimer = setTimeout(() => {
+                detectDevice();
+                applyResponsiveStyles();
+            }, 150);
+        });
+        
+        window.addEventListener('orientationchange', () => {
+            setTimeout(() => {
+                detectDevice();
+                handleOrientationChange();
+            }, 100);
+        });
+        
+        // Observer les changements DOM pour optimiser les nouveaux éléments
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach(() => {
+                optimizeImages();
+                if (deviceInfo.isTV) setupTVOptimizations();
+            });
+        });
+        
+        observer.observe(document.body, { childList: true, subtree: true });
+        
+        console.log('[Responsive] Initialisé - Mode:', 
+            deviceInfo.isTV ? 'TV' : 
+            (deviceInfo.isTablet ? 'Tablette' : 
+            (deviceInfo.isMobile ? 'Mobile' : 'Desktop')));
+    }
+    
+    // Démarrer après chargement du DOM
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+    
+    // Export pour utilisation externe
+    window.UniversalToonResponsive = {
+        deviceInfo: deviceInfo,s
+        refresh: () => { detectDevice(); applyResponsiveStyles(); }
+    };
+    
+})();
+
+
+</script>
 </body>
 </html>
