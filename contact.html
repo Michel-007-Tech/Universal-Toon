@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Universal Toon</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Quicksand:wght@400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    
+    <style>
+        :root {
+            --disney-blue: #0d47a1;
+            --disney-magenta: #e91e63;
+            --disney-gold: #ffc107;
+            --disney-purple: #7b1fa2;
+            --disney-teal: #0097a7;
+            --disney-red: #d32f2f;
+            --disney-light: #f5f5f5;
+            --disney-dark: #121212;
+            --header-font: 'Poppins', sans-serif;
+            --body-font: 'Quicksand', sans-serif;
+            --magic-font: 'Dancing Script', cursive;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: var(--body-font);
+            background: linear-gradient(135deg, #1a0b2e 0%, #2d1b69 50%, #4a2b8c 100%);
+            color: var(--disney-light);
+            line-height: 1.7;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        header {
+            background: rgba(13, 13, 46, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 193, 7, 0.2);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            height: 90px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+        
+        .magic-hat {
+            font-size: 42px;
+            color: var(--disney-gold);
+            animation: hatFloat 6s infinite ease-in-out;
+        }
+        
+        @keyframes hatFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .site-title {
+            font-family: var(--magic-font);
+            font-size: 38px;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--disney-gold), var(--disney-magenta), var(--disney-teal));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .nav-container {
+            background: linear-gradient(90deg, var(--disney-purple), var(--disney-blue));
+            padding: 0 5%;
+        }
+        
+        .nav-menu {
+            display: flex;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 18px 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: block;
+            font-family: var(--header-font);
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(13, 13, 46, 0.95);
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            min-width: 250px;
+            display: none;
+            z-index: 1001;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 193, 7, 0.2);
+            border-top: none;
+        }
+        
+        .dropdown-menu.active { display: block; }
+        .dropdown-item {
+            padding: 15px 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+            color: white;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-item:hover {
+            background: rgba(233, 30, 99, 0.2);
+            padding-left: 35px;
+        }
+        
+        .contact-container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+        
+        .contact-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .contact-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .contact-header h1 {
+            font-family: var(--magic-font);
+            font-size: 56px;
+            color: var(--disney-gold);
+            margin-bottom: 20px;
+        }
+        
+        .contact-header p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 18px;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .contact-info {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+        }
+        
+        .info-title {
+            font-size: 28px;
+            color: var(--disney-gold);
+            margin-bottom: 30px;
+            font-family: var(--header-font);
+            text-align: center;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            transition: 0.3s;
+        }
+        
+        .info-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--disney-purple), var(--disney-magenta));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: white;
+        }
+        
+        .info-content h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .info-content p, .info-content a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+        }
+        
+        .info-content a:hover {
+            color: var(--disney-gold);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .social-link {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: white;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+        
+        .social-link:hover {
+            background: var(--disney-magenta);
+            transform: translateY(-5px);
+        }
+        
+        .contact-form {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+        }
+        
+        .form-title {
+            font-size: 28px;
+            color: var(--disney-gold);
+            margin-bottom: 30px;
+            font-family: var(--header-font);
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            font-size: 16px;
+            color: white;
+            font-family: var(--body-font);
+            transition: 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--disney-gold);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .form-group select option {
+            background: #2d1b69;
+        }
+        
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(45deg, var(--disney-purple), var(--disney-magenta));
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: var(--header-font);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn-submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* Loader animation */
+        .loader {
+            width: 20px;
+            height: 20px;
+            border: 2px solid white;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 0.6s linear infinite;
+            display: inline-block;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .faq-section {
+            margin-top: 50px;
+        }
+        
+        .faq-title {
+            font-size: 32px;
+            color: var(--disney-gold);
+            text-align: center;
+            margin-bottom: 40px;
+            font-family: var(--header-font);
+        }
+        
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+        
+        .faq-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .faq-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .faq-question i {
+            color: var(--disney-gold);
+            transition: 0.3s;
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 10px;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .map-container {
+            margin-top: 50px;
+            border-radius: 20px;
+            overflow: hidden;
+            height: 300px;
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .notification {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--disney-purple), var(--disney-magenta));
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            z-index: 9999;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        footer {
+            background: rgba(13, 13, 46, 0.95);
+            color: white;
+            padding: 70px 5% 40px;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255, 193, 7, 0.2);
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--disney-purple), var(--disney-magenta), var(--disney-gold));
+        }
+        
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-section h3 {
+            font-size: 24px;
+            margin-bottom: 25px;
+            color: var(--disney-gold);
+            font-family: var(--header-font);
+        }
+        
+        .footer-section p, .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            display: block;
+            padding: 8px 0;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+            padding-left: 15px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .footer-bottom p::before, .footer-bottom p::after {
+            content: '✦';
+            color: var(--disney-gold);
+            margin: 0 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .contact-card { padding: 30px 20px; }
+            .contact-header h1 { font-size: 40px; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .nav-menu { flex-wrap: wrap; justify-content: center; }
+            .nav-link { padding: 12px 20px; font-size: 14px; }
+            .header-container { flex-direction: column; height: auto; padding: 15px; }
+            .faq-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo-container">
+                <div class="magic-hat">🎩</div>
+                <h1 class="site-title">Universal Toon</h1>
+            </a>
+        </div>
+        <div class="nav-container">
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link">Accueil</a>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" id="categoriesDropdownToggle">Catégories <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-menu" id="categoriesDropdown">
+                        <a href="conte-fee.html" class="dropdown-item">Conte de fée</a>
+                        <a href="aventure.html" class="dropdown-item">Aventure&Action</a>
+                        <a href="univers.html" class="dropdown-item">Univers</a>
+                        <a href="enfants.html" class="dropdown-item">Education</a>
+                    </div>
+                </div>
+                <a href="privacy.html" class="nav-link">Confidentialité</a>
+                <a href="terms.html" class="nav-link">Conditions</a>
+                <a href="contact.html" class="nav-link active">Contact</a>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="contact-container">
+        <div class="contact-card">
+            <div class="contact-header">
+                <h1>📞 Contactez-nous</h1>
+                <p>Une question, une suggestion ? Notre équipe est là pour vous répondre !</p>
+            </div>
+            
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h2 class="info-title"><i class="fas fa-address-card"></i> Nos coordonnées</h2>
+                    
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="info-content">
+                            <h4>Adresse</h4>
+                            <p>Universal Toon<br>Mbour, Sénégal</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
+                        <div class="info-content">
+                            <h4>Téléphone</h4>
+                            <p><a href="tel:+221762442530">+221 76 244 25 30</a><br><a href="tel:+221755222968">+221 75 522 29 68</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="info-content">
+                            <h4>Email</h4>
+                            <p><a href="mailto:contact@universaltoon.com">contact@universaltoon.com</a><br><a href="mailto:support@universaltoon.com">support@universaltoon.com</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fas fa-clock"></i></div>
+                        <div class="info-content">
+                            <h4>Horaires d'ouverture</h4>
+                            <p>Lundi - Vendredi : 9h - 18h<br>Samedi : 10h - 14h<br>Dimanche : Fermé</p>
+                        </div>
+                    </div>
+                    
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h2 class="form-title"><i class="fas fa-paper-plane"></i> Envoyez-nous un message</h2>
+                    
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nom complet *</label>
+                            <input type="text" id="name" name="name" required placeholder="Votre nom">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required placeholder="votre@email.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Sujet *</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">-- Sélectionnez un sujet --</option>
+                                <option value="Question générale">Question générale</option>
+                                <option value="Support technique">Support technique</option>
+                                <option value="Signalement de bug">Signalement de bug</option>
+                                <option value="Suggestion">Suggestion</option>
+                                <option value="Partenariat">Partenariat</option>
+                                <option value="Autre">Autre</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="Décrivez votre demande..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-submit" id="submitBtn">
+                            <i class="fas fa-paper-plane"></i> Envoyer le message
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="faq-section">
+                <h2 class="faq-title"><i class="fas fa-question-circle"></i> Foire aux questions</h2>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Comment créer un compte ?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            Cliquez sur le bouton "Connexion" en haut à droite, puis sur "Inscription". Remplissez le formulaire avec votre email, un mot de passe et votre pseudo.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Les dessins animés sont-ils gratuits ?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            Oui, Universal Toon propose une large sélection de dessins animés gratuits. Un abonnement premium sera disponible prochainement pour un accès illimité.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Comment signaler un contenu inapproprié ?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            Utilisez notre formulaire de contact en sélectionnant "Signalement de contenu" comme sujet, ou envoyez-nous un email directement à moderation@universaltoon.com.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Puis-je proposer un partenariat ?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            Bien sûr ! Contactez-nous via le formulaire en sélectionnant "Partenariat" ou envoyez un email à partenariat@universaltoon.com.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d123950.39368560792!2d-17.014570905731747!3d14.383305895293923!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xec105fbaa946c6d%3A0x5132717c6fc32230!2sMbour%2C%20S%C3%A9n%C3%A9gal!5e0!3m2!1sfr!2sfr!4v1700000000000!5m2!1sfr!2sfr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Universal Toon</h3>
+                <p>Plateforme de dessins animés pour toute la famille.</p>
+                <p style="margin-top: 10px;">Propulsé par <strong>SDM</strong> & <strong>DMTech</strong></p>
+            </div>
+            <div class="footer-section">
+                <h3>Liens utiles</h3>
+                <a href="index.html">Accueil</a>
+                <a href="about.html">Concepteurs</a>
+                <a href="privacy.html">Confidentialité</a>
+                <a href="terms.html">Conditions d'utilisation</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h3>Suivez-nous</h3>
+                <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+                <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+                <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: contact@universaltoon.com</p>
+                <p>Tél: +221 76 244 25 30</p>
+                <p>Sénégal - Mbour</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Universal Toon - Tous droits réservés | Créé avec ❤️ par SDM & DMTech</p>
+        </div>
+    </footer>
+
+    <script>
+        // ============================================
+        // CONFIGURATION EMAILJS
+        // ============================================
+        // REMPLACEZ CES VALEURS PAR LES VOTRES (Inscription gratuite sur emailjs.com)
+        const EMAILJS_CONFIG = {
+            PUBLIC_KEY: "YOUR_PUBLIC_KEY",     // Remplacez par votre Public Key EmailJS
+            SERVICE_ID: "service_universaltoon", // Remplacez par votre Service ID
+            TEMPLATE_ID: "template_contact"     // Remplacez par votre Template ID
+        };
+        
+        // Initialisation d'EmailJS
+        emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+        
+        // Menu déroulant
+        const toggle = document.getElementById('categoriesDropdownToggle');
+        const dropdown = document.getElementById('categoriesDropdown');
+        if (toggle && dropdown) {
+            toggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                dropdown.classList.toggle('active');
+            });
+            document.addEventListener('click', (e) => {
+                if (!toggle.contains(e.target) && !dropdown.contains(e.target)) {
+                    dropdown.classList.remove('active');
+                }
+            });
+        }
+        
+        // FAQ accordéon
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            item.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+        
+        // Fonction d'affichage des notifications
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.innerHTML = message;
+            
+            if (type === 'error') {
+                notification.style.background = 'linear-gradient(135deg, #d32f2f, #c62828)';
+            } else if (type === 'success') {
+                notification.style.background = 'linear-gradient(135deg, #2e7d32, #1b5e20)';
+            } else if (type === 'info') {
+                notification.style.background = 'linear-gradient(135deg, #1565c0, #0d47a1)';
+            }
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+        }
+        
+        // Fonction pour vérifier si EmailJS est configuré
+        function isEmailJSConfigured() {
+            return EMAILJS_CONFIG.PUBLIC_KEY !== "YOUR_PUBLIC_KEY" && 
+                   EMAILJS_CONFIG.PUBLIC_KEY !== "";
+        }
+        
+        // Formulaire de contact avec EmailJS
+        const contactForm = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        
+        if (contactForm) {
+            contactForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const subject = document.getElementById('subject').value;
+                const message = document.getElementById('message').value.trim();
+                
+                // Validation des champs
+                if (!name || !email || !subject || !message) {
+                    showNotification('⚠️ Veuillez remplir tous les champs obligatoires', 'error');
+                    return;
+                }
+                
+                if (!email.includes('@') || !email.includes('.')) {
+                    showNotification('⚠️ Veuillez entrer une adresse email valide', 'error');
+                    return;
+                }
+                
+                // Désactiver le bouton et afficher le chargement
+                submitBtn.disabled = true;
+                const originalBtnHTML = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<span class="loader"></span> Envoi en cours...';
+                
+                try {
+                    // Vérifier si EmailJS est configuré
+                    if (!isEmailJSConfigured()) {
+                        // Mode démo : simulation d'envoi
+                        console.log('Mode démo : EmailJS non configuré');
+                        await simulateEmailSend(name, email, subject, message);
+                        showNotification('✅ [MODE DÉMO] Votre message a été envoyé avec succès ! (EmailJS non configuré)', 'success');
+                        contactForm.reset();
+                    } else {
+                        // Envoi réel via EmailJS
+                        const templateParams = {
+                            to_name: "Universal Toon Team",
+                            from_name: name,
+                            from_email: email,
+                            subject: subject,
+                            message: message,
+                            reply_to: email
+                        };
+                        
+                        const response = await emailjs.send(
+                            EMAILJS_CONFIG.SERVICE_ID,
+                            EMAILJS_CONFIG.TEMPLATE_ID,
+                            templateParams
+                        );
+                        
+                        console.log('EmailJS Response:', response);
+                        showNotification('✅ Votre message a été envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.', 'success');
+                        contactForm.reset();
+                    }
+                } catch (error) {
+                    console.error('Erreur EmailJS:', error);
+                    showNotification('❌ Une erreur est survenue lors de l\'envoi. Veuillez réessayer ou nous contacter directement par email.', 'error');
+                } finally {
+                    // Réactiver le bouton
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalBtnHTML;
+                }
+            });
+        }
+        
+        // Simulation d'envoi pour le mode démo (si EmailJS non configuré)
+        function simulateEmailSend(name, email, subject, message) {
+            return new Promise((resolve) => {
+                console.log('=== SIMULATION ENVOI EMAIL ===');
+                console.log('Nom:', name);
+                console.log('Email:', email);
+                console.log('Sujet:', subject);
+                console.log('Message:', message);
+                console.log('================================');
+                
+                // Sauvegarder dans localStorage pour consultation
+                const messages = JSON.parse(localStorage.getItem('contact_messages') || '[]');
+                messages.push({
+                    id: Date.now(),
+                    name: name,
+                    email: email,
+                    subject: subject,
+                    message: message,
+                    date: new Date().toLocaleString()
+                });
+                localStorage.setItem('contact_messages', JSON.stringify(messages));
+                
+                setTimeout(resolve, 1500);
+            });
+        }
+        
+        // Afficher un message d'information sur la configuration EmailJS
+        if (!isEmailJSConfigured()) {
+            setTimeout(() => {
+                showNotification('ℹ️ Mode démo actif. Pour activer l\'envoi réel, configurez EmailJS avec vos clés.', 'info');
+            }, 1000);
+        }
+        
+        // Fonction pour vérifier et afficher les messages sauvegardés (admin uniquement)
+        window.viewMessages = function() {
+            const messages = JSON.parse(localStorage.getItem('contact_messages') || '[]');
+            if (messages.length === 0) {
+                showNotification('📭 Aucun message enregistré', 'info');
+            } else {
+                console.table(messages);
+                showNotification(`📬 ${messages.length} message(s) enregistré(s) dans la console (F12)`, 'info');
+            }
+        };
+    </script>
+</body>
+</html>

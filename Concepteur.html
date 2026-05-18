@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concepteurs - Universal Toon</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Quicksand:wght@400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --disney-blue: #0d47a1;
+            --disney-magenta: #e91e63;
+            --disney-gold: #ffc107;
+            --disney-purple: #7b1fa2;
+            --disney-teal: #0097a7;
+            --disney-red: #d32f2f;
+            --disney-light: #f5f5f5;
+            --disney-dark: #121212;
+            --header-font: 'Poppins', sans-serif;
+            --body-font: 'Quicksand', sans-serif;
+            --magic-font: 'Dancing Script', cursive;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: var(--body-font);
+            background: linear-gradient(135deg, #1a0b2e 0%, #2d1b69 50%, #4a2b8c 100%);
+            color: var(--disney-light);
+            line-height: 1.7;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        /* Header */
+        header {
+            background: rgba(13, 13, 46, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 193, 7, 0.2);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            height: 90px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+        
+        .magic-hat {
+            font-size: 42px;
+            color: var(--disney-gold);
+            animation: hatFloat 6s infinite ease-in-out;
+        }
+        
+        @keyframes hatFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .site-title {
+            font-family: var(--magic-font);
+            font-size: 38px;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--disney-gold), var(--disney-magenta), var(--disney-teal));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .nav-container {
+            background: linear-gradient(90deg, var(--disney-purple), var(--disney-blue));
+            padding: 0 5%;
+        }
+        
+        .nav-menu {
+            display: flex;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 18px 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: block;
+            font-family: var(--header-font);
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(13, 13, 46, 0.95);
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            min-width: 250px;
+            display: none;
+            z-index: 1001;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 193, 7, 0.2);
+            border-top: none;
+        }
+        
+        .dropdown-menu.active { display: block; }
+        .dropdown-item {
+            padding: 15px 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+            color: white;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-item:hover {
+            background: rgba(233, 30, 99, 0.2);
+            padding-left: 35px;
+        }
+        
+        /* Page container */
+        .about-container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+        
+        .about-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .about-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .about-header h1 {
+            font-family: var(--magic-font);
+            font-size: 56px;
+            color: var(--disney-gold);
+            margin-bottom: 20px;
+        }
+        
+        .about-header p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 18px;
+        }
+        
+        /* Cartes des fondateurs */
+        .founders-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .founder-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 25px;
+            overflow: hidden;
+            transition: 0.4s;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .founder-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--disney-gold);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .founder-avatar {
+            position: relative;
+            padding: 40px 0 20px;
+        }
+        
+        .avatar-icon {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, var(--disney-purple), var(--disney-magenta));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            font-size: 70px;
+            color: white;
+            border: 4px solid var(--disney-gold);
+        }
+        
+        .founder-info {
+            padding: 0 30px 30px;
+        }
+        
+        .founder-name {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--disney-gold);
+            margin-bottom: 10px;
+            font-family: var(--header-font);
+        }
+        
+        .founder-title {
+            font-size: 18px;
+            color: var(--disney-teal);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .founder-description {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .founder-contact {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        
+        .contact-icon:hover {
+            background: var(--disney-magenta);
+            transform: scale(1.1);
+        }
+        
+        /* Section société */
+        .company-section {
+            margin: 50px 0;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            text-align: center;
+        }
+        
+        .company-section h2 {
+            font-size: 28px;
+            color: var(--disney-gold);
+            margin-bottom: 20px;
+            font-family: var(--header-font);
+        }
+        
+        .company-logos {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+        
+        .company-logo {
+            text-align: center;
+        }
+        
+        .logo-circle {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--disney-purple), var(--disney-magenta));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 40px;
+            color: white;
+        }
+        
+        .company-logo h3 {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        
+        .company-logo p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Timeline */
+        .timeline-section {
+            margin: 50px 0;
+        }
+        
+        .timeline-title {
+            text-align: center;
+            font-size: 28px;
+            color: var(--disney-gold);
+            margin-bottom: 40px;
+            font-family: var(--header-font);
+        }
+        
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--disney-gold), var(--disney-magenta));
+        }
+        
+        .timeline-item {
+            display: flex;
+            justify-content: flex-end;
+            position: relative;
+            margin-bottom: 40px;
+            width: 100%;
+        }
+        
+        .timeline-item:nth-child(even) {
+            justify-content: flex-start;
+        }
+        
+        .timeline-content {
+            width: 45%;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 15px;
+            position: relative;
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-right: 5%;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: 5%;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background: var(--disney-gold);
+            border-radius: 50%;
+            z-index: 2;
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-dot {
+            right: -10px;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-dot {
+            left: -10px;
+        }
+        
+        .timeline-year {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--disney-gold);
+            margin-bottom: 10px;
+        }
+        
+        .timeline-text {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        /* Valeurs */
+        .values-section {
+            margin: 50px 0;
+        }
+        
+        .values-title {
+            text-align: center;
+            font-size: 28px;
+            color: var(--disney-gold);
+            margin-bottom: 40px;
+            font-family: var(--header-font);
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+        }
+        
+        .value-card {
+            text-align: center;
+            padding: 30px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+        
+        .value-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+        
+        .value-icon {
+            font-size: 50px;
+            color: var(--disney-gold);
+            margin-bottom: 20px;
+        }
+        
+        .value-card h4 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .value-card p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Footer */
+        footer {
+            background: rgba(13, 13, 46, 0.95);
+            color: white;
+            padding: 70px 5% 40px;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255, 193, 7, 0.2);
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--disney-purple), var(--disney-magenta), var(--disney-gold));
+        }
+        
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-section h3 {
+            font-size: 24px;
+            margin-bottom: 25px;
+            color: var(--disney-gold);
+            font-family: var(--header-font);
+        }
+        
+        .footer-section p, .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            display: block;
+            padding: 8px 0;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+            padding-left: 15px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .footer-bottom p::before, .footer-bottom p::after {
+            content: '✦';
+            color: var(--disney-gold);
+            margin: 0 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .about-card { padding: 30px 20px; }
+            .about-header h1 { font-size: 40px; }
+            .founders-grid { grid-template-columns: 1fr; }
+            .nav-menu { flex-wrap: wrap; justify-content: center; }
+            .nav-link { padding: 12px 20px; font-size: 14px; }
+            .header-container { flex-direction: column; height: auto; padding: 15px; }
+            .timeline::before { left: 20px; }
+            .timeline-item { justify-content: flex-start !important; }
+            .timeline-content { width: calc(100% - 50px); margin-left: 50px !important; margin-right: 0 !important; }
+            .timeline-dot { left: -30px !important; right: auto !important; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo-container">
+                <div class="magic-hat">🎩</div>
+                <h1 class="site-title">Universal Toon</h1>
+            </a>
+        </div>
+        <div class="nav-container">
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link">Accueil</a>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" id="categoriesDropdownToggle">Catégories <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-menu" id="categoriesDropdown">
+                        <a href="conte-fee.html" class="dropdown-item">Conte de fée</a>
+                        <a href="aventure.html" class="dropdown-item">Aventure&Action</a>
+                        <a href="univers.html" class="dropdown-item">Univers</a>
+                        <a href="enfants.html" class="dropdown-item">Education</a>
+                    </div>
+                </div>
+                <a href="about.html" class="nav-link active">Concepteurs</a>
+                <a href="privacy.html" class="nav-link">Confidentialité</a>
+                <a href="terms.html" class="nav-link">Conditions</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="about-container">
+        <div class="about-card">
+            <div class="about-header">
+                <h1>✨ Les Concepteurs ✨</h1>
+                <p>Découvrez les talents derrière Universal Toon</p>
+            </div>
+            
+            <!-- Fondateurs -->
+            <div class="founders-grid">
+                <!-- Seidou Mangane - SDM -->
+                <div class="founder-card">
+                    <div class="founder-avatar">
+                        <div class="avatar-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="founder-info">
+                        <h2 class="founder-name">Seidou Mangane</h2>
+                        <div class="founder-title"><i class="fas fa-crown"></i> Fondateur & CEO - SDM</div>
+                        <p class="founder-description">
+                            Visionnaire passionné par l'univers de l'animation et les technologies innovantes. 
+                            Seidou a fondé SDM (Seidou Mangane) avec la mission de créer une plateforme 
+                            familiale unique rassemblant les meilleurs dessins animés pour petits et grands.
+                        </p>
+                        <div class="founder-contact">
+                            <a href="#" class="contact-icon"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="contact-icon"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="contact-icon"><i class="fab fa-github"></i></a>
+                            <a href="mailto:seidou@universaltoon.com" class="contact-icon"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Denis Michel - DMTech -->
+                <div class="founder-card">
+                    <div class="founder-avatar">
+                        <div class="avatar-icon">
+                            <i class="fas fa-microchip"></i>
+                        </div>
+                    </div>
+                    <div class="founder-info">
+                        <h2 class="founder-name">Denis Michel</h2>
+                        <div class="founder-title"><i class="fas fa-code"></i> Co-fondateur & CTO - DMTech</div>
+                        <p class="founder-description">
+                            Expert en développement web et technologies de pointe, Denis Michel a fondé 
+                            DMTech (Denis Michel Technology). Grâce à son expertise technique, il a conçu 
+                            l'infrastructure robuste et sécurisée qui fait la force d'Universal Toon.
+                        </p>
+                        <div class="founder-contact">
+                            <a href="#" class="contact-icon"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="contact-icon"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="contact-icon"><i class="fab fa-github"></i></a>
+                            <a href="mailto:denis@universaltoon.com" class="contact-icon"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sociétés -->
+            <div class="company-section">
+                <h2><i class="fas fa-building"></i> Nos entités</h2>
+                <div class="company-logos">
+                    <div class="company-logo">
+                        <div class="logo-circle">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <h3>SDM</h3>
+                        <p>Seidou Mangane<br>Vision & Stratégie</p>
+                    </div>
+                    <div class="company-logo">
+                        <div class="logo-circle">
+                            <i class="fas fa-microchip"></i>
+                        </div>
+                        <h3>DMTech</h3>
+                        <p>Denis Michel Technology<br>Innovation & Développement</p>
+                    </div>
+                    <div class="company-logo">
+                        <div class="logo-circle">
+                            <i class="fas fa-tv"></i>
+                        </div>
+                        <h3>Universal Toon</h3>
+                        <p>La plateforme<br>Dessins animés pour tous</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Timeline -->
+            <div class="timeline-section">
+                <h2 class="timeline-title"><i class="fas fa-history"></i> Notre histoire</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2023</div>
+                            <div class="timeline-text">Création de SDM (Seidou Mangane) et lancement du projet Universal Toon</div>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2024</div>
+                            <div class="timeline-text">Fondation de DMTech (Denis Michel Technology) et développement de l'infrastructure technique</div>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2025</div>
+                            <div class="timeline-text">Lancement officiel de la plateforme Universal Toon</div>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2026</div>
+                            <div class="timeline-text">Expansion internationale et nouvelles fonctionnalités</div>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Valeurs -->
+            <div class="values-section">
+                <h2 class="values-title"><i class="fas fa-heart"></i> Nos valeurs</h2>
+                <div class="values-grid">
+                    <div class="value-card">
+                        <div class="value-icon"><i class="fas fa-users"></i></div>
+                        <h4>Famille</h4>
+                        <p>Des contenus adaptés à tous les âges</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon"><i class="fas fa-rocket"></i></div>
+                        <h4>Innovation</h4>
+                        <p>Technologies de pointe pour une expérience unique</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon"><i class="fas fa-shield-alt"></i></div>
+                        <h4>Sécurité</h4>
+                        <p>Protection maximale des données des utilisateurs</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon"><i class="fas fa-globe"></i></div>
+                        <h4>Accessibilité</h4>
+                        <p>Plateforme gratuite et accessible à tous</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mission -->
+            <div class="company-section">
+                <h2><i class="fas fa-bullseye"></i> Notre mission</h2>
+                <p style="font-size: 18px; max-width: 800px; margin: 0 auto;">
+                    "Offrir aux familles du monde entier une plateforme de divertissement animé 
+                    de qualité, gratuite, sécurisée et accessible à tous, tout en promouvant 
+                    les valeurs de partage, de créativité et d'éducation."
+                </p>
+                <p style="margin-top: 20px; font-style: italic; color: var(--disney-gold);">
+                    — Seidou Mangane & Denis Michel
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Universal Toon</h3>
+                <p>Plateforme de dessins animés pour toute la famille.</p>
+                <p style="margin-top: 10px;">Propulsé par <strong>SDM</strong> & <strong>DMTech</strong></p>
+            </div>
+            <div class="footer-section">
+                <h3>Liens utiles</h3>
+                <a href="index.html">Accueil</a>
+                <a href="about.html">Concepteurs</a>
+                <a href="privacy.html">Confidentialité</a>
+                <a href="terms.html">Conditions d'utilisation</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h3>Suivez-nous</h3>
+                <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+                <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+                <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: contact@universaltoon.com</p>
+                <p>Tél: +221 76 244 25 30</p>
+                <p>Sénégal - Mbour</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Universal Toon - Tous droits réservés | Créé avec ❤️ par SDM & DMTech</p>
+        </div>
+    </footer>
+
+    <script>
+        // Menu déroulant
+        const toggle = document.getElementById('categoriesDropdownToggle');
+        const dropdown = document.getElementById('categoriesDropdown');
+        if (toggle && dropdown) {
+            toggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                dropdown.classList.toggle('active');
+            });
+            document.addEventListener('click', (e) => {
+                if (!toggle.contains(e.target) && !dropdown.contains(e.target)) {
+                    dropdown.classList.remove('active');
+                }
+            });
+        }
+        
+        // Animation au scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observer les éléments
+        document.querySelectorAll('.founder-card, .company-section, .timeline-item, .value-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
