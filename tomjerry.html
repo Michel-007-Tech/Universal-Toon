@@ -1,3 +1,23 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tom et Jerry - Universal Toon</title>
+    <link rel="stylesheet" href="https://
+
+
+
+Ordinateurs cloud
+Nouveau
+
+
+Utiliser Manus partout
+
+Vous pouvez également télécharger et utiliser Manus sur mobile et sur bureau pour une expérience différente.
+
+tomjerry.html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -103,9 +123,19 @@
         .nav-container {
             background: linear-gradient(90deg, var(--cat-blue), var(--red));
             padding: 0 5%;
+            position: relative;
         }
         
-        .nav-menu { display: flex; max-width: 1600px; margin: 0 auto; }
+        .nav-menu { 
+            display: flex; 
+            max-width: 1600px; 
+            margin: 0 auto;
+            list-style: none;
+        }
+        
+        .nav-item {
+            position: relative;
+        }
         
         .nav-link {
             color: white;
@@ -114,6 +144,7 @@
             font-weight: 600;
             display: block;
             font-family: var(--header-font);
+            position: relative;
         }
         
         .nav-link:hover, .nav-link.active { background: rgba(255, 255, 255, 0.2); }
@@ -152,6 +183,7 @@
             color: white;
             text-decoration: none;
             display: block;
+            transition: all 0.3s;
         }
         
         .dropdown-item:hover {
@@ -225,11 +257,13 @@
             backdrop-filter: blur(5px);
             animation: fadeInUp 0.6s ease-out;
             animation-fill-mode: both;
+            position: relative;
         }
         
         .video-item:hover {
             transform: translateY(-15px);
             border: 1px solid var(--cheese-yellow);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
         
         .video-item::before {
@@ -240,12 +274,14 @@
             right: 0;
             height: 5px;
             background: linear-gradient(90deg, var(--cat-blue), var(--cheese-yellow), var(--red));
+            z-index: 1;
         }
         
         .video-thumbnail {
             position: relative;
             padding-bottom: 56.25%;
             height: 0;
+            overflow: hidden;
         }
         
         .video-thumbnail img {
@@ -253,10 +289,41 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .video-item:hover .video-thumbnail img {
+            transform: scale(1.05);
+        }
+        
+        .video-thumbnail .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(0,0,0,0.7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            opacity: 0;
+        }
+        
+        .video-item:hover .play-overlay {
+            opacity: 1;
+        }
+        
+        .play-overlay i {
+            font-size: 28px;
+            color: white;
+            margin-left: 5px;
         }
         
         .video-info { padding: 25px; }
-        .video-info h3 { font-size: 24px; margin-bottom: 10px; }
+        .video-info h3 { font-size: 24px; margin-bottom: 10px; color: var(--cheese-yellow); }
         .video-info p { color: rgba(255,255,255,0.8); font-size: 16px; }
         .video-meta {
             display: flex;
@@ -289,6 +356,12 @@
             background: rgba(44, 62, 80, 0.95);
             border-radius: 20px;
             overflow: hidden;
+            animation: modalFadeIn 0.4s ease-out;
+        }
+        
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
         }
         
         .video-modal-header {
@@ -296,18 +369,35 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 30px;
-            background: rgba(0,0,0,0.3);
+            background: linear-gradient(90deg, var(--cat-blue), var(--red));
+        }
+        
+        .video-modal-header h3 {
+            font-size: 24px;
+            color: var(--cheese-yellow);
         }
         
         .close-video-modal {
             font-size: 32px;
             cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .close-video-modal:hover {
+            transform: rotate(90deg);
+            color: var(--cheese-yellow);
+        }
+        
+        .video-modal-body {
+            padding: 20px;
         }
         
         .video-modal-iframe-container {
             position: relative;
             padding-bottom: 56.25%;
             height: 0;
+            border-radius: 15px;
+            overflow: hidden;
         }
         
         .video-modal-iframe-container iframe {
@@ -317,7 +407,14 @@
             border: none;
         }
         
-        .video-modal-info { padding: 25px 30px; }
+        .video-modal-info { 
+            padding: 20px 0 0 0;
+        }
+        
+        .video-modal-info p {
+            line-height: 1.6;
+            color: rgba(255,255,255,0.9);
+        }
         
         .btn {
             padding: 16px 35px;
@@ -327,19 +424,41 @@
             font-weight: 700;
             cursor: pointer;
             font-family: var(--header-font);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
         }
         
         .btn-primary {
             background: linear-gradient(45deg, var(--cat-blue), var(--cheese-yellow));
             color: white;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
         }
         
-        .btn-primary:hover { transform: translateY(-5px); }
+        .btn-primary:hover { 
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(243,156,18,0.4);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(-2px);
+        }
         
         footer {
             background: rgba(44, 62, 80, 0.95);
             padding: 70px 5% 40px;
             margin-top: 100px;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--cat-blue), var(--cheese-yellow), var(--red));
         }
         
         .footer-content {
@@ -348,39 +467,31 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 50px;
+            margin-bottom: 50px;
         }
         
         .footer-section h3 {
             font-size: 24px;
             margin-bottom: 25px;
             color: var(--cheese-yellow);
+            position: relative;
+            display: inline-block;
         }
         
-        .footer-section p, .footer-section a {
-            color: rgba(255,255,255,0.8);
-            text-decoration: none;
-            display: block;
-            padding: 8px 0;
-        }
-        
-        .footer-section a:hover {
-            color: var(--cheese-yellow);
-            padding-left: 15px;
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--cheese-yellow), transparent);
         }
         
         .footer-bottom {
             text-align: center;
-            margin-top: 50px;
-            padding-top: 30px;
+            padding-top: 40px;
             border-top: 1px solid rgba(255,255,255,0.1);
-        }
-        
-        @media (max-width: 768px) {
-            .header-container { flex-direction: column; height: auto; padding: 20px; }
-            .nav-menu { flex-wrap: wrap; justify-content: center; }
-            .nav-link { padding: 15px 20px; }
-            .category-hero h1 { font-size: 44px; }
-            .videos-container { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -394,56 +505,188 @@
                 <h1 class="site-title">Universal Toon</h1>
             </a>
         </div>
-        
         <div class="nav-container">
-            <nav class="nav-menu">
-                <div class="nav-item">
-                    <a href="index.html" class="nav-link">Accueil</a>
-                </div>
-                <div class="nav-item">
-                    <a href="#" class="nav-link active" id="categoriesDropdownToggle">Catégories <i class="fas fa-chevron-down"></i></a>
-                    <div class="dropdown-menu" id="categoriesDropdown">
-                        <a href="conte-fee.html" class="dropdown-item">Conte de fée</a>
-                        <a href="aventure.html" class="dropdown-item">Aventure&Action</a>
-                        <a href="tomjerry.html" class="dropdown-item active">Tom et Jerry</a>
-                        <a href="oggy.html" class="dropdown-item">Oggy et les Cafards</a>
-                        <a href="univers.html" class="dropdown-item">Univers</a>
-                    </div>
-                </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="index.html" class="nav-link">Accueil</a></li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link active" id="categoriesDropdownToggle">Catégories <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-menu" id="categoriesDropdown">
+                            <a href="conte-fee.html" class="dropdown-item">✨ Contes de fée</a>
+                            <a href="aventure.html" class="dropdown-item">⚔️ Aventure & Action</a>
+                            <a href="education.html" class="dropdown-item">📚 Éducation</a>
+                            <a href="univers.html" class="dropdown-item">🌍 Univers</a>
+                        </div>
+                    </li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
             </nav>
         </div>
     </header>
-    
+
     <section class="category-hero">
         <h1>Tom et Jerry</h1>
-        <p>Les aventures intemporelles du chat Tom et de la souris Jerry ! Courses-poursuites, cascades et humour garantis.</p>
-        <button class="btn btn-primary" id="watchTrailerBtn">Regarder la bande-annonce</button>
+        <p>Retrouvez les aventures cultes du chat et de la souris les plus célèbres du monde ! Des courses-poursuites, du rire et de la nostalgie pour toute la famille.</p>
+        <button class="btn btn-primary" id="watchTrailerBtn">Regarder la compilation</button>
     </section>
-    
+
     <section class="videos-section">
-        <h2 class="section-title">Les Meilleurs Épisodes</h2>
-        <div class="videos-container" id="videosContainer"></div>
+        <h2 class="section-title">Épisodes Complets</h2>
+        <div class="videos-container" id="videosContainer">
+            <!-- Les vidéos seront chargées ici -->
+        </div>
     </section>
-    
+
     <div class="video-modal" id="videoModal">
         <div class="video-modal-content">
             <div class="video-modal-header">
-                <h3 id="videoModalTitle">Titre</h3>
+                <h3 id="videoModalTitle">Titre de la vidéo</h3>
                 <span class="close-video-modal" id="closeVideoModal">&times;</span>
             </div>
             <div class="video-modal-body">
-                <div class="video-modal-iframe-container">
-                    <div id="videoPlayerContainer"></div>
-                </div>
+                <div class="video-modal-iframe-container" id="videoPlayerContainer"></div>
                 <div class="video-modal-info">
                     <p id="videoModalDescription">Description</p>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <h3>À propos</h3>
-                <p>Universal Toon - Les meilleurs dessins animés pour toute la famille.</p
+                <h3>À propos de Universal Toon</h3>
+                <p>Universal Toon est une plateforme qui regroupe les meilleurs dessins animés pour toute la famille.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Navigation</h3>
+                <ul style="list-style: none;">
+                    <li><a href="index.html" style="color: white; text-decoration: none;">Accueil</a></li>
+                    <li><a href="univers.html" style="color: white; text-decoration: none;">Univers</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Universal Toon. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        const tomJerryVideos = [
+            {
+                id: 1,
+                title: "Tom et Jerry - 85 ans de rire",
+                description: "Une compilation spéciale pour célébrer les 85 ans de rivalité entre Tom et Jerry.",
+                videoId: "MONcBg7kcng",
+                thumbnail: "https://img.youtube.com/vi/MONcBg7kcng/hqdefault.jpg",
+                duration: "25:30",
+                year: "2024"
+            },
+            {
+                id: 2,
+                title: "Tom et Jerry - Compilation Classique Vol. 1",
+                description: "Les meilleurs moments de l'âge d'or de Tom et Jerry par Warner Classics.",
+                videoId: "Ph7iu3xlpFY",
+                thumbnail: "https://img.youtube.com/vi/Ph7iu3xlpFY/hqdefault.jpg",
+                duration: "30:45",
+                year: "Classic"
+            },
+            {
+                id: 3,
+                title: "Tom et Jerry - Les Meilleurs Ennemis",
+                description: "Revivez les moments où Tom et Jerry s'allient contre un ennemi commun ou se font des farces.",
+                videoId: "QhryNO3_12c",
+                thumbnail: "https://img.youtube.com/vi/QhryNO3_12c/hqdefault.jpg",
+                duration: "22:00",
+                year: "2023"
+            },
+            {
+                id: 4,
+                title: "Tom et Jerry - Mega Compilation Vol. 1",
+                description: "Une énorme compilation d'épisodes cultes pour des heures de divertissement.",
+                videoId: "j-88jrkyszQ",
+                thumbnail: "https://img.youtube.com/vi/j-88jrkyszQ/hqdefault.jpg",
+                duration: "45:15",
+                year: "2025"
+            },
+            {
+                id: 5,
+                title: "Tom et Jerry - Le Meilleur de Tom",
+                description: "Focus sur les meilleures cascades et les plans ratés de Tom le chat.",
+                videoId: "E3SKllw7t7E",
+                thumbnail: "https://img.youtube.com/vi/E3SKllw7t7E/hqdefault.jpg",
+                duration: "20:30",
+                year: "2024"
+            },
+            {
+                id: 6,
+                title: "Tom et Jerry - Quiet Please! (1945)",
+                description: "L'épisode classique oscarisé où Tom doit faire taire Jerry pour ne pas réveiller Spike.",
+                videoId: "Gkysb_8N9os",
+                thumbnail: "https://img.youtube.com/vi/Gkysb_8N9os/hqdefault.jpg",
+                duration: "07:00",
+                year: "1945"
+            }
+        ];
+
+        function createCheeseParticles() {
+            const container = document.getElementById('cheese');
+            const emojis = ['🧀', '🐭', '🐱'];
+            for (let i = 0; i < 50; i++) {
+                const piece = document.createElement('div');
+                piece.className = 'cheese-piece';
+                piece.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                piece.style.left = `${Math.random() * 100}%`;
+                piece.style.animationDelay = `${Math.random() * 15}s`;
+                piece.style.fontSize = `${15 + Math.random() * 25}px`;
+                container.appendChild(piece);
+            }
+        }
+
+        function loadVideos() {
+            const container = document.getElementById('videosContainer');
+            container.innerHTML = tomJerryVideos.map((video, index) => `
+                <div class="video-item" style="animation-delay: ${index * 0.1}s" onclick="openVideoModal('${video.videoId}', '${video.title.replace(/'/g, "\\'")}', '${video.description.replace(/'/g, "\\'")}')">
+                    <div class="video-thumbnail">
+                        <img src="${video.thumbnail}" alt="${video.title}">
+                        <div class="play-overlay"><i class="fas fa-play"></i></div>
+                    </div>
+                    <div class="video-info">
+                        <h3>${video.title}</h3>
+                        <p>${video.description}</p>
+                        <div class="video-meta">
+                            <span><i class="fas fa-clock"></i> ${video.duration}</span>
+                            <span><i class="fas fa-calendar"></i> ${video.year}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openVideoModal(videoId, title, description) {
+            document.getElementById('videoModalTitle').textContent = title;
+            document.getElementById('videoModalDescription').textContent = description;
+            document.getElementById('videoPlayerContainer').innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" allowfullscreen allow="autoplay"></iframe>`;
+            document.getElementById('videoModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeVideoModal() {
+            document.getElementById('videoModal').classList.remove('active');
+            document.getElementById('videoPlayerContainer').innerHTML = '';
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            createCheeseParticles();
+            loadVideos();
+            document.getElementById('closeVideoModal').onclick = closeVideoModal;
+            document.getElementById('watchTrailerBtn').onclick = () => openVideoModal(tomJerryVideos[0].videoId, tomJerryVideos[0].title, tomJerryVideos[0].description);
+            document.getElementById('categoriesDropdownToggle').onclick = (e) => {
+                e.preventDefault();
+                document.getElementById('categoriesDropdown').classList.toggle('active');
+            };
+        });
+    </script>
+</body>
+</html>

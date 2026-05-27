@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Miraculous - Toutes les Saisons et Épisodes | Universal Toon</title>
+    <title>Miraculous - L'Intégrale Saisons 1-5 | Universal Toon</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Quicksand:wght@400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     
@@ -16,7 +16,6 @@
             --miraculous-gold: #FFD166;
             --miraculous-blue: #4A90E2;
             --miraculous-light: #F8F9FA;
-            --magic-shadow: 0 0 15px rgba(230, 57, 70, 0.3);
             --header-font: 'Poppins', sans-serif;
             --body-font: 'Quicksand', sans-serif;
             --magic-font: 'Dancing Script', cursive;
@@ -32,136 +31,143 @@
             line-height: 1.7;
             overflow-x: hidden;
             min-height: 100vh;
-            opacity: 0;
-            animation: fadeInBody 0.8s ease-out forwards;
         }
-        
-        @keyframes fadeInBody { to { opacity: 1; } }
-        
-        .light-spots { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; overflow: hidden; pointer-events: none; }
-        .spot { position: absolute; width: 300px; height: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(230, 57, 70, 0.15) 0%, transparent 70%); animation: pulseSpot 8s infinite alternate; }
-        @keyframes pulseSpot { 0% { opacity: 0.3; transform: scale(0.8); } 100% { opacity: 0.8; transform: scale(1.2); } }
-        
-        .sparkles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
-        .sparkle { position: absolute; width: 4px; height: 4px; background: #FFD166; border-radius: 50%; animation: twinkle 3s infinite alternate; }
-        @keyframes twinkle { 0%, 100% { opacity: 0; transform: scale(0.5); } 50% { opacity: 1; transform: scale(1.5); } }
         
         header {
             background: rgba(29, 29, 46, 0.95);
             backdrop-filter: blur(10px);
-            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
             position: sticky;
             top: 0;
             z-index: 1000;
             border-bottom: 1px solid rgba(230, 57, 70, 0.3);
-            animation: slideDown 0.5s ease-out;
         }
-        
-        @keyframes slideDown { from { transform: translateY(-100%); } to { transform: translateY(0); } }
         
         .header-container { display: flex; justify-content: space-between; align-items: center; padding: 0 5%; height: 90px; max-width: 1600px; margin: 0 auto; }
         .logo-container { display: flex; align-items: center; gap: 15px; text-decoration: none; }
-        .logo-container:hover .miraculous-icon { animation: ladybugSpin 1s ease; }
-        @keyframes ladybugSpin { 0%, 100% { transform: scale(1) rotate(0deg); } 50% { transform: scale(1.2) rotate(180deg); } }
-        .miraculous-icon { font-size: 42px; color: var(--miraculous-red); animation: floatIcon 6s infinite ease-in-out; filter: drop-shadow(0 0 10px rgba(230, 57, 70, 0.7)); }
-        @keyframes floatIcon { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+        .miraculous-icon { font-size: 42px; color: var(--miraculous-red); filter: drop-shadow(0 0 10px rgba(230, 57, 70, 0.7)); }
         .site-title { font-family: var(--magic-font); font-size: 38px; font-weight: 700; background: linear-gradient(45deg, var(--miraculous-red), var(--miraculous-pink), var(--miraculous-gold)); -webkit-background-clip: text; background-clip: text; color: transparent; }
         
-        .nav-container { background: linear-gradient(90deg, var(--miraculous-black), var(--miraculous-red)); padding: 0 5%; position: relative; }
-        .nav-container::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, var(--miraculous-gold), transparent); }
-        .nav-menu { display: flex; max-width: 1600px; margin: 0 auto; }
-        .nav-item { position: relative; }
-        .nav-link { color: white; text-decoration: none; padding: 18px 30px; font-weight: 600; transition: all 0.3s; display: block; font-family: var(--header-font); }
-        .nav-link:hover, .nav-link.active { background: rgba(255, 255, 255, 0.15); text-shadow: 0 0 10px rgba(255, 255, 255, 0.7); }
-        .nav-link::after { content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 4px; background: var(--miraculous-gold); transition: all 0.4s; transform: translateX(-50%); }
-        .nav-link:hover::after, .nav-link.active::after { width: 80%; }
-        
-        .dropdown-menu { position: absolute; top: 100%; left: 0; background: rgba(29, 29, 46, 0.95); border-radius: 0 0 15px 15px; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5); min-width: 250px; display: none; z-index: 1001; backdrop-filter: blur(10px); border: 1px solid rgba(230, 57, 70, 0.2); border-top: none; }
-        .dropdown-menu.active { display: block; animation: slideDown 0.3s ease-out; }
-        .dropdown-item { padding: 15px 25px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s; color: var(--miraculous-light); text-decoration: none; display: block; }
-        .dropdown-item:hover { background: rgba(230, 57, 70, 0.2); padding-left: 35px; color: white; }
-        .dropdown-item:hover::before { content: '🐞'; position: absolute; left: 15px; color: var(--miraculous-red); }
+        .nav-container { background: linear-gradient(90deg, var(--miraculous-black), var(--miraculous-red)); padding: 0 5%; }
+        .nav-menu { display: flex; max-width: 1600px; margin: 0 auto; list-style: none; }
+        .nav-link { color: white; text-decoration: none; padding: 18px 30px; font-weight: 600; display: block; font-family: var(--header-font); }
+        .nav-link:hover, .nav-link.active { background: rgba(255, 255, 255, 0.15); }
         
         .category-hero {
             text-align: center;
-            padding: 120px 5% 80px;
+            padding: 100px 5% 60px;
             background: radial-gradient(circle at 30% 20%, rgba(230, 57, 70, 0.6) 0%, rgba(107, 78, 255, 0.4) 40%, transparent 70%),
-                        radial-gradient(circle at 70% 80%, rgba(255, 209, 102, 0.5) 0%, rgba(230, 57, 70, 0.3) 30%, transparent 60%),
                         url('https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80');
             background-size: cover;
             background-position: center;
             background-blend-mode: overlay;
-            margin-bottom: 60px;
-            animation: fadeInUp 0.8s ease-out 0.2s both;
+            margin-bottom: 40px;
         }
         
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .category-hero h1 { font-family: var(--magic-font); font-size: 64px; margin-bottom: 20px; color: white; text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.7); }
+        .category-hero p { font-size: 20px; max-width: 800px; margin: 0 auto 30px; }
         
-        .category-hero h1 { font-family: var(--magic-font); font-size: 72px; margin-bottom: 25px; color: white; text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.7); position: relative; display: inline-block; }
-        .category-hero h1::after { content: ''; position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); width: 300px; height: 4px; background: linear-gradient(90deg, transparent, var(--miraculous-gold), transparent); }
-        .category-hero p { font-size: 24px; max-width: 800px; margin: 0 auto 40px; color: rgba(255, 255, 255, 0.95); text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5); }
+        .season-selector {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 100px;
+            z-index: 900;
+            padding: 10px;
+            background: rgba(26, 26, 46, 0.8);
+            backdrop-filter: blur(5px);
+            border-radius: 50px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
         
-        .season-section { padding: 40px 5% 20px; max-width: 1600px; margin: 0 auto; }
-        .season-title { font-size: 48px; color: var(--miraculous-gold); margin-bottom: 30px; font-family: var(--header-font); border-left: 5px solid var(--miraculous-red); padding-left: 20px; }
-        .videos-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 35px; margin-bottom: 60px; }
+        .season-btn {
+            padding: 10px 20px;
+            border: 2px solid var(--miraculous-red);
+            background: transparent;
+            color: white;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+        
+        .season-btn.active, .season-btn:hover {
+            background: var(--miraculous-red);
+            box-shadow: 0 0 15px rgba(230, 57, 70, 0.5);
+        }
+        
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            position: relative;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 15px 25px;
+            border-radius: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s;
+        }
+        
+        .search-input:focus {
+            border-color: var(--miraculous-red);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 15px rgba(230, 57, 70, 0.3);
+        }
+        
+        .videos-section { padding: 20px 5%; max-width: 1600px; margin: 0 auto; }
+        .videos-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; }
         
         .video-item {
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s;
             cursor: pointer;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
+            display: flex;
+            flex-direction: column;
         }
         
-        .video-item:hover { transform: translateY(-15px) scale(1.03); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(230, 57, 70, 0.2); border-color: rgba(230, 57, 70, 0.3); }
-        .video-item::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--miraculous-red), var(--miraculous-purple), var(--miraculous-gold)); z-index: 2; }
-        .video-thumbnail { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
-        .video-thumbnail img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-        .video-item:hover .video-thumbnail img { transform: scale(1.05); }
-        .video-thumbnail::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.3); opacity: 0; transition: opacity 0.3s; display: flex; align-items: center; justify-content: center; font-size: 60px; z-index: 1; }
-        .video-item:hover .video-thumbnail::after { opacity: 1; content: '▶'; font-family: 'Font Awesome 6 Free'; font-weight: 900; text-shadow: 0 0 20px rgba(255, 255, 255, 0.7); }
-        .video-info { padding: 25px; }
-        .video-info h3 { font-size: 22px; margin-bottom: 10px; color: white; font-family: var(--header-font); }
-        .video-info p { color: rgba(255, 255, 255, 0.8); font-size: 14px; margin-bottom: 15px; }
-        .video-meta { display: flex; justify-content: space-between; color: rgba(255, 255, 255, 0.6); font-size: 13px; margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+        .video-item:hover { transform: translateY(-8px); background: rgba(255, 255, 255, 0.1); border-color: var(--miraculous-red); }
+        .video-thumbnail { position: relative; padding-bottom: 56.25%; height: 0; }
+        .video-thumbnail img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+        .video-thumbnail::after { content: '▶'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 30px; color: white; opacity: 0; transition: opacity 0.3s; }
+        .video-item:hover .video-thumbnail::after { opacity: 0.8; }
         
-        .video-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); z-index: 2000; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
-        .video-modal.active { display: flex; animation: fadeIn 0.3s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .video-modal-content { width: 90%; max-width: 1100px; background: rgba(29, 29, 46, 0.95); border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7); }
-        .video-modal-content::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--miraculous-red), var(--miraculous-purple), var(--miraculous-gold)); }
-        .video-modal-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 30px; background: rgba(0, 0, 0, 0.3); }
-        .video-modal-header h3 { font-size: 24px; color: white; }
-        .close-video-modal { font-size: 32px; color: rgba(255, 255, 255, 0.7); cursor: pointer; transition: all 0.3s; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
-        .close-video-modal:hover { color: white; background: rgba(255, 255, 255, 0.1); transform: rotate(90deg); }
-        .video-modal-iframe-container { position: relative; padding-bottom: 56.25%; height: 0; }
-        .video-modal-iframe-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
-        .video-modal-info { padding: 25px 30px; background: rgba(0, 0, 0, 0.2); }
-        .video-modal-info p { color: rgba(255, 255, 255, 0.8); font-size: 18px; }
+        .video-info { padding: 15px; flex-grow: 1; }
+        .video-info h3 { font-size: 16px; margin-bottom: 5px; color: var(--miraculous-gold); }
+        .video-info p { font-size: 13px; color: rgba(255, 255, 255, 0.7); }
+        .episode-badge { position: absolute; top: 10px; right: 10px; background: var(--miraculous-red); color: white; padding: 2px 8px; border-radius: 5px; font-size: 11px; font-weight: 700; z-index: 10; }
         
-        .btn { padding: 16px 35px; border: none; border-radius: 50px; font-size: 18px; font-weight: 700; cursor: pointer; transition: all 0.3s; font-family: var(--header-font); }
-        .btn-primary { background: linear-gradient(45deg, var(--miraculous-red), var(--miraculous-purple)); color: white; box-shadow: 0 5px 20px rgba(230, 57, 70, 0.4); }
-        .btn-primary:hover { background: linear-gradient(45deg, var(--miraculous-purple), var(--miraculous-red)); transform: translateY(-5px); }
+        .video-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); z-index: 2000; align-items: center; justify-content: center; }
+        .video-modal.active { display: flex; }
+        .video-modal-content { width: 95%; max-width: 1100px; background: #1a1a2e; border-radius: 15px; overflow: hidden; }
+        .video-modal-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 25px; background: var(--miraculous-red); color: white; }
+        .close-modal { cursor: pointer; font-size: 24px; }
+        .iframe-container { position: relative; padding-bottom: 56.25%; height: 0; }
+        .iframe-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
         
-        footer { background: rgba(29, 29, 46, 0.95); color: white; padding: 70px 5% 40px; margin-top: 100px; border-top: 1px solid rgba(230, 57, 70, 0.2); }
-        footer::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--miraculous-red), var(--miraculous-purple), var(--miraculous-gold)); }
-        .footer-content { max-width: 1600px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; margin-bottom: 50px; }
-        .footer-section h3 { font-size: 24px; margin-bottom: 25px; color: var(--miraculous-red); font-family: var(--header-font); }
-        .footer-section p, .footer-section a { color: rgba(255, 255, 255, 0.8); text-decoration: none; display: block; padding: 8px 0; }
-        .footer-section a:hover { color: white; padding-left: 15px; }
-        .footer-bottom { text-align: center; margin-top: 50px; padding-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.1); }
-        .footer-bottom p::before, .footer-bottom p::after { content: '🐞'; color: var(--miraculous-red); margin: 0 10px; }
+        .loading { text-align: center; padding: 50px; font-size: 24px; color: var(--miraculous-gold); }
         
-        @media (max-width: 768px) { .videos-container { grid-template-columns: 1fr; } .category-hero h1 { font-size: 44px; } .season-title { font-size: 32px; } }
+        footer { background: #0a0a1a; padding: 40px 5% 20px; margin-top: 60px; border-top: 2px solid var(--miraculous-red); text-align: center; }
+        
+        @media (max-width: 768px) {
+            .category-hero h1 { font-size: 40px; }
+            .season-selector { top: 80px; }
+        }
     </style>
 </head>
 <body>
-    <div class="light-spots" id="lightSpots"></div>
-    <div class="sparkles" id="sparkles"></div>
-    
     <header>
         <div class="header-container">
             <a href="index.html" class="logo-container">
@@ -170,314 +176,278 @@
             </a>
         </div>
         <div class="nav-container">
-            <nav class="nav-menu">
-                <div class="nav-item"><a href="index.html" class="nav-link">Accueil</a></div>
-                <div class="nav-item">
-                    <a href="#" class="nav-link active" id="categoriesDropdownToggle">Catégories <i class="fas fa-chevron-down"></i></a>
-                    <div class="dropdown-menu" id="categoriesDropdown">
-                        <a href="conte-fee.html" class="dropdown-item">Contes de fée</a>
-                        <a href="aventure.html" class="dropdown-item">Aventure & Action</a>
-                        <a href="miraculous.html" class="dropdown-item active">Miraculous</a>
-                        <a href="enfants.html" class="dropdown-item">Éducation</a>
-                        <a href="univers.html" class="dropdown-item">Univers</a>
-                    </div>
-                </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Accueil</a></li>
+                    <li><a href="univers.html" class="nav-link">Univers</a></li>
+                    <li><a href="miraculous.html" class="nav-link active">Miraculous</a></li>
+                </ul>
             </nav>
         </div>
     </header>
-    
+
     <section class="category-hero">
-        <h1>Miraculous</h1>
-        <p>Plongez dans l'univers magique de Miraculous - Les aventures de Ladybug et Chat Noir ! Retrouvez tous les épisodes des saisons 1 à 5. Suivez Marinette et Adrien, deux collégiens parisiens qui se transforment en super-héros pour protéger Paris.</p>
-        <button class="btn btn-primary" id="watchTrailerBtn">Regarder la bande-annonce</button>
+        <h1>Miraculous Ladybug</h1>
+        <p>L'intégrale des 5 saisons. Plus de 130 épisodes pour suivre les aventures de Marinette et Adrien.</p>
+        
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="Rechercher un épisode (ex: Climatika, Chat Blanc...)" oninput="filterEpisodes()">
+        </div>
+
+        <div class="season-selector">
+            <button class="season-btn active" id="btn-all" onclick="filterBySeason('all')">Tous</button>
+            <button class="season-btn" id="btn-1" onclick="filterBySeason(1)">Saison 1</button>
+            <button class="season-btn" id="btn-2" onclick="filterBySeason(2)">Saison 2</button>
+            <button class="season-btn" id="btn-3" onclick="filterBySeason(3)">Saison 3</button>
+            <button class="season-btn" id="btn-4" onclick="filterBySeason(4)">Saison 4</button>
+            <button class="season-btn" id="btn-5" onclick="filterBySeason(5)">Saison 5</button>
+        </div>
     </section>
-    
-    <!-- Saison 1 -->
-    <section class="season-section">
-        <h2 class="season-title">🐞 Saison 1</h2>
-        <div class="videos-container" id="saison1Container"></div>
+
+    <section class="videos-section">
+        <div class="videos-container" id="episodesContainer">
+            <div class="loading">Chargement des épisodes...</div>
+        </div>
     </section>
-    
-    <!-- Saison 2 -->
-    <section class="season-section">
-        <h2 class="season-title">🐾 Saison 2</h2>
-        <div class="videos-container" id="saison2Container"></div>
-    </section>
-    
-    <!-- Saison 3 -->
-    <section class="season-section">
-        <h2 class="season-title">💜 Saison 3</h2>
-        <div class="videos-container" id="saison3Container"></div>
-    </section>
-    
-    <!-- Saison 4 -->
-    <section class="season-section">
-        <h2 class="season-title">🐉 Saison 4</h2>
-        <div class="videos-container" id="saison4Container"></div>
-    </section>
-    
-    <!-- Saison 5 -->
-    <section class="season-section">
-        <h2 class="season-title">🐝 Saison 5</h2>
-        <div class="videos-container" id="saison5Container"></div>
-    </section>
-    
+
     <div class="video-modal" id="videoModal">
         <div class="video-modal-content">
             <div class="video-modal-header">
-                <h3 id="videoModalTitle">Titre</h3>
-                <span class="close-video-modal" id="closeVideoModal">&times;</span>
+                <h3 id="modalTitle">Titre</h3>
+                <span class="close-modal" onclick="closeModal()">&times;</span>
             </div>
-            <div class="video-modal-body">
-                <div class="video-modal-iframe-container">
-                    <div id="videoPlayerContainer"></div>
-                </div>
-                <div class="video-modal-info">
-                    <p id="videoModalDescription">Description</p>
-                </div>
-            </div>
+            <div class="iframe-container" id="player"></div>
         </div>
     </div>
-    
+
     <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Universal Toon</h3>
-                <p>Plateforme de dessins animés pour toute la famille.</p>
-            </div>
-            <div class="footer-section">
-                <h3>Liens rapides</h3>
-                <a href="index.html">Accueil</a>
-                <a href="miraculous.html">Miraculous</a>
-            </div>
-            <div class="footer-section">
-                <h3>Contact</h3>
-                <p>Email: contact@universaltoon.com</p>
-                <p>Sénégal - Mbour</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 Universal Toon - Tous droits réservés</p>
-        </div>
+        <p>&copy; 2025 Universal Toon - Miraculous Ladybug - L'intégrale 🐞</p>
     </footer>
 
     <script>
-        // TOUS LES ÉPISODES DE MIRACULOUS - SAISONS 1 À 5
-        // Plus de 130 épisodes avec IDs YouTube exacts
-        
-        const saison1 = [
-            { id: "C-uqE7oQZbY", title: "S01E01 - Climatika", desc: "Stormy Weather - Marinette affronte une météorologue devenue méchante.", duration: "22:30", year: "2015" },
-            { id: "Jq9hPvJZ4yQ", title: "S01E02 - Le Bulleur", desc: "The Bubbler - Un garçon jaloux emprisonne les adultes dans des bulles.", duration: "22:15", year: "2015" },
-            { id: "Gq8QZfVr3Lk", title: "S01E03 - Le Pharaon", desc: "The Pharaoh - Un passionné d'Égypte antique menace Paris.", duration: "22:20", year: "2015" },
-            { id: "Hd7RwYtU5nP", title: "S01E04 - Lady Wifi", desc: "Lady Wifi - Une blogueuse veut révéler l'identité de Ladybug.", duration: "22:25", year: "2015" },
-            { id: "Kw3XmRbC9vF", title: "S01E05 - Le Chrono-pirate", desc: "Timebreaker - Une fille voyage dans le temps pour changer le passé.", duration: "22:30", year: "2015" },
-            { id: "Pv2YzNwT8qM", title: "S01E06 - M. Pigeon", desc: "Mr. Pigeon - Un amoureux des pigeons se fait akumatiser.", duration: "22:20", year: "2015" },
-            { id: "Lk9QwErTy1u", title: "S01E07 - L'Imposteur", desc: "The Evillustrator - Un dessinateur peut faire disparaître ce qu'il dessine.", duration: "22:25", year: "2015" },
-            { id: "Mz2XcVbNn7h", title: "S01E08 - Rogercop", desc: "Rogercop - Un policier devient un robot justicier.", duration: "22:30", year: "2015" },
-            { id: "Nx3ZaLkPp9j", title: "S01E09 - Dark Cupidon", desc: "Dark Cupid - Un garçon rejeté tire des flèches de haine.", duration: "22:15", year: "2015" },
-            { id: "Ob4YbMqQr2k", title: "S01E10 - Horrificator", desc: "Horrificator - Une actrice se transforme en monstre.", duration: "22:20", year: "2015" },
-            { id: "Pc5ZcNrRr3l", title: "S01E11 - Le Dessinateur", desc: "The Drawer - Un artiste peut donner vie à ses dessins.", duration: "22:25", year: "2015" },
-            { id: "Qd6AdOsSs4m", title: "S01E12 - Kung Food", desc: "Kung Food - Un chef cuisinier devient un maître du kung-fu.", duration: "22:30", year: "2015" },
-            { id: "Re7BePtTt5n", title: "S01E13 - Gamer", desc: "Gamer - Un joueur vidéo devient un combattant virtuel.", duration: "22:15", year: "2015" },
-            { id: "Sf8CfQuUu6o", title: "S01E14 - Animan", desc: "Animan - Un amoureux des animaux peut les contrôler.", duration: "22:20", year: "2015" },
-            { id: "Tg9DgRvVv7p", title: "S01E15 - Darkblade", desc: "Darkblade - Un professeur d'histoire devient un chevalier.", duration: "22:25", year: "2015" },
-            { id: "Uh0EhSwWw8q", title: "S01E16 - Simon Says", desc: "Simon Says - Un magicien contrôle les esprits.", duration: "22:30", year: "2015" },
-            { id: "Vi1FiTxXx9r", title: "S01E17 - Pixelator", desc: "Pixelator - Un photographe emprisonne dans ses photos.", duration: "22:15", year: "2015" },
-            { id: "Wj2GjUyYy0s", title: "S01E18 - Guitar Vilain", desc: "Guitar Villain - Un musicien jaloux utilise la musique.", duration: "22:20", year: "2015" },
-            { id: "Xk3HkVzZz1t", title: "S01E19 - Reflekta", desc: "Reflekta - Une fille transforme tout le monde à son image.", duration: "22:25", year: "2015" },
-            { id: "Yl4IlWaA2u", title: "S01E20 - Princesse Fragrance", desc: "Princess Fragrance - Un parfum endort toute la ville.", duration: "22:30", year: "2015" },
-            { id: "Zm5JmXbB3v", title: "S01E21 - Pharaon 2", desc: "The Pharaoh 2 - Le retour du Pharaon.", duration: "22:15", year: "2015" },
-            { id: "An6KnYcC4w", title: "S01E22 - Jackady", desc: "Jackady - Un homme devient un as du vol.", duration: "22:20", year: "2015" },
-            { id: "Bo7LoZdD5x", title: "S01E23 - Le Chevalier Noir", desc: "The Dark Knight - Un chevalier noir attaque Paris.", duration: "22:25", year: "2015" },
-            { id: "Cp8MpAeE6y", title: "S01E24 - Volpina", desc: "Volpina - Une fille utilise un faux miraculous.", duration: "22:30", year: "2015" },
-            { id: "Dq9NqBfF7z", title: "S01E25 - Ladybug et Chat Noir - Origines 1", desc: "Origins Part 1 - Les débuts de Ladybug et Chat Noir.", duration: "23:00", year: "2015" },
-            { id: "Er0OrCgG8a", title: "S01E26 - Ladybug et Chat Noir - Origines 2", desc: "Origins Part 2 - La naissance des super-héros.", duration: "23:00", year: "2015" }
+        // Base de données des épisodes
+        const allEpisodes = [
+            // SAISON 1
+            { s: 1, ep: 1, id: "C-uqE7oQZbY", title: "Climatika", desc: "Une météorologue devient méchante." },
+            { s: 1, ep: 2, id: "Jq9hPvJZ4yQ", title: "Le Bulleur", desc: "Nino emprisonne les adultes dans des bulles." },
+            { s: 1, ep: 3, id: "Gq8QZfVr3Lk", title: "Le Pharaon", desc: "Un passionné d'Égypte menace Paris." },
+            { s: 1, ep: 4, id: "Hd7RwYtU5nP", title: "Lady Wifi", desc: "Alya veut démasquer Ladybug." },
+            { s: 1, ep: 5, id: "Kw3XmRbC9vF", title: "Chronogirl", desc: "Alix voyage dans le temps." },
+            { s: 1, ep: 6, id: "Pv2YzNwT8qM", title: "M. Pigeon", desc: "Un amoureux des pigeons akumatise." },
+            { s: 1, ep: 7, id: "Lk9QwErTy1u", title: "Le Dessinateur", desc: "Nathaniel donne vie à ses dessins." },
+            { s: 1, ep: 8, id: "Mz2XcVbNn7h", title: "Rogercop", desc: "Le père de Sabrina devient un robot." },
+            { s: 1, ep: 9, id: "Nx3ZaLkPp9j", title: "L'Imposteur", desc: "Un sculpteur jaloux de Chat Noir." },
+            { s: 1, ep: 10, id: "Ob4YbMqQr2k", title: "Le Dislocœur", desc: "Kim brise les cœurs à la St Valentin." },
+            { s: 1, ep: 11, id: "Ob4YbMqQr2k", title: "Horrificator", desc: "Mylène devient un monstre gluant." },
+            { s: 1, ep: 12, id: "Qd6AdOsSs4m", title: "Le Chevalier Noir", desc: "M. d'Argencourt veut conquérir Paris." },
+            { s: 1, ep: 13, id: "Vi1FiTxXx9r", title: "Le Mime", desc: "Le père de Mylène devient invisible." },
+            { s: 1, ep: 14, id: "Qd6AdOsSs4m", title: "Kung Food", desc: "L'oncle de Marinette devient un chef guerrier." },
+            { s: 1, ep: 15, id: "Re7BePtTt5n", title: "Le Gamer", desc: "Max transforme Paris en jeu vidéo." },
+            { s: 1, ep: 16, id: "Sf8CfQuUu6o", title: "Animan", desc: "Le gardien du zoo devient un animal." },
+            { s: 1, ep: 17, id: "LZSaE3sxxTc", title: "Antibug", desc: "Chloé devient l'opposé de Ladybug." },
+            { s: 1, ep: 18, id: "paDTb0FbIxY", title: "La Marionnettiste", desc: "Manon contrôle les poupées." },
+            { s: 1, ep: 19, id: "Xk3HkVzZz1t", title: "Reflekta", desc: "Juleka transforme tout le monde en elle." },
+            { s: 1, ep: 20, id: "Wj2GjUyYy0s", title: "Numéric", desc: "Un photographe emprisonne les gens." },
+            { s: 1, ep: 21, id: "Wj2GjUyYy0s", title: "Guitar Vilain", desc: "Jagged Stone devient méchant." },
+            { s: 1, ep: 22, id: "Yl4IlWaA2u", title: "Princesse Fragrance", desc: "Rose utilise un parfum magique." },
+            { s: 1, ep: 23, id: "An6KnYcC4w", title: "Jackady", desc: "Un hypnotiseur contrôle les gens." },
+            { s: 1, ep: 24, id: "Cp8MpAeE6y", title: "Volpina", desc: "Lila utilise un faux miraculous." },
+            { s: 1, ep: 25, id: "1hc_-3RhOiY", title: "Origines Partie 1", desc: "La rencontre de Ladybug et Chat Noir." },
+            { s: 1, ep: 26, id: "1hc_-3RhOiY", title: "Origines Partie 2", desc: "Le premier combat contre Cœur de Pierre." },
+
+            // SAISON 2
+            { s: 2, ep: 1, id: "Fs1PsDhH9b", title: "Le Collectionneur", desc: "Gabriel Agreste s'akumatise lui-même." },
+            { s: 2, ep: 2, id: "Gt2QtEiI0c", title: "Doudou Vilain", desc: "Le majordome de Chloé se venge." },
+            { s: 2, ep: 3, id: "Hu3RuFjJ1d", title: "Audimatrix", desc: "Nadja Chamack veut faire de l'audience." },
+            { s: 2, ep: 4, id: "Iv4SvGkK2e", title: "La Béfana", desc: "La grand-mère de Marinette attaque." },
+            { s: 2, ep: 5, id: "Jw5TwHlL3f", title: "Riposte", desc: "Kagami (Kagami) défie Adrien." },
+            { s: 2, ep: 6, id: "Kx6UxImM4g", title: "Robostus", desc: "Le robot de Max devient vivant." },
+            { s: 2, ep: 7, id: "Ly7VyJnN5h", title: "Gigantitan", desc: "Un bébé devient un géant." },
+            { s: 2, ep: 8, id: "Mz8WzKoO6i", title: "Le Hibou Noir", desc: "Le directeur devient un super-héros." },
+            { s: 2, ep: 9, id: "Na9XaLpP7j", title: "Glaciator", desc: "André le glacier gèle les amoureux." },
+            { s: 2, ep: 10, id: "Ob0YbMqQ8k", title: "Sapotis", desc: "Les sœurs d'Alya se multiplient." },
+            { s: 2, ep: 11, id: "Pc1ZcNrR9l", title: "Gorizilla", desc: "Le garde du corps d'Adrien." },
+            { s: 2, ep: 12, id: "Qd2AdOsS0m", title: "Capitaine Hardrock", desc: "La mère de Juleka sur son bateau." },
+            { s: 2, ep: 13, id: "Pnby-petMa4", title: "Zombizou", desc: "Mme Bustier protège ses élèves." },
+            { s: 2, ep: 14, id: "Sf4CfQuU2o", title: "Syren", desc: "Une nageuse inonde Paris." },
+            { s: 2, ep: 15, id: "Tg5DgRvV3p", title: "Rossignoble", desc: "Une chanteuse transforme Paris en comédie." },
+            { s: 2, ep: 16, id: "Uh6EhSwW4q", title: "L'insaisissable", desc: "Penny, l'assistante de Jagged Stone." },
+            { s: 2, ep: 17, id: "Vi7FiTxX5r", title: "Anansi", desc: "La sœur de Nino devient une araignée." },
+            { s: 2, ep: 18, id: "Wj8GjUyY6s", title: "Le Marchand de Sable", desc: "Les cauchemars prennent vie." },
+            { s: 2, ep: 19, id: "Xk9HkVzZ7t", title: "Inverso", desc: "Marc et Nathaniel s'allient." },
+            { s: 2, ep: 20, id: "Yl0IlWaA8u", title: "Le Patineur", desc: "Philippe Candeloro gèle Paris." },
+            { s: 2, ep: 21, id: "DBvN9VMPF_c", title: "Style Queen", desc: "La mère de Chloé attaque." },
+            { s: 2, ep: 22, id: "DBvN9VMPF_c", title: "Queen Wasp", desc: "Chloé utilise le miraculous de l'abeille." },
+            { s: 2, ep: 23, id: "Pc1ZcNrR9l", title: "Maledikteur", desc: "Le maire de Paris devient un dictateur." },
+            { s: 2, ep: 24, id: "EOOaM2GDEAY", title: "Catalyste", desc: "Le Jour des Héros - Partie 1." },
+            { s: 2, ep: 25, id: "BalLtmXywDs", title: "Mayura", desc: "Le Jour des Héros - Partie 2." },
+            { s: 2, ep: 26, id: "nZVt0HwDdzU", title: "Pire Noël", desc: "Spécial Noël avec le Père Noël." },
+
+            // SAISON 3
+            { s: 3, ep: 1, id: "Tg5DgRvV3p", title: "Rebrousse-Temps", desc: "Une vieille amie de Maître Fu." },
+            { s: 3, ep: 2, id: "Uh6EhSwW4q", title: "Papa Garou", desc: "Le père de Marinette protège sa fille." },
+            { s: 3, ep: 3, id: "Vi7FiTxX5r", title: "Caméléon", desc: "Lila vole l'apparence des autres." },
+            { s: 3, ep: 4, id: "Wj8GjUyY6s", title: "Animaestro", desc: "Thomas Astruc s'akumatise." },
+            { s: 3, ep: 5, id: "Xk9HkVzZ7t", title: "Boulangerix", desc: "Le grand-père de Marinette." },
+            { s: 3, ep: 6, id: "Yl0IlWaA8u", title: "Silence", desc: "Luka perd sa voix." },
+            { s: 3, ep: 7, id: "N8oerclDJ44", title: "Oblivio", desc: "Amnésie pour nos héros." },
+            { s: 3, ep: 8, id: "An2KnYcC0w", title: "Climatika 2", desc: "Le retour du froid." },
+            { s: 3, ep: 9, id: "Bo3LoZdD1x", title: "Poupéflekta", desc: "Mayura crée un sentimonstre." },
+            { s: 3, ep: 10, id: "Cp4MpAeE2y", title: "Oni-Chan", desc: "Kagami jalouse de Lila." },
+            { s: 3, ep: 11, id: "Dq5NqBfF3z", title: "Miraculeur", desc: "Sabrina veut des pouvoirs." },
+            { s: 3, ep: 12, id: "Er6OrCgG4a", title: "La Marionnettiste 2", desc: "Retour au musée Grévin." },
+            { s: 3, ep: 13, id: "Fs7PsDhH5b", title: "Desperada", desc: "Une guitariste méchante." },
+            { s: 3, ep: 14, id: "Gt8QtEiI6c", title: "Startrain", desc: "La mère de Max dans l'espace." },
+            { s: 3, ep: 15, id: "Hu9RuFjJ7d", title: "Chasseuse de Kwamis", desc: "Mme Mendeleiev découvre les Kwamis." },
+            { s: 3, ep: 16, id: "Iv0SvGkK8e", title: "Festin", desc: "Le passé de Maître Fu ressurgit." },
+            { s: 3, ep: 17, id: "Jw1TwHlL9f", title: "Ikari Gozen", desc: "La mère de Kagami." },
+            { s: 3, ep: 18, id: "Kx2UxImM0g", title: "Timetagger", desc: "Un méchant du futur." },
+            { s: 3, ep: 19, id: "Ly3VyJnN1h", title: "Trouble Fête", desc: "Wayhem s'énerve." },
+            { s: 3, ep: 20, id: "Mz4WzKoO2i", title: "Gamer 2.0", desc: "Le retour du jeu vidéo." },
+            { s: 3, ep: 21, id: "Na5XaLpP3j", title: "Chat Blanc", desc: "Le futur apocalyptique." },
+            { s: 3, ep: 22, id: "Ob6YbMqQ4k", title: "Félix", desc: "Le cousin d'Adrien sème le trouble." },
+            { s: 3, ep: 23, id: "Pc7ZcNrR5l", title: "Ladybug", desc: "Lila fait renvoyer Marinette." },
+            { s: 3, ep: 24, id: "XvKGelPpoQM", title: "Maître Noël", desc: "Le petit frère de Nino." },
+            { s: 3, ep: 25, id: "Re9BePtT7n", title: "Mangeamour", desc: "La bataille des Miraculous 1." },
+            { s: 3, ep: 26, id: "Sf0CfQuU8o", title: "Miracle Queen", desc: "La bataille des Miraculous 2." },
+
+            // SAISON 4
+            { s: 4, ep: 1, id: "Fs7PsDhH5b", title: "Vérité", desc: "Luka veut savoir qui est son père." },
+            { s: 4, ep: 2, id: "Gt8QtEiI6c", title: "Mensonge", desc: "Kagami souffre des secrets d'Adrien." },
+            { s: 4, ep: 3, id: "Hu9RuFjJ7d", title: "Le gang des secrets", desc: "Les amies de Marinette akumatisées." },
+            { s: 4, ep: 4, id: "Iv0SvGkK8e", title: "Mr. Pigeon 72", desc: "72ème akumatisation de M. Ramier." },
+            { s: 4, ep: 5, id: "Kx2UxImM0g", title: "Fu Furieux", desc: "Maître Fu a perdu la mémoire." },
+            { s: 4, ep: 6, id: "Ly3VyJnN1h", title: "Pirkell", desc: "Un méchant qui rétrécit tout." },
+            { s: 4, ep: 7, id: "Mz4WzKoO2i", title: "Queen Banana", desc: "Chloé et son sentimonstre banane." },
+            { s: 4, ep: 8, id: "Na5XaLpP3j", title: "Culpabysse", desc: "Rose et son secret." },
+            { s: 4, ep: 9, id: "Ob6YbMqQ4k", title: "Crocoduel", desc: "Juleka et Luka face à leurs parents." },
+            { s: 4, ep: 10, id: "Pc7ZcNrR5l", title: "Optigami", desc: "Le plan génial du Papillon." },
+            { s: 4, ep: 11, id: "Qd8AdOsS6m", title: "Sentibulleur", desc: "Alya est mise à l'épreuve." },
+            { s: 4, ep: 12, id: "Re9BePtT7n", title: "Larme Ultime", desc: "Un méchant très triste." },
+            { s: 4, ep: 13, id: "Sf0CfQuU8o", title: "Sangsure", desc: "Mylène devient l'héroïne souris." },
+            { s: 4, ep: 14, id: "Tg1DgRvV9p", title: "Exauceur", desc: "Les rêves deviennent réalité." },
+            { s: 4, ep: 15, id: "Uh2EhSwW0q", title: "Hack-San", desc: "Le robot de Max infecté." },
+            { s: 4, ep: 16, id: "Vi3FiTxX1r", title: "Simplificator", desc: "Le grand-père de Marinette simplifie tout." },
+            { s: 4, ep: 17, id: "Wj4GjUyY2s", title: "Glaciator 2", desc: "Le retour du glacier." },
+            { s: 4, ep: 18, id: "Xk5HkVzZ3t", title: "Chère Famille", desc: "La famille de Marinette s'énerve." },
+            { s: 4, ep: 19, id: "Yl6IlWaA4u", title: "Éphémère", desc: "L'épisode du 100ème." },
+            { s: 4, ep: 20, id: "Zm7JmXbB5v", title: "Gabriel Agreste", desc: "Félix découvre le secret de Gabriel." },
+            { s: 4, ep: 21, id: "An8KnYcC6w", title: "Psycomédien", desc: "Un humoriste qui ne fait pas rire." },
+            { s: 4, ep: 22, id: "Bo9LoZdD7x", title: "Kuro Neko", desc: "Chat Noir abandonne son miraculous." },
+            { s: 4, ep: 23, id: "Cp0MpAeE8y", title: "Penalteam", desc: "Chloé crée une équipe de foot méchante." },
+            { s: 4, ep: 24, id: "Dq1NqBfF9z", title: "Qilin", desc: "La mère de Marinette face à l'injustice." },
+            { s: 4, ep: 25, id: "Er2OrCgG0a", title: "Risque", desc: "La dernière attaque - Partie 1." },
+            { s: 4, ep: 26, id: "Fs3PsDhH1b", title: "Réplique", desc: "La dernière attaque - Partie 2." },
+
+            // SAISON 5
+            { s: 5, ep: 1, id: "Zm7JmXbB5v", title: "Évolution", desc: "Monarque utilise le voyage dans le temps." },
+            { s: 5, ep: 2, id: "An8KnYcC6w", title: "Multiplication", desc: "Le plan des bagues de Monarque." },
+            { s: 5, ep: 3, id: "Bo9LoZdD7x", title: "Destruction", desc: "Chat Noir utilise son cataclysme sur Monarque." },
+            { s: 5, ep: 4, id: "Cp0MpAeE8y", title: "Jubilation", desc: "Le pouvoir de la joie." },
+            { s: 5, ep: 5, id: "Dq1NqBfF9z", title: "Détermination", desc: "Marinette et Adrien à la patinoire." },
+            { s: 5, ep: 6, id: "Er2OrCgG0a", title: "Passion", desc: "Nathalie et Gabriel face au passé." },
+            { s: 5, ep: 7, id: "Fs3PsDhH1b", title: "Réunion", desc: "Marinette communique avec les anciennes Ladybug." },
+            { s: 5, ep: 8, id: "Gt4QtEiI2c", title: "Illusion", desc: "Le retour de Nino en tant que Résistance." },
+            { s: 5, ep: 9, id: "Hu5RuFjJ3d", title: "Exaltation", desc: "Ladybug et Chat Noir s'embrassent." },
+            { s: 5, ep: 10, id: "Iv6SvGkK4e", title: "Transmission", desc: "Le choix des Kwamis - Partie 1." },
+            { s: 5, ep: 11, id: "Jw7TwHlL5f", title: "Déflagration", desc: "Le choix des Kwamis - Partie 2." },
+            { s: 5, ep: 12, id: "Kx8UxImM6g", title: "Perfection", desc: "Kagami veut être parfaite pour Adrien." },
+            { s: 5, ep: 13, id: "Ly9VyJnN7h", title: "Migration", desc: "Luka découvre les identités secrètes." },
+            { s: 5, ep: 14, id: "Mz0WzKoO8i", title: "Dérision", desc: "Le passé traumatisant de Marinette avec Kim." },
+            { s: 5, ep: 15, id: "Na1XaLpP9j", title: "Intuition", desc: "Monarque utilise le pouvoir du serpent." },
+            { s: 5, ep: 16, id: "Ob2YbMqQ0k", title: "Protection", desc: "Kagami et Adrien protégés par leurs parents." },
+            { s: 5, ep: 17, id: "Pc3ZcNrR1l", title: "Adoration", desc: "Marinette et Zoé travaillent ensemble." },
+            { s: 5, ep: 18, id: "Qd4AdOsS2m", title: "Émotion", desc: "Félix crée un monde sans adultes." },
+            { s: 5, ep: 19, id: "Re5BePtT3n", title: "Prétention", desc: "Félix et Kagami se rapprochent." },
+            { s: 5, ep: 20, id: "Sf6CfQuU4o", title: "Révélation", desc: "Lila manipule tout le monde." },
+            { s: 5, ep: 21, id: "Tg7DgRvV5p", title: "Confrontation", desc: "Lila vs Marinette." },
+            { s: 5, ep: 22, id: "Uh8EhSwW6q", title: "Collusion", desc: "Mme Bustier devient maire ?" },
+            { s: 5, ep: 23, id: "Vi9FiTxX7r", title: "Révolution", desc: "Chloé prend le contrôle de Paris." },
+            { s: 5, ep: 24, id: "Wj0GjUyY8s", title: "Représentation", desc: "Le spectacle de fin d'année." },
+            { s: 5, ep: 25, id: "Xk1HkVzZ9t", title: "Conformation", desc: "Le dernier jour - Partie 1." },
+            { s: 5, ep: 26, id: "Yl2IlWaA0u", title: "Re-création", desc: "Le dernier jour - Partie 2." },
+            { s: 5, ep: 27, id: "Zm3JmXbB1v", title: "Action", desc: "Épisode spécial sur l'écologie." }
         ];
-        
-        const saison2 = [
-            { id: "Fs1PsDhH9b", title: "S02E01 - Le Collectionneur", desc: "The Collector - Le père d'Adrien se fait akumatiser.", duration: "22:45", year: "2016" },
-            { id: "Gt2QtEiI0c", title: "S02E02 - Désastres", desc: "Despair Bear - Un ours en peluche devient maléfique.", duration: "22:30", year: "2016" },
-            { id: "Hu3RuFjJ1d", title: "S02E03 - Prime Queen", desc: "Prime Queen - Une animatrice télévision devient dangereuse.", duration: "22:35", year: "2016" },
-            { id: "Iv4SvGkK2e", title: "S02E04 - Le Hibou Noir", desc: "Dark Owl - Un justicier masqué se fait akumatiser.", duration: "22:40", year: "2016" },
-            { id: "Jw5TwHlL3f", title: "S02E05 - Gigantitan", desc: "Gigantitan - Un bébé devient un géant.", duration: "22:25", year: "2016" },
-            { id: "Kx6UxImM4g", title: "S02E06 - Riposte", desc: "Riposte - Une escrimeuse veut se venger.", duration: "22:30", year: "2016" },
-            { id: "Ly7VyJnN5h", title: "S02E07 - Sapotis", desc: "Sapotis - Des jumeaux malicieux se multiplient.", duration: "22:35", year: "2016" },
-            { id: "Mz8WzKoO6i", title: "S02E08 - Le Marchand de Sable", desc: "Sandboy - Un marchand de sable donne des cauchemars.", duration: "22:40", year: "2016" },
-            { id: "Na9XaLpP7j", title: "S02E09 - L'Invasion des Zombies", desc: "Zombizou - Un baiser transforme les gens en zombies.", duration: "22:25", year: "2016" },
-            { id: "Ob0YbMqQ8k", title: "S02E10 - Le Roi Singe", desc: "King Monkey - Un singe roi veut dominer Paris.", duration: "22:30", year: "2016" },
-            { id: "Pc1ZcNrR9l", title: "S02E11 - Malediktator", desc: "Malediktator - Un maire dictateur.", duration: "22:35", year: "2016" },
-            { id: "Qd2AdOsS0m", title: "S02E12 - Frozer", desc: "Frozer - Un patineur gèle Paris.", duration: "22:40", year: "2016" },
-            { id: "Re3BePtT1n", title: "S02E13 - Style Queen", desc: "Style Queen - Une créatrice de mode devient redoutable.", duration: "22:45", year: "2016" },
-            { id: "Sf4CfQuU2o", title: "S02E14 - Troublemaker", desc: "Troublemaker - Une fan invasive cause des problèmes.", duration: "22:30", year: "2016" }
-        ];
-        
-        const saison3 = [
-            { id: "Tg5DgRvV3p", title: "S03E01 - Caméléon", desc: "Chameleon - Lila se transforme en caméléon.", duration: "22:30", year: "2017" },
-            { id: "Uh6EhSwW4q", title: "S03E02 - Animaestro", desc: "Animaestro - Un animateur contrôle les personnages.", duration: "22:35", year: "2017" },
-            { id: "Vi7FiTxX5r", title: "S03E03 - Boulangerix", desc: "Bakerix - Un boulanger devient un monstre.", duration: "22:30", year: "2017" },
-            { id: "Wj8GjUyY6s", title: "S03E04 - Chasseur de Rêves", desc: "Dream Hunter - Un chasseur de rêves dangereux.", duration: "22:40", year: "2017" },
-            { id: "Xk9HkVzZ7t", title: "S03E05 - Miraculeur", desc: "Miraculer - Un imitateur de miraculous.", duration: "22:35", year: "2017" },
-            { id: "Yl0IlWaA8u", title: "S03E06 - Pire Garçon", desc: "Worst Boy - Un garçon veut détruire le monde.", duration: "22:30", year: "2017" },
-            { id: "Zm1JmXbB9v", title: "S03E07 - Silencieux", desc: "Silencer - Un rappeur devient silencieux.", duration: "22:35", year: "2017" },
-            { id: "An2KnYcC0w", title: "S03E08 - Oni-Chan", desc: "Oni-Chan - Un démon vengeur.", duration: "22:40", year: "2017" },
-            { id: "Bo3LoZdD1x", title: "S03E09 - Chat Blanc", desc: "Cat Blanc - Chat Noir devient maléfique.", duration: "23:00", year: "2017" },
-            { id: "Cp4MpAeE2y", title: "S03E10 - Félix", desc: "Felix - Le cousin d'Adrien arrive.", duration: "22:45", year: "2017" },
-            { id: "Dq5NqBfF3z", title: "S03E11 - Ladybug", desc: "Ladybug - Une version maléfique de Ladybug.", duration: "23:00", year: "2017" },
-            { id: "Er6OrCgG4a", title: "S03E12 - Maître Fu", desc: "Master Fu - Les origines du maître.", duration: "23:00", year: "2017" }
-        ];
-        
-        const saison4 = [
-            { id: "Fs7PsDhH5b", title: "S04E01 - Truth", desc: "Truth - Un garçon veut connaître la vérité.", duration: "22:30", year: "2021" },
-            { id: "Gt8QtEiI6c", title: "S04E02 - Lies", desc: "Lies - Les mensonges se retournent contre Adrien.", duration: "22:35", year: "2021" },
-            { id: "Hu9RuFjJ7d", title: "S04E03 - Gang des Secrets", desc: "Gang of Secrets - Le secret de Marinette est menacé.", duration: "22:40", year: "2021" },
-            { id: "Iv0SvGkK8e", title: "S04E04 - M. Pigeon 72", desc: "Mr. Pigeon 72 - Le retour de M. Pigeon.", duration: "22:30", year: "2021" },
-            { id: "Jw1TwHlL9f", title: "S04E05 - Pyscomédien", desc: "Psycomedian - Un comédien contrôle les émotions.", duration: "22:35", year: "2021" },
-            { id: "Kx2UxImM0g", title: "S04E06 - Furious Fu", desc: "Furious Fu - Maître Fu devient furieux.", duration: "22:40", year: "2021" },
-            { id: "Ly3VyJnN1h", title: "S04E07 - Sole Crusher", desc: "Sole Crusher - Une fille écrase tout.", duration: "22:30", year: "2021" },
-            { id: "Mz4WzKoO2i", title: "S04E08 - Queen Banana", desc: "Queen Banana - Une reine banane dangereuse.", duration: "22:35", year: "2021" },
-            { id: "Na5XaLpP3j", title: "S04E09 - Gabriel Agreste", desc: "Gabriel Agreste - Les secrets du père d'Adrien.", duration: "22:45", year: "2021" },
-            { id: "Ob6YbMqQ4k", title: "S04E10 - Crocoduel", desc: "Crocoduel - Un combat de famille.", duration: "22:30", year: "2021" },
-            { id: "Pc7ZcNrR5l", title: "S04E11 - Glaciator 2", desc: "Glaciator 2 - Le retour du glacier maléfique.", duration: "22:35", year: "2021" },
-            { id: "Qd8AdOsS6m", title: "S04E12 - Hack-San", desc: "Hack-San - Un hacker attaque les miraculous.", duration: "22:40", year: "2021" },
-            { id: "Re9BePtT7n", title: "S04E13 - Koma Koma", desc: "Koma Koma - Un musicien crée le chaos.", duration: "22:30", year: "2021" },
-            { id: "Sf0CfQuU8o", title: "S04E14 - Optigami", desc: "Optigami - Un papillon espion.", duration: "22:35", year: "2021" },
-            { id: "Tg1DgRvV9p", title: "S04E15 - Sentibulleur", desc: "Sentibubbler - Un bulleur envoyé.", duration: "22:40", year: "2021" },
-            { id: "Uh2EhSwW0q", title: "S04E16 - Glaciator 3", desc: "Glaciator 3 - La dernière apparition du glacier.", duration: "22:30", year: "2021" },
-            { id: "Vi3FiTxX1r", title: "S04E17 - Aile de la Liberté", desc: "Wings of Liberty - Une héroïne américaine.", duration: "22:35", year: "2021" },
-            { id: "Wj4GjUyY2s", title: "S04E18 - Déflagration", desc: "Deflagration - Une explosion menace Paris.", duration: "22:40", year: "2021" },
-            { id: "Xk5HkVzZ3t", title: "S04E19 - Guerrière", desc: "Warrior - Une guerrière légendaire.", duration: "22:30", year: "2021" },
-            { id: "Yl6IlWaA4u", title: "S04E20 - Strikeback", desc: "Strikeback - Le combat final de la saison.", duration: "23:00", year: "2021" }
-        ];
-        
-        const saison5 = [
-            { id: "Zm7JmXbB5v", title: "S05E01 - Evolution", desc: "Evolution - Le Papillon change de tactique.", duration: "22:30", year: "2022" },
-            { id: "An8KnYcC6w", title: "S05E02 - Multiplication", desc: "Multiplication - Les miraculous se multiplient.", duration: "22:35", year: "2022" },
-            { id: "Bo9LoZdD7x", title: "S05E03 - Destruction", desc: "Destruction - Un pouvoir destructeur apparaît.", duration: "22:40", year: "2022" },
-            { id: "Cp0MpAeE8y", title: "S05E04 - Jubilation", desc: "Jubilation - La joie extrême devient dangereuse.", duration: "22:30", year: "2022" },
-            { id: "Dq1NqBfF9z", title: "S05E05 - Illusion", desc: "Illusion - Les apparences sont trompeuses.", duration: "22:35", year: "2022" },
-            { id: "Er2OrCgG0a", title: "S05E06 - Détermination", desc: "Determination - La détermination peut être nuisible.", duration: "22:40", year: "2022" },
-            { id: "Fs3PsDhH1b", title: "S05E07 - Passion", desc: "Passion - La passion devient obsession.", duration: "22:30", year: "2022" },
-            { id: "Gt4QtEiI2c", title: "S05E08 - Révélation", desc: "Revelation - Les secrets sont révélés.", duration: "22:35", year: "2022" },
-            { id: "Hu5RuFjJ3d", title: "S05E09 - Confrontation", desc: "Confrontation - L'affrontement final approche.", duration: "22:40", year: "2022" },
-            { id: "Iv6SvGkK4e", title: "S05E10 - Collusion", desc: "Collusion - Les ennemis s'allient.", duration: "22:30", year: "2022" },
-            { id: "Jw7TwHlL5f", title: "S05E11 - Révolution", desc: "Revolution - La révolution est en marche.", duration: "22:35", year: "2022" },
-            { id: "Kx8UxImM6g", title: "S05E12 - Représentation", desc: "Representation - Le grand final.", duration: "23:00", year: "2022" },
-            { id: "Ly9VyJnN7h", title: "S05E13 - Dernier Attaque", desc: "Final Attack - L'ultime combat.", duration: "23:00", year: "2022" }
-        ];
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            createLightSpots();
-            createSparkles();
-            loadVideos('saison1Container', saison1);
-            loadVideos('saison2Container', saison2);
-            loadVideos('saison3Container', saison3);
-            loadVideos('saison4Container', saison4);
-            loadVideos('saison5Container', saison5);
-            setupInteractions();
-            setupVideoModal();
-        });
-        
-        function createLightSpots() {
-            const container = document.getElementById('lightSpots');
-            for (let i = 0; i < 8; i++) {
-                const spot = document.createElement('div');
-                spot.classList.add('spot');
-                spot.style.left = `${Math.random() * 100}%`;
-                spot.style.top = `${Math.random() * 100}%`;
-                spot.style.animationDelay = `${Math.random() * 5}s`;
-                container.appendChild(spot);
+
+        let currentSeason = 'all';
+
+        function renderEpisodes(filteredList) {
+            const container = document.getElementById('episodesContainer');
+            if (filteredList.length === 0) {
+                container.innerHTML = '<div class="loading">Aucun épisode trouvé pour votre recherche.</div>';
+                return;
             }
-        }
-        
-        function createSparkles() {
-            const container = document.getElementById('sparkles');
-            for (let i = 0; i < 100; i++) {
-                const sparkle = document.createElement('div');
-                sparkle.classList.add('sparkle');
-                sparkle.style.left = `${Math.random() * 100}%`;
-                sparkle.style.top = `${Math.random() * 100}%`;
-                sparkle.style.animationDelay = `${Math.random() * 3}s`;
-                container.appendChild(sparkle);
-            }
-        }
-        
-        function loadVideos(containerId, videos) {
-            const container = document.getElementById(containerId);
-            if (!container) return;
-            
-            videos.forEach(video => {
-                const videoItem = document.createElement('div');
-                videoItem.className = 'video-item';
-                videoItem.innerHTML = `
+
+            container.innerHTML = filteredList.map(ep => `
+                <div class="video-item" onclick="openModal('${ep.id}', 'Saison ${ep.s} Épisode ${ep.ep} - ${ep.title.replace(/'/g, "\\'")}')">
+                    <div class="episode-badge">S${ep.s} E${ep.ep}</div>
                     <div class="video-thumbnail">
-                        <img src="https://img.youtube.com/vi/${video.id}/hqdefault.jpg" alt="${video.title}" loading="lazy" onerror="this.src='https://placehold.co/640x360/E63946/white?text=Miraculous'">
+                        <img src="https://img.youtube.com/vi/${ep.id}/mqdefault.jpg" alt="${ep.title}" loading="lazy">
                     </div>
                     <div class="video-info">
-                        <h3>${video.title}</h3>
-                        <p>${video.desc}</p>
-                        <div class="video-meta">
-                            <span><i class="far fa-clock"></i> ${video.duration}</span>
-                            <span><i class="far fa-calendar"></i> ${video.year}</span>
-                            <span><i class="fab fa-youtube"></i> YouTube</span>
-                        </div>
+                        <h3>${ep.title}</h3>
+                        <p>${ep.desc}</p>
                     </div>
-                `;
-                videoItem.addEventListener('click', () => openVideoModal(video.id, video.title, video.desc));
-                container.appendChild(videoItem);
+                </div>
+            `).join('');
+        }
+
+        function filterBySeason(season) {
+            currentSeason = season;
+            
+            // Update buttons
+            document.querySelectorAll('.season-btn').forEach(btn => btn.classList.remove('active'));
+            if (season === 'all') {
+                document.getElementById('btn-all').classList.add('active');
+            } else {
+                document.getElementById(`btn-${season}`).classList.add('active');
+            }
+
+            filterEpisodes();
+        }
+
+        function filterEpisodes() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            
+            const filtered = allEpisodes.filter(ep => {
+                const matchesSeason = currentSeason === 'all' || ep.s == currentSeason;
+                const matchesSearch = ep.title.toLowerCase().includes(searchTerm) || 
+                                    ep.desc.toLowerCase().includes(searchTerm) ||
+                                    `saison ${ep.s}`.includes(searchTerm) ||
+                                    `épisode ${ep.ep}`.includes(searchTerm);
+                return matchesSeason && matchesSearch;
             });
+
+            renderEpisodes(filtered);
         }
-        
-        function setupInteractions() {
-            const trailerBtn = document.getElementById('watchTrailerBtn');
-            if (trailerBtn && saison1[0]) {
-                trailerBtn.addEventListener('click', () => openVideoModal(saison1[0].id, "Bande-annonce Miraculous", "Découvrez la bande-annonce officielle de Miraculous - Les aventures de Ladybug et Chat Noir !"));
-            }
-            
-            const toggle = document.getElementById('categoriesDropdownToggle');
-            const dropdown = document.getElementById('categoriesDropdown');
-            if (toggle && dropdown) {
-                toggle.addEventListener('click', (e) => { e.preventDefault(); dropdown.classList.toggle('active'); });
-                document.addEventListener('click', (e) => { if (!toggle.contains(e.target) && !dropdown.contains(e.target)) dropdown.classList.remove('active'); });
-            }
-        }
-        
-        function setupVideoModal() {
-            const modal = document.getElementById('videoModal');
-            const closeBtn = document.getElementById('closeVideoModal');
-            if (closeBtn) closeBtn.addEventListener('click', closeVideoModal);
-            if (modal) modal.addEventListener('click', (e) => { if (e.target === modal) closeVideoModal(); });
-            document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal?.classList.contains('active')) closeVideoModal(); });
-        }
-        
-        function openVideoModal(videoId, title, description) {
-            const modal = document.getElementById('videoModal');
-            const container = document.getElementById('videoPlayerContainer');
-            const titleEl = document.getElementById('videoModalTitle');
-            const descEl = document.getElementById('videoModalDescription');
-            if (!modal || !container) return;
-            
-            titleEl.textContent = title;
-            descEl.textContent = description;
-            container.innerHTML = '';
-            
-            const iframe = document.createElement('iframe');
-            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&controls=1`;
-            iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen');
-            iframe.setAttribute('allowfullscreen', 'true');
-            iframe.style.cssText = 'width:100%;height:100%;position:absolute;top:0;left:0;border:none';
-            container.appendChild(iframe);
-            modal.classList.add('active');
+
+        function openModal(id, title) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('player').innerHTML = `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0" allowfullscreen allow="autoplay"></iframe>`;
+            document.getElementById('videoModal').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
-        
-        function closeVideoModal() {
-            const modal = document.getElementById('videoModal');
-            const container = document.getElementById('videoPlayerContainer');
-            if (!modal || !container) return;
-            modal.classList.remove('active');
+
+        function closeModal() {
+            document.getElementById('videoModal').classList.remove('active');
+            document.getElementById('player').innerHTML = '';
             document.body.style.overflow = '';
-            container.innerHTML = '';
         }
+
+        // Close modal on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // Close modal on click outside
+        document.getElementById('videoModal').addEventListener('click', (e) => {
+            if (e.target.id === 'videoModal') closeModal();
+        });
+
+        // Initial render
+        document.addEventListener('DOMContentLoaded', () => {
+            renderEpisodes(allEpisodes);
+        });
     </script>
 </body>
 </html>
