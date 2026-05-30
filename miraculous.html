@@ -227,146 +227,925 @@
     <script>
         // Base de données des épisodes
         const allEpisodes = [
-            // SAISON 1
-            { s: 1, ep: 1, id: "C-uqE7oQZbY", title: "Climatika", desc: "Une météorologue devient méchante." },
-            { s: 1, ep: 2, id: "Jq9hPvJZ4yQ", title: "Le Bulleur", desc: "Nino emprisonne les adultes dans des bulles." },
-            { s: 1, ep: 3, id: "Gq8QZfVr3Lk", title: "Le Pharaon", desc: "Un passionné d'Égypte menace Paris." },
-            { s: 1, ep: 4, id: "Hd7RwYtU5nP", title: "Lady Wifi", desc: "Alya veut démasquer Ladybug." },
-            { s: 1, ep: 5, id: "Kw3XmRbC9vF", title: "Chronogirl", desc: "Alix voyage dans le temps." },
-            { s: 1, ep: 6, id: "Pv2YzNwT8qM", title: "M. Pigeon", desc: "Un amoureux des pigeons akumatise." },
-            { s: 1, ep: 7, id: "Lk9QwErTy1u", title: "Le Dessinateur", desc: "Nathaniel donne vie à ses dessins." },
-            { s: 1, ep: 8, id: "Mz2XcVbNn7h", title: "Rogercop", desc: "Le père de Sabrina devient un robot." },
-            { s: 1, ep: 9, id: "Nx3ZaLkPp9j", title: "L'Imposteur", desc: "Un sculpteur jaloux de Chat Noir." },
-            { s: 1, ep: 10, id: "Ob4YbMqQr2k", title: "Le Dislocœur", desc: "Kim brise les cœurs à la St Valentin." },
-            { s: 1, ep: 11, id: "Ob4YbMqQr2k", title: "Horrificator", desc: "Mylène devient un monstre gluant." },
-            { s: 1, ep: 12, id: "Qd6AdOsSs4m", title: "Le Chevalier Noir", desc: "M. d'Argencourt veut conquérir Paris." },
-            { s: 1, ep: 13, id: "Vi1FiTxXx9r", title: "Le Mime", desc: "Le père de Mylène devient invisible." },
-            { s: 1, ep: 14, id: "Qd6AdOsSs4m", title: "Kung Food", desc: "L'oncle de Marinette devient un chef guerrier." },
-            { s: 1, ep: 15, id: "Re7BePtTt5n", title: "Le Gamer", desc: "Max transforme Paris en jeu vidéo." },
-            { s: 1, ep: 16, id: "Sf8CfQuUu6o", title: "Animan", desc: "Le gardien du zoo devient un animal." },
-            { s: 1, ep: 17, id: "LZSaE3sxxTc", title: "Antibug", desc: "Chloé devient l'opposé de Ladybug." },
-            { s: 1, ep: 18, id: "paDTb0FbIxY", title: "La Marionnettiste", desc: "Manon contrôle les poupées." },
-            { s: 1, ep: 19, id: "Xk3HkVzZz1t", title: "Reflekta", desc: "Juleka transforme tout le monde en elle." },
-            { s: 1, ep: 20, id: "Wj2GjUyYy0s", title: "Numéric", desc: "Un photographe emprisonne les gens." },
-            { s: 1, ep: 21, id: "Wj2GjUyYy0s", title: "Guitar Vilain", desc: "Jagged Stone devient méchant." },
-            { s: 1, ep: 22, id: "Yl4IlWaA2u", title: "Princesse Fragrance", desc: "Rose utilise un parfum magique." },
-            { s: 1, ep: 23, id: "An6KnYcC4w", title: "Jackady", desc: "Un hypnotiseur contrôle les gens." },
-            { s: 1, ep: 24, id: "Cp8MpAeE6y", title: "Volpina", desc: "Lila utilise un faux miraculous." },
-            { s: 1, ep: 25, id: "1hc_-3RhOiY", title: "Origines Partie 1", desc: "La rencontre de Ladybug et Chat Noir." },
-            { s: 1, ep: 26, id: "1hc_-3RhOiY", title: "Origines Partie 2", desc: "Le premier combat contre Cœur de Pierre." },
+            
+            {
+                        "s": 1,
+                        "ep": 1,
+                        "id": "y0FEhAqCzUg",
+                        "title": "Climatika",
+                        "desc": "Saison 1, Épisode 1 : Climatika. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 1,
+                        "ep": 2,
+                        "id": "y0FEhAqCzUg",
+                        "title": "Le Bulleur",
+                        "desc": "Saison 1, Épisode 2 : Le Bulleur. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 1,
+                        "ep": 3,
+                        "id": "y0FEhAqCzUg",
+                        "title": "Le Pharaon",
+                        "desc": "Saison 1, Épisode 3 : Le Pharaon. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 1,
+                        "ep": 4,
+                        "id": "y0FEhAqCzUg",
+                        "title": "Lady Wifi",
+                        "desc": "Saison 1, Épisode 4 : Lady Wifi. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 1,
+                        "ep": 5,
+                        "id": "y0FEhAqCzUg",
+                        "title": "Chronogirl",
+                        "desc": "Saison 1, Épisode 5 : Chronogirl. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 1,
+                        "ep": 6,
+                        "id": "y0FEhAqCzUg",
+                        "title": "M. Pigeon",
+                        "desc": "Saison 1, Épisode 6 : M. Pigeon. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 1,
+                        "ep": 7,
+                        "id": "y0FEhAqCzUg",
+                        "title": "Le Dessinateur",
+                        "desc": "Saison 1, Épisode 7 : Le Dessinateur. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 1,
+                        "ep": 8,
+                        "id": "y0FEhAqCzUg",
+                        "title": "Rogercop",
+                        "desc": "Saison 1, Épisode 8 : Rogercop. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 1,
+                        "ep": 9,
+                        "id": "y0FEhAqCzUg",
+                        "title": "L'Imposteur",
+                        "desc": "Saison 1, Épisode 9 : L'Imposteur. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 1,
+                        "ep": 10,
+                        "id": "y0FEhAqCzUg",
+                        "title": "Le Dislocœur",
+                        "desc": "Saison 1, Épisode 10 : Le Dislocœur. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 1,
+                        "ep": 11,
+                        "id": "y0FEhAqCzUg",
+                        "title": "Horrificator",
+                        "desc": "Saison 1, Épisode 11 : Horrificator. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 1,
+                        "ep": 12,
+                        "id": "y0FEhAqCzUg",
+                        "title": "Le Chevalier Noir",
+                        "desc": "Saison 1, Épisode 12 : Le Chevalier Noir. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 1,
+                        "ep": 13,
+                        "id": "y0FEhAqCzUg",
+                        "title": "Le Mime",
+                        "desc": "Saison 1, Épisode 13 : Le Mime. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 1,
+                        "ep": 14,
+                        "id": "y0FEhAqCzUg",
+                        "title": "Kung Food",
+                        "desc": "Saison 1, Épisode 14 : Kung Food. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 1,
+                        "ep": 15,
+                        "id": "y0FEhAqCzUg",
+                        "title": "Le Gamer",
+                        "desc": "Saison 1, Épisode 15 : Le Gamer. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 1,
+                        "ep": 16,
+                        "id": "y0FEhAqCzUg",
+                        "title": "Animan",
+                        "desc": "Saison 1, Épisode 16 : Animan. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 1,
+                        "ep": 17,
+                        "id": "LZSaE3sxxTc",
+                        "title": "Antibug",
+                        "desc": "Saison 1, Épisode 17 : Antibug. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 1,
+                        "ep": 18,
+                        "id": "paDTb0FbIxY",
+                        "title": "La Marionnettiste",
+                        "desc": "Saison 1, Épisode 18 : La Marionnettiste. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 1,
+                        "ep": 19,
+                        "id": "y0FEhAqCzUg",
+                        "title": "Reflekta",
+                        "desc": "Saison 1, Épisode 19 : Reflekta. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 1,
+                        "ep": 20,
+                        "id": "y0FEhAqCzUg",
+                        "title": "Numéric",
+                        "desc": "Saison 1, Épisode 20 : Numéric. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 1,
+                        "ep": 21,
+                        "id": "y0FEhAqCzUg",
+                        "title": "Guitar Vilain",
+                        "desc": "Saison 1, Épisode 21 : Guitar Vilain. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 1,
+                        "ep": 22,
+                        "id": "y0FEhAqCzUg",
+                        "title": "Princesse Fragrance",
+                        "desc": "Saison 1, Épisode 22 : Princesse Fragrance. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 1,
+                        "ep": 23,
+                        "id": "y0FEhAqCzUg",
+                        "title": "Jackady",
+                        "desc": "Saison 1, Épisode 23 : Jackady. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 1,
+                        "ep": 24,
+                        "id": "y0FEhAqCzUg",
+                        "title": "Volpina",
+                        "desc": "Saison 1, Épisode 24 : Volpina. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 1,
+                        "ep": 25,
+                        "id": "y0FEhAqCzUg",
+                        "title": "Ladybug et Chat Noir (Origines - Partie 1)",
+                        "desc": "Saison 1, Épisode 25 : Ladybug et Chat Noir (Origines - Partie 1). Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 1,
+                        "ep": 26,
+                        "id": "y0FEhAqCzUg",
+                        "title": "Cœur de Pierre (Origines - Partie 2)",
+                        "desc": "Saison 1, Épisode 26 : Cœur de Pierre (Origines - Partie 2). Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 2,
+                        "ep": 1,
+                        "id": "BalLtmXywDs",
+                        "title": "Le Collectionneur",
+                        "desc": "Saison 2, Épisode 1 : Le Collectionneur. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 2,
+                        "ep": 2,
+                        "id": "BalLtmXywDs",
+                        "title": "Doudou Vilain",
+                        "desc": "Saison 2, Épisode 2 : Doudou Vilain. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 2,
+                        "ep": 3,
+                        "id": "BalLtmXywDs",
+                        "title": "Audimatrix",
+                        "desc": "Saison 2, Épisode 3 : Audimatrix. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 2,
+                        "ep": 4,
+                        "id": "BalLtmXywDs",
+                        "title": "La Béfana",
+                        "desc": "Saison 2, Épisode 4 : La Béfana. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 2,
+                        "ep": 5,
+                        "id": "BalLtmXywDs",
+                        "title": "Riposte",
+                        "desc": "Saison 2, Épisode 5 : Riposte. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 2,
+                        "ep": 6,
+                        "id": "BalLtmXywDs",
+                        "title": "Robostus",
+                        "desc": "Saison 2, Épisode 6 : Robostus. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 2,
+                        "ep": 7,
+                        "id": "BalLtmXywDs",
+                        "title": "Gigantitan",
+                        "desc": "Saison 2, Épisode 7 : Gigantitan. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 2,
+                        "ep": 8,
+                        "id": "BalLtmXywDs",
+                        "title": "Le Hibou Noir",
+                        "desc": "Saison 2, Épisode 8 : Le Hibou Noir. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 2,
+                        "ep": 9,
+                        "id": "BalLtmXywDs",
+                        "title": "Glaciator",
+                        "desc": "Saison 2, Épisode 9 : Glaciator. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 2,
+                        "ep": 10,
+                        "id": "BalLtmXywDs",
+                        "title": "Sapotis",
+                        "desc": "Saison 2, Épisode 10 : Sapotis. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 2,
+                        "ep": 11,
+                        "id": "BalLtmXywDs",
+                        "title": "Gorizilla",
+                        "desc": "Saison 2, Épisode 11 : Gorizilla. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 2,
+                        "ep": 12,
+                        "id": "BalLtmXywDs",
+                        "title": "Capitaine Hardrock",
+                        "desc": "Saison 2, Épisode 12 : Capitaine Hardrock. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 2,
+                        "ep": 13,
+                        "id": "BalLtmXywDs",
+                        "title": "Zombizou",
+                        "desc": "Saison 2, Épisode 13 : Zombizou. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 2,
+                        "ep": 14,
+                        "id": "BalLtmXywDs",
+                        "title": "Syren",
+                        "desc": "Saison 2, Épisode 14 : Syren. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 2,
+                        "ep": 15,
+                        "id": "BalLtmXywDs",
+                        "title": "Rossignoble",
+                        "desc": "Saison 2, Épisode 15 : Rossignoble. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 2,
+                        "ep": 16,
+                        "id": "BalLtmXywDs",
+                        "title": "L'insaisissable",
+                        "desc": "Saison 2, Épisode 16 : L'insaisissable. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 2,
+                        "ep": 17,
+                        "id": "BalLtmXywDs",
+                        "title": "Anansi",
+                        "desc": "Saison 2, Épisode 17 : Anansi. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 2,
+                        "ep": 18,
+                        "id": "BalLtmXywDs",
+                        "title": "Le Marchand de Sable",
+                        "desc": "Saison 2, Épisode 18 : Le Marchand de Sable. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 2,
+                        "ep": 19,
+                        "id": "BalLtmXywDs",
+                        "title": "Inverso",
+                        "desc": "Saison 2, Épisode 19 : Inverso. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 2,
+                        "ep": 20,
+                        "id": "BalLtmXywDs",
+                        "title": "Le Patineur",
+                        "desc": "Saison 2, Épisode 20 : Le Patineur. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 2,
+                        "ep": 21,
+                        "id": "DBvN9VMPF_c",
+                        "title": "Style Queen",
+                        "desc": "Saison 2, Épisode 21 : Style Queen. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 2,
+                        "ep": 22,
+                        "id": "BalLtmXywDs",
+                        "title": "Queen Wasp",
+                        "desc": "Saison 2, Épisode 22 : Queen Wasp. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 2,
+                        "ep": 23,
+                        "id": "BalLtmXywDs",
+                        "title": "Maledikteur",
+                        "desc": "Saison 2, Épisode 23 : Maledikteur. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 2,
+                        "ep": 24,
+                        "id": "EOOaM2GDEAY",
+                        "title": "Catalyste",
+                        "desc": "Saison 2, Épisode 24 : Catalyste. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 2,
+                        "ep": 25,
+                        "id": "BalLtmXywDs",
+                        "title": "Mayura",
+                        "desc": "Saison 2, Épisode 25 : Mayura. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 2,
+                        "ep": 26,
+                        "id": "BalLtmXywDs",
+                        "title": "Pire Noël",
+                        "desc": "Saison 2, Épisode 26 : Pire Noël. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 3,
+                        "ep": 1,
+                        "id": "N8oerclDJ44",
+                        "title": "Rebrousse-Temps",
+                        "desc": "Saison 3, Épisode 1 : Rebrousse-Temps. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 3,
+                        "ep": 2,
+                        "id": "N8oerclDJ44",
+                        "title": "Papa Garou",
+                        "desc": "Saison 3, Épisode 2 : Papa Garou. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 3,
+                        "ep": 3,
+                        "id": "N8oerclDJ44",
+                        "title": "Caméléon",
+                        "desc": "Saison 3, Épisode 3 : Caméléon. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 3,
+                        "ep": 4,
+                        "id": "N8oerclDJ44",
+                        "title": "Animaestro",
+                        "desc": "Saison 3, Épisode 4 : Animaestro. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 3,
+                        "ep": 5,
+                        "id": "N8oerclDJ44",
+                        "title": "Boulangerix",
+                        "desc": "Saison 3, Épisode 5 : Boulangerix. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 3,
+                        "ep": 6,
+                        "id": "N8oerclDJ44",
+                        "title": "Silence",
+                        "desc": "Saison 3, Épisode 6 : Silence. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 3,
+                        "ep": 7,
+                        "id": "N8oerclDJ44",
+                        "title": "Oblivio",
+                        "desc": "Saison 3, Épisode 7 : Oblivio. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 3,
+                        "ep": 8,
+                        "id": "N8oerclDJ44",
+                        "title": "Climatika 2",
+                        "desc": "Saison 3, Épisode 8 : Climatika 2. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 3,
+                        "ep": 9,
+                        "id": "N8oerclDJ44",
+                        "title": "Poupéflekta",
+                        "desc": "Saison 3, Épisode 9 : Poupéflekta. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 3,
+                        "ep": 10,
+                        "id": "N8oerclDJ44",
+                        "title": "Oni-Chan",
+                        "desc": "Saison 3, Épisode 10 : Oni-Chan. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 3,
+                        "ep": 11,
+                        "id": "N8oerclDJ44",
+                        "title": "Miraculeur",
+                        "desc": "Saison 3, Épisode 11 : Miraculeur. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 3,
+                        "ep": 12,
+                        "id": "N8oerclDJ44",
+                        "title": "La Marionnettiste 2",
+                        "desc": "Saison 3, Épisode 12 : La Marionnettiste 2. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 3,
+                        "ep": 13,
+                        "id": "N8oerclDJ44",
+                        "title": "Desperada",
+                        "desc": "Saison 3, Épisode 13 : Desperada. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 3,
+                        "ep": 14,
+                        "id": "xeFmobdB6dU",
+                        "title": "Startrain",
+                        "desc": "Saison 3, Épisode 14 : Startrain. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 3,
+                        "ep": 15,
+                        "id": "N8oerclDJ44",
+                        "title": "Chasseuse de Kwamis",
+                        "desc": "Saison 3, Épisode 15 : Chasseuse de Kwamis. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 3,
+                        "ep": 16,
+                        "id": "N8oerclDJ44",
+                        "title": "Festin",
+                        "desc": "Saison 3, Épisode 16 : Festin. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 3,
+                        "ep": 17,
+                        "id": "N8oerclDJ44",
+                        "title": "Ikari Gozen",
+                        "desc": "Saison 3, Épisode 17 : Ikari Gozen. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 3,
+                        "ep": 18,
+                        "id": "N8oerclDJ44",
+                        "title": "Timetagger",
+                        "desc": "Saison 3, Épisode 18 : Timetagger. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 3,
+                        "ep": 19,
+                        "id": "N8oerclDJ44",
+                        "title": "Trouble Fête",
+                        "desc": "Saison 3, Épisode 19 : Trouble Fête. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 3,
+                        "ep": 20,
+                        "id": "N8oerclDJ44",
+                        "title": "Gamer 2.0",
+                        "desc": "Saison 3, Épisode 20 : Gamer 2.0. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 3,
+                        "ep": 21,
+                        "id": "N8oerclDJ44",
+                        "title": "Chat Blanc",
+                        "desc": "Saison 3, Épisode 21 : Chat Blanc. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 3,
+                        "ep": 22,
+                        "id": "N8oerclDJ44",
+                        "title": "Félix",
+                        "desc": "Saison 3, Épisode 22 : Félix. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 3,
+                        "ep": 23,
+                        "id": "N8oerclDJ44",
+                        "title": "Ladybug",
+                        "desc": "Saison 3, Épisode 23 : Ladybug. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 3,
+                        "ep": 24,
+                        "id": "XvKGelPpoQM",
+                        "title": "Maître Noël",
+                        "desc": "Saison 3, Épisode 24 : Maître Noël. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 3,
+                        "ep": 25,
+                        "id": "N8oerclDJ44",
+                        "title": "Mangeamour",
+                        "desc": "Saison 3, Épisode 25 : Mangeamour. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 3,
+                        "ep": 26,
+                        "id": "N8oerclDJ44",
+                        "title": "Miracle Queen",
+                        "desc": "Saison 3, Épisode 26 : Miracle Queen. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 4,
+                        "ep": 1,
+                        "id": "EOOaM2GDEAY",
+                        "title": "Vérité",
+                        "desc": "Saison 4, Épisode 1 : Vérité. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 4,
+                        "ep": 2,
+                        "id": "EOOaM2GDEAY",
+                        "title": "Mensonge",
+                        "desc": "Saison 4, Épisode 2 : Mensonge. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 4,
+                        "ep": 3,
+                        "id": "EOOaM2GDEAY",
+                        "title": "Le gang des secrets",
+                        "desc": "Saison 4, Épisode 3 : Le gang des secrets. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 4,
+                        "ep": 4,
+                        "id": "EOOaM2GDEAY",
+                        "title": "Mr. Pigeon 72",
+                        "desc": "Saison 4, Épisode 4 : Mr. Pigeon 72. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 4,
+                        "ep": 5,
+                        "id": "EOOaM2GDEAY",
+                        "title": "Fu Furieux",
+                        "desc": "Saison 4, Épisode 5 : Fu Furieux. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 4,
+                        "ep": 6,
+                        "id": "EOOaM2GDEAY",
+                        "title": "Pirkell",
+                        "desc": "Saison 4, Épisode 6 : Pirkell. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 4,
+                        "ep": 7,
+                        "id": "EOOaM2GDEAY",
+                        "title": "Queen Banana",
+                        "desc": "Saison 4, Épisode 7 : Queen Banana. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 4,
+                        "ep": 8,
+                        "id": "EOOaM2GDEAY",
+                        "title": "Culpabysse",
+                        "desc": "Saison 4, Épisode 8 : Culpabysse. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 4,
+                        "ep": 9,
+                        "id": "EOOaM2GDEAY",
+                        "title": "Crocoduel",
+                        "desc": "Saison 4, Épisode 9 : Crocoduel. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 4,
+                        "ep": 10,
+                        "id": "EOOaM2GDEAY",
+                        "title": "Optigami",
+                        "desc": "Saison 4, Épisode 10 : Optigami. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 4,
+                        "ep": 11,
+                        "id": "EOOaM2GDEAY",
+                        "title": "Sentibulleur",
+                        "desc": "Saison 4, Épisode 11 : Sentibulleur. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 4,
+                        "ep": 12,
+                        "id": "EOOaM2GDEAY",
+                        "title": "Larme Ultime",
+                        "desc": "Saison 4, Épisode 12 : Larme Ultime. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 4,
+                        "ep": 13,
+                        "id": "EOOaM2GDEAY",
+                        "title": "Sangsure",
+                        "desc": "Saison 4, Épisode 13 : Sangsure. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 4,
+                        "ep": 14,
+                        "id": "EOOaM2GDEAY",
+                        "title": "Exauceur",
+                        "desc": "Saison 4, Épisode 14 : Exauceur. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 4,
+                        "ep": 15,
+                        "id": "EOOaM2GDEAY",
+                        "title": "Hack-San",
+                        "desc": "Saison 4, Épisode 15 : Hack-San. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 4,
+                        "ep": 16,
+                        "id": "EOOaM2GDEAY",
+                        "title": "Simplificator",
+                        "desc": "Saison 4, Épisode 16 : Simplificator. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 4,
+                        "ep": 17,
+                        "id": "EOOaM2GDEAY",
+                        "title": "Glaciator 2",
+                        "desc": "Saison 4, Épisode 17 : Glaciator 2. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 4,
+                        "ep": 18,
+                        "id": "EOOaM2GDEAY",
+                        "title": "Chère Famille",
+                        "desc": "Saison 4, Épisode 18 : Chère Famille. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 4,
+                        "ep": 19,
+                        "id": "EOOaM2GDEAY",
+                        "title": "Éphémère",
+                        "desc": "Saison 4, Épisode 19 : Éphémère. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 4,
+                        "ep": 20,
+                        "id": "EOOaM2GDEAY",
+                        "title": "Gabriel Agreste",
+                        "desc": "Saison 4, Épisode 20 : Gabriel Agreste. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 4,
+                        "ep": 21,
+                        "id": "EOOaM2GDEAY",
+                        "title": "Psycomédien",
+                        "desc": "Saison 4, Épisode 21 : Psycomédien. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 4,
+                        "ep": 22,
+                        "id": "EOOaM2GDEAY",
+                        "title": "Kuro Neko",
+                        "desc": "Saison 4, Épisode 22 : Kuro Neko. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 4,
+                        "ep": 23,
+                        "id": "EOOaM2GDEAY",
+                        "title": "Penalteam",
+                        "desc": "Saison 4, Épisode 23 : Penalteam. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 4,
+                        "ep": 24,
+                        "id": "EOOaM2GDEAY",
+                        "title": "Qilin",
+                        "desc": "Saison 4, Épisode 24 : Qilin. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 4,
+                        "ep": 25,
+                        "id": "EOOaM2GDEAY",
+                        "title": "Risque",
+                        "desc": "Saison 4, Épisode 25 : Risque. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 4,
+                        "ep": 26,
+                        "id": "EOOaM2GDEAY",
+                        "title": "Réplique",
+                        "desc": "Saison 4, Épisode 26 : Réplique. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 5,
+                        "ep": 1,
+                        "id": "H23UwElT2w8",
+                        "title": "Évolution",
+                        "desc": "Saison 5, Épisode 1 : Évolution. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 5,
+                        "ep": 2,
+                        "id": "H23UwElT2w8",
+                        "title": "Multiplication",
+                        "desc": "Saison 5, Épisode 2 : Multiplication. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 5,
+                        "ep": 3,
+                        "id": "H23UwElT2w8",
+                        "title": "Destruction",
+                        "desc": "Saison 5, Épisode 3 : Destruction. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 5,
+                        "ep": 4,
+                        "id": "H23UwElT2w8",
+                        "title": "Jubilation",
+                        "desc": "Saison 5, Épisode 4 : Jubilation. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 5,
+                        "ep": 5,
+                        "id": "H23UwElT2w8",
+                        "title": "Détermination",
+                        "desc": "Saison 5, Épisode 5 : Détermination. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 5,
+                        "ep": 6,
+                        "id": "H23UwElT2w8",
+                        "title": "Passion",
+                        "desc": "Saison 5, Épisode 6 : Passion. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 5,
+                        "ep": 7,
+                        "id": "H23UwElT2w8",
+                        "title": "Réunion",
+                        "desc": "Saison 5, Épisode 7 : Réunion. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 5,
+                        "ep": 8,
+                        "id": "H23UwElT2w8",
+                        "title": "Illusion",
+                        "desc": "Saison 5, Épisode 8 : Illusion. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 5,
+                        "ep": 9,
+                        "id": "H23UwElT2w8",
+                        "title": "Exaltation",
+                        "desc": "Saison 5, Épisode 9 : Exaltation. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 5,
+                        "ep": 10,
+                        "id": "H23UwElT2w8",
+                        "title": "Transmission",
+                        "desc": "Saison 5, Épisode 10 : Transmission. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 5,
+                        "ep": 11,
+                        "id": "H23UwElT2w8",
+                        "title": "Déflagration",
+                        "desc": "Saison 5, Épisode 11 : Déflagration. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 5,
+                        "ep": 12,
+                        "id": "H23UwElT2w8",
+                        "title": "Perfection",
+                        "desc": "Saison 5, Épisode 12 : Perfection. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 5,
+                        "ep": 13,
+                        "id": "H23UwElT2w8",
+                        "title": "Migration",
+                        "desc": "Saison 5, Épisode 13 : Migration. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 5,
+                        "ep": 14,
+                        "id": "H23UwElT2w8",
+                        "title": "Dérision",
+                        "desc": "Saison 5, Épisode 14 : Dérision. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 5,
+                        "ep": 15,
+                        "id": "H23UwElT2w8",
+                        "title": "Intuition",
+                        "desc": "Saison 5, Épisode 15 : Intuition. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 5,
+                        "ep": 16,
+                        "id": "H23UwElT2w8",
+                        "title": "Protection",
+                        "desc": "Saison 5, Épisode 16 : Protection. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 5,
+                        "ep": 17,
+                        "id": "H23UwElT2w8",
+                        "title": "Adoration",
+                        "desc": "Saison 5, Épisode 17 : Adoration. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 5,
+                        "ep": 18,
+                        "id": "H23UwElT2w8",
+                        "title": "Émotion",
+                        "desc": "Saison 5, Épisode 18 : Émotion. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 5,
+                        "ep": 19,
+                        "id": "H23UwElT2w8",
+                        "title": "Prétention",
+                        "desc": "Saison 5, Épisode 19 : Prétention. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 5,
+                        "ep": 20,
+                        "id": "H23UwElT2w8",
+                        "title": "Révélation",
+                        "desc": "Saison 5, Épisode 20 : Révélation. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 5,
+                        "ep": 21,
+                        "id": "H23UwElT2w8",
+                        "title": "Confrontation",
+                        "desc": "Saison 5, Épisode 21 : Confrontation. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 5,
+                        "ep": 22,
+                        "id": "H23UwElT2w8",
+                        "title": "Collusion",
+                        "desc": "Saison 5, Épisode 22 : Collusion. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 5,
+                        "ep": 23,
+                        "id": "H23UwElT2w8",
+                        "title": "Révolution",
+                        "desc": "Saison 5, Épisode 23 : Révolution. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 5,
+                        "ep": 24,
+                        "id": "H23UwElT2w8",
+                        "title": "Représentation",
+                        "desc": "Saison 5, Épisode 24 : Représentation. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 5,
+                        "ep": 25,
+                        "id": "H23UwElT2w8",
+                        "title": "Conformation",
+                        "desc": "Saison 5, Épisode 25 : Conformation. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 5,
+                        "ep": 26,
+                        "id": "H23UwElT2w8",
+                        "title": "Re-création",
+                        "desc": "Saison 5, Épisode 26 : Re-création. Suivez les aventures de Ladybug et Chat Noir."
+            },
+            {
+                        "s": 5,
+                        "ep": 27,
+                        "id": "H23UwElT2w8",
+                        "title": "Action",
+                        "desc": "Saison 5, Épisode 27 : Action. Suivez les aventures de Ladybug et Chat Noir."
+            }
 
-            // SAISON 2
-            { s: 2, ep: 1, id: "Fs1PsDhH9b", title: "Le Collectionneur", desc: "Gabriel Agreste s'akumatise lui-même." },
-            { s: 2, ep: 2, id: "Gt2QtEiI0c", title: "Doudou Vilain", desc: "Le majordome de Chloé se venge." },
-            { s: 2, ep: 3, id: "Hu3RuFjJ1d", title: "Audimatrix", desc: "Nadja Chamack veut faire de l'audience." },
-            { s: 2, ep: 4, id: "Iv4SvGkK2e", title: "La Béfana", desc: "La grand-mère de Marinette attaque." },
-            { s: 2, ep: 5, id: "Jw5TwHlL3f", title: "Riposte", desc: "Kagami (Kagami) défie Adrien." },
-            { s: 2, ep: 6, id: "Kx6UxImM4g", title: "Robostus", desc: "Le robot de Max devient vivant." },
-            { s: 2, ep: 7, id: "Ly7VyJnN5h", title: "Gigantitan", desc: "Un bébé devient un géant." },
-            { s: 2, ep: 8, id: "Mz8WzKoO6i", title: "Le Hibou Noir", desc: "Le directeur devient un super-héros." },
-            { s: 2, ep: 9, id: "Na9XaLpP7j", title: "Glaciator", desc: "André le glacier gèle les amoureux." },
-            { s: 2, ep: 10, id: "Ob0YbMqQ8k", title: "Sapotis", desc: "Les sœurs d'Alya se multiplient." },
-            { s: 2, ep: 11, id: "Pc1ZcNrR9l", title: "Gorizilla", desc: "Le garde du corps d'Adrien." },
-            { s: 2, ep: 12, id: "Qd2AdOsS0m", title: "Capitaine Hardrock", desc: "La mère de Juleka sur son bateau." },
-            { s: 2, ep: 13, id: "Pnby-petMa4", title: "Zombizou", desc: "Mme Bustier protège ses élèves." },
-            { s: 2, ep: 14, id: "Sf4CfQuU2o", title: "Syren", desc: "Une nageuse inonde Paris." },
-            { s: 2, ep: 15, id: "Tg5DgRvV3p", title: "Rossignoble", desc: "Une chanteuse transforme Paris en comédie." },
-            { s: 2, ep: 16, id: "Uh6EhSwW4q", title: "L'insaisissable", desc: "Penny, l'assistante de Jagged Stone." },
-            { s: 2, ep: 17, id: "Vi7FiTxX5r", title: "Anansi", desc: "La sœur de Nino devient une araignée." },
-            { s: 2, ep: 18, id: "Wj8GjUyY6s", title: "Le Marchand de Sable", desc: "Les cauchemars prennent vie." },
-            { s: 2, ep: 19, id: "Xk9HkVzZ7t", title: "Inverso", desc: "Marc et Nathaniel s'allient." },
-            { s: 2, ep: 20, id: "Yl0IlWaA8u", title: "Le Patineur", desc: "Philippe Candeloro gèle Paris." },
-            { s: 2, ep: 21, id: "DBvN9VMPF_c", title: "Style Queen", desc: "La mère de Chloé attaque." },
-            { s: 2, ep: 22, id: "DBvN9VMPF_c", title: "Queen Wasp", desc: "Chloé utilise le miraculous de l'abeille." },
-            { s: 2, ep: 23, id: "Pc1ZcNrR9l", title: "Maledikteur", desc: "Le maire de Paris devient un dictateur." },
-            { s: 2, ep: 24, id: "EOOaM2GDEAY", title: "Catalyste", desc: "Le Jour des Héros - Partie 1." },
-            { s: 2, ep: 25, id: "BalLtmXywDs", title: "Mayura", desc: "Le Jour des Héros - Partie 2." },
-            { s: 2, ep: 26, id: "nZVt0HwDdzU", title: "Pire Noël", desc: "Spécial Noël avec le Père Noël." },
-
-            // SAISON 3
-            { s: 3, ep: 1, id: "Tg5DgRvV3p", title: "Rebrousse-Temps", desc: "Une vieille amie de Maître Fu." },
-            { s: 3, ep: 2, id: "Uh6EhSwW4q", title: "Papa Garou", desc: "Le père de Marinette protège sa fille." },
-            { s: 3, ep: 3, id: "Vi7FiTxX5r", title: "Caméléon", desc: "Lila vole l'apparence des autres." },
-            { s: 3, ep: 4, id: "Wj8GjUyY6s", title: "Animaestro", desc: "Thomas Astruc s'akumatise." },
-            { s: 3, ep: 5, id: "Xk9HkVzZ7t", title: "Boulangerix", desc: "Le grand-père de Marinette." },
-            { s: 3, ep: 6, id: "Yl0IlWaA8u", title: "Silence", desc: "Luka perd sa voix." },
-            { s: 3, ep: 7, id: "N8oerclDJ44", title: "Oblivio", desc: "Amnésie pour nos héros." },
-            { s: 3, ep: 8, id: "An2KnYcC0w", title: "Climatika 2", desc: "Le retour du froid." },
-            { s: 3, ep: 9, id: "Bo3LoZdD1x", title: "Poupéflekta", desc: "Mayura crée un sentimonstre." },
-            { s: 3, ep: 10, id: "Cp4MpAeE2y", title: "Oni-Chan", desc: "Kagami jalouse de Lila." },
-            { s: 3, ep: 11, id: "Dq5NqBfF3z", title: "Miraculeur", desc: "Sabrina veut des pouvoirs." },
-            { s: 3, ep: 12, id: "Er6OrCgG4a", title: "La Marionnettiste 2", desc: "Retour au musée Grévin." },
-            { s: 3, ep: 13, id: "Fs7PsDhH5b", title: "Desperada", desc: "Une guitariste méchante." },
-            { s: 3, ep: 14, id: "Gt8QtEiI6c", title: "Startrain", desc: "La mère de Max dans l'espace." },
-            { s: 3, ep: 15, id: "Hu9RuFjJ7d", title: "Chasseuse de Kwamis", desc: "Mme Mendeleiev découvre les Kwamis." },
-            { s: 3, ep: 16, id: "Iv0SvGkK8e", title: "Festin", desc: "Le passé de Maître Fu ressurgit." },
-            { s: 3, ep: 17, id: "Jw1TwHlL9f", title: "Ikari Gozen", desc: "La mère de Kagami." },
-            { s: 3, ep: 18, id: "Kx2UxImM0g", title: "Timetagger", desc: "Un méchant du futur." },
-            { s: 3, ep: 19, id: "Ly3VyJnN1h", title: "Trouble Fête", desc: "Wayhem s'énerve." },
-            { s: 3, ep: 20, id: "Mz4WzKoO2i", title: "Gamer 2.0", desc: "Le retour du jeu vidéo." },
-            { s: 3, ep: 21, id: "Na5XaLpP3j", title: "Chat Blanc", desc: "Le futur apocalyptique." },
-            { s: 3, ep: 22, id: "Ob6YbMqQ4k", title: "Félix", desc: "Le cousin d'Adrien sème le trouble." },
-            { s: 3, ep: 23, id: "Pc7ZcNrR5l", title: "Ladybug", desc: "Lila fait renvoyer Marinette." },
-            { s: 3, ep: 24, id: "XvKGelPpoQM", title: "Maître Noël", desc: "Le petit frère de Nino." },
-            { s: 3, ep: 25, id: "Re9BePtT7n", title: "Mangeamour", desc: "La bataille des Miraculous 1." },
-            { s: 3, ep: 26, id: "Sf0CfQuU8o", title: "Miracle Queen", desc: "La bataille des Miraculous 2." },
-
-            // SAISON 4
-            { s: 4, ep: 1, id: "Fs7PsDhH5b", title: "Vérité", desc: "Luka veut savoir qui est son père." },
-            { s: 4, ep: 2, id: "Gt8QtEiI6c", title: "Mensonge", desc: "Kagami souffre des secrets d'Adrien." },
-            { s: 4, ep: 3, id: "Hu9RuFjJ7d", title: "Le gang des secrets", desc: "Les amies de Marinette akumatisées." },
-            { s: 4, ep: 4, id: "Iv0SvGkK8e", title: "Mr. Pigeon 72", desc: "72ème akumatisation de M. Ramier." },
-            { s: 4, ep: 5, id: "Kx2UxImM0g", title: "Fu Furieux", desc: "Maître Fu a perdu la mémoire." },
-            { s: 4, ep: 6, id: "Ly3VyJnN1h", title: "Pirkell", desc: "Un méchant qui rétrécit tout." },
-            { s: 4, ep: 7, id: "Mz4WzKoO2i", title: "Queen Banana", desc: "Chloé et son sentimonstre banane." },
-            { s: 4, ep: 8, id: "Na5XaLpP3j", title: "Culpabysse", desc: "Rose et son secret." },
-            { s: 4, ep: 9, id: "Ob6YbMqQ4k", title: "Crocoduel", desc: "Juleka et Luka face à leurs parents." },
-            { s: 4, ep: 10, id: "Pc7ZcNrR5l", title: "Optigami", desc: "Le plan génial du Papillon." },
-            { s: 4, ep: 11, id: "Qd8AdOsS6m", title: "Sentibulleur", desc: "Alya est mise à l'épreuve." },
-            { s: 4, ep: 12, id: "Re9BePtT7n", title: "Larme Ultime", desc: "Un méchant très triste." },
-            { s: 4, ep: 13, id: "Sf0CfQuU8o", title: "Sangsure", desc: "Mylène devient l'héroïne souris." },
-            { s: 4, ep: 14, id: "Tg1DgRvV9p", title: "Exauceur", desc: "Les rêves deviennent réalité." },
-            { s: 4, ep: 15, id: "Uh2EhSwW0q", title: "Hack-San", desc: "Le robot de Max infecté." },
-            { s: 4, ep: 16, id: "Vi3FiTxX1r", title: "Simplificator", desc: "Le grand-père de Marinette simplifie tout." },
-            { s: 4, ep: 17, id: "Wj4GjUyY2s", title: "Glaciator 2", desc: "Le retour du glacier." },
-            { s: 4, ep: 18, id: "Xk5HkVzZ3t", title: "Chère Famille", desc: "La famille de Marinette s'énerve." },
-            { s: 4, ep: 19, id: "Yl6IlWaA4u", title: "Éphémère", desc: "L'épisode du 100ème." },
-            { s: 4, ep: 20, id: "Zm7JmXbB5v", title: "Gabriel Agreste", desc: "Félix découvre le secret de Gabriel." },
-            { s: 4, ep: 21, id: "An8KnYcC6w", title: "Psycomédien", desc: "Un humoriste qui ne fait pas rire." },
-            { s: 4, ep: 22, id: "Bo9LoZdD7x", title: "Kuro Neko", desc: "Chat Noir abandonne son miraculous." },
-            { s: 4, ep: 23, id: "Cp0MpAeE8y", title: "Penalteam", desc: "Chloé crée une équipe de foot méchante." },
-            { s: 4, ep: 24, id: "Dq1NqBfF9z", title: "Qilin", desc: "La mère de Marinette face à l'injustice." },
-            { s: 4, ep: 25, id: "Er2OrCgG0a", title: "Risque", desc: "La dernière attaque - Partie 1." },
-            { s: 4, ep: 26, id: "Fs3PsDhH1b", title: "Réplique", desc: "La dernière attaque - Partie 2." },
-
-            // SAISON 5
-            { s: 5, ep: 1, id: "Zm7JmXbB5v", title: "Évolution", desc: "Monarque utilise le voyage dans le temps." },
-            { s: 5, ep: 2, id: "An8KnYcC6w", title: "Multiplication", desc: "Le plan des bagues de Monarque." },
-            { s: 5, ep: 3, id: "Bo9LoZdD7x", title: "Destruction", desc: "Chat Noir utilise son cataclysme sur Monarque." },
-            { s: 5, ep: 4, id: "Cp0MpAeE8y", title: "Jubilation", desc: "Le pouvoir de la joie." },
-            { s: 5, ep: 5, id: "Dq1NqBfF9z", title: "Détermination", desc: "Marinette et Adrien à la patinoire." },
-            { s: 5, ep: 6, id: "Er2OrCgG0a", title: "Passion", desc: "Nathalie et Gabriel face au passé." },
-            { s: 5, ep: 7, id: "Fs3PsDhH1b", title: "Réunion", desc: "Marinette communique avec les anciennes Ladybug." },
-            { s: 5, ep: 8, id: "Gt4QtEiI2c", title: "Illusion", desc: "Le retour de Nino en tant que Résistance." },
-            { s: 5, ep: 9, id: "Hu5RuFjJ3d", title: "Exaltation", desc: "Ladybug et Chat Noir s'embrassent." },
-            { s: 5, ep: 10, id: "Iv6SvGkK4e", title: "Transmission", desc: "Le choix des Kwamis - Partie 1." },
-            { s: 5, ep: 11, id: "Jw7TwHlL5f", title: "Déflagration", desc: "Le choix des Kwamis - Partie 2." },
-            { s: 5, ep: 12, id: "Kx8UxImM6g", title: "Perfection", desc: "Kagami veut être parfaite pour Adrien." },
-            { s: 5, ep: 13, id: "Ly9VyJnN7h", title: "Migration", desc: "Luka découvre les identités secrètes." },
-            { s: 5, ep: 14, id: "Mz0WzKoO8i", title: "Dérision", desc: "Le passé traumatisant de Marinette avec Kim." },
-            { s: 5, ep: 15, id: "Na1XaLpP9j", title: "Intuition", desc: "Monarque utilise le pouvoir du serpent." },
-            { s: 5, ep: 16, id: "Ob2YbMqQ0k", title: "Protection", desc: "Kagami et Adrien protégés par leurs parents." },
-            { s: 5, ep: 17, id: "Pc3ZcNrR1l", title: "Adoration", desc: "Marinette et Zoé travaillent ensemble." },
-            { s: 5, ep: 18, id: "Qd4AdOsS2m", title: "Émotion", desc: "Félix crée un monde sans adultes." },
-            { s: 5, ep: 19, id: "Re5BePtT3n", title: "Prétention", desc: "Félix et Kagami se rapprochent." },
-            { s: 5, ep: 20, id: "Sf6CfQuU4o", title: "Révélation", desc: "Lila manipule tout le monde." },
-            { s: 5, ep: 21, id: "Tg7DgRvV5p", title: "Confrontation", desc: "Lila vs Marinette." },
-            { s: 5, ep: 22, id: "Uh8EhSwW6q", title: "Collusion", desc: "Mme Bustier devient maire ?" },
-            { s: 5, ep: 23, id: "Vi9FiTxX7r", title: "Révolution", desc: "Chloé prend le contrôle de Paris." },
-            { s: 5, ep: 24, id: "Wj0GjUyY8s", title: "Représentation", desc: "Le spectacle de fin d'année." },
-            { s: 5, ep: 25, id: "Xk1HkVzZ9t", title: "Conformation", desc: "Le dernier jour - Partie 1." },
-            { s: 5, ep: 26, id: "Yl2IlWaA0u", title: "Re-création", desc: "Le dernier jour - Partie 2." },
-            { s: 5, ep: 27, id: "Zm3JmXbB1v", title: "Action", desc: "Épisode spécial sur l'écologie." }
         ];
 
         let currentSeason = 'all';
