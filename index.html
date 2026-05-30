@@ -18,13 +18,9 @@
             --disney-red: #d32f2f;
             --disney-light: #f5f5f5;
             --disney-dark: #121212;
-            --magic-shadow: 0 0 15px rgba(233, 30, 99, 0.3);
             --header-font: 'Poppins', sans-serif;
             --body-font: 'Quicksand', sans-serif;
             --magic-font: 'Dancing Script', cursive;
-            --glass-bg: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
-            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
         }
         
         * { 
@@ -53,120 +49,147 @@
         
         @keyframes fadeInBody { to { opacity: 1; } }
         
-        /* Overlay de blocage avant connexion */
-        .auth-required-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
+        /* ============================================ */
+        /* RESPONSIVE DESIGN - INSTRUCTIONS POUR TOUS LES APPAREILS */
+        /* ============================================ */
+        
+        /* Conteneur principal responsive */
+        .container {
             width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(15px);
-            z-index: 10001;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.5s ease;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
         }
         
-        .auth-required-overlay.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
+        /* MOBILE FIRST - Styles par défaut pour tous les appareils */
+        /* Ces styles s'appliquent aux mobiles (moins de 768px) */
+        
+        body {
+            font-size: 14px;
         }
         
-        .auth-required-card {
-            background: linear-gradient(135deg, #1a0b2e 0%, #2d1b69 100%);
-            border-radius: 30px;
-            padding: 50px;
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-            border: 1px solid rgba(255, 193, 7, 0.3);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-            animation: modalFadeIn 0.5s ease-out;
+        /* Flexbox direction column par défaut (mobile) */
+        .flex-container, 
+        .header-container, 
+        .nav-menu, 
+        .categories-grid,
+        .footer-content,
+        .auth-buttons-container,
+        .sdm-social-buttons {
+            flex-direction: column;
         }
         
-        @keyframes modalFadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
+        /* Espacements réduits sur mobile */
+        .hero {
+            padding: 60px 5% 40px;
         }
         
-        .auth-required-card .magic-icon {
-            font-size: 80px;
-            margin-bottom: 20px;
-            animation: bounce 2s infinite;
+        .hero h1 {
+            font-size: 32px;
         }
         
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        .hero p {
+            font-size: 16px;
         }
         
-        .auth-required-card h2 {
-            font-family: var(--magic-font);
-            font-size: 36px;
-            margin-bottom: 15px;
-            background: linear-gradient(45deg, var(--disney-gold), var(--disney-magenta));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        .auth-required-card p {
-            color: rgba(255,255,255,0.8);
+        .section-title {
+            font-size: 28px;
             margin-bottom: 30px;
+        }
+        
+        .category-card {
+            margin-bottom: 20px;
+        }
+        
+        .category-image {
+            height: 200px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
             font-size: 16px;
         }
         
-        .auth-buttons-container {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
+        /* TABLETTES ET GRANDS ÉCRANS (min-width: 768px) */
+        @media (min-width: 768px) {
+            
+            /* Conteneur principal avec largeur max et centrage */
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+            
+            /* Taille de police augmentée pour meilleure lisibilité */
+            body {
+                font-size: 17px;
+            }
+            
+            /* Flexbox direction row sur tablette et desktop */
+            .flex-container, 
+            .header-container, 
+            .nav-menu, 
+            .categories-grid,
+            .footer-content,
+            .auth-buttons-container,
+            .sdm-social-buttons {
+                flex-direction: row;
+            }
+            
+            /* Espacements normaux */
+            .hero {
+                padding: 120px 5% 80px;
+            }
+            
+            .hero h1 {
+                font-size: 52px;
+            }
+            
+            .hero p {
+                font-size: 22px;
+            }
+            
+            .section-title {
+                font-size: 38px;
+                margin-bottom: 50px;
+            }
+            
+            .category-image {
+                height: 260px;
+            }
+            
+            .btn {
+                padding: 14px 30px;
+                font-size: 17px;
+            }
         }
         
-        .btn-auth-required {
-            padding: 14px 35px;
-            border: none;
-            border-radius: 50px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-family: var(--header-font);
+        /* GRANDS ÉCRANS (min-width: 1024px) */
+        @media (min-width: 1024px) {
+            .hero h1 {
+                font-size: 72px;
+            }
+            
+            .hero p {
+                font-size: 24px;
+            }
+            
+            .section-title {
+                font-size: 42px;
+            }
+            
+            .category-image {
+                height: 280px;
+            }
+            
+            .btn {
+                padding: 16px 35px;
+                font-size: 18px;
+            }
         }
         
-        .btn-login-required {
-            background: linear-gradient(45deg, var(--disney-purple), var(--disney-magenta));
-            color: white;
-            border: 2px solid transparent;
-        }
-        
-        .btn-login-required:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(233, 30, 99, 0.4);
-        }
-        
-        .btn-signup-required {
-            background: transparent;
-            color: var(--disney-gold);
-            border: 2px solid var(--disney-gold);
-        }
-        
-        .btn-signup-required:hover {
-            background: rgba(255, 193, 7, 0.1);
-            transform: translateY(-3px);
-        }
-        
-        /* Contenu principal caché au départ */
-        .main-content {
-            display: none;
-        }
-        
-        .main-content.visible {
-            display: block;
-        }
+        /* ============================================ */
+        /* STYLES DE BASE (suite) */
+        /* ============================================ */
         
         .magic-dust { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; overflow: hidden; pointer-events: none; }
         .dust-particle { position: absolute; width: 4px; height: 4px; border-radius: 50%; background: rgba(255, 255, 255, 0.7); box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8); animation: floatDust 15s infinite linear; }
@@ -195,9 +218,25 @@
             justify-content: space-between; 
             align-items: center; 
             padding: 0 5%; 
-            height: 90px; 
             max-width: 1600px; 
             margin: 0 auto; 
+        }
+        
+        /* Responsive header */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                height: auto;
+                padding: 15px 5%;
+                gap: 15px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .header-container {
+                flex-direction: row;
+                height: 90px;
+            }
         }
         
         .logo-container { 
@@ -224,8 +263,6 @@
         
         .magic-hat::before { content: "🎩"; display: block; transition: all 0.3s ease; }
         
-        .logo-container:hover .magic-hat::before { content: "✨"; transform: scale(1.3) rotate(180deg); color: #1e88e5; filter: drop-shadow(0 0 15px rgba(33, 150, 243, 0.9)); }
-        
         @keyframes hatFloat { 0%, 100% { transform: translateY(0) rotate(0deg); } 25% { transform: translateY(-10px) rotate(-5deg); } 75% { transform: translateY(5px) rotate(5deg); } }
         
         .site-title { 
@@ -238,6 +275,16 @@
             color: transparent; 
             text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5); 
             letter-spacing: 1px; 
+        }
+        
+        @media (max-width: 768px) {
+            .site-title { font-size: 28px; }
+            .magic-hat { font-size: 32px; }
+        }
+        
+        @media (min-width: 768px) {
+            .site-title { font-size: 38px; }
+            .magic-hat { font-size: 42px; }
         }
         
         /* BURGER MENU POUR MOBILE */
@@ -282,14 +329,69 @@
             transition: all 0.4s ease;
         }
         
-        .nav-item { 
-            position: relative; 
+        /* Navigation responsive */
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .nav-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background: linear-gradient(135deg, var(--disney-purple), var(--disney-blue));
+                max-height: 0;
+                overflow: hidden;
+                opacity: 0;
+                padding: 0;
+                z-index: 999;
+            }
+            
+            .nav-menu.open {
+                max-height: 500px;
+                opacity: 1;
+                padding: 10px 0;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            }
+            
+            .nav-item {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .nav-link {
+                padding: 12px 20px;
+                font-size: 16px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .nav-menu {
+                flex-direction: row;
+                position: static;
+                max-height: none;
+                opacity: 1;
+                padding: 0;
+            }
+            
+            .nav-link {
+                padding: 18px 30px;
+                font-size: 15px;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .nav-link {
+                padding: 18px 30px;
+                font-size: 16px;
+            }
         }
         
         .nav-link { 
             color: white; 
             text-decoration: none; 
-            padding: 18px 30px; 
             font-weight: 600; 
             transition: all 0.3s; 
             display: block; 
@@ -334,6 +436,29 @@
             border-top: none; 
         }
         
+        @media (max-width: 768px) {
+            .dropdown-menu {
+                position: static;
+                background: rgba(0, 0, 0, 0.3);
+                max-height: 0;
+                overflow: hidden;
+                opacity: 0;
+                transition: all 0.3s ease;
+                box-shadow: none;
+            }
+            
+            .dropdown-menu.active {
+                max-height: 400px;
+                opacity: 1;
+                padding: 5px 0;
+            }
+            
+            .dropdown-item {
+                text-align: center;
+                padding: 12px 20px;
+            }
+        }
+        
         .dropdown-menu.active { display: block; animation: slideDown 0.3s ease-out; }
         
         .dropdown-item { 
@@ -361,7 +486,6 @@
         /* HERO RESPONSIVE */
         .hero {
             text-align: center;
-            padding: 120px 5% 80px;
             background: radial-gradient(circle at 30% 20%, rgba(33, 150, 243, 0.6) 0%, rgba(21, 101, 192, 0.4) 40%, transparent 70%),
                         radial-gradient(circle at 70% 80%, rgba(156, 39, 176, 0.5) 0%, rgba(103, 58, 183, 0.3) 30%, transparent 60%);
             background-size: cover;
@@ -380,7 +504,6 @@
         
         .hero h1 { 
             font-family: var(--magic-font); 
-            font-size: 72px; 
             margin-bottom: 25px; 
             color: #ffeb3b; 
             text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.7), 0 0 30px rgba(255, 193, 7, 0.5), 0 0 60px rgba(33, 150, 243, 0.3); 
@@ -396,13 +519,29 @@
             bottom: -15px; 
             left: 50%; 
             transform: translateX(-50%); 
-            width: 300px; 
             height: 4px; 
             background: linear-gradient(90deg, transparent, var(--disney-gold), transparent); 
         }
         
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 42px; }
+            .hero h1::after { width: 200px; }
+            .hero p { font-size: 18px; padding: 0 10px; }
+        }
+        
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .hero h1 { font-size: 58px; }
+            .hero h1::after { width: 250px; }
+            .hero p { font-size: 22px; }
+        }
+        
+        @media (min-width: 1024px) {
+            .hero h1 { font-size: 72px; }
+            .hero h1::after { width: 300px; }
+            .hero p { font-size: 24px; }
+        }
+        
         .hero p { 
-            font-size: 24px; 
             max-width: 800px; 
             margin: 0 auto 40px; 
             color: #ffeb3b; 
@@ -419,7 +558,6 @@
         .section-title { 
             text-align: center; 
             margin-bottom: 60px; 
-            font-size: 42px; 
             color: white; 
             font-family: var(--header-font); 
             text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(233, 30, 99, 0.3); 
@@ -442,11 +580,51 @@
         .section-title::before { left: -50px; }
         .section-title::after { right: -50px; }
         
+        @media (max-width: 768px) {
+            .section-title { font-size: 32px; margin-bottom: 40px; }
+            .section-title::before, .section-title::after { display: none; }
+        }
+        
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .section-title { font-size: 38px; }
+        }
+        
+        @media (min-width: 1024px) {
+            .section-title { font-size: 42px; }
+        }
+        
         .categories-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); 
             gap: 35px; 
             margin-bottom: 80px; 
+        }
+        
+        @media (max-width: 576px) {
+            .categories-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+        
+        @media (min-width: 577px) and (max-width: 768px) {
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+        }
+        
+        @media (min-width: 1025px) {
+            .categories-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 35px;
+            }
         }
         
         .category-card { 
@@ -462,11 +640,6 @@
             animation: fadeInUp 0.6s ease-out; 
             animation-fill-mode: both; 
         }
-        
-        .category-card:nth-child(1) { animation-delay: 0.9s; }
-        .category-card:nth-child(2) { animation-delay: 1s; }
-        .category-card:nth-child(3) { animation-delay: 1.1s; }
-        .category-card:nth-child(4) { animation-delay: 1.2s; }
         
         .category-card:hover { 
             transform: translateY(-15px) scale(1.03); 
@@ -485,7 +658,24 @@
             z-index: 2; 
         }
         
-        .category-image { height: 280px; width: 100%; object-fit: cover; transition: transform 0.5s; }
+        .category-image { 
+            width: 100%; 
+            object-fit: cover; 
+            transition: transform 0.5s; 
+        }
+        
+        @media (max-width: 768px) {
+            .category-image { height: 200px; }
+        }
+        
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .category-image { height: 240px; }
+        }
+        
+        @media (min-width: 1024px) {
+            .category-image { height: 280px; }
+        }
+        
         .category-card:hover .category-image { transform: scale(1.05); }
         
         .category-overlay { 
@@ -501,17 +691,35 @@
             transition: transform 0.4s, opacity 0.4s; 
         }
         
+        @media (max-width: 768px) {
+            .category-overlay {
+                opacity: 1;
+                transform: translateY(0);
+                padding: 20px;
+            }
+        }
+        
         .category-card:hover .category-overlay { transform: translateY(0); opacity: 1; }
         
-        .category-overlay h3 { font-size: 28px; margin-bottom: 10px; font-family: var(--header-font); color: var(--disney-gold); text-shadow: 0 0 10px rgba(255, 193, 7, 0.5); }
+        .category-overlay h3 { 
+            font-size: 28px; 
+            margin-bottom: 10px; 
+            font-family: var(--header-font); 
+            color: var(--disney-gold); 
+            text-shadow: 0 0 10px rgba(255, 193, 7, 0.5); 
+        }
+        
+        @media (max-width: 768px) {
+            .category-overlay h3 { font-size: 24px; }
+            .category-overlay p { font-size: 14px; }
+        }
+        
         .category-overlay p { font-size: 16px; opacity: 0.9; line-height: 1.6; }
         
         /* BOUTONS */
         .btn { 
-            padding: 16px 35px; 
             border: none; 
             border-radius: 50px; 
-            font-size: 18px; 
             font-weight: 700; 
             cursor: pointer; 
             transition: all 0.3s; 
@@ -520,6 +728,14 @@
             overflow: hidden; 
             letter-spacing: 1px; 
             animation: fadeInUp 0.8s ease-out 0.8s both; 
+        }
+        
+        @media (max-width: 768px) {
+            .btn { padding: 12px 28px; font-size: 16px; }
+        }
+        
+        @media (min-width: 768px) {
+            .btn { padding: 16px 35px; font-size: 18px; }
         }
         
         .btn-primary { 
@@ -575,9 +791,37 @@
             max-width: 1600px; 
             margin: 0 auto; 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
             gap: 50px; 
             margin-bottom: 50px; 
+        }
+        
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+            
+            .footer-section h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+                width: 80px;
+            }
+            
+            .footer-section a {
+                text-align: center;
+            }
+            
+            .footer-section a:hover {
+                padding-left: 0;
+                transform: translateX(5px);
+            }
+        }
+        
+        @media (min-width: 769px) {
+            .footer-content {
+                grid-template-columns: repeat(4, 1fr);
+            }
         }
         
         .footer-section { position: relative; }
@@ -629,6 +873,11 @@
         .footer-bottom p { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
         .footer-bottom p::before, .footer-bottom p::after { content: '✦'; color: var(--disney-gold); font-size: 18px; }
         
+        @media (max-width: 576px) {
+            .footer-bottom p { font-size: 12px; flex-direction: column; }
+            .footer-bottom p::before, .footer-bottom p::after { display: none; }
+        }
+        
         /* Active page indicator */
         .nav-link.active-page {
             background: rgba(255, 193, 7, 0.2);
@@ -653,7 +902,7 @@
             justify-content: center;
             align-items: center;
         }
-
+        
         .sdm-auth-modal {
             background: linear-gradient(135deg, #fff5e6 0%, #ffe6cc 100%);
             border-radius: 30px;
@@ -664,12 +913,36 @@
             box-shadow: 0 25px 50px rgba(0,0,0,0.3);
             animation: sdmFadeIn 0.3s ease-out;
         }
-
+        
+        @media (max-width: 576px) {
+            .sdm-auth-modal {
+                width: 95%;
+                margin: 10px;
+            }
+            
+            .sdm-tab {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            
+            .sdm-form-panel {
+                padding: 20px;
+            }
+            
+            .sdm-social-buttons {
+                flex-direction: column;
+            }
+            
+            .sdm-social-btn {
+                width: 100%;
+            }
+        }
+        
         @keyframes sdmFadeIn {
             from { opacity: 0; transform: scale(0.95); }
             to { opacity: 1; transform: scale(1); }
         }
-
+        
         .sdm-modal-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 20px;
@@ -677,19 +950,19 @@
             position: relative;
             border-radius: 30px 30px 0 0;
         }
-
+        
         .sdm-modal-header h2 {
             color: white;
             margin: 0;
             font-size: 24px;
         }
-
+        
         .sdm-modal-header p {
             color: rgba(255,255,255,0.9);
             margin: 5px 0 0;
             font-size: 13px;
         }
-
+        
         .sdm-close-btn {
             position: absolute;
             top: 15px;
@@ -699,19 +972,19 @@
             cursor: pointer;
             transition: 0.3s;
         }
-
+        
         .sdm-close-btn:hover {
             color: #ffd700;
             transform: rotate(90deg);
         }
-
+        
         .sdm-tabs {
             display: flex;
             background: #f0e6d2;
             border-bottom: 2px solid #ffd89c;
             flex-wrap: wrap;
         }
-
+        
         .sdm-tab {
             flex: 1;
             padding: 15px;
@@ -724,36 +997,36 @@
             transition: 0.3s;
             min-width: 100px;
         }
-
+        
         .sdm-tab.active {
             background: white;
             color: #667eea;
             border-bottom: 3px solid #667eea;
         }
-
+        
         .sdm-form-panel {
             padding: 25px;
         }
-
+        
         .sdm-form {
             display: none;
         }
-
+        
         .sdm-form.active {
             display: block;
         }
-
+        
         .sdm-input-group {
             margin-bottom: 18px;
         }
-
+        
         .sdm-input-group label {
             display: block;
             margin-bottom: 8px;
             font-weight: bold;
             color: #4a2c2a;
         }
-
+        
         .sdm-input-group input {
             width: 100%;
             padding: 12px 15px;
@@ -762,13 +1035,13 @@
             font-size: 14px;
             transition: 0.3s;
         }
-
+        
         .sdm-input-group input:focus {
             outline: none;
             border-color: #667eea;
             box-shadow: 0 0 0 3px rgba(102,126,234,0.2);
         }
-
+        
         .sdm-btn-auth {
             width: 100%;
             padding: 14px;
@@ -782,28 +1055,12 @@
             transition: 0.3s;
             margin-top: 10px;
         }
-
+        
         .sdm-btn-auth:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(102,126,234,0.4);
         }
-
-        .sdm-btn-secondary {
-            background: transparent;
-            border: none;
-            color: #667eea;
-            cursor: pointer;
-            font-size: 14px;
-            margin-top: 10px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        .sdm-btn-secondary:hover {
-            color: #764ba2;
-            text-decoration: underline;
-        }
-
+        
         .sdm-divider {
             display: flex;
             align-items: center;
@@ -811,19 +1068,19 @@
             margin: 20px 0;
             color: #999;
         }
-
+        
         .sdm-divider::before,
         .sdm-divider::after {
             content: '';
             flex: 1;
             border-bottom: 1px solid #ddd;
         }
-
+        
         .sdm-divider span {
             padding: 0 10px;
             font-size: 12px;
         }
-
+        
         .sdm-social-buttons {
             display: flex;
             gap: 15px;
@@ -831,7 +1088,7 @@
             margin-top: 15px;
             flex-wrap: wrap;
         }
-
+        
         .sdm-social-btn {
             flex: 1;
             display: flex;
@@ -850,36 +1107,31 @@
             border: 1px solid #ddd;
             min-width: 100px;
         }
-
-        .sdm-social-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
+        
         .sdm-social-btn.google-btn:hover {
             background: #DB4437;
             color: white;
             border-color: #DB4437;
         }
-
+        
         .sdm-social-btn.apple-btn:hover {
             background: #000;
             color: white;
             border-color: #000;
         }
-
+        
         .sdm-social-btn.github-btn:hover {
             background: #333;
             color: white;
             border-color: #333;
         }
-
+        
         .sdm-forgot-password {
             text-align: right;
             margin-top: 5px;
             margin-bottom: 15px;
         }
-
+        
         .sdm-forgot-password button {
             background: none;
             border: none;
@@ -888,17 +1140,17 @@
             cursor: pointer;
             font-weight: bold;
         }
-
+        
         .sdm-forgot-password button:hover {
             color: #764ba2;
             text-decoration: underline;
         }
-
+        
         .sdm-back-to-login {
             text-align: center;
             margin-top: 15px;
         }
-
+        
         .sdm-back-to-login button {
             background: none;
             border: none;
@@ -907,12 +1159,12 @@
             font-size: 14px;
             font-weight: bold;
         }
-
+        
         .sdm-back-to-login button:hover {
             color: #764ba2;
             text-decoration: underline;
         }
-
+        
         .sdm-message {
             margin-top: 15px;
             padding: 10px;
@@ -921,25 +1173,25 @@
             text-align: center;
             display: none;
         }
-
+        
         .sdm-message.error {
             background: #ffe0e0;
             color: #d32f2f;
             display: block;
         }
-
+        
         .sdm-message.success {
             background: #e0ffe0;
             color: #2e7d32;
             display: block;
         }
-
+        
         .sdm-message.info {
             background: #e3f2fd;
             color: #1565c0;
             display: block;
         }
-
+        
         /* Widget utilisateur dans la navbar */
         .sdm-user-widget {
             display: inline-flex;
@@ -955,11 +1207,11 @@
             font-size: 14px;
             flex-shrink: 0;
         }
-
+        
         .sdm-user-widget:hover {
             transform: scale(1.05);
         }
-
+        
         .sdm-user-avatar {
             width: 32px;
             height: 32px;
@@ -970,7 +1222,31 @@
             justify-content: center;
             font-size: 18px;
         }
-
+        
+        @media (max-width: 768px) {
+            .sdm-user-widget {
+                margin-left: 0;
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .sdm-user-avatar {
+                width: 28px;
+                height: 28px;
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 375px) {
+            .sdm-user-widget span:last-child {
+                display: none;
+            }
+            
+            .sdm-user-widget {
+                padding: 6px 10px;
+            }
+        }
+        
         /* Loading spinner */
         .sdm-loading {
             display: inline-block;
@@ -982,15 +1258,12 @@
             animation: sdm-spin 0.6s linear infinite;
             margin-right: 8px;
         }
-
+        
         @keyframes sdm-spin {
             to { transform: rotate(360deg); }
         }
         
-        /* ============================================ */
-        /* STYLES DU CHATBOT IA */
-        /* ============================================ */
-        
+        /* Chatbot responsive */
         .chatbot-container {
             position: fixed;
             bottom: 30px;
@@ -1063,6 +1336,28 @@
         
         .chatbot-window.open {
             display: flex;
+        }
+        
+        @media (max-width: 576px) {
+            .chatbot-container {
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .chatbot-toggle {
+                width: 55px;
+                height: 55px;
+            }
+            
+            .chatbot-toggle i {
+                font-size: 26px;
+            }
+            
+            .chatbot-window {
+                width: calc(100vw - 40px);
+                right: -10px;
+                height: 500px;
+            }
         }
         
         .chatbot-header {
@@ -1291,7 +1586,6 @@
             }
         }
         
-        /* Suggestions rapides */
         .quick-suggestions {
             padding: 10px 15px;
             display: flex;
@@ -1316,7 +1610,7 @@
             border-color: #ffc107;
         }
         
-        /* Zone de recherche de dessins animés */
+        /* Zone de recherche responsive */
         .search-section {
             max-width: 1200px;
             margin: 40px auto;
@@ -1331,6 +1625,23 @@
             gap: 10px;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255,193,7,0.2);
+        }
+        
+        @media (max-width: 576px) {
+            .search-container {
+                flex-direction: column;
+                border-radius: 20px;
+            }
+            
+            .search-btn {
+                padding: 12px;
+            }
+        }
+        
+        @media (min-width: 577px) {
+            .search-container {
+                flex-direction: row;
+            }
         }
         
         .search-input {
@@ -1376,6 +1687,12 @@
             display: grid;
         }
         
+        @media (max-width: 576px) {
+            .search-results {
+                grid-template-columns: 1fr;
+            }
+        }
+        
         .result-card {
             background: rgba(255,255,255,0.05);
             border-radius: 15px;
@@ -1410,113 +1727,48 @@
             line-height: 1.4;
         }
         
-        @media (max-width: 576px) {
-            .chatbot-window {
-                width: calc(100vw - 40px);
-                right: -10px;
-                height: 500px;
+        /* Orientation paysage sur mobile */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .hero {
+                padding: 50px 5% 40px;
             }
             
-            .chatbot-container {
-                bottom: 20px;
-                right: 20px;
+            .hero h1 {
+                font-size: 36px;
             }
             
-            .chatbot-toggle {
-                width: 55px;
-                height: 55px;
-            }
-            
-            .chatbot-toggle i {
-                font-size: 26px;
-            }
-            
-            .search-container {
-                flex-direction: column;
-                border-radius: 20px;
-            }
-            
-            .search-btn {
-                padding: 12px;
-            }
-            
-            .auth-required-card {
-                padding: 30px 20px;
-            }
-            
-            .auth-required-card h2 {
-                font-size: 28px;
-            }
-        }
-        
-        /* RESPONSIVE DESIGN */
-        @media (max-width: 1024px) { 
-            .categories-grid { 
-                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
-                gap: 25px;
-            }
-            .hero h1 { font-size: 58px; }
-            .hero p { font-size: 22px; }
-            .section-title { font-size: 38px; }
-        }
-        
-        @media (max-width: 768px) { 
-            .header-container { 
-                flex-direction: row;
-                justify-content: space-between;
-                height: auto;
-                padding: 15px 5%;
-            }
-            .site-title { font-size: 28px; }
-            .magic-hat { font-size: 32px; }
-            .mobile-menu-toggle { display: block; }
-            .nav-menu {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                flex-direction: column;
-                background: linear-gradient(135deg, var(--disney-purple), var(--disney-blue));
-                max-height: 0;
-                overflow: hidden;
-                opacity: 0;
-                padding: 0;
-                z-index: 999;
-            }
             .nav-menu.open {
-                max-height: 500px;
-                opacity: 1;
-                padding: 10px 0;
+                max-height: 300px;
+                overflow-y: auto;
             }
-            .nav-item { width: 100%; text-align: center; }
-            .nav-link { padding: 12px 20px; }
-            .dropdown-menu {
-                position: static;
-                background: rgba(0,0,0,0.3);
-                max-height: 0;
-                overflow: hidden;
-                opacity: 0;
-            }
-            .dropdown-menu.active {
-                max-height: 400px;
-                opacity: 1;
-                padding: 5px 0;
-            }
-            .hero { padding: 80px 5% 50px; }
-            .hero h1 { font-size: 42px; }
-            .hero p { font-size: 18px; }
-            .categories-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
-            .section-title { font-size: 32px; }
-            .section-title::before, .section-title::after { display: none; }
-            .category-overlay { opacity: 1; transform: translateY(0); padding: 20px; }
         }
         
-        @media (max-width: 576px) {
-            .hero h1 { font-size: 32px; }
-            .categories-grid { grid-template-columns: 1fr; }
-            .section-title { font-size: 28px; }
+        /* Améliorations tactiles pour mobile */
+        @media (hover: none) and (pointer: coarse) {
+            .category-card:hover {
+                transform: none;
+            }
+            
+            .category-overlay {
+                opacity: 1;
+                transform: translateY(0);
+                background: linear-gradient(transparent, rgba(0, 0, 0, 0.95));
+            }
+            
+            .btn-primary:active {
+                transform: translateY(0);
+            }
+            
+            .dropdown-item:active {
+                background: rgba(233, 30, 99, 0.3);
+            }
+            
+            .nav-link:active {
+                background: rgba(255, 255, 255, 0.15);
+            }
         }
         
+        /* Scrollbar personnalisée */
         ::-webkit-scrollbar {
             width: 8px;
             height: 8px;
@@ -1531,33 +1783,24 @@
             background: linear-gradient(135deg, var(--disney-purple), var(--disney-magenta));
             border-radius: 10px;
         }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, var(--disney-magenta), var(--disney-gold));
+        }
     </style>
 </head>
 <body>
-    <!-- Overlay de blocage avant connexion -->
-    <div class="auth-required-overlay" id="authRequiredOverlay">
-        <div class="auth-required-card">
-            <div class="magic-icon">🎩✨</div>
-            <h2>Bienvenue sur Universal Toon</h2>
-            <p>Pour accéder à notre plateforme et découvrir tous nos dessins animés, veuillez créer un compte ou vous connecter.</p>
-            <div class="auth-buttons-container">
-                <button class="btn-auth-required btn-login-required" id="openLoginFromOverlay">Se connecter</button>
-                <button class="btn-auth-required btn-signup-required" id="openSignupFromOverlay">Créer un compte</button>
-            </div>
-        </div>
-    </div>
-
     <div class="magic-dust" id="magicDust"></div>
     <div class="twinkling-stars" id="twinklingStars"></div>
     
     <div class="main-content" id="mainContent">
         <header>
             <div class="header-container">
-                <a href="index.html" class="logo-container">
+                <a href="#" class="logo-container">
                     <div class="magic-hat"></div>
                     <h1 class="site-title">Universal Toon</h1>
                 </a>
-                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Menu">
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
                     <i class="fas fa-bars"></i>
                 </button>
                 <div id="sdmAuthBtn" class="sdm-user-widget">
@@ -1567,27 +1810,19 @@
             </div>
             <div class="nav-container">
                 <ul class="nav-menu" id="navMenu">
+                    <li class="nav-item"><a href="#" class="nav-link active" id="homeLink">Accueil</a></li>
                     <li class="nav-item">
-                        <a href="index.html" class="nav-link" id="homeLink">Accueil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link" id="categoriesDropdownToggle">Catégories <i class="fas fa-chevron-down" style="margin-left: 5px; font-size: 12px;"></i></a>
+                        <a href="#" class="nav-link" id="categoriesDropdownToggle">Catégories <i class="fas fa-chevron-down"></i></a>
                         <div class="dropdown-menu" id="categoriesDropdown">
-                            <a href="conte-fee.html" class="dropdown-item">✨ Contes de fée</a>
-                            <a href="aventure.html" class="dropdown-item">⚔️ Aventure & Action</a>
-                            <a href="univers.html" class="dropdown-item">🌍 Univers</a>
-                            <a href="education.html" class="dropdown-item">📚 Éducation</a>
+                            <a href="#" class="dropdown-item">✨ Contes de fée</a>
+                            <a href="#" class="dropdown-item">⚔️ Aventure & Action</a>
+                            <a href="#" class="dropdown-item">🌍 Univers</a>
+                            <a href="#" class="dropdown-item">📚 Éducation</a>
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <a href="confidentialité.html" class="nav-link" id="confidentialiteLink">Confidentialité</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="contact.html" class="nav-link" id="contactLink">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="conditions.html" class="nav-link" id="conditionLink">Conditions</a>
-                    </li>
+                    <li class="nav-item"><a href="#" class="nav-link">Confidentialité</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Conditions</a></li>
                 </ul>
             </div>
         </header>
@@ -1598,10 +1833,9 @@
             <button class="btn btn-primary" id="exploreBtn">Explorer les catégories</button>
         </section>
         
-        <!-- Section de recherche de dessins animés -->
         <div class="search-section">
             <div class="search-container">
-                <input type="text" class="search-input" id="searchInput" placeholder="🔍 Rechercher un dessin animé... (Ex: Cendrillon, Aladdin, La Reine des Neiges...)">
+                <input type="text" class="search-input" id="searchInput" placeholder="🔍 Rechercher un dessin animé...">
                 <button class="search-btn" id="searchBtn">Rechercher</button>
             </div>
             <div class="search-results" id="searchResults"></div>
@@ -1616,44 +1850,41 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>À propos de Universal Toon</h3>
-                    <p>Universal Toon est une plateforme qui regroupe les meilleurs dessins animés pour toute la famille. Profitez de contenu adapté à tous les âges et tous les goûts.</p>
+                    <p>Universal Toon est une plateforme qui regroupe les meilleurs dessins animés pour toute la famille.</p>
                 </div>
                 <div class="footer-section">
                     <h3>Navigation</h3>
                     <ul>
-                        <li><a href="index.html">Accueil</a></li>
-                        <li><a href="conte-fee.html">Contes de fée</a></li>
-                        <li><a href="aventure.html">Aventure & Action</a></li>
-                        <li><a href="univers.html">Univers</a></li>
-                        <li><a href="education.html">Éducation</a></li>
+                        <li><a href="#">Accueil</a></li>
+                        <li><a href="#">Contes de fée</a></li>
+                        <li><a href="#">Aventure & Action</a></li>
+                        <li><a href="#">Univers</a></li>
+                        <li><a href="#">Éducation</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h3>Catégories</h3>
                     <ul>
-                        <li><a href="conte-fee.html">✨ Contes de fée</a></li>
-                        <li><a href="aventure.html">⚔️ Aventure & Action</a></li>
-                        <li><a href="education.html">📚 Éducation</a></li>
-                        <li><a href="univers.html">🌍 Univers</a></li>
+                        <li><a href="#">✨ Contes de fée</a></li>
+                        <li><a href="#">⚔️ Aventure & Action</a></li>
+                        <li><a href="#">📚 Éducation</a></li>
+                        <li><a href="#">🌍 Univers</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h3>Contact</h3>
                     <p>Email: contact@universaltoon.com</p>
-                    <p>Téléphone: +221 76 244 25 30 & +221 75 522 29 68</p>
+                    <p>Téléphone: +221 76 244 25 30</p>
                     <p>Adresse: Sénégal, Mbour</p>
-                    <p><a href="condition.html">Conditions d'utilisation</a></p>
-                    <p><a href="confidentialité.html">Politique de confidentialité</a></p>
-                    <p><a href="Concepteur.html">Fondateurs</a></p>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Universal Toon. Tous droits réservés. Conçu avec ❤️ pour les familles</p>
+                <p>&copy; 2025 Universal Toon. Tous droits réservés. Conçu avec ❤️</p>
             </div>
         </footer>
     </div>
 
-    <!-- MODAL D'AUTHENTIFICATION -->
+    <!-- MODAL AUTHENTIFICATION -->
     <div id="sdmAuthModal" class="sdm-auth-overlay">
         <div class="sdm-auth-modal">
             <div class="sdm-modal-header">
@@ -1682,12 +1913,6 @@
                         <button type="button" id="sdmForgotPasswordBtn">Mot de passe oublié ?</button>
                     </div>
                     <button type="submit" class="sdm-btn-auth">Se connecter</button>
-                    <div class="sdm-divider"><span>Ou continuer avec</span></div>
-                    <div class="sdm-social-buttons">
-                        <button type="button" class="sdm-social-btn google-btn" id="sdmGoogleLoginBtn"><i class="fab fa-google"></i> Google</button>
-                        <button type="button" class="sdm-social-btn apple-btn" id="sdmAppleLoginBtn"><i class="fab fa-apple"></i> Apple</button>
-                        <button type="button" class="sdm-social-btn github-btn" id="sdmGithubLoginBtn"><i class="fab fa-github"></i> GitHub</button>
-                    </div>
                     <div id="sdmLoginMsg" class="sdm-message"></div>
                 </form>
                 
@@ -1697,7 +1922,7 @@
                         <input type="email" id="sdmSignupEmail" required placeholder="exemple@disney.com">
                     </div>
                     <div class="sdm-input-group">
-                        <label>🔒 Mot de passe (min 6 caractères)</label>
+                        <label>🔒 Mot de passe (min 4 caractères)</label>
                         <input type="password" id="sdmSignupPassword" required placeholder="••••••••">
                     </div>
                     <div class="sdm-input-group">
@@ -1705,12 +1930,6 @@
                         <input type="text" id="sdmSignupUsername" placeholder="Ton pseudo Disney">
                     </div>
                     <button type="submit" class="sdm-btn-auth">Créer mon compte</button>
-                    <div class="sdm-divider"><span>Ou s'inscrire avec</span></div>
-                    <div class="sdm-social-buttons">
-                        <button type="button" class="sdm-social-btn google-btn" id="sdmGoogleSignupBtn"><i class="fab fa-google"></i> Google</button>
-                        <button type="button" class="sdm-social-btn apple-btn" id="sdmAppleSignupBtn"><i class="fab fa-apple"></i> Apple</button>
-                        <button type="button" class="sdm-social-btn github-btn" id="sdmGithubSignupBtn"><i class="fab fa-github"></i> GitHub</button>
-                    </div>
                     <div id="sdmSignupMsg" class="sdm-message"></div>
                 </form>
                 
@@ -1729,7 +1948,7 @@
         </div>
     </div>
 
-    <!-- CHATBOT IA UNIVERSAL TOON -->
+    <!-- CHATBOT IA -->
     <div class="chatbot-container">
         <div class="chatbot-toggle" id="chatbotToggle">
             <i class="fas fa-comment"></i>
@@ -1745,85 +1964,35 @@
                         <span>En ligne</span>
                     </div>
                 </div>
-                <button class="chatbot-close" id="chatbotClose">
-                    <i class="fas fa-chevron-down"></i>
-                </button>
+                <button class="chatbot-close" id="chatbotClose"><i class="fas fa-chevron-down"></i></button>
             </div>
             <div class="chatbot-messages" id="chatbotMessages">
                 <div class="message ai">
                     <div class="message-avatar">🤖</div>
                     <div class="message-content">
                         Bonjour ! Je suis l'assistant magique d'Universal Toon ! ✨<br><br>
-                        Je connais TOUS nos dessins animés ! Voici ce que je peux faire :<br>
-                        • 🎬 Vous parler de n'importe quel dessin animé<br>
-                        • 🔍 Vous aider à trouver un film par titre<br>
-                        • 📚 Vous recommander selon vos goûts<br>
-                        • ⭐ Vous donner des détails sur les personnages<br><br>
-                        Essayez de me demander : "Parle-moi de La Reine des Neiges" ou "Cherche Aladdin" !
+                        Je peux vous aider à trouver des dessins animés, vous conseiller, et répondre à vos questions !
                     </div>
                 </div>
             </div>
             <div class="quick-suggestions">
-                <button class="suggestion-btn" data-suggestion="La Reine des Neiges">❄️ La Reine des Neiges</button>
-                <button class="suggestion-btn" data-suggestion="Aladdin">🪔 Aladdin</button>
-                <button class="suggestion-btn" data-suggestion="Le Roi Lion">🦁 Le Roi Lion</button>
-                <button class="suggestion-btn" data-suggestion="Vaiana">🌊 Vaiana</button>
                 <button class="suggestion-btn" data-suggestion="Cendrillon">👠 Cendrillon</button>
+                <button class="suggestion-btn" data-suggestion="La Reine des Neiges">❄️ La Reine des Neiges</button>
+                <button class="suggestion-btn" data-suggestion="Le Roi Lion">🦁 Le Roi Lion</button>
+                <button class="suggestion-btn" data-suggestion="Contes de fée">✨ Contes de fée</button>
             </div>
             <div class="chatbot-input-container">
-                <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Cherchez un dessin animé ou posez une question...">
-                <button class="chatbot-send" id="chatbotSend">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
+                <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Cherchez un dessin animé...">
+                <button class="chatbot-send" id="chatbotSend"><i class="fas fa-paper-plane"></i></button>
             </div>
         </div>
     </div>
 
-    <script type="module">
+    <script>
         // ============================================
-        // CONFIGURATION FIREBASE
+        // SYSTÈME D'AUTHENTIFICATION LOCAL (LOCALSTORAGE)
         // ============================================
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { 
-            getAuth, 
-            createUserWithEmailAndPassword, 
-            signInWithEmailAndPassword, 
-            signOut, 
-            onAuthStateChanged, 
-            updateProfile,
-            sendPasswordResetEmail,
-            GoogleAuthProvider,
-            OAuthProvider,
-            signInWithPopup
-        } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyB33esedjnifzMq_4_C4SpprCdFvZ1SaVM",
-            authDomain: "disney-2c184.firebaseapp.com",
-            projectId: "disney-2c184",
-            storageBucket: "disney-2c184.firebasestorage.app",
-            messagingSenderId: "893790980161",
-            appId: "1:893790980161:web:6d7980fc1d3fc20cea9ec0",
-            measurementId: "G-H96M4NV1VJ"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
         
-        // Providers pour les connexions sociales
-        const googleProvider = new GoogleAuthProvider();
-        googleProvider.addScope('profile');
-        googleProvider.addScope('email');
-        
-        const appleProvider = new OAuthProvider('apple.com');
-        appleProvider.addScope('email');
-        appleProvider.addScope('name');
-        
-        const githubProvider = new OAuthProvider('github.com');
-        githubProvider.addScope('user:email');
-
         // Éléments DOM
         const modal = document.getElementById('sdmAuthModal');
         const closeModal = document.getElementById('sdmCloseModal');
@@ -1834,97 +2003,67 @@
         const loginMsg = document.getElementById('sdmLoginMsg');
         const signupMsg = document.getElementById('sdmSignupMsg');
         const resetMsg = document.getElementById('sdmResetMsg');
-        const authOverlay = document.getElementById('authRequiredOverlay');
         const mainContent = document.getElementById('mainContent');
+        const authBtn = document.getElementById('sdmAuthBtn');
 
-        function showMessage(element, message, isError = true, isInfo = false) {
-            element.textContent = message;
-            if (isInfo) {
-                element.className = 'sdm-message info';
-            } else {
-                element.className = `sdm-message ${isError ? 'error' : 'success'}`;
-            }
-            element.style.display = 'block';
-            setTimeout(() => {
-                element.style.display = 'none';
-            }, 5000);
+        // Fonctions d'authentification
+        function saveUser(user) {
+            localStorage.setItem('universalToonUser', JSON.stringify(user));
         }
         
-        function setLoading(button, isLoading) {
-            if (isLoading) {
-                button.originalText = button.innerHTML;
-                button.disabled = true;
-                button.innerHTML = '<span class="sdm-loading"></span> Chargement...';
-            } else {
-                button.disabled = false;
-                button.innerHTML = button.originalText || button.textContent;
-            }
+        function getUser() {
+            const user = localStorage.getItem('universalToonUser');
+            return user ? JSON.parse(user) : null;
         }
-
-        function updateUserWidget(user) {
-            const authBtn = document.getElementById('sdmAuthBtn');
-            if (authBtn && user) {
-                const displayName = user.displayName || user.email.split('@')[0];
-                const firstLetter = displayName.charAt(0).toUpperCase();
-                authBtn.innerHTML = `<span class="sdm-user-avatar">${firstLetter}</span> <span>${displayName}</span>`;
+        
+        function logout() {
+            localStorage.removeItem('universalToonUser');
+            updateUI();
+            showAuthModal();
+        }
+        
+        function updateUI() {
+            const user = getUser();
+            if (user && authBtn) {
+                const firstLetter = user.name.charAt(0).toUpperCase();
+                authBtn.innerHTML = `<span class="sdm-user-avatar">${firstLetter}</span> <span>${user.name}</span>`;
                 authBtn.onclick = () => {
                     if (confirm('Voulez-vous vous déconnecter ?')) {
-                        signOut(auth);
+                        logout();
                     }
                 };
             } else if (authBtn) {
                 authBtn.innerHTML = '<span class="sdm-user-avatar">👤</span> <span>Connexion</span>';
-                authBtn.onclick = () => { 
-                    modal.style.display = 'flex';
-                    if (authOverlay) authOverlay.classList.add('hidden');
-                };
+                authBtn.onclick = () => { showAuthModal(); };
             }
         }
         
-        // Fonction de connexion sociale générique
-        async function socialLogin(provider, isSignup = false) {
-            try {
-                const result = await signInWithPopup(auth, provider);
-                const user = result.user;
-                
-                const userDoc = await getDoc(doc(db, "utilisateurs", user.uid));
-                
-                if (!userDoc.exists()) {
-                    await setDoc(doc(db, "utilisateurs", user.uid), {
-                        username: user.displayName || user.email.split('@')[0],
-                        email: user.email,
-                        points: 0,
-                        drawings: 0,
-                        createdAt: serverTimestamp(),
-                        lastLogin: serverTimestamp(),
-                        provider: provider.providerId
-                    });
-                } else {
-                    await setDoc(doc(db, "utilisateurs", user.uid), {
-                        lastLogin: serverTimestamp()
-                    }, { merge: true });
-                }
-                
-                showMessage(isSignup ? signupMsg : loginMsg, `✅ ${isSignup ? 'Inscription' : 'Connexion'} réussie !`, false);
-                setTimeout(() => {
-                    modal.style.display = 'none';
-                    if (authOverlay) authOverlay.classList.add('hidden');
-                    if (mainContent) mainContent.classList.add('visible');
-                }, 1500);
-            } catch (error) {
-                console.error(error);
-                let errorMessage = 'Une erreur est survenue';
-                if (error.code === 'auth/account-exists-with-different-credential') {
-                    errorMessage = 'Un compte existe déjà avec cette adresse email. Veuillez vous connecter avec la méthode appropriée.';
-                } else if (error.code === 'auth/popup-closed-by-user') {
-                    errorMessage = 'Fenêtre popup fermée. Veuillez réessayer.';
-                } else if (error.code === 'auth/unauthorized-domain') {
-                    errorMessage = 'Domaine non autorisé. Veuillez ajouter ce domaine dans la console Firebase.';
-                } else {
-                    errorMessage = error.message;
-                }
-                showMessage(isSignup ? signupMsg : loginMsg, `❌ ${errorMessage}`, true);
-            }
+        function showAuthModal() {
+            modal.style.display = 'flex';
+            mainContent.style.display = 'none';
+            // Réinitialiser les formulaires
+            document.getElementById('sdmLoginEmail').value = '';
+            document.getElementById('sdmLoginPassword').value = '';
+            document.getElementById('sdmSignupEmail').value = '';
+            document.getElementById('sdmSignupPassword').value = '';
+            document.getElementById('sdmSignupUsername').value = '';
+            loginMsg.style.display = 'none';
+            signupMsg.style.display = 'none';
+            resetMsg.style.display = 'none';
+        }
+        
+        function hideAuthModal() {
+            modal.style.display = 'none';
+            mainContent.style.display = 'block';
+        }
+        
+        function showMessage(element, message, isError = true) {
+            element.textContent = message;
+            element.className = `sdm-message ${isError ? 'error' : 'success'}`;
+            element.style.display = 'block';
+            setTimeout(() => {
+                element.style.display = 'none';
+            }, 5000);
         }
 
         // Gestion des onglets
@@ -1975,235 +2114,134 @@
             resetMsg.style.display = 'none';
         });
 
-        // Réinitialisation mot de passe
+        // Réinitialisation mot de passe (simulation)
         resetForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('sdmResetEmail').value.trim();
-            const submitBtn = resetForm.querySelector('button[type="submit"]');
             
             if (!email) {
                 showMessage(resetMsg, '❌ Veuillez entrer votre adresse email', true);
                 return;
             }
             
-            setLoading(submitBtn, true);
+            const users = JSON.parse(localStorage.getItem('universalToonUsers') || '[]');
+            const userExists = users.find(u => u.email === email);
             
-            try {
-                await sendPasswordResetEmail(auth, email);
-                showMessage(resetMsg, '✅ Un email de réinitialisation a été envoyé. Vérifiez votre boîte de réception.', false);
+            if (userExists) {
+                showMessage(resetMsg, '✅ Un email de réinitialisation a été envoyé (simulation).', false);
                 document.getElementById('sdmResetEmail').value = '';
-            } catch (error) {
-                let errorMessage = 'Une erreur est survenue';
-                if (error.code === 'auth/user-not-found') {
-                    errorMessage = '❌ Aucun compte trouvé avec cette adresse email';
-                } else if (error.code === 'auth/invalid-email') {
-                    errorMessage = '❌ Adresse email invalide';
-                } else {
-                    errorMessage = `❌ ${error.message}`;
-                }
-                showMessage(resetMsg, errorMessage, true);
-            } finally {
-                setLoading(submitBtn, false);
+            } else {
+                showMessage(resetMsg, '❌ Aucun compte trouvé avec cette adresse email', true);
             }
         });
 
-        // Inscription email/mot de passe
+        // Inscription
         signupForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('sdmSignupEmail').value.trim();
             const password = document.getElementById('sdmSignupPassword').value;
             const username = document.getElementById('sdmSignupUsername').value.trim() || email.split('@')[0];
-            const submitBtn = signupForm.querySelector('button[type="submit"]');
             
-            if (password.length < 6) {
-                showMessage(signupMsg, '❌ Mot de passe trop court (min 6 caractères)', true);
+            if (password.length < 4) {
+                showMessage(signupMsg, '❌ Mot de passe trop court (min 4 caractères)', true);
                 return;
             }
             
-            setLoading(submitBtn, true);
+            const users = JSON.parse(localStorage.getItem('universalToonUsers') || '[]');
             
-            try {
-                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-                await updateProfile(userCredential.user, { displayName: username });
-                await setDoc(doc(db, "utilisateurs", userCredential.user.uid), {
-                    username: username,
-                    email: email,
-                    points: 0,
-                    drawings: 0,
-                    createdAt: serverTimestamp(),
-                    lastLogin: serverTimestamp()
-                });
-                
-                showMessage(signupMsg, '✅ Compte créé avec succès !', false);
-                setTimeout(() => {
-                    modal.style.display = 'none';
-                    if (authOverlay) authOverlay.classList.add('hidden');
-                    if (mainContent) mainContent.classList.add('visible');
-                }, 1500);
-            } catch (error) {
-                if (error.code === 'auth/email-already-in-use') {
-                    showMessage(signupMsg, '❌ Email déjà utilisé', true);
-                } else if (error.code === 'auth/weak-password') {
-                    showMessage(signupMsg, '❌ Mot de passe trop faible', true);
-                } else {
-                    showMessage(signupMsg, `❌ ${error.message}`, true);
-                }
-            } finally {
-                setLoading(submitBtn, false);
+            if (users.find(u => u.email === email)) {
+                showMessage(signupMsg, '❌ Email déjà utilisé', true);
+                return;
             }
+            
+            users.push({ name: username, email, password });
+            localStorage.setItem('universalToonUsers', JSON.stringify(users));
+            saveUser({ name: username, email });
+            
+            showMessage(signupMsg, '✅ Compte créé avec succès !', false);
+            setTimeout(() => {
+                hideAuthModal();
+                updateUI();
+                showWelcomeMessage(username);
+            }, 1500);
         });
 
-        // Connexion email/mot de passe
+        // Connexion
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('sdmLoginEmail').value.trim();
             const password = document.getElementById('sdmLoginPassword').value;
-            const submitBtn = loginForm.querySelector('button[type="submit"]');
             
-            setLoading(submitBtn, true);
+            const users = JSON.parse(localStorage.getItem('universalToonUsers') || '[]');
+            const user = users.find(u => u.email === email && u.password === password);
             
-            try {
-                await signInWithEmailAndPassword(auth, email, password);
+            if (user) {
+                saveUser({ name: user.name, email: user.email });
                 showMessage(loginMsg, '✅ Connexion réussie !', false);
                 setTimeout(() => {
-                    modal.style.display = 'none';
-                    if (authOverlay) authOverlay.classList.add('hidden');
-                    if (mainContent) mainContent.classList.add('visible');
+                    hideAuthModal();
+                    updateUI();
+                    showWelcomeMessage(user.name);
                 }, 1000);
-            } catch (error) {
-                if (error.code === 'auth/user-not-found') {
-                    showMessage(loginMsg, '❌ Aucun compte trouvé avec cet email', true);
-                } else if (error.code === 'auth/wrong-password') {
-                    showMessage(loginMsg, '❌ Mot de passe incorrect', true);
-                } else if (error.code === 'auth/too-many-requests') {
-                    showMessage(loginMsg, '❌ Trop de tentatives. Réessayez plus tard.', true);
-                } else {
-                    showMessage(loginMsg, '❌ Email ou mot de passe incorrect', true);
-                }
-            } finally {
-                setLoading(submitBtn, false);
-            }
-        });
-
-        // Connexions sociales
-        document.getElementById('sdmGoogleLoginBtn')?.addEventListener('click', () => socialLogin(googleProvider, false));
-        document.getElementById('sdmAppleLoginBtn')?.addEventListener('click', () => socialLogin(appleProvider, false));
-        document.getElementById('sdmGithubLoginBtn')?.addEventListener('click', () => socialLogin(githubProvider, false));
-        document.getElementById('sdmGoogleSignupBtn')?.addEventListener('click', () => socialLogin(googleProvider, true));
-        document.getElementById('sdmAppleSignupBtn')?.addEventListener('click', () => socialLogin(appleProvider, true));
-        document.getElementById('sdmGithubSignupBtn')?.addEventListener('click', () => socialLogin(githubProvider, true));
-
-        // Boutons overlay
-        document.getElementById('openLoginFromOverlay')?.addEventListener('click', () => {
-            modal.style.display = 'flex';
-            // Activer l'onglet connexion
-            tabs.forEach(tab => tab.classList.remove('active'));
-            document.querySelector('[data-sdm-tab="login"]').classList.add('active');
-            loginForm.classList.add('active');
-            signupForm.classList.remove('active');
-            resetForm.classList.remove('active');
-        });
-        
-        document.getElementById('openSignupFromOverlay')?.addEventListener('click', () => {
-            modal.style.display = 'flex';
-            // Activer l'onglet inscription
-            tabs.forEach(tab => tab.classList.remove('active'));
-            document.querySelector('[data-sdm-tab="signup"]').classList.add('active');
-            signupForm.classList.add('active');
-            loginForm.classList.remove('active');
-            resetForm.classList.remove('active');
-        });
-
-        // Surveillance état connexion
-        onAuthStateChanged(auth, (user) => {
-            updateUserWidget(user);
-            if (user) {
-                if (authOverlay) authOverlay.classList.add('hidden');
-                if (mainContent) mainContent.classList.add('visible');
             } else {
-                if (mainContent) mainContent.classList.remove('visible');
-                if (authOverlay) authOverlay.classList.remove('hidden');
+                showMessage(loginMsg, '❌ Email ou mot de passe incorrect', true);
             }
         });
+
+        function showWelcomeMessage(name) {
+            const msg = document.createElement('div');
+            msg.textContent = `✨ Bienvenue ${name} ! ✨`;
+            msg.style.cssText = 'position:fixed; top:20px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#667eea,#764ba2); padding:12px 25px; border-radius:50px; color:white; font-weight:bold; z-index:10002; animation:fadeOut 3s forwards;';
+            document.body.appendChild(msg);
+            setTimeout(() => msg.remove(), 3000);
+        }
 
         // Fermeture modal
-        closeModal.onclick = () => { modal.style.display = 'none'; };
-        window.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
+        closeModal.onclick = () => { hideAuthModal(); };
+        window.onclick = (e) => { if (e.target === modal) hideAuthModal(); };
+
+        // Animation fadeOut pour le message de bienvenue
+        const style = document.createElement('style');
+        style.textContent = `@keyframes fadeOut { 0% { opacity: 1; } 70% { opacity: 1; } 100% { opacity: 0; visibility: hidden; } }`;
+        document.head.appendChild(style);
 
         // ============================================
         // BASE DE DONNÉES DES DESSINS ANIMÉS ET IA
         // ============================================
         
         const cartoonsDatabase = [
-            { id: 1, title: "Cendrillon", category: "Contes de fée", year: 1950, description: "Une jeune fille maltraitée voit sa vie transformée grâce à sa fée marraine.", characters: "Cendrillon, Le Prince, La Fée Marraine", song: "Rêve" },
-            { id: 2, title: "La Reine des Neiges", category: "Contes de fée", year: 2013, description: "Elsa, une reine aux pouvoirs glacials, s'isole pour protéger les autres.", characters: "Elsa, Anna, Kristoff, Olaf", song: "Let It Go" },
-            { id: 3, title: "Aladdin", category: "Contes de fée", year: 1992, description: "Un jeune voleur découvre une lampe magique contenant un génie.", characters: "Aladdin, Jasmine, Le Génie, Jafar", song: "A Whole New World" },
-            { id: 4, title: "Le Roi Lion", category: "Aventure & Action", year: 1994, description: "Simba doit affronter son passé et reprendre sa place de roi.", characters: "Simba, Mufasa, Scar, Timon, Pumbaa", song: "Hakuna Matata" },
-            { id: 5, title: "Vaiana", category: "Univers", year: 2016, description: "Une jeune fille courageuse traverse l'océan pour sauver son île.", characters: "Vaiana, Maui, Pua, Hei Hei", song: "A la tienne" },
-            { id: 6, title: "Mulan", category: "Contes de fée", year: 1998, description: "Une jeune fille se déguise en homme pour prendre la place de son père.", characters: "Mulan, Shang, Mushu", song: "Reflection" }
+            { title: "Cendrillon", category: "Contes de fée", year: 1950, description: "Une jeune fille maltraitée voit sa vie transformée grâce à sa fée marraine.", characters: "Cendrillon, Le Prince, La Fée Marraine" },
+            { title: "La Reine des Neiges", category: "Contes de fée", year: 2013, description: "Elsa, une reine aux pouvoirs glacials, s'isole pour protéger les autres.", characters: "Elsa, Anna, Kristoff, Olaf" },
+            { title: "Aladdin", category: "Contes de fée", year: 1992, description: "Un jeune voleur découvre une lampe magique contenant un génie.", characters: "Aladdin, Jasmine, Le Génie, Jafar" },
+            { title: "Le Roi Lion", category: "Aventure & Action", year: 1994, description: "Simba doit affronter son passé et reprendre sa place de roi.", characters: "Simba, Mufasa, Scar, Timon, Pumbaa" },
+            { title: "Vaiana", category: "Univers", year: 2016, description: "Une jeune fille courageuse traverse l'océan pour sauver son île.", characters: "Vaiana, Maui, Pua, Hei Hei" },
+            { title: "Mulan", category: "Contes de fée", year: 1998, description: "Une jeune fille se déguise en homme pour prendre la place de son père.", characters: "Mulan, Shang, Mushu" }
         ];
 
-        class UniversalToonAssistant {
-            constructor() {
-                this.cartoons = cartoonsDatabase;
-            }
-            
+        class Assistant {
             searchCartoon(query) {
-                query = query.toLowerCase().trim();
-                return this.cartoons.filter(cartoon => 
-                    cartoon.title.toLowerCase().includes(query) ||
-                    cartoon.characters.toLowerCase().includes(query)
-                );
+                query = query.toLowerCase();
+                return cartoonsDatabase.filter(c => c.title.toLowerCase().includes(query) || c.characters.toLowerCase().includes(query));
             }
-            
             getCartoonInfo(title) {
-                const cartoon = this.cartoons.find(c => c.title.toLowerCase() === title.toLowerCase());
-                if (cartoon) {
-                    return `🎬 **${cartoon.title}** (${cartoon.year})\n📖 ${cartoon.description}\n👥 Personnages : ${cartoon.characters}\n🎵 Chanson : ${cartoon.song}\n📂 Catégorie : ${cartoon.category}`;
-                }
-                return null;
+                const c = cartoonsDatabase.find(c => c.title.toLowerCase() === title.toLowerCase());
+                return c ? `🎬 **${c.title}** (${c.year})\n📖 ${c.description}\n👥 Personnages : ${c.characters}\n📂 Catégorie : ${c.category}` : null;
             }
-            
-            getRecommendationsByCategory(category) {
-                const results = this.cartoons.filter(c => c.category === category);
-                if (results.length > 0) {
-                    let message = `📚 Voici nos dessins animés dans **${category}** :\n\n`;
-                    results.forEach(c => message += `✨ **${c.title}** (${c.year})\n   ${c.description.substring(0, 60)}...\n\n`);
-                    return message;
-                }
-                return null;
-            }
-            
             processMessage(message) {
                 const lowerMsg = message.toLowerCase();
-                
-                for (const cartoon of this.cartoons) {
-                    if (lowerMsg.includes(cartoon.title.toLowerCase())) {
-                        return this.getCartoonInfo(cartoon.title);
-                    }
+                for (const c of cartoonsDatabase) {
+                    if (lowerMsg.includes(c.title.toLowerCase())) return this.getCartoonInfo(c.title);
                 }
-                
-                if (lowerMsg.includes("conte") || lowerMsg.includes("fée")) {
-                    return this.getRecommendationsByCategory("Contes de fée") || "Découvrez nos magnifiques contes de fée ! ✨";
-                }
-                if (lowerMsg.includes("aventure") || lowerMsg.includes("action")) {
-                    return this.getRecommendationsByCategory("Aventure & Action") || "Préparez-vous pour l'aventure ! ⚔️";
-                }
-                if (lowerMsg.includes("aide") || lowerMsg === "bonjour" || lowerMsg === "salut") {
-                    return `🎩 **Guide d'utilisation** 🎩\n\n🔍 "Cherche La Reine des Neiges" - trouver un film\n🎬 "Parle-moi d'Aladdin" - détails\n📂 "Contes de fée" - voir catégorie\n🎲 "Recommande-moi" - suggestion\n\nQue souhaitez-vous ? ✨`;
-                }
-                if (lowerMsg.includes("recommande") || lowerMsg.includes("suggère")) {
-                    const random = this.cartoons[Math.floor(Math.random() * this.cartoons.length)];
-                    return `🎲 Je vous recommande : **${random.title}** (${random.year})\n📖 ${random.description.substring(0, 80)}...`;
-                }
-                
-                return `🎭 Je n'ai pas compris. Essayez :\n• "Cherche Vaiana"\n• "Parle-moi du Roi Lion"\n• "Contes de fée"\n• "Recommande-moi"\n• "Aide" ✨`;
+                if (lowerMsg.includes("conte") || lowerMsg.includes("fée")) return "✨ Découvrez nos contes de fée : Cendrillon, La Reine des Neiges, Aladdin, Mulan !";
+                if (lowerMsg.includes("aventure")) return "⚔️ Aventure & Action : Le Roi Lion vous attend !";
+                if (lowerMsg.includes("aide") || lowerMsg === "bonjour") return "🎩 Posez-moi une question sur un dessin animé ! Ex: 'Parle-moi du Roi Lion'";
+                return "🎭 Je n'ai pas compris. Essayez : 'Cendrillon', 'Le Roi Lion' ou 'Contes de fée'";
             }
         }
 
-        const assistant = new UniversalToonAssistant();
+        const assistant = new Assistant();
         
-        // Chatbot events
+        // Chatbot
         const chatbotToggle = document.getElementById('chatbotToggle');
         const chatbotWindow = document.getElementById('chatbotWindow');
         const chatbotClose = document.getElementById('chatbotClose');
@@ -2213,37 +2251,33 @@
         const suggestionBtns = document.querySelectorAll('.suggestion-btn');
         
         function addMessage(text, isUser = false) {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${isUser ? 'user' : 'ai'}`;
-            messageDiv.innerHTML = `<div class="message-avatar">${isUser ? '👤' : '🤖'}</div><div class="message-content">${text.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</div>`;
-            chatbotMessages.appendChild(messageDiv);
+            const div = document.createElement('div');
+            div.className = `message ${isUser ? 'user' : 'ai'}`;
+            div.innerHTML = `<div class="message-avatar">${isUser ? '👤' : '🤖'}</div><div class="message-content">${text.replace(/\n/g, '<br>')}</div>`;
+            chatbotMessages.appendChild(div);
             chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
         }
         
-        function showTypingIndicator() {
-            const typingDiv = document.createElement('div');
-            typingDiv.className = 'message ai';
-            typingDiv.id = 'typingIndicator';
-            typingDiv.innerHTML = `<div class="message-avatar">🤖</div><div class="typing-indicator"><span></span><span></span><span></span></div>`;
-            chatbotMessages.appendChild(typingDiv);
+        function showTyping() {
+            const div = document.createElement('div');
+            div.className = 'message ai';
+            div.id = 'typingIndicator';
+            div.innerHTML = `<div class="message-avatar">🤖</div><div class="typing-indicator"><span></span><span></span><span></span></div>`;
+            chatbotMessages.appendChild(div);
             chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
         }
         
-        function removeTypingIndicator() {
-            const indicator = document.getElementById('typingIndicator');
-            if (indicator) indicator.remove();
-        }
+        function removeTyping() { document.getElementById('typingIndicator')?.remove(); }
         
         async function sendMessage() {
-            const message = chatbotInput.value.trim();
-            if (!message) return;
-            addMessage(message, true);
+            const msg = chatbotInput.value.trim();
+            if (!msg) return;
+            addMessage(msg, true);
             chatbotInput.value = '';
-            showTypingIndicator();
+            showTyping();
             setTimeout(() => {
-                removeTypingIndicator();
-                const response = assistant.processMessage(message);
-                addMessage(response, false);
+                removeTyping();
+                addMessage(assistant.processMessage(msg), false);
             }, 500);
         }
         
@@ -2264,136 +2298,128 @@
             });
         });
         
-        // Search functionality
+        // Recherche
         function performSearch() {
             const query = document.getElementById('searchInput').value.trim();
-            const resultsContainer = document.getElementById('searchResults');
-            if (!query) { resultsContainer.classList.remove('active'); return; }
+            const container = document.getElementById('searchResults');
+            if (!query) { container.classList.remove('active'); return; }
             const results = assistant.searchCartoon(query);
-            resultsContainer.innerHTML = '';
+            container.innerHTML = '';
             if (results.length > 0) {
-                results.forEach(cartoon => {
+                results.forEach(c => {
                     const card = document.createElement('div');
                     card.className = 'result-card';
-                    card.innerHTML = `<div class="result-title">${cartoon.title} (${cartoon.year})</div><div class="result-category">📂 ${cartoon.category}</div><div class="result-desc">${cartoon.description.substring(0, 100)}...</div>`;
+                    card.innerHTML = `<div class="result-title">${c.title} (${c.year})</div><div class="result-category">📂 ${c.category}</div><div class="result-desc">${c.description.substring(0, 100)}...</div>`;
                     card.onclick = () => {
-                        const response = assistant.getCartoonInfo(cartoon.title);
-                        if (response) addMessage(response, false);
+                        addMessage(assistant.getCartoonInfo(c.title), false);
                         chatbotWindow.classList.add('open');
                         chatbotToggle.classList.add('active');
                     };
-                    resultsContainer.appendChild(card);
+                    container.appendChild(card);
                 });
-                resultsContainer.classList.add('active');
+                container.classList.add('active');
             } else {
-                resultsContainer.innerHTML = '<div class="result-card" style="text-align:center">Aucun résultat trouvé.</div>';
-                resultsContainer.classList.add('active');
+                container.innerHTML = '<div class="result-card" style="text-align:center">Aucun résultat trouvé.</div>';
+                container.classList.add('active');
             }
         }
         
         document.getElementById('searchBtn').addEventListener('click', performSearch);
         document.getElementById('searchInput').addEventListener('keypress', (e) => { if (e.key === 'Enter') performSearch(); });
         
-        // Categories et animations
+        // Catégories
         const categories = [
-            { id: "conte", name: "Contes de fée", description: "Plongez dans l'univers magique des contes de fée.", image: "https://images.unsplash.com/photo-1635805737707-575885ab0820?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80", page: "conte-fee.html" },
-            { id: "aventure", name: "Aventure & Action", description: "Partez à l'aventure avec des héros intrépides.", image: "https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80", page: "aventure.html" },
-            { id: "education", name: "Éducation", description: "Des dessins animés éducatifs et amusants.", image: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80", page: "education.html" },
-            { id: "univers", name: "Univers", description: "Des histoires drôles et légères pour rire en famille.", image: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80", page: "univers.html" }
+            { name: "Contes de fée", description: "Plongez dans l'univers magique des contes de fée.", image: "https://images.unsplash.com/photo-1635805737707-575885ab0820?w=800" },
+            { name: "Aventure & Action", description: "Partez à l'aventure avec des héros intrépides.", image: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=800" },
+            { name: "Éducation", description: "Des dessins animés éducatifs et amusants.", image: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=800" },
+            { name: "Univers", description: "Des histoires drôles et légères pour rire en famille.", image: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800" }
         ];
 
-        function loadCategoryCards() {
+        function loadCategories() {
             const container = document.getElementById('categoriesGrid');
-            if (!container) return;
-            container.innerHTML = '';
-            categories.forEach(category => {
-                const card = document.createElement('div');
-                card.className = 'category-card';
-                card.innerHTML = `<img src="${category.image}" alt="${category.name}" class="category-image" loading="lazy"><div class="category-overlay"><h3>${category.name}</h3><p>${category.description}</p></div>`;
-                card.addEventListener('click', () => { window.location.href = category.page; });
-                container.appendChild(card);
-            });
+            if (container) {
+                container.innerHTML = categories.map(c => `
+                    <div class="category-card">
+                        <img src="${c.image}" alt="${c.name}" class="category-image" loading="lazy">
+                        <div class="category-overlay">
+                            <h3>${c.name}</h3>
+                            <p>${c.description}</p>
+                        </div>
+                    </div>
+                `).join('');
+            }
         }
 
         function createMagicDust() {
             const container = document.getElementById('magicDust');
-            if (!container) return;
             for (let i = 0; i < 100; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('dust-particle');
-                particle.style.width = `${Math.random() * 5 + 2}px`;
-                particle.style.height = `${Math.random() * 5 + 2}px`;
-                particle.style.left = `${Math.random() * 100}%`;
-                particle.style.animationDelay = `${Math.random() * 15}s`;
-                particle.style.animationDuration = `${10 + Math.random() * 20}s`;
-                container.appendChild(particle);
+                const p = document.createElement('div');
+                p.className = 'dust-particle';
+                p.style.width = `${Math.random() * 5 + 2}px`;
+                p.style.height = p.style.width;
+                p.style.left = `${Math.random() * 100}%`;
+                p.style.animationDelay = `${Math.random() * 15}s`;
+                p.style.animationDuration = `${10 + Math.random() * 20}s`;
+                container.appendChild(p);
             }
         }
 
-        function createTwinklingStars() {
+        function createStars() {
             const container = document.getElementById('twinklingStars');
-            if (!container) return;
             for (let i = 0; i < 80; i++) {
-                const star = document.createElement('div');
-                star.classList.add('star');
-                star.style.width = `${Math.random() * 3 + 1}px`;
-                star.style.height = `${Math.random() * 3 + 1}px`;
-                star.style.left = `${Math.random() * 100}%`;
-                star.style.top = `${Math.random() * 100}%`;
-                star.style.animationDelay = `${Math.random() * 3}s`;
-                star.style.animationDuration = `${1 + Math.random() * 4}s`;
-                container.appendChild(star);
+                const s = document.createElement('div');
+                s.className = 'star';
+                s.style.width = `${Math.random() * 3 + 1}px`;
+                s.style.height = s.style.width;
+                s.style.left = `${Math.random() * 100}%`;
+                s.style.top = `${Math.random() * 100}%`;
+                s.style.animationDelay = `${Math.random() * 3}s`;
+                container.appendChild(s);
             }
         }
 
         function setupInteractions() {
-            const exploreBtn = document.getElementById('exploreBtn');
-            if (exploreBtn) {
-                exploreBtn.addEventListener('click', () => {
-                    document.getElementById('categoriesSection').scrollIntoView({ behavior: 'smooth' });
-                });
-            }
-
+            document.getElementById('exploreBtn')?.addEventListener('click', () => {
+                document.getElementById('categoriesSection').scrollIntoView({ behavior: 'smooth' });
+            });
             const mobileToggle = document.getElementById('mobileMenuToggle');
             const navMenu = document.getElementById('navMenu');
-            const toggleIcon = mobileToggle?.querySelector('i');
-            
             if (mobileToggle && navMenu) {
-                mobileToggle.addEventListener('click', (e) => {
-                    e.stopPropagation();
+                mobileToggle.addEventListener('click', () => {
                     navMenu.classList.toggle('open');
                     mobileToggle.classList.toggle('active');
-                    if (navMenu.classList.contains('open')) {
-                        toggleIcon.classList.remove('fa-bars');
-                        toggleIcon.classList.add('fa-times');
-                    } else {
-                        toggleIcon.classList.remove('fa-times');
-                        toggleIcon.classList.add('fa-bars');
-                    }
                 });
             }
-
             const toggle = document.getElementById('categoriesDropdownToggle');
             const dropdown = document.getElementById('categoriesDropdown');
             if (toggle && dropdown) {
                 toggle.addEventListener('click', (e) => {
                     e.preventDefault();
-                    e.stopPropagation();
                     dropdown.classList.toggle('active');
                 });
                 document.addEventListener('click', (e) => {
-                    if (!toggle.contains(e.target) && !dropdown.contains(e.target)) {
-                        dropdown.classList.remove('active');
-                    }
+                    if (!toggle.contains(e.target) && !dropdown.contains(e.target)) dropdown.classList.remove('active');
                 });
+            }
+        }
+
+        // Vérification au chargement
+        function checkAuth() {
+            const user = getUser();
+            if (user) {
+                hideAuthModal();
+                updateUI();
+            } else {
+                showAuthModal();
             }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             createMagicDust();
-            createTwinklingStars();
-            loadCategoryCards();
+            createStars();
+            loadCategories();
             setupInteractions();
+            checkAuth();
         });
     </script>
 </body>
