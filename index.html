@@ -713,15 +713,15 @@
                 <li class="nav-item">
                     <a href="#" class="nav-link" id="categoriesDropdownToggle">Catégories <i class="fas fa-chevron-down"></i></a>
                     <div class="dropdown-menu" id="categoriesDropdown">
-                        <a href="conte-fee.html" class="dropdown-item">✨ Contes de fée</a>
-                        <a href="aventure.html" class="dropdown-item">⚔️ Aventure & Action</a>
-                        <a href="univers.html" class="dropdown-item">🌍 Univers</a>
-                        <a href="education.html" class="dropdown-item">📚 Éducation</a>
+                        <a href="#" class="dropdown-item">✨ Contes de fée</a>
+                        <a href="#" class="dropdown-item">⚔️ Aventure & Action</a>
+                        <a href="#" class="dropdown-item">🌍 Univers</a>
+                        <a href="#" class="dropdown-item">📚 Éducation</a>
                     </div>
                 </li>
-                <li class="nav-item"><a href="confidentialité.html" class="nav-link">Confidentialité</a></li>
-                <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-                <li class="nav-item"><a href="condition.html" class="nav-link">Conditions</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Confidentialité</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Conditions</a></li>
             </ul>
         </div>
     </header>
@@ -754,21 +754,20 @@
             <div class="footer-section">
                 <h3>Navigation</h3>
                 <ul>
-                    <li><a href="index.html">Accueil</a></li>
-                    <li><a href="conte-fee.html">Contes de fée</a></li>
-                    <li><a href="aventure.html">Aventure & Action</a></li>
-                    <li><a href="univers.html">Univers</a></li>
-                    <li><a href="education.html">Éducation</a></li>
+                    <li><a href="#">Accueil</a></li>
+                    <li><a href="#">Contes de fée</a></li>
+                    <li><a href="#">Aventure & Action</a></li>
+                    <li><a href="#">Univers</a></li>
+                    <li><a href="#">Éducation</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h3>Catégories</h3>
                 <ul>
-                    <li><a href="conte-fee.html">✨ Contes de fée</a></li>
-                    <li><a href="aventure.html">⚔️ Aventure & Action</a></li>
-                    <li><a href="education.html">📚 Éducation</a></li>
-                    <li><a href="univers.html">🌍 Univers</a></li>
-                    <li><a href="Concepteur.html">🎨 Concepteur</a></li>
+                    <li><a href="#">✨ Contes de fée</a></li>
+                    <li><a href="#">⚔️ Aventure & Action</a></li>
+                    <li><a href="#">📚 Éducation</a></li>
+                    <li><a href="#">🌍 Univers</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -845,11 +844,11 @@
                     </div>
                     <div class="sdm-input-group">
                         <label>🎭 Pseudo</label>
-                        <input type="text" id="dmtechSignupUsername" placeholder="Ton pseudo Disney">
+                        <input type="text" id="sdmSignupUsername" placeholder="Ton pseudo Disney">
                     </div>
-                    <button type="submit" class="dmtech-btn-auth">Créer mon compte</button>
+                    <button type="submit" class="sdm-btn-auth">Créer mon compte</button>
                     
-                    <div class="dmtech-divider">
+                    <div class="sdm-divider">
                         <span>Ou s'inscrire avec</span>
                     </div>
                     
@@ -918,7 +917,6 @@
                 <button class="suggestion-btn" data-suggestion="La Reine des Neiges">❄️ La Reine des Neiges</button>
                 <button class="suggestion-btn" data-suggestion="Le Roi Lion">🦁 Le Roi Lion</button>
                 <button class="suggestion-btn" data-suggestion="Contes de fée">✨ Contes de fée</button>
-                 <button class="suggestion-btn" data-suggestion="ALL">✨ Tout</button>
             </div>
             <div class="chatbot-input-container">
                 <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Cherchez un dessin animé...">
@@ -1380,24 +1378,31 @@
         
         // Catégories
         const categories = [
-            { name: "Contes de fée", description: "Plongez dans l'univers magique des contes de fée.", image: "https://images.unsplash.com/photo-1635805737707-575885ab0820?w=800" },
-            { name: "Aventure & Action", description: "Partez à l'aventure avec des héros intrépides.", image: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=800" },
-            { name: "Éducation", description: "Des dessins animés éducatifs et amusants.", image: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=800" },
-            { name: "Univers", description: "Des histoires drôles et légères pour rire en famille.", image: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800" }
+            { name: "Contes de fée", description: "Plongez dans l'univers magique des contes de fée.", image: "https://images.unsplash.com/photo-1635805737707-575885ab0820?w=800", page: "conte-fee.html" },
+            { name: "Aventure & Action", description: "Partez à l'aventure avec des héros intrépides.", image: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=800", page: "aventure.html" },
+            { name: "Éducation", description: "Des dessins animés éducatifs et amusants.", image: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=800", page: "education.html" },
+            { name: "Univers", description: "Des histoires drôles et légères pour rire en famille.", image: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800", page: "univers.html" }
         ];
 
         function loadCategories() {
             const container = document.getElementById('categoriesGrid');
             if (container) {
-                container.innerHTML = categories.map(c => `
-                    <div class="category-card">
-                        <img src="${c.image}" alt="${c.name}" class="category-image" loading="lazy">
+                container.innerHTML = '';
+                categories.forEach(category => {
+                    const card = document.createElement('div');
+                    card.className = 'category-card';
+                    card.innerHTML = `
+                        <img src="${category.image}" alt="${category.name}" class="category-image" loading="lazy">
                         <div class="category-overlay">
-                            <h3>${c.name}</h3>
-                            <p>${c.description}</p>
+                            <h3>${category.name}</h3>
+                            <p>${category.description}</p>
                         </div>
-                    </div>
-                `).join('');
+                    `;
+                    card.addEventListener('click', () => {
+                        window.location.href = category.page;
+                    });
+                    container.appendChild(card);
+                });
             }
         }
 
